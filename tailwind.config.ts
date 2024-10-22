@@ -23,6 +23,10 @@ const config: Config = {
         xxl: "32px",
         xxxl: "40px",
       },
+      colors: {
+        "authentic-dark": "#9baaa9",
+        "authentic-light": "rgb(201, 222, 220)",
+      },
     },
   },
   plugins: [],
