@@ -5,13 +5,23 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/containers/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      borderRadius: {
+        md: "4px",
+      },
+      spacing: {
+        xxxs: "2px",
+        xxs: "4px",
+        xs: "8px",
+        sm: "12px",
+        md: "16px",
+        lg: "20px",
+        xl: "24px",
+        xxl: "32px",
+        xxxl: "40px",
       },
     },
   },
