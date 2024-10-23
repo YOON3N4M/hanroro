@@ -1,5 +1,6 @@
 import GalleryItem from "@/components/GalleryItem";
 import Recommend from "./Recommend";
+import Footer from "@/components/layout/Footer";
 
 interface MainContainerProps {}
 
@@ -28,6 +29,7 @@ function MainContainer(props: MainContainerProps) {
       <section className="mt-md">
         <Recommend />
       </section>
+      <Footer />
     </main>
   );
 }
