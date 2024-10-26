@@ -26,6 +26,7 @@ const config: Config = {
       colors: {
         "authentic-dark": "#9baaa9",
         "authentic-light": "rgb(201, 222, 220)",
+        "authentic-brown": "rgb(145, 126, 106)",
       },
     },
   },

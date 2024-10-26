@@ -17,7 +17,7 @@ function MainContainer(props: MainContainerProps) {
       </section>
       <section className="mt-md">
         <h2 className="text-authentic-dark text-sm">gallery</h2>
-        <div className="grid grid-cols-4 gap-sm mt-sm">
+        <div className="grid grid-cols-4 gap-xxs mt-sm">
           {testArr.map((i) => (
             <GalleryItem className="aspect-[1/1] rounded-md" key={i} />
           ))}
