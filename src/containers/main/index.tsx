@@ -10,7 +10,7 @@ function MainContainer(props: MainContainerProps) {
   const {} = props;
 
   return (
-    <main className="inner bg-white h-full">
+    <div className="h-full">
       <section>
         <h2 className="text-authentic-dark text-sm">calendar</h2>
         <div></div>
@@ -29,8 +29,7 @@ function MainContainer(props: MainContainerProps) {
       <section className="mt-md">
         <Recommend />
       </section>
-      <Footer />
-    </main>
+    </div>
   );
 }
 

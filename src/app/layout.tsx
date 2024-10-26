@@ -20,7 +20,10 @@ export default function RootLayout({
     <html className="h-full" lang="en">
       <body className="h-full w-full text-authentic-dark">
         <Header />
-        {children}
+        <main className="inner h-full bg-white flex flex-col">
+          {children}
+          <Footer />
+        </main>
       </body>
     </html>
   );
