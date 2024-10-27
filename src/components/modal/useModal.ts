@@ -7,7 +7,8 @@ export default function useModal() {
   const { setIsModalOn, setModalElements } = useModalActions();
 
   //단독 모달
-  function oepnSingleModal(modalEl: ModalElement) {
+  function openSingleModal(modalEl: ModalElement) {
+    setIsModalOn(true);
     setModalElements([modalEl]);
   }
 
@@ -31,7 +32,7 @@ export default function useModal() {
   }
 
   return {
-    oepnSingleModal,
+    openSingleModal,
     addModalElement,
     closeAllModal,
     removeModalElement,
