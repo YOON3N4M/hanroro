@@ -1,14 +1,17 @@
 import GalleryItem from "@/components/GalleryItem";
 import React from "react";
+import GalleyUploadButton from "./Upload";
 
-const testArr = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
+const testArr = [
+  1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 7, 8, 1, 2, 3, 7, 8, 1, 2, 3, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8,
+];
 
 export default function GalleryContainer() {
   return (
     <div>
       <div className="flex justify-between">
         <div className="flex">
-          <button>upload</button>
+          <GalleyUploadButton />
         </div>
         <div>
           <input className="bg-black" />

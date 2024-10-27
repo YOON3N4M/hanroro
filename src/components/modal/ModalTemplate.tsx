@@ -15,7 +15,7 @@ function ModalTemplate(props: ModalTemplateProps) {
     <div className="absolute left-0 top-0 z-[500] h-[100dvh] w-[100vw]">
       <div className="relative z-[600] flex size-full">
         <div className="absolute z-[700] center">
-          <div className="rounded-[4px] bg-white p-md max-w-100vw">{children}</div>
+          <div className="rounded-[4px] bg-white p-md max-w-[100vw]">{children}</div>
         </div>
         <ModalBackGround removeModalElement={removeModalElement} />
       </div>

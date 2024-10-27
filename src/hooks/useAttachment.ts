@@ -2,11 +2,13 @@ import { ChangeEvent, useState } from "react";
 
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { storageService } from "@/lib/firebase/firebase";
+import { isGif } from "@/utils";
 
 interface Props {}
 
 export function useAttachment() {
   const [tempAttachment, setTempAttachment] = useState(null);
+  const [isGifType, setIsGifType] = useState(false);
 
   function handleChangeAttachment(e: ChangeEvent<HTMLInputElement>) {
     let selectedPicture;
@@ -14,9 +16,9 @@ export function useAttachment() {
 
     if (e.target.files !== null) {
       selectedPicture = e.target.files[0];
+      setIsGifType(isGif(e.target.files[0].name));
       reader.readAsDataURL(selectedPicture);
       reader.onloadend = (_e: any) => {
-        console.log(_e.currentTarget.result);
         setTempAttachment(_e.currentTarget.result);
       };
     }
@@ -27,7 +29,6 @@ export function useAttachment() {
     const attachmentRef = ref(storageService, storageURL);
     const res = await uploadString(attachmentRef, tempAttachment, "data_url");
     const attachmentURL = await getDownloadURL(res.ref);
-    console.log("업로드 URL", attachmentURL);
 
     return attachmentURL as string;
   }
@@ -37,5 +38,6 @@ export function useAttachment() {
     tempAttachment,
     generateURL,
     setTempAttachment,
+    isGifType,
   };
 }

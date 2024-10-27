@@ -6,3 +6,7 @@ export const cn = (...classNames: (string | false | undefined)[]) => {
 
   return styledClassNames.join(" ");
 };
+
+export function isGif(filename: string) {
+  return filename.includes(".gif") ? true : false;
+}
