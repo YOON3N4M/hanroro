@@ -3,15 +3,15 @@ import React from "react";
 
 export default function ProfileContainer() {
   return (
-    <section className="mt-md">
+    <section className="mt-md w-full">
       <div className="relative w-full">
-        <div>
-          <Image width={1000} height={1000} src="/images/profile/profile.jpg" alt="profile" />
+        <div className="w-full">
+          <Image className="max-w-full" width={1000} height={1000} src="/images/profile/profile.jpg" alt="profile" />
         </div>
         <div className="absolute w-full h-full bg-black z-[-10] -top-sm"> </div>
       </div>
       <div className="mt-md text-authentic-brown text-sm">
-        <div className="flex gap-md w-[80%] ml-auto bg-white translate-y-[-50%] p-md shadow-md">
+        <div className="flex gap-md w-[80%] ml-auto bg-white translate-y-[-50%] p-md shadow-md mo:flex-col">
           <div className="flex-1 flex flex-col">
             <h1 className="font-semibold text-lg">한로로</h1>
             <div className="flex justify-between mt-auto">
