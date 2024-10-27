@@ -76,6 +76,9 @@ main {
 }
 
 @layer components {
+  .button {
+    @apply py-xxxs px-xs bg-authentic-dark text-white;
+  }
   .tag {
     @apply py-xxxs px-xxs bg-authentic-dark text-white rounded-md;
   }
