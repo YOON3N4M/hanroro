@@ -64,7 +64,7 @@ export default function UploadModal() {
       isGif: isGifType,
       uploaderId: "test",
       storageFileName: storageFileName,
-      // img 업로드
+      uploadAt: new Date().getTime(),
     };
 
     await uploadImage(newImageDoc);

@@ -6,4 +6,5 @@ export interface GalleryItemDoc {
   isGif: boolean;
   uploaderId: string;
   storageFileName: string;
+  uploadAt: number;
 }
