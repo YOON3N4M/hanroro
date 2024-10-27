@@ -14,7 +14,7 @@ const config: Config = {
       },
       screens: {
         mo: { max: "600px" },
-        pc: "601x",
+        pc: "601px",
       },
       spacing: {
         xxxs: "2px",
