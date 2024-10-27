@@ -22,12 +22,16 @@ export default function ImageViewModal(props: ImageViewModalProps) {
         alt={imageDoc.title}
         className="pc:max-h-[80vh] object-cover pc:w-auto mo:max-w-[80vw]"
       />
-      <div className="absolute top-full mt-md flex gap-sm text-sm">
-        {imageDoc.tags.map((tag, idx) => (
-          <span key={`${imageDoc.id}-${idx}`} className="tag">
-            #{tag}
-          </span>
-        ))}
+      <div></div>
+      <div className="absolute top-full mt-md text-sm text-white">
+        <span className="text-md font-bold">{imageDoc.title}</span>
+        <div className="flex gap-xs mt-xs">
+          {imageDoc.tags.map((tag, idx) => (
+            <span key={`${imageDoc.id}-${idx}`} className="">
+              #{tag}
+            </span>
+          ))}
+        </div>
       </div>
     </ModalTemplate>
   );

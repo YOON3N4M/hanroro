@@ -11,5 +11,9 @@ export default function GalleyUploadButton() {
     openSingleModal(<UploadModal />);
   }
 
-  return <button onClick={onClickUpload}>upload</button>;
+  return (
+    <button onClick={onClickUpload} className="button text-sm">
+      upload
+    </button>
+  );
 }

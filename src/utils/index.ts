@@ -10,3 +10,7 @@ export const cn = (...classNames: (string | false | undefined)[]) => {
 export function isGif(filename: string) {
   return filename.includes(".gif") ? true : false;
 }
+
+export function filterDuple<T>(arr: T[]): T[] {
+  return arr.filter((item, index) => arr.indexOf(item) === index);
+}
