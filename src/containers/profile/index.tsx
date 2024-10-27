@@ -1,3 +1,4 @@
+import { IconInstagram, IconYoutube } from "@/components/svg";
 import Image from "next/image";
 import React from "react";
 
@@ -13,8 +14,26 @@ export default function ProfileContainer() {
       <div className="mt-md text-authentic-brown text-sm">
         <div className="flex gap-md w-[80%] ml-auto bg-white translate-y-[-50%] p-md shadow-md mo:flex-col">
           <div className="flex-1 flex flex-col">
-            <h1 className="font-semibold text-lg">한로로</h1>
-            <div className="flex justify-between mt-auto">
+            <div className="flex justify-between">
+              <h1 className="font-semibold text-lg">한로로</h1>
+              <div className="flex items-center gap-xs">
+                <a
+                  href="https://www.instagram.com/hanr0r0?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconInstagram className="size-[18px]" />
+                </a>
+                <a
+                  href="https://youtube.com/@hanroro6055?si=PU5sFgGjwXMjXkGa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconYoutube className="size-[18px]" />
+                </a>
+              </div>
+            </div>
+            <div className="flex justify-between pc:mt-auto mo:mt-sm">
               <span>birth</span>
               <span>2000.11.11</span>
             </div>
