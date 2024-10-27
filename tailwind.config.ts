@@ -12,6 +12,10 @@ const config: Config = {
       borderRadius: {
         md: "4px",
       },
+      screens: {
+        mo: { max: "600px" },
+        pc: "601x",
+      },
       spacing: {
         xxxs: "2px",
         xxs: "4px",

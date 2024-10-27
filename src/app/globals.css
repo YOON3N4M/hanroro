@@ -65,7 +65,7 @@ main {
     text-wrap: balance;
   }
   .inner {
-    @apply max-w-[600px] w-[600px] min-w-[320px] mx-auto px-lg;
+    @apply max-w-[600px] w-[600px] min-w-[320px] mx-auto px-lg mo:w-full;
   }
   .drag-unable {
     -webkit-user-select: none;
