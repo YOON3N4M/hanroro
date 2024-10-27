@@ -74,3 +74,9 @@ main {
     user-select: none;
   }
 }
+
+@layer components {
+  .tag {
+    @apply py-xxxs px-xxs bg-authentic-dark text-white rounded-md;
+  }
+}

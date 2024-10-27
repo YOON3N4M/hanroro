@@ -93,11 +93,7 @@ export default function UploadModal() {
             </form>
             <div className="mt-sm flex gap-xs">
               {tags.map((tagItem, idx) => (
-                <button
-                  key={idx}
-                  className="py-xxxs px-xxs bg-authentic-dark text-white rounded-md"
-                  onClick={() => onTagBtnClick(idx)}
-                >
+                <button key={idx} className="tag" onClick={() => onTagBtnClick(idx)}>
                   <span>#{tagItem}</span>
                 </button>
               ))}
