@@ -1,12 +1,33 @@
-import GalleryItem from "@/components/GalleryItem";
-import React from "react";
-import GalleyUploadButton from "./Upload";
+"use client";
 
-const testArr = [
-  1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 7, 8, 1, 2, 3, 7, 8, 1, 2, 3, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8,
-];
+import GalleryItem from "@/components/GalleryItem";
+import React, { useEffect, useState } from "react";
+import GalleyUploadButton from "./Upload";
+import { getAllGifs, getAllImages } from "@/services/firebase";
+
+import { MasonryGrid } from "@egjs/react-grid";
 
 export default function GalleryContainer() {
+  const [combinedList, setCombinedList] = useState<any[]>([]);
+  const [gifs, setGifs] = useState<any[]>([]);
+  const [images, setImages] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function init() {
+      const imagesRes = await getAllImages();
+      const gifsRes = await getAllGifs();
+
+      if (!imagesRes) return;
+      if (!gifsRes) return;
+
+      setImages(imagesRes);
+      setGifs(gifsRes);
+
+      setCombinedList([...imagesRes, ...gifsRes]);
+    }
+    init();
+  }, []);
+
   return (
     <div>
       <div className="flex justify-between">
@@ -24,11 +45,16 @@ export default function GalleryContainer() {
       </div>
       <div className="">
         {/* 갤러리 영역 */}
-        <div className="grid grid-cols-4 gap-xxxs mt-sm">
-          {testArr.map((i) => (
-            <GalleryItem className="aspect-[1/1] rounded-md" key={i} />
+        <MasonryGrid column={3} gap={5} defaultDirection={"end"} align={"justify"}>
+          {combinedList.map((i) => (
+            <GalleryItem className="rounded-md" key={i.id} doc={i} />
           ))}
-        </div>
+        </MasonryGrid>
+        {/* <div className="flex gap-xxxs mt-sm items-start">
+          {combinedList.map((i) => (
+            <GalleryItem className="rounded-md" key={i.id} doc={i} />
+          ))}
+        </div> */}
       </div>
     </div>
   );

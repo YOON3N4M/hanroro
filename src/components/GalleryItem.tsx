@@ -1,12 +1,22 @@
+import { GalleryItemDoc } from "@/types";
 import { cn } from "@/utils";
+import Image from "next/image";
 import { HTMLAttributes } from "react";
 
-interface GalleryItemProps extends HTMLAttributes<HTMLDivElement> {}
+interface GalleryItemProps extends HTMLAttributes<HTMLDivElement> {
+  doc: GalleryItemDoc;
+}
 
 function GalleryItem(props: GalleryItemProps) {
-  const { className, ...attrs } = props;
+  const { doc, className, ...attrs } = props;
 
-  return <div className={cn(className, "bg-black")} {...attrs}></div>;
+  if (!doc) return;
+
+  return (
+    <div className={cn(className, "bg-black")} {...attrs}>
+      <Image width={1000} height={1000} src={doc.url} className="max-w-[183px]" />
+    </div>
+  );
 }
 
 export default GalleryItem;
