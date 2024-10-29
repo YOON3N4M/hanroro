@@ -6,7 +6,7 @@ function Header(props: HeaderProps) {
   const {} = props;
 
   return (
-    <header className="inner bg-white text-authentic">
+    <header className="inner bg-white text-authentic text-sm">
       <div className="flex !py-lg">
         <div className="basis-1/5">
           <Link href={"/"}>ABC</Link>
