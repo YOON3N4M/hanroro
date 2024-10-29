@@ -2,7 +2,6 @@ import { getAllGifs, getAllImages } from '@/services/firebase'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-	console.log('dd?')
 	try {
 		const imageRes = await getAllImages()
 		const gifRes = await getAllGifs()

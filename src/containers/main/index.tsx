@@ -11,7 +11,6 @@ interface MainContainerProps {
 
 function MainContainer(props: MainContainerProps) {
 	const { galleryDocs } = props
-	console.log(galleryDocs)
 	return (
 		<div className="h-full">
 			<section>

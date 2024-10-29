@@ -7,32 +7,42 @@ import { getAllGifs, getAllImages } from '@/services/firebase'
 
 import { MasonryGrid } from '@egjs/react-grid'
 import { filterDuple } from '@/utils'
+import { GalleryDocsObj, GalleryItemDoc } from '@/types'
+import { create } from 'zustand'
 
-export default function GalleryContainer() {
-	const [combinedList, setCombinedList] = useState<any[]>([])
-	const [gifs, setGifs] = useState<any[]>([])
-	const [images, setImages] = useState<any[]>([])
-	const [uniqueTags, setUniqueTags] = useState<any[]>([])
+interface GalleryContainerProps {
+	galleryDocs: GalleryDocsObj
+}
 
-	useEffect(() => {
-		async function init() {
-			const imagesRes = await getAllImages()
-			const gifsRes = await getAllGifs()
+export default function GalleryContainer(props: GalleryContainerProps) {
+	const { galleryDocs } = props
 
-			if (!imagesRes) return
-			if (!gifsRes) return
+	const [combinedList, setCombinedList] = useState<GalleryItemDoc[]>(() =>
+		combineImageGif(galleryDocs),
+	)
+	const [uniqueTags, setUniqueTags] = useState<string[]>(() =>
+		filterUniqueTags([...galleryDocs.gif, ...galleryDocs.images]),
+	)
 
-			setImages(imagesRes)
-			setGifs(gifsRes)
-			const combine: any[] = [...imagesRes, ...gifsRes]
-			setCombinedList(combine)
-			const basicTags = combine.map((doc) => doc.tags)
-			const flat = basicTags.flat(2)
-			const unique = filterDuple(flat)
-			setUniqueTags(unique)
-		}
-		init()
-	}, [])
+	function combineImageGif(obj: GalleryDocsObj) {
+		if (!obj.images) return []
+		if (!obj.gif) return []
+
+		const { gif, images } = obj
+
+		const beforeSort = [...images, ...gif]
+		const afterSort = beforeSort.sort((a, b) => b.uploadAt - a.uploadAt)
+
+		return afterSort
+	}
+
+	function filterUniqueTags(obj: GalleryItemDoc[]) {
+		const allTags = obj.map((doc) => doc.tags)
+		const flat = allTags.flat(2)
+		const unique = filterDuple(flat)
+
+		return unique
+	}
 
 	return (
 		<div className="mt-md">
@@ -58,16 +68,16 @@ export default function GalleryContainer() {
 			</div>
 			<div className="mt-sm w-full">
 				{/* 갤러리 영역 */}
-				{/* <MasonryGrid column={3} gap={5} defaultDirection={"end"} align={"justify"}>
-          {combinedList.map((i) => (
-            <GalleryItem className="rounded-md" key={i.id} doc={i} />
-          ))}
-        </MasonryGrid> */}
-				{/* <div className="flex gap-xxxs mt-sm items-start">
-          {combinedList.map((i) => (
-            <GalleryItem className="rounded-md" key={i.id} doc={i} />
-          ))}
-        </div> */}
+				<MasonryGrid
+					column={3}
+					gap={5}
+					defaultDirection={'end'}
+					align={'justify'}
+				>
+					{combinedList.map((i) => (
+						<GalleryItem className="rounded-md" key={i.id} doc={i} />
+					))}
+				</MasonryGrid>
 			</div>
 		</div>
 	)
