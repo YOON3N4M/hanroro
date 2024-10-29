@@ -48,18 +48,18 @@ export default function GalleryContainer(props: GalleryContainerProps) {
 		<div className="mt-md">
 			<div className="flex justify-between">
 				<div className="flex">
-					<input
+					{/* <input
 						className="bg-white border text-sm px-xs border-authentic-light"
 						placeholder="title or tag..."
-					/>
+					/> */}
 				</div>
 				<div className="flex">
 					<GalleyUploadButton />
 				</div>
 			</div>
 			<div className="flex gap-xs mt-sm text-sm flex-wrap">
-				<button className="tag">image</button>
-				<button className="tag">gif</button>
+				{/* <button className="tag">image</button>
+				<button className="tag">gif</button> */}
 				{uniqueTags.map((item, idx) => (
 					<button key={`tag-${item}`} className="tag text-xs">
 						#{item}
