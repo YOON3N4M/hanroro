@@ -42,6 +42,10 @@ export default function GalleryContainer(props: GalleryContainerProps) {
     return unique;
   }
 
+  useEffect(() => {
+    console.log(galleryDocs);
+  }, [galleryDocs]);
+
   return (
     <div className="mt-md">
       <div className="flex justify-between">
@@ -74,7 +78,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
           useResizeObserver={true}
           observeChildren={true}
         >
-          {combinedList.map((i) => (
+          {galleryDocs.images.map((i) => (
             <GalleryItem className="rounded-md" key={i.id} doc={i} />
           ))}
         </MasonryGrid>

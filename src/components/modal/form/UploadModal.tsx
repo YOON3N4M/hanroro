@@ -7,6 +7,8 @@ import { uploadImage } from "@/services/firebase";
 import { v4 as uuidv4 } from "uuid";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import useModal from "../useModal";
+import { revalidateApiTag } from "@/services";
+import { redirect } from "next/navigation";
 
 export default function UploadModal() {
   const { handleChangeAttachment, tempAttachment, generateURL, isGifType } = useAttachment();
@@ -68,6 +70,7 @@ export default function UploadModal() {
     };
 
     await uploadImage(newImageDoc);
+    await revalidateApiTag("gallery");
 
     setIsLoading(false);
     closeAllModal();
