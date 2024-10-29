@@ -7,10 +7,15 @@ function Footer(props: FooterProps) {
 
   return (
     <div className="py-xxxl mt-auto text-center opacity-70 text-xs">
-      <p className="">hanroro panpage</p>
-      <a href="https://open.kakao.com/o/s6CV3FWg" target="_blank" rel="noopener noreferrer">
-        &gt; contact kakaotalk &lt;
-      </a>
+      <div>
+        <span className="mx-auto">hanroro panpage</span>
+      </div>
+      <div className="flex gap-sm justify-center">
+        <a href="https://open.kakao.com/o/s6CV3FWg" target="_blank" rel="noopener noreferrer">
+          contact
+        </a>
+        <Link href="/about">about</Link>
+      </div>
     </div>
   );
 }
