@@ -14,7 +14,7 @@ export default function ImageViewModal(props: ImageViewModalProps) {
 
   console.log(imageDoc);
   return (
-    <ModalTemplate>
+    <ModalTemplate bg={false}>
       <Image
         width={3000}
         height={3000}

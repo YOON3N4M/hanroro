@@ -1,13 +1,15 @@
 import { ReactNode, useEffect } from "react";
 import useModal from "./useModal";
 import { useIsModalOn } from "./store";
+import { cn } from "@/utils";
 
 interface ModalTemplateProps {
   children?: ReactNode;
+  bg?: boolean;
 }
 
 function ModalTemplate(props: ModalTemplateProps) {
-  const { children } = props;
+  const { children, bg = true } = props;
 
   const { removeModalElement } = useModal();
 
@@ -15,7 +17,7 @@ function ModalTemplate(props: ModalTemplateProps) {
     <div className="absolute left-0 top-0 z-[500] h-[100dvh] w-[100vw]">
       <div className="relative z-[600] flex size-full">
         <div className="absolute z-[700] center">
-          <div className="rounded-[4px] bg-white p-md max-w-[100vw]">{children}</div>
+          <div className={cn("p-md max-w-[100vw]", bg && "rounded-[4px] bg-white")}>{children}</div>
         </div>
         <ModalBackGround removeModalElement={removeModalElement} />
       </div>
