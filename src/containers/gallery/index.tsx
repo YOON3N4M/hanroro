@@ -8,52 +8,46 @@ import { GalleryDocsObj, GalleryItemDoc } from '@/types'
 import { filterDuple } from '@/utils'
 import { MasonryGrid } from '@egjs/react-grid'
 
+interface GalleryDocsObjWithCombine extends GalleryDocsObj {
+	combine: GalleryItemDoc[]
+}
+
 interface GalleryContainerProps {
-	galleryDocs: GalleryDocsObj
+	galleryDocs: GalleryDocsObjWithCombine
+}
+
+function filterUniqueTags(obj: GalleryItemDoc[]) {
+	const allTags = obj.map((doc) => doc.tags)
+	const flat = allTags.flat(2)
+	const unique = filterDuple(flat)
+
+	return unique
 }
 
 export default function GalleryContainer(props: GalleryContainerProps) {
 	const { galleryDocs } = props
+	const { images, gif, combine } = galleryDocs
 
-	const [combinedList, setCombinedList] = useState<GalleryItemDoc[]>(() =>
-		combineImageGif(galleryDocs),
-	)
-	const [uniqueTags, setUniqueTags] = useState<string[]>(() =>
-		filterUniqueTags([...galleryDocs.gif, ...galleryDocs.images]),
-	)
-
-	function combineImageGif(obj: GalleryDocsObj) {
-		if (!obj.images) return []
-		if (!obj.gif) return []
-
-		const { gif, images } = obj
-
-		const beforeSort = [...images, ...gif]
-		const afterSort = beforeSort.sort((a, b) => b.uploadAt - a.uploadAt)
-
-		return afterSort
-	}
-
-	function filterUniqueTags(obj: GalleryItemDoc[]) {
-		const allTags = obj.map((doc) => doc.tags)
-		const flat = allTags.flat(2)
-		const unique = filterDuple(flat)
-
-		return unique
-	}
+	//render state
+	const [renderImageList, setRenderImageList] = useState(combine)
+	const [uniqueTags, setUniqueTags] = useState(() => filterUniqueTags(combine))
 
 	useEffect(() => {
-		console.log(galleryDocs)
+		// 만약 필터 기능이 추가된다면 이부분 필터를 고려해야함
+
+		// revalidate시 렌더링 갱신
+		setRenderImageList(combine)
+		setUniqueTags(filterUniqueTags(combine))
 	}, [galleryDocs])
 
 	return (
 		<div className="mt-md">
 			<div className="flex justify-between">
 				<div className="flex">
-					{/* <input
+					<input
 						className="bg-white border text-sm px-xs border-authentic-light"
 						placeholder="title or tag..."
-					/> */}
+					/>
 				</div>
 				<div className="flex">
 					<GalleyUploadButton />
@@ -78,7 +72,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
 					useResizeObserver={true}
 					observeChildren={true}
 				>
-					{galleryDocs.images.map((i) => (
+					{renderImageList.map((i) => (
 						<GalleryItem className="rounded-md" key={i.id} doc={i} />
 					))}
 				</MasonryGrid>
