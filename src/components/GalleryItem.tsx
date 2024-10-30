@@ -28,8 +28,13 @@ function GalleryItem(props: GalleryItemProps) {
 			onClick={() => onImageClick(doc)}
 			{...attrs}
 		>
-			{/* <Image width={1000} height={1000} src={doc.url} className="max-w-[183px]" alt={doc.title} /> */}
-			<span>{doc.title}</span>
+			<Image
+				width={1000}
+				height={1000}
+				src={doc.url}
+				className="max-w-[183px]"
+				alt={doc.title}
+			/>
 		</div>
 	)
 }

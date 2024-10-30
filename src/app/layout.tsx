@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import ModalPortal from '@/components/modal/ModalPortal'
+import Toolbar from './Toolbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,6 +27,7 @@ export default function RootLayout({
 					<Footer />
 				</main>
 				<ModalPortal />
+				<Toolbar />
 			</body>
 		</html>
 	)
