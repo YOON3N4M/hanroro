@@ -1,7 +1,7 @@
 import { dbService } from '@/lib/firebase/firebase'
 import { GalleryItemDoc } from '@/types'
 import { addDoc, collection, doc, getDocs, updateDoc } from 'firebase/firestore'
-import { API_BASE_URL } from '.'
+import { API_BASE_URL, API_TAG } from '.'
 
 export async function uploadImage(document: GalleryItemDoc) {
 	const collectionName = document.isGif ? 'gifs' : 'images'
@@ -17,7 +17,9 @@ export async function uploadImage(document: GalleryItemDoc) {
 }
 export async function getGallery() {
 	try {
-		const res = await fetch(`${API_BASE_URL}/api/gallery/`)
+		const res = await fetch(`${API_BASE_URL}/api/gallery/`, {
+			next: { tags: [API_TAG.gallery] },
+		})
 		return res
 	} catch (error) {
 		console.log(error)

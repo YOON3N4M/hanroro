@@ -1,14 +1,12 @@
 'use client'
 
 import GalleryItem from '@/components/GalleryItem'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import GalleyUploadButton from './Upload'
-import { getAllGifs, getAllImages } from '@/services/firebase'
 
-import { MasonryGrid } from '@egjs/react-grid'
-import { filterDuple } from '@/utils'
 import { GalleryDocsObj, GalleryItemDoc } from '@/types'
-import { create } from 'zustand'
+import { filterDuple } from '@/utils'
+import { MasonryGrid } from '@egjs/react-grid'
 
 interface GalleryContainerProps {
 	galleryDocs: GalleryDocsObj
@@ -80,7 +78,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
 					useResizeObserver={true}
 					observeChildren={true}
 				>
-					{combinedList.map((i) => (
+					{galleryDocs.images.map((i) => (
 						<GalleryItem className="rounded-md" key={i.id} doc={i} />
 					))}
 				</MasonryGrid>
