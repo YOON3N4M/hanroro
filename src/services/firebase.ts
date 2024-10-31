@@ -18,6 +18,7 @@ export async function uploadImage(document: GalleryItemDoc) {
 export async function getGallery() {
 	try {
 		const res = await fetch(`${API_BASE_URL}/api/gallery/`, {
+			cache: 'force-cache',
 			next: { tags: [API_TAG.gallery] },
 		})
 		return res
