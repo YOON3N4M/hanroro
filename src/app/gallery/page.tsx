@@ -10,12 +10,11 @@ const defaultData = {
 }
 
 export default async function GalleryPage() {
-	// const res = await getGallery()
-	// const data = res ? ((await res?.json()).data as GalleryDocsObj) : defaultData
-	// const combine = combineImageGif(data)
-	// const galleryDocs = { ...data, combine }
-	// return <GalleryContainer galleryDocs={galleryDocs} />
-	return <></>
+	const res = await getGallery()
+	const data = res ? ((await res?.json()).data as GalleryDocsObj) : defaultData
+	const combine = combineImageGif(data)
+	const galleryDocs = { ...data, combine }
+	return <GalleryContainer galleryDocs={galleryDocs} />
 }
 
 function combineImageGif(obj: GalleryDocsObj) {
