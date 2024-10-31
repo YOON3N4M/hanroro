@@ -3,11 +3,18 @@ import { getGallery } from '@/services/firebase'
 import { GalleryDocsObj } from '@/types'
 import React from 'react'
 
+const defaultData = {
+	images: [],
+	gif: [],
+	combine: [],
+}
+
 export default async function GalleryPage() {
 	const res = await getGallery()
 	const data = (await res?.json()).data as GalleryDocsObj
 	const combine = combineImageGif(data)
-	return <GalleryContainer galleryDocs={{ ...data, combine }} />
+	const galleryDocs = data ? { ...data, combine } : defaultData
+	return <GalleryContainer galleryDocs={galleryDocs} />
 }
 
 function combineImageGif(obj: GalleryDocsObj) {
