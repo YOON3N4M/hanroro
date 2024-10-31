@@ -9,7 +9,7 @@ const defaultData: GalleryDocsObj = {
 
 export default async function Home() {
 	const res = await getGallery()
-	const data = (await res?.json()).data as GalleryDocsObj
+	const data = res ? ((await res?.json()).data as GalleryDocsObj) : defaultData
 
-	return <MainContainer galleryDocs={data || defaultData} />
+	return <MainContainer galleryDocs={data} />
 }
