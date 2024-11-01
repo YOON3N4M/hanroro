@@ -4,10 +4,12 @@ import React from "react";
 
 export default function AlbumContainer() {
   return (
-    <div className="mt-sm">
-      {ALBUM_LIST.map((album) => (
-        <AlbumItem key={`${album.title}-${album.type}`} album={album} />
-      ))}
+    <div className="mt-sm ">
+      <div className="flex flex-col gap-[80px]">
+        {ALBUM_LIST.map((album) => (
+          <AlbumItem key={`${album.title}-${album.type}`} album={album} />
+        ))}
+      </div>
     </div>
   );
 }

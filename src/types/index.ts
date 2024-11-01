@@ -27,5 +27,6 @@ export interface Album {
 export interface Track {
   title: string;
   duration: string;
+  youtubeUrl: string;
   //작곡가
 }
