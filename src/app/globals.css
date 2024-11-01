@@ -46,6 +46,9 @@ main {
 }
 
 @layer utilities {
+  body {
+    @apply font-pretendard;
+  }
   .text-balance {
     text-wrap: balance;
   }

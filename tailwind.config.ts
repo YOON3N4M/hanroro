@@ -16,6 +16,9 @@ const config: Config = {
         mo: { max: "600px" },
         pc: "601px",
       },
+      fontFamily: {
+        pretendard: ["var(--font-pretendard)"],
+      },
       spacing: {
         xxxs: "2px",
         xxs: "4px",
