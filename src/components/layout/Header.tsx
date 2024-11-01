@@ -2,6 +2,12 @@ import Link from "next/link";
 
 interface HeaderProps {}
 
+const NAVIGATION_ITEM = [
+  { name: "profile", href: "/profile" },
+  { name: "album", href: "/album" },
+  { name: "gallery", href: "/gallery" },
+];
+
 function Header(props: HeaderProps) {
   const {} = props;
 
@@ -9,18 +15,14 @@ function Header(props: HeaderProps) {
     <header className="inner bg-white text-authentic text-sm">
       <div className="flex !py-lg">
         <div className="basis-1/5">
-          <Link href={"/"}>ABC</Link>
+          <Link href={"/"}>hanroro</Link>
         </div>
         <nav className="flex gap-lg">
-          <div>
-            <Link href={"/profile"}>profile</Link>
-          </div>
-          <div>
-            <Link href={"/album"}>album</Link>
-          </div>
-          <div>
-            <Link href={"/gallery"}>gallery</Link>
-          </div>
+          {NAVIGATION_ITEM.map((item) => (
+            <div key={item.name}>
+              <Link href={item.href}>{item.name}</Link>
+            </div>
+          ))}
         </nav>
       </div>
     </header>

@@ -42,7 +42,7 @@ export default function ProfileContainer() {
               <span>2022.03.14</span>
             </div>
             <div className="flex justify-between">
-              <span>agency</span>
+              <span>label</span>
               <span>Authentic</span>
             </div>
           </div>
