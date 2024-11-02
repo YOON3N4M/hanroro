@@ -7,7 +7,6 @@ export interface GalleryDocsObj {
 
 export interface GalleryItemDoc {
   id?: string;
-  title: string;
   tags: string[];
   url: string;
   isGif: boolean;

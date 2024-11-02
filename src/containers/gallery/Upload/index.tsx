@@ -12,7 +12,7 @@ export default function GalleyUploadButton() {
   }
 
   return (
-    <button onClick={onClickUpload} className="button text-sm">
+    <button onClick={onClickUpload} className="button text-xs">
       upload
     </button>
   );
