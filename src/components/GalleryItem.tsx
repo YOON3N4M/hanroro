@@ -9,10 +9,11 @@ import ImageViewModal from "./modal/form/ImageViewModal";
 
 interface GalleryItemProps extends HTMLAttributes<HTMLDivElement> {
   doc: GalleryItemDoc;
+  imageClassName?: string;
 }
 
 function GalleryItem(props: GalleryItemProps) {
-  const { doc, className, ...attrs } = props;
+  const { doc, className, imageClassName, ...attrs } = props;
 
   const { openSingleModal } = useModal();
 
@@ -24,7 +25,7 @@ function GalleryItem(props: GalleryItemProps) {
 
   return (
     <div
-      className={cn(className, "cursor-pointer transition-all mo:max-w-[33%]")}
+      className={cn(className, "cursor-pointer transition-all")}
       onClick={() => onImageClick(doc)}
       {...attrs}
     >
@@ -32,7 +33,7 @@ function GalleryItem(props: GalleryItemProps) {
         width={1000}
         height={1000}
         src={doc.url}
-        className="max-w-[183px] mo:max-w-full"
+        className={cn("object-cover", imageClassName)}
         alt={doc.tags[0]}
       />
     </div>

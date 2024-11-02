@@ -109,7 +109,12 @@ export default function GalleryContainer(props: GalleryContainerProps) {
           observeChildren={true}
         >
           {renderImageList.map((i) => (
-            <GalleryItem className="rounded-md" key={i.id} doc={i} />
+            <GalleryItem
+              className="rounded-md mo:max-w-[33%]"
+              imageClassName="max-w-[183px] mo:max-w-full"
+              key={i.id}
+              doc={i}
+            />
           ))}
         </MasonryGrid>
       </div>
