@@ -4,7 +4,7 @@ interface HeaderProps {}
 
 const NAVIGATION_ITEM = [
   { name: "profile", href: "/profile" },
-  { name: "album", href: "/album" },
+  // { name: "album", href: "/album" },
   { name: "gallery", href: "/gallery" },
 ];
 
