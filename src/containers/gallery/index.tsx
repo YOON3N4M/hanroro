@@ -16,6 +16,8 @@ interface GalleryContainerProps {
   galleryDocs: GalleryDocsObjWithCombine;
 }
 
+type ImageType = "image" | "gif";
+
 function filterUniqueTags(obj: GalleryItemDoc[]) {
   const allTags = obj.map((doc) => doc.tags);
   const flat = allTags.flat(2);
@@ -36,6 +38,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
   const [renderImageList, setRenderImageList] = useState(combine);
   const [uniqueTags, setUniqueTags] = useState(() => filterUniqueTags(combine));
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [typeFilter, setTypeFilter] = useState<null | ImageType>(null);
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     setSearchKeyword(event.target.value);
@@ -47,6 +50,33 @@ export default function GalleryContainer(props: GalleryContainerProps) {
     } else {
       setSearchKeyword(tag);
       setRenderImageList(filterByTag(combine, tag));
+    }
+  }
+
+  function onClickTypeTag(type: ImageType) {
+    if (type === typeFilter) {
+      setTypeFilter(null);
+      setRenderImageList(combine);
+      return;
+    }
+
+    if (searchKeyword === "") {
+      if (type === "image") {
+        setTypeFilter("image");
+        setRenderImageList(images);
+      } else {
+        setTypeFilter("gif");
+        setRenderImageList(gif);
+      }
+    } else {
+      if (type === "image") {
+        setTypeFilter("image");
+        setRenderImageList(filterByTag(images, searchKeyword));
+      } else {
+        setTypeFilter("gif");
+        setRenderImageList(gif);
+        setRenderImageList(filterByTag(gif, searchKeyword));
+      }
     }
   }
 
@@ -70,13 +100,31 @@ export default function GalleryContainer(props: GalleryContainerProps) {
   return (
     <div className="mt-md">
       <div className="flex justify-between">
-        <div className="flex">
+        <div className="flex gap-xs">
           <input
             className="bg-white border text-sm px-xs border-authentic-light"
             placeholder="tag..."
             onChange={onChange}
             value={searchKeyword}
           />
+          <button
+            className={cn(
+              "button text-xs",
+              typeFilter === "image" && "bg-authentic-brown"
+            )}
+            onClick={() => onClickTypeTag("image")}
+          >
+            image
+          </button>
+          <button
+            className={cn(
+              "button text-xs",
+              typeFilter === "gif" && "bg-authentic-brown"
+            )}
+            onClick={() => onClickTypeTag("gif")}
+          >
+            gif
+          </button>
         </div>
         <div className="flex">
           <GalleyUploadButton />
