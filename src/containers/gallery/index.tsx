@@ -1,11 +1,11 @@
 "use client";
 
 import GalleryItem from "@/components/GalleryItem";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import GalleyUploadButton from "./Upload";
 
 import { GalleryDocsObj, GalleryItemDoc } from "@/types";
-import { filterDuple } from "@/utils";
+import { cn, filterDuple } from "@/utils";
 import { MasonryGrid } from "@egjs/react-grid";
 
 interface GalleryDocsObjWithCombine extends GalleryDocsObj {
@@ -24,6 +24,10 @@ function filterUniqueTags(obj: GalleryItemDoc[]) {
   return unique;
 }
 
+function filterByTag(docList: GalleryItemDoc[], tag: string) {
+  return docList.filter((doc) => doc.tags.includes(tag));
+}
+
 export default function GalleryContainer(props: GalleryContainerProps) {
   const { galleryDocs } = props;
   const { images, gif, combine } = galleryDocs;
@@ -31,6 +35,20 @@ export default function GalleryContainer(props: GalleryContainerProps) {
   //render state
   const [renderImageList, setRenderImageList] = useState(combine);
   const [uniqueTags, setUniqueTags] = useState(() => filterUniqueTags(combine));
+  const [searchKeyword, setSearchKeyword] = useState("");
+
+  function onChange(event: ChangeEvent<HTMLInputElement>) {
+    setSearchKeyword(event.target.value);
+  }
+
+  function onClickTag(tag: string) {
+    if (tag === searchKeyword) {
+      setSearchKeyword("");
+    } else {
+      setSearchKeyword(tag);
+      setRenderImageList(filterByTag(combine, tag));
+    }
+  }
 
   useEffect(() => {
     // 만약 필터 기능이 추가된다면 이부분 필터를 고려해야함
@@ -40,24 +58,42 @@ export default function GalleryContainer(props: GalleryContainerProps) {
     setUniqueTags(filterUniqueTags(combine));
   }, [galleryDocs]);
 
+  useEffect(() => {
+    if (searchKeyword === "") {
+      setRenderImageList(combine);
+    } else {
+      const filterdBySeachKeyword = filterByTag(combine, searchKeyword);
+      setRenderImageList(filterdBySeachKeyword);
+    }
+  }, [searchKeyword]);
+
   return (
     <div className="mt-md">
       <div className="flex justify-between">
         <div className="flex">
           <input
             className="bg-white border text-sm px-xs border-authentic-light"
-            placeholder="title or tag..."
+            placeholder="tag..."
+            onChange={onChange}
+            value={searchKeyword}
           />
         </div>
         <div className="flex">
           <GalleyUploadButton />
         </div>
       </div>
-      <div className="flex gap-xs mt-sm text-sm flex-wrap">
+      <div className="flex gap-xs mt-sm text-sm flex-wrap max-h-[80px] overflow-hidden">
         {/* <button className="tag">image</button>
 				<button className="tag">gif</button> */}
         {uniqueTags.map((item, idx) => (
-          <button key={`tag-${item}`} className="tag text-xs">
+          <button
+            key={`tag-${item}`}
+            className={cn(
+              "tag text-xs",
+              item === searchKeyword && "bg-authentic-brown"
+            )}
+            onClick={() => onClickTag(item)}
+          >
             #{item}
           </button>
         ))}
