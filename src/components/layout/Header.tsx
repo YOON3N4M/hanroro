@@ -15,7 +15,7 @@ function Header(props: HeaderProps) {
     <header className="inner bg-white text-authentic text-sm">
       <div className="flex !py-lg">
         <div className="basis-1/5">
-          <Link href={"/"}>hanroro</Link>
+          <Link href={"/"}>HANRORO</Link>
         </div>
         <nav className="flex gap-lg">
           {NAVIGATION_ITEM.map((item) => (

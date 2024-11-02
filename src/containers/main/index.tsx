@@ -17,25 +17,27 @@ function MainContainer(props: MainContainerProps) {
   return (
     <div className="">
       <section>
-        <h2 className="text-authentic-dark text-sm">calendar</h2>
+        <h2 className="text-authentic-dark text-sm opacity-70 border-b border-authentic-light">calendar</h2>
         <div></div>
       </section>
       <section className="mt-md">
-        <h2 className="text-authentic-dark text-sm">gallery</h2>
-        <div className="grid grid-cols-4 gap-xxs mt-sm">
+        <h2 className="text-authentic-dark text-sm opacity-70 border-b border-authentic-light">gallery</h2>
+        <div className="grid grid-cols-4 gap-xxs mt-xs">
           {galleryDocs.images.slice(0, 8).map((i) => (
             <GalleryItem className="aspect-[1/1] overflow-hidden flex justify-center" key={i.id} doc={i} />
           ))}
         </div>
-        <div className="flex justify-end mt-sm">
+        <div className="flex justify-end mt-xs">
           <Link className="text-xs" href={"/gallery"}>
             more
           </Link>
         </div>
       </section>
       <section className="mt-md">
-        <h2 className="text-sm font-normal opacity-70">roro&#39;s recommended</h2>
-        <Recommend />
+        <h2 className="text-sm font-normal opacity-70 border-b border-authentic-light">roro&#39;s recommended</h2>
+        <div className="mt-xs">
+          <Recommend />
+        </div>
       </section>
     </div>
   );
