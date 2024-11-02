@@ -1,4 +1,5 @@
 import { IconInstagram, IconYoutube } from "@/components/svg";
+import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import Image from "next/image";
 import React from "react";
 
@@ -7,7 +8,13 @@ export default function ProfileContainer() {
     <section className="mt-md w-full">
       <div className="relative w-full">
         <div className="w-full">
-          <Image className="max-w-full" width={1000} height={1000} src="/images/profile/profile.jpg" alt="profile" />
+          <Image
+            className="max-w-full"
+            width={1000}
+            height={1000}
+            src="/images/profile/profile.jpg"
+            alt="profile"
+          />
         </div>
         <div className="absolute w-full h-full bg-black z-[-10] -top-sm"> </div>
       </div>
@@ -17,20 +24,12 @@ export default function ProfileContainer() {
             <div className="flex justify-between">
               <h1 className="font-semibold text-lg">한로로</h1>
               <div className="flex items-center gap-xs">
-                <a
-                  href="https://www.instagram.com/hanr0r0?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <NewTabAnchor href="https://www.instagram.com/hanr0r0?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
                   <IconInstagram className="size-[18px]" />
-                </a>
-                <a
-                  href="https://youtube.com/@hanroro6055?si=PU5sFgGjwXMjXkGa"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                </NewTabAnchor>
+                <NewTabAnchor href="https://youtube.com/@hanroro6055?si=PU5sFgGjwXMjXkGa">
                   <IconYoutube className="size-[18px]" />
-                </a>
+                </NewTabAnchor>
               </div>
             </div>
             <div className="flex justify-between pc:mt-auto mo:mt-sm">
@@ -48,8 +47,9 @@ export default function ProfileContainer() {
           </div>
           <div className="flex-1">
             <p className="">
-              다가올 미래를 두려워하는 청춘에게 손을 건네는 것으로 그의 작품은 시작됩니다. 누구보다 자신의 두려움이
-              크지만, 못지않은 용기로 한로로는 분연히 시대의 아픔을 관통하고 우리와 유대합니다.
+              다가올 미래를 두려워하는 청춘에게 손을 건네는 것으로 그의 작품은
+              시작됩니다. 누구보다 자신의 두려움이 크지만, 못지않은 용기로
+              한로로는 분연히 시대의 아픔을 관통하고 우리와 유대합니다.
             </p>
           </div>
         </div>

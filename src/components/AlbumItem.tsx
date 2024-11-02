@@ -4,6 +4,7 @@ import { Album, Track } from "@/types";
 import Image from "next/image";
 import { useState } from "react";
 import { IconYoutube } from "./svg";
+import NewTabAnchor from "./ui/NewTabAnchor";
 
 interface AlbumItemProps {
   album: Album;
@@ -69,13 +70,9 @@ function TrackItem({ track, idx }: { track: Track; idx: number }) {
         {!isHover ? (
           <span className="ml-auto">{duration}</span>
         ) : (
-          <a
-            href="https://www.instagram.com/hanr0r0?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <NewTabAnchor href="">
             <IconYoutube />
-          </a>
+          </NewTabAnchor>
         )}
       </div>
     </div>

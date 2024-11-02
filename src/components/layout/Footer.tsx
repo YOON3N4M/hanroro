@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NewTabAnchor from "../ui/NewTabAnchor";
 
 interface FooterProps {}
 
@@ -11,9 +12,9 @@ function Footer(props: FooterProps) {
         <span className="mx-auto">hanroro panpage</span>
       </div>
       <div className="flex gap-sm justify-center">
-        <a href="https://open.kakao.com/o/s6CV3FWg" target="_blank" rel="noopener noreferrer">
+        <NewTabAnchor href="https://open.kakao.com/o/s6CV3FWg">
           contact
-        </a>
+        </NewTabAnchor>
         <Link href="/about">about</Link>
       </div>
     </div>

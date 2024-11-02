@@ -1,3 +1,4 @@
+import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import React from "react";
 
 export default function AboutContainer() {
@@ -9,7 +10,8 @@ export default function AboutContainer() {
         <br /> 트래픽/광고 등 일체의 금전적 수익은 발생하지 않습니다.
       </p>
       <p className="mt-sm">
-        사이트에 기재된 한로로 님의 앨범, 스케줄 등의 정보 중 오류가 있는 부분들은
+        사이트에 기재된 한로로 님의 앨범, 스케줄 등의 정보 중 오류가 있는
+        부분들은
         <br />
         아래의 이메일 혹은 오픈채팅으로 제보해 주시면 감사하겠습니다.
         <br />
@@ -17,9 +19,12 @@ export default function AboutContainer() {
       </p>
       <div className="flex flex-col mt-md">
         <span>yoon3namm@gmail.com</span>
-        <a className="underline" href="https://open.kakao.com/o/s6CV3FWg" target="_blank" rel="noopener noreferrer">
+        <NewTabAnchor
+          className="underline"
+          href="https://open.kakao.com/o/s6CV3FWg"
+        >
           kakaotalk
-        </a>
+        </NewTabAnchor>
       </div>
     </div>
   );
