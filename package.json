@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@egjs/react-grid": "^1.17.0",
+    "date-fns": "^4.1.0",
     "firebase": "^11.0.1",
     "next": "14.2.5",
     "next-cache-toolbar": "^0.2.1",
