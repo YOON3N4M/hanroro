@@ -5,7 +5,7 @@ import useCalendar from "./useCalendar";
 import { IconRightLeft, IconRightRight } from "../svg";
 import { cn } from "@/utils";
 
-const weeks = ["M", "T", "W", "T", "F", "S", "S"];
+const weeks = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 export default function Calendar() {
   const { currentDate, daysOfMonth, nextMonth, prevMonth } = useCalendar();
@@ -39,20 +39,20 @@ export default function Calendar() {
       {/* days */}
       <div className="grid grid-cols-7 mt-xs">
         {daysOfMonth.map((day, idx) => (
-          <DayGrid key={`${format(day, "yyyy-MM-dd")}-${idx}`} day={day} />
+          <DayGrid key={`${format(day, "yyyy-MM-dd")}-${idx}`} day={day} currentDate={currentDate} />
         ))}
       </div>
     </div>
   );
 }
 
-function DayGrid({ day }: { day: Date }) {
+function DayGrid({ currentDate, day }: { currentDate: Date; day: Date }) {
   const isSunday = format(day, "iii") === "Sun";
-
+  const isDayOfCurrentDate = format(day, "LLL") === format(currentDate, "LLL");
   return (
     <div className="min-h-[50px]">
       <div className="flex justify-center">
-        <span className={cn(isSunday && "text-red-300")}>{format(day, "dd")}</span>
+        <span className={cn(isSunday && "text-red-300", !isDayOfCurrentDate && "opacity-40")}>{format(day, "dd")}</span>
       </div>
     </div>
   );
