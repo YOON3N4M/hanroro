@@ -24,18 +24,14 @@ function GalleryItem(props: GalleryItemProps) {
   }
 
   return (
-    <div
-      className={cn(className, "cursor-pointer transition-all")}
-      onClick={() => onImageClick(doc)}
-      {...attrs}
-    >
-      <Image
+    <div className={cn(className, "cursor-pointer transition-all")} onClick={() => onImageClick(doc)} {...attrs}>
+      {/* <Image
         width={1000}
         height={1000}
         src={doc.url}
         className={cn("object-cover", imageClassName)}
         alt={doc.tags[0]}
-      />
+      /> */}
     </div>
   );
 }
