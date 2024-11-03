@@ -11,14 +11,11 @@ function Recommend(props: RecommendProps) {
   const {} = props;
 
   return (
-    <div className="flex text-sm gap-sm">
+    <div className="flex text-sm gap-sm mo:flex-col">
       <div className="flex-1">
         <div className="flex gap-sm items-center">
           <h2>music</h2>
-          <NewTabAnchor
-            className="text-base"
-            href="https://open.spotify.com/user/31b5u2b6imqqe6ddalfnqvbpdbbm"
-          >
+          <NewTabAnchor className="text-base" href="https://open.spotify.com/user/31b5u2b6imqqe6ddalfnqvbpdbbm">
             <IconSpotify />
           </NewTabAnchor>
         </div>
