@@ -9,6 +9,7 @@ import localFont from "next/font/local";
 import { cn } from "@/utils";
 import { API_BASE_URL } from "@/services";
 import AuthProvider from "@/components/auth/AuthProvider";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,8 @@ const pretendard = localFont({
   weight: "45 920",
   variable: "--font-pretendard",
 });
+
+const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS as string;
 
 export default function RootLayout({
   children,
@@ -45,6 +48,7 @@ export default function RootLayout({
           {API_BASE_URL?.includes("localhost") && <Toolbar />}
         </AuthProvider>
       </body>
+      <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
     </html>
   );
 }
