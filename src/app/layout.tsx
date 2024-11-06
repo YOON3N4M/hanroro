@@ -19,6 +19,15 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  metadataBase: new URL(API_BASE_URL),
+  openGraph: {
+    images: [
+      {
+        url: "/images/profile/profile.jpg",
+        alt: "한로로",
+      },
+    ],
+  },
 };
 
 const pretendard = localFont({
