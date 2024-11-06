@@ -9,12 +9,10 @@ function Footer(props: FooterProps) {
   return (
     <div className="py-xxxl mt-auto text-center opacity-70 text-xs">
       <div>
-        <span className="mx-auto">hanroro panpage</span>
+        <span className="mx-auto">hanroro fanpage</span>
       </div>
       <div className="flex gap-sm justify-center">
-        <NewTabAnchor href="https://open.kakao.com/o/s6CV3FWg">
-          contact
-        </NewTabAnchor>
+        <NewTabAnchor href="https://open.kakao.com/o/s6CV3FWg">contact</NewTabAnchor>
         <Link href="/about">about</Link>
       </div>
     </div>
