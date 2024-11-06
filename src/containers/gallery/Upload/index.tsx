@@ -2,9 +2,14 @@
 
 import UploadModal from "@/components/modal/form/UploadModal";
 import useModal from "@/components/modal/useModal";
-import React from "react";
+import { cn } from "@/utils";
+import React, { ButtonHTMLAttributes } from "react";
 
-export default function GalleyUploadButton() {
+interface GalleyUploadButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {}
+
+export default function GalleyUploadButton(props: GalleyUploadButtonProps) {
+  const { className } = props;
   const { openSingleModal } = useModal();
 
   function onClickUpload() {
@@ -12,7 +17,7 @@ export default function GalleyUploadButton() {
   }
 
   return (
-    <button onClick={onClickUpload} className="button text-xs">
+    <button onClick={onClickUpload} className={cn("button text-xs", className)}>
       upload
     </button>
   );
