@@ -7,6 +7,7 @@ import ModalPortal from '@/components/modal/ModalPortal'
 import Toolbar from './Toolbar'
 import localFont from 'next/font/local'
 import { cn } from '@/utils'
+import { API_BASE_URL } from '@/services'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -44,7 +45,7 @@ export default function RootLayout({
 					<Footer />
 				</main>
 				<ModalPortal />
-				<Toolbar />
+				{API_BASE_URL?.includes('localhost') && <Toolbar />}
 			</body>
 		</html>
 	)

@@ -30,9 +30,5 @@ export default function useCalendar() {
     setCurrentDate((prev) => subMonths(prev, 1));
   }
 
-  useEffect(() => {
-    console.log(currentDate);
-  }, [currentDate]);
-
   return { daysOfMonth, currentDate, nextMonth, prevMonth };
 }

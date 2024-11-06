@@ -32,11 +32,9 @@ function ModalBackGround({ removeModalElement }: { removeModalElement: () => voi
 
   function handleModalClose() {
     removeModalElement();
-    console.log("?");
   }
 
   function getBodyScrollbarWidth() {
-    console.log(window.innerWidth - document.documentElement.offsetWidth);
     return window.innerWidth - document.documentElement.offsetWidth;
   }
 

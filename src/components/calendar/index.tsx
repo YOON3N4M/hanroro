@@ -73,7 +73,7 @@ function DayGrid({ currentDate, day }: { currentDate: Date; day: Date }) {
 	const scheduleListOfDay = SCHEDULE_LIST.filter((schedule) =>
 		schedule.date.includes(formattedDay),
 	)
-	console.log(scheduleListOfDay)
+
 	return (
 		<div className="min-h-[50px]">
 			<div className="flex justify-center">
