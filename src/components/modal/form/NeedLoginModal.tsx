@@ -5,7 +5,7 @@ import LoginButton from "@/components/auth/LoginButton";
 export default function NeedLoginModal() {
   return (
     <ModalTemplate>
-      <div className="min-w-[300px] text-sm">
+      <div className="min-w-[300px] text-sm mo:min-w-[80vw]">
         <p>
           부적절한 이미지 업로드 방지를 위해
           <br />

@@ -97,10 +97,10 @@ export default function UploadModal() {
           </div>
         </div>
         {!tempAttachment && (
-          <div className="text-xs">
+          <div className="text-xs mt-md">
             <div>
               <span>업로드 금지 항목</span>
-              <ul className="text-xs">
+              <ul>
                 <li>- 한로로 님과 관련 없는 이미지</li>
                 <li>- 타인에게 불쾌감을 줄 수 있는 이미지</li>
                 <li>- 선정적, 음란성 이미지</li>
@@ -108,7 +108,7 @@ export default function UploadModal() {
               </ul>
               <p className="mt-xs">
                 상기 금지 항목을 어기고 업로드된 이미지는 관리자가 예고 없이 삭제 할 수 있으며
-                <br /> 업로드로 인해 발생하는 모든 문제의 책임은 본인에게 있습니다.
+                <br className="mo:hidden" /> 업로드로 인해 발생하는 모든 문제의 책임은 본인에게 있습니다.
               </p>
               <p className="mt-sm">그 외 한로로 님과 관련된 이미지들은 자유롭게 업로드 가능합니다!</p>
             </div>
