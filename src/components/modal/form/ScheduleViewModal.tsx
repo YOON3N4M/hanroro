@@ -51,7 +51,7 @@ export default function ScheduleViewModal(props: ScheduleViewModalProps) {
 							<IconCalendar />
 							<div className="flex gap-xxxs">
 								{date.map((d, idx) => (
-									<span>
+									<span key={`${title}-${d}=${idx}`}>
 										{idx !== 0 ? '- ' : ''}
 										{d}
 									</span>
