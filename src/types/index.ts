@@ -29,3 +29,10 @@ export interface Track {
   youtubeUrl: string;
   //작곡가
 }
+
+export interface UserDoc {
+  uid: string;
+  email: string;
+  displayName: string;
+  createdAt: number;
+}
