@@ -8,11 +8,13 @@ import { v4 as uuidv4 } from "uuid";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import useModal from "../useModal";
 import { revalidateApi } from "@/services/_server";
+import { useUser } from "@/store/auth";
 
 export default function UploadModal() {
-  const { handleChangeAttachment, tempAttachment, generateURL, isGifType } =
-    useAttachment();
+  const { handleChangeAttachment, tempAttachment, generateURL, isGifType } = useAttachment();
   const { closeAllModal } = useModal();
+
+  const user = useUser();
 
   //const [title, setTitle] = useState('')
   const [tag, setTag] = useState("");
@@ -59,13 +61,13 @@ export default function UploadModal() {
     // 	console.log('none title')
     // 	return
     // }
+    if (!user) return;
+
     setIsLoading(true);
 
     const storageFileName = uuidv4();
 
-    const attachmentUrl = await generateURL(
-      `gallery/${isGifType ? "gif" : "images"}/${storageFileName}`
-    );
+    const attachmentUrl = await generateURL(`gallery/${isGifType ? "gif" : "images"}/${storageFileName}`);
     if (!attachmentUrl) return;
 
     // docs 생성
@@ -74,7 +76,7 @@ export default function UploadModal() {
       tags,
       url: attachmentUrl,
       isGif: isGifType,
-      uploaderId: "test",
+      uploaderId: user?.uid,
       storageFileName: storageFileName,
       uploadAt: new Date().getTime(),
     };
@@ -88,15 +90,31 @@ export default function UploadModal() {
 
   return (
     <ModalTemplate>
-      <div className="relative pc:min-w-[500px] mo:min-w-[80vw] min-h-[50vh] max-w-[500px] mo:max-w-[300px] text-sm flex flex-col justify-center">
+      <div className="relative pc:min-w-[500px] mo:min-w-[80vw] min-h-[30vh] max-w-[500px] mo:max-w-[300px] text-sm flex flex-col justify-center">
         <div className="flex justify-center">
           <div className="flex w-full cursor-pointer items-center justify-center rounded-md bg-base-300">
-            <AttachmentInput
-              onChange={handleChangeAttachment}
-              attachmentSrc={tempAttachment}
-            />
+            <AttachmentInput onChange={handleChangeAttachment} attachmentSrc={tempAttachment} />
           </div>
         </div>
+        {!tempAttachment && (
+          <div className="text-xs">
+            <div>
+              <span>업로드 금지 항목</span>
+              <ul className="text-xs">
+                <li>- 한로로 님과 관련 없는 이미지</li>
+                <li>- 타인에게 불쾌감을 줄 수 있는 이미지</li>
+                <li>- 선정적, 음란성 이미지</li>
+                <li>- 개인의 신상이 노출 될 여지가 있는 이미지</li>
+              </ul>
+              <p className="mt-xs">
+                상기 금지 항목을 어기고 업로드된 이미지는 관리자가 예고 없이 삭제 할 수 있으며
+                <br /> 업로드로 인해 발생하는 모든 문제의 책임은 본인에게 있습니다.
+              </p>
+              <p className="mt-sm">그 외 한로로 님과 관련된 이미지들은 자유롭게 업로드 가능합니다!</p>
+            </div>
+          </div>
+        )}
+
         <form ref={formRef} action={revalidateApi}></form>
         {tempAttachment && (
           <div className="flex flex-col mt-md">
@@ -108,35 +126,19 @@ export default function UploadModal() {
 						/> */}
             <form onSubmit={onTagSubmit} className="flex flex-col">
               <label className="mt-sm">태그</label>
-              <p className="text-xs opacity-80 mt-xxxs">
-                태그는 검색시 필터링에 사용됩니다.
-              </p>
-              <p className="text-xs opacity-80 mt-xxxs">
-                단어 입력후 엔터를 입력하면 태그가 만들어집니다.
-              </p>
-              <input
-                className="border mt-xs"
-                onChange={onTagChange}
-                value={tag}
-                onKeyDown={handleSpaceBar}
-              />
+              <p className="text-xs opacity-80 mt-xxxs">태그는 검색시 필터링에 사용됩니다.</p>
+              <p className="text-xs opacity-80 mt-xxxs">단어 입력후 엔터를 입력하면 태그가 만들어집니다.</p>
+              <input className="border mt-xs" onChange={onTagChange} value={tag} onKeyDown={handleSpaceBar} />
             </form>
             <div className="mt-sm flex gap-xs">
               {tags.map((tagItem, idx) => (
-                <button
-                  key={idx}
-                  className="tag"
-                  onClick={() => onTagBtnClick(idx)}
-                >
+                <button key={idx} className="tag" onClick={() => onTagBtnClick(idx)}>
                   <span>#{tagItem}</span>
                 </button>
               ))}
             </div>
             <div className="flex justify-end">
-              <button
-                className="py-xxxs px-xs bg-authentic-dark text-white"
-                onClick={onUpload}
-              >
+              <button className="py-xxxs px-xs bg-authentic-dark text-white" onClick={onUpload}>
                 <span>upload</span>
               </button>
             </div>
