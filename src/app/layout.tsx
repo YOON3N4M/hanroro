@@ -33,6 +33,9 @@ export const metadata: Metadata = {
 	//google search console
 	verification: {
 		google: GOOGLE_SEARCH_VERIFICATION,
+		other: {
+			'naver-site-verification': 'fdecb3ed7af2113b9668ebf39d0e77bea6d8e4e7',
+		},
 	},
 }
 
