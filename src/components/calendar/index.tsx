@@ -22,11 +22,11 @@ export default function Calendar() {
 						{format(currentDate, 'yyyy')}.{format(currentDate, 'MM')}
 					</span>
 				</div>
-				<div className="flex min-w-[80px] justify-center">
-					<button onClick={prevMonth}>
+				<div className="flex min-w-[80px] justify-center gap-sm">
+					<button onClick={prevMonth} aria-label="calendar prev">
 						<IconRightLeft />
 					</button>
-					<button onClick={nextMonth}>
+					<button onClick={nextMonth} aria-label="calendar next">
 						<IconRightRight />
 					</button>
 				</div>
@@ -110,6 +110,7 @@ function ScheduleItem({ schedule }: { schedule: Schedule }) {
 				scheduleTypeColorStyles[schedule.type].default,
 				scheduleTypeColorStyles[schedule.type].hover,
 			)}
+			aria-label="view schedule"
 		></button>
 	)
 }
