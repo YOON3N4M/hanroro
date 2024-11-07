@@ -82,9 +82,10 @@ function MainContainer(props: MainContainerProps) {
 						alt="BUSAN ROCK FESTIVAL 2024"
 						imageHover={false}
 					>
-						<div className="mt-auto pb-[60px] flex flex-col items-center font-[100]">
+						<span className="absolute center font-[100]">END</span>
+						<div className="mt-auto h-1/3 flex flex-col pc:items-center font-[100]">
 							<h2 className="text-3xl">BUSAN ROCK FESTIVAL 2024</h2>
-							<p>10.05 (end)</p>
+							<span className="mo:mt-xs">10.05</span>
 						</div>
 					</ContentModule>
 				</div>
@@ -94,9 +95,10 @@ function MainContainer(props: MainContainerProps) {
 						alt="grand mint festival 2024"
 						imageHover={false}
 					>
-						<div className="mt-auto pb-[60px] flex flex-col items-center font-[100]">
+						<span className="absolute center font-[100]">END</span>
+						<div className="mt-auto h-1/3 flex flex-col pc:items-center font-[100]">
 							<h2 className="text-3xl">GRAND MINT FESTIVAL 2024</h2>
-							<p>11.03 (end)</p>
+							<span className="mo:mt-xs">11.03</span>
 						</div>
 					</ContentModule>
 				</div>
@@ -106,9 +108,9 @@ function MainContainer(props: MainContainerProps) {
 						alt="wonderlivet 2024"
 						href="https://wonderli.vet/"
 					>
-						<div className="mt-auto pb-[60px] flex flex-col items-center font-[100]">
+						<div className="mt-auto h-1/3 flex flex-col pc:items-center font-[100]">
 							<h2 className="text-3xl">WONDERLIVET 2024</h2>
-							<p>11.08</p>
+							<span className="mo:mt-xs">11.08</span>
 						</div>
 					</ContentModule>
 				</div>
