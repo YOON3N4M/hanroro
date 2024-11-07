@@ -1,34 +1,38 @@
-"use client";
+'use client'
 
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect } from 'react'
 
-import { User, onAuthStateChanged } from "firebase/auth";
-import { useAuthActions, useUser } from "@/store/auth";
-import { auth } from "@/lib/firebase/firebase";
+import { auth } from '@/lib/firebase/firebase'
+import { getUserDocument } from '@/services/firebase'
+import { useAuthActions } from '@/store/auth'
+import { UserDoc } from '@/types'
+import { User, onAuthStateChanged } from 'firebase/auth'
 
 interface AuthProviderProps {
-  children: ReactNode;
+	children: ReactNode
 }
 
 function AuthProvider(props: AuthProviderProps) {
-  const { children } = props;
-  const user = useUser();
+	const { children } = props
 
-  const { setIsLogin, setUser } = useAuthActions();
+	const { setIsLogin, setUser, setUserDoc } = useAuthActions()
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (sessionUser: User | null) => {
-      if (sessionUser) {
-        setIsLogin("authenticated");
-        setUser(sessionUser);
-      } else {
-        setIsLogin("unauthenticated");
-        setUser(null);
-      }
-    });
-  }, []);
+	useEffect(() => {
+		onAuthStateChanged(auth, async (sessionUser: User | null) => {
+			if (sessionUser) {
+				const userDoc = (await getUserDocument(sessionUser.uid)) as UserDoc
+				setIsLogin('authenticated')
+				setUser(sessionUser)
+				setUserDoc(userDoc)
+			} else {
+				setIsLogin('unauthenticated')
+				setUser(null)
+				setUserDoc(null)
+			}
+		})
+	}, [])
 
-  return <div className="w-full h-full">{children}</div>;
+	return <div className="w-full h-full">{children}</div>
 }
 
-export default AuthProvider;
+export default AuthProvider

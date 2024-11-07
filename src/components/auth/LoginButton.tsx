@@ -84,5 +84,5 @@ function generateUserObject(
 	displayName: string,
 	createdAt: number,
 ) {
-	return { uid, email, displayName, createdAt }
+	return { uid, email, displayName, createdAt, job: 'user' }
 }
