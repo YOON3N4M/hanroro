@@ -1,5 +1,5 @@
 export default async function sitemap() {
-	const baseUrl = 'https://hanroro.vercel.app/'
+	const baseUrl = 'https://hanroro.vercel.app'
 
 	return [
 		{ url: baseUrl, lastModified: new Date() },
