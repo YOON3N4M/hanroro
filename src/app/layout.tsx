@@ -30,6 +30,7 @@ export const metadata: Metadata = {
 			},
 		],
 	},
+	//google search console
 	verification: {
 		google: GOOGLE_SEARCH_VERIFICATION,
 	},
