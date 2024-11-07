@@ -19,6 +19,9 @@ const config: Config = {
 			fontFamily: {
 				pretendard: ['var(--font-pretendard)'],
 			},
+			height: {
+				nav: '45px',
+			},
 			spacing: {
 				xxxs: '2px',
 				xxs: '4px',
@@ -29,6 +32,7 @@ const config: Config = {
 				xl: '24px',
 				xxl: '32px',
 				xxxl: '40px',
+				nav: '45px',
 			},
 			colors: {
 				//before rework
