@@ -6,7 +6,7 @@ import React from "react";
 export default function ProfileContainer() {
   return (
     <section className="mt-md w-full">
-      <div className="relative w-full">
+      {/* <div className="relative w-full">
         <div className="w-full">
           <Image
             className="max-w-full"
@@ -53,7 +53,7 @@ export default function ProfileContainer() {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <div className="mt-md flex gap-md">
         <div className="flex-1 bg-authentic-brown text-4xl text-right">
           <p className="text-white">A</p>
