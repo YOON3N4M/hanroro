@@ -1,42 +1,44 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/containers/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-      borderRadius: {
-        md: "4px",
-      },
-      screens: {
-        mo: { max: "600px" },
-        pc: "601px",
-      },
-      fontFamily: {
-        pretendard: ["var(--font-pretendard)"],
-      },
-      spacing: {
-        xxxs: "2px",
-        xxs: "4px",
-        xs: "8px",
-        sm: "12px",
-        md: "16px",
-        lg: "20px",
-        xl: "24px",
-        xxl: "32px",
-        xxxl: "40px",
-      },
-      colors: {
-        "authentic-dark": "#9baaa9",
-        "authentic-light": "rgb(201, 222, 220)",
-        "authentic-brown": "rgb(145, 126, 106)",
-      },
-    },
-  },
-  plugins: [],
-};
-export default config;
+	content: [
+		'./src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+		'./src/components/**/*.{js,ts,jsx,tsx,mdx}',
+		'./src/app/**/*.{js,ts,jsx,tsx,mdx}',
+		'./src/containers/**/*.{js,ts,jsx,tsx,mdx}',
+	],
+	theme: {
+		extend: {
+			borderRadius: {
+				md: '4px',
+			},
+			screens: {
+				mo: { max: '734px' },
+				pc: '735px',
+			},
+			fontFamily: {
+				pretendard: ['var(--font-pretendard)'],
+			},
+			spacing: {
+				xxxs: '2px',
+				xxs: '4px',
+				xs: '8px',
+				sm: '12px',
+				md: '16px',
+				lg: '20px',
+				xl: '24px',
+				xxl: '32px',
+				xxxl: '40px',
+			},
+			colors: {
+				//before rework
+				'authentic-dark': '#9baaa9',
+				'authentic-light': 'rgb(201, 222, 220)',
+				'authentic-brown': 'rgb(145, 126, 106)',
+				//after-rework
+			},
+		},
+	},
+	plugins: [],
+}
+export default config

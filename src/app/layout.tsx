@@ -61,7 +61,7 @@ export default function RootLayout({
 			>
 				<AuthProvider>
 					<Header />
-					<main className="inner h-full bg-white flex flex-col">
+					<main className="h-full bg-white flex flex-col">
 						{children}
 						<Footer />
 					</main>
