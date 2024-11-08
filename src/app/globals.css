@@ -6,93 +6,93 @@
 }
 
 @media (prefers-color-scheme: dark) {
-	:root {
-	}
+  :root {
+  }
 }
 
 body {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	padding: 0;
-	margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 * {
-	::-webkit-scrollbar {
-		width: 0px;
-	}
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
 
-	/* 스크롤바 트랙 */
-	::-webkit-scrollbar-track {
-		background: #ffffff;
-		border-radius: 10px;
-		margin-right: 4px;
-	}
+  /* 스크롤바 트랙 */
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+    margin-right: 4px;
+  }
 
-	/* 스크롤바 핸들 */
-	::-webkit-scrollbar-thumb {
-		background-color: rgb(201, 222, 220);
-		border-radius: 10px;
-		width: 4px;
-	}
+  /* 스크롤바 핸들 */
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(201, 222, 220);
+    border-radius: 10px;
+    width: 4px;
+  }
 }
 
 .visually-hidden {
-	position: absolute;
-	clip: rect(1px, 1px, 1px, 1px);
-	-webkit-clip-path: inset(0px 0px 99.9% 99.9%);
-	clip-path: inset(0px 0px 99.9% 99.9%);
-	overflow: hidden;
-	height: 1px;
-	width: 1px;
-	padding: 0;
-	border: 0;
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(0px 0px 99.9% 99.9%);
+  clip-path: inset(0px 0px 99.9% 99.9%);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  border: 0;
 }
 
 main {
-	flex-grow: 1;
-	overflow-y: auto;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 @layer utilities {
-	body {
-		@apply font-pretendard;
-	}
-	.text-balance {
-		text-wrap: balance;
-	}
-	.blind {
-		@apply absolute m-[-1px] size-[1px] overflow-hidden;
-	}
-	.center {
-		@apply x-center y-center;
-	}
-	.x-center {
-		@apply left-[50%] translate-x-[-50%];
-	}
-	.y-center {
-		@apply top-[50%] translate-y-[-50%];
-	}
-	.text-balance {
-		text-wrap: balance;
-	}
-	.inner {
-		@apply max-w-[1024px] w-full mx-auto px-[22px];
-	}
-	.drag-unable {
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-use-select: none;
-		user-select: none;
-	}
+  body {
+    @apply font-pretendard;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .blind {
+    @apply absolute m-[-1px] size-[1px] overflow-hidden;
+  }
+  .center {
+    @apply x-center y-center;
+  }
+  .x-center {
+    @apply left-[50%] translate-x-[-50%];
+  }
+  .y-center {
+    @apply top-[50%] translate-y-[-50%];
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .inner {
+    @apply max-w-[1024px] w-full mx-auto px-[22px];
+  }
+  .drag-unable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-use-select: none;
+    user-select: none;
+  }
 }
 
 @layer components {
-	.button {
-		@apply py-xxxs px-xs bg-authentic-dark text-white;
-	}
-	.tag {
-		@apply py-xxxs px-xxs text-xs bg-authentic-dark text-white rounded-md;
-	}
+  .button {
+    @apply text-white rounded-md bg-black py-xs px-sm border;
+  }
+  .tag {
+    @apply rounded-md text-black bg-gray-200 px-xs;
+  }
 }

@@ -9,3 +9,5 @@ export { CiCalendar as IconCalendar } from "react-icons/ci";
 export { CiTimer as IconTimer } from "react-icons/ci";
 export { CiLink as IconLink } from "react-icons/ci";
 export { CiLocationOn as IconLocation } from "react-icons/ci";
+// export { HiOutlineXCircle as IconRemove } from "react-icons/hi";
+export { TbCircleXFilled as IconRemove } from "react-icons/tb";

@@ -7,6 +7,8 @@ import GalleyUploadButton from "./Upload";
 import { GalleryDocsObj, GalleryItemDoc } from "@/types";
 import { cn, filterDuple } from "@/utils";
 import { MasonryGrid } from "@egjs/react-grid";
+import { IconRemove } from "@/components/svg";
+import { DebounceEvent } from "@/utils/DebounceEvent";
 
 interface GalleryDocsObjWithCombine extends GalleryDocsObj {
   combine: GalleryItemDoc[];
@@ -30,15 +32,37 @@ function filterByTag(docList: GalleryItemDoc[], tag: string) {
   return docList.filter((doc) => doc.tags.includes(tag));
 }
 
+// 1360 < 8
+// 1360 > 6
+//
+const masonryColumnGap = 5;
+
+function columnCount() {
+  if (window.innerWidth > 1360) {
+    return 8;
+  } else if (window.innerWidth > 735) {
+    return 6;
+  } else {
+    return 4;
+  }
+}
+
 export default function GalleryContainer(props: GalleryContainerProps) {
   const { galleryDocs } = props;
   const { images, gif, combine } = galleryDocs;
 
   //render state
+  const [masonryColumn, setMasonryColumn] = useState(columnCount);
   const [renderImageList, setRenderImageList] = useState(combine);
   const [uniqueTags, setUniqueTags] = useState(() => filterUniqueTags(combine));
   const [searchKeyword, setSearchKeyword] = useState("");
   const [typeFilter, setTypeFilter] = useState<null | ImageType>(null);
+
+  const masonryItemStyle = {
+    width: `calc((100% - ${
+      (masonryColumn - 1) * masonryColumnGap
+    }px)/${masonryColumn})`,
+  };
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     setSearchKeyword(event.target.value);
@@ -97,68 +121,97 @@ export default function GalleryContainer(props: GalleryContainerProps) {
     }
   }, [searchKeyword]);
 
+  useEffect(() => {
+    const handleMasonryColumn = () => {
+      const newColumnCount = columnCount();
+      console.log(newColumnCount);
+      setMasonryColumn(newColumnCount);
+    };
+
+    const ResizeDebounced = new DebounceEvent("resize", handleMasonryColumn);
+    return () => {
+      ResizeDebounced.removeEventListeners();
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(masonryColumn);
+  }, [masonryColumn]);
   return (
-    <div className="mt-md">
-      <div className="flex flex-col">
-        <div className="flex gap-xs">
-          <input
-            className="bg-white border text-sm px-xs border-authentic-light max-w-[168px]"
-            placeholder="tag..."
-            onChange={onChange}
-            value={searchKeyword}
-          />
+    <div className="pt-md flex text-black bg-white gap-md h-full px-md mo:flex-col">
+      {/* filter section */}
+      <div className="basis-[20%] pc:min-h-[500px] min-w-[300px] max-w-[375px] border py-md bg-[#fafafc] mo:w-full mo:max-w-full">
+        <div className="flex justify-center">
+          <GalleyUploadButton className="text-white rounded-md bg-black py-xs px-sm w-[180px] border" />
         </div>
-        <div className="flex mt-sm gap-sm">
-          <button
-            className={cn("button text-xs", typeFilter === "image" && "bg-authentic-brown")}
-            onClick={() => onClickTypeTag("image")}
-            aria-label="filter image"
-          >
-            image
-          </button>
-          <button
-            className={cn("button text-xs", typeFilter === "gif" && "bg-authentic-brown")}
-            onClick={() => onClickTypeTag("gif")}
-            aria-label="filter gif"
-          >
-            gif
-          </button>
-          <GalleyUploadButton className="ml-auto" />
+        <div className="px-md mt-md text-sm">
+          <span className="opacity-60">필터</span>
+          <div className="flex gap-sm mt-xxs text-sm">
+            <button
+              className={cn(
+                "text-white rounded-md bg-black px-sm flex items-center gap-xxs"
+              )}
+              onClick={() => onClickTypeTag("image")}
+              aria-label="filter image"
+            >
+              사진 {typeFilter === "image" && <IconRemove />}
+            </button>
+            <button
+              className="text-white rounded-md bg-black px-sm flex items-center gap-xxs"
+              onClick={() => onClickTypeTag("gif")}
+              aria-label="filter gif"
+            >
+              움짤{typeFilter === "gif" && <IconRemove />}
+            </button>
+          </div>
+        </div>
+        <div className="px-md mt-md text-sm">
+          <span className="opacity-60">태그</span>
+          <div className="flex gap-sm mt-xxs flex-wrap text-sm mo:max-h-[130px] mo:overflow-y-auto">
+            {uniqueTags.map((item, idx) => (
+              <button
+                key={`tag-${item}`}
+                className={cn(
+                  "rounded-md text-black bg-gray-200 px-xs",
+                  item === searchKeyword && "bg-gray-300"
+                )}
+                onClick={() => onClickTag(item)}
+                aria-label={`filter ${item}`}
+              >
+                #{item}
+              </button>
+              //   <button
+              //     key={`tag-${item}`}
+              //     className={cn(
+              //       "tag text-xs",
+              //       item === searchKeyword && "bg-authentic-brown"
+              //     )}
+              //   >
+              //     #{item}
+              //   </button>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="flex gap-xs mt-sm text-sm flex-wrap max-h-[80px] overflow-hidden">
-        {/* <button className="tag">image</button>
-				<button className="tag">gif</button> */}
-        {uniqueTags.map((item, idx) => (
-          <button
-            key={`tag-${item}`}
-            className={cn("tag text-xs", item === searchKeyword && "bg-authentic-brown")}
-            onClick={() => onClickTag(item)}
-            aria-label={`filter ${item}`}
-          >
-            #{item}
-          </button>
-        ))}
-      </div>
-      <div className="mt-sm w-full">
-        {/* 갤러리 영역 */}
-        {/* <MasonryGrid
-					column={3}
-					gap={5}
-					defaultDirection={'end'}
-					align={'justify'}
-					useResizeObserver={true}
-					observeChildren={true}
-				>
-					{renderImageList.map((i) => (
-						<GalleryItem
-							className="rounded-md mo:max-w-[33%]"
-							imageClassName="max-w-[183px] mo:max-w-full"
-							key={i.id}
-							doc={i}
-						/>
-					))}
-				</MasonryGrid> */}
+      <div className="bg-[#fafafc] border flex-1 pc:min-h-full max-h-full overflow-y-auto p-[5px]">
+        <MasonryGrid
+          column={masonryColumn}
+          gap={5}
+          defaultDirection={"end"}
+          align={"justify"}
+          useResizeObserver={true}
+          observeChildren={true}
+        >
+          {renderImageList.map((i) => (
+            <GalleryItem
+              style={masonryItemStyle}
+              className={cn("rounded-md mo:max-w-[33%]")}
+              //   imageClassName="max-w-[183px] mo:max-w-full"
+              key={i.id}
+              doc={i}
+            />
+          ))}
+        </MasonryGrid>
       </div>
     </div>
   );

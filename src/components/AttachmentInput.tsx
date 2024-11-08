@@ -14,7 +14,12 @@ function AttachmentInput(props: AttachmentInputProps) {
 
   const { attachmentSrc } = props;
   return (
-    <div className={cn("flex size-full items-center justify-center", absolute && "absolute")}>
+    <div
+      className={cn(
+        "flex size-full items-center justify-center",
+        absolute && "absolute"
+      )}
+    >
       {/* id 값 props로 받아야 할지도, 이 컴포넌트가 한 페이지에 여러개 있다면? */}
       <input className="hidden" id="file-input" type="file" {...attrs} />
       {attachmentSrc ? (
@@ -33,11 +38,11 @@ function AttachmentInput(props: AttachmentInputProps) {
           htmlFor="file-input"
           className={cn(
             className,
-            "flex bg-authentic-light text-white font-bold w-[150px] p-xl cursor-pointer items-center justify-center rounded-md bg-base-200",
+            "flex bg-black text-white w-[180px] px-xl py-xs cursor-pointer text-sm items-center justify-center rounded-md bg-base-200",
             absolute && "absolute opacity-0 center hover:opacity-80"
           )}
         >
-          select image
+          이미지 선택
         </label>
       )}
     </div>
