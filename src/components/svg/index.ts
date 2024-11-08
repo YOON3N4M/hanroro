@@ -12,3 +12,5 @@ export { CiLocationOn as IconLocation } from "react-icons/ci";
 // export { HiOutlineXCircle as IconRemove } from "react-icons/hi";
 export { TbCircleXFilled as IconRemove } from "react-icons/tb";
 export { BsThreeDotsVertical as IconKebabMenu } from "react-icons/bs";
+
+export { CiEdit as iconEdit } from "react-icons/ci";

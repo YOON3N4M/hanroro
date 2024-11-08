@@ -1,88 +1,90 @@
-'use client'
+"use client";
 
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes } from "react";
 
-import { signOut } from 'firebase/auth'
+import { signOut } from "firebase/auth";
 
 import {
-	getUserDocument,
-	googleLogin,
-	postUserDocument,
-} from '@/services/firebase'
+  getUserDocument,
+  googleLogin,
+  postUserDocument,
+} from "@/services/firebase";
 
-import { cn } from '@/utils'
+import { cn } from "@/utils";
 
-import { useAuthActions, useIsLogin } from '@/store/auth'
-import { auth } from '@/lib/firebase/firebase'
+import { useAuthActions, useIsLogin } from "@/store/auth";
+import { auth } from "@/lib/firebase/firebase";
+import { useRouter } from "next/navigation";
 
 interface LoginButtonProps extends HTMLAttributes<HTMLButtonElement> {
-	icon?: boolean
+  icon?: boolean;
 }
 
 function LoginButton(props: LoginButtonProps) {
-	const { className, icon = true } = props
+  const { className, icon = true } = props;
 
-	const isLogin = useIsLogin()
-	const { setIsLogin } = useAuthActions()
+  const router = useRouter();
 
-	async function handleSignIn() {
-		const loginRes = await googleLogin()
+  const isLogin = useIsLogin();
+  const { setIsLogin } = useAuthActions();
 
-		console.log(loginRes)
+  async function handleSignIn() {
+    const loginRes = await googleLogin();
 
-		if (!loginRes.userData) {
-			alert('로그인에 실패하였습니다.')
-			return
-		}
+    console.log(loginRes);
 
-		const isExistUser = await getUserDocument(loginRes.userData.uid)
+    if (!loginRes.userData) {
+      alert("로그인에 실패하였습니다.");
+      return;
+    }
 
-		if (!isExistUser) {
-			console.log('new user')
-			console.log(loginRes.userData)
-			const { displayName, uid, email } = loginRes.userData
-			const createdAt = new Date().getTime()
-			const newUser = generateUserObject(
-				uid,
-				email!,
-				displayName || email!,
-				createdAt,
-			)
-			await postUserDocument(newUser)
-		} else {
-			console.log('old user')
-		}
+    const isExistUser = await getUserDocument(loginRes.userData.uid);
 
-		setIsLogin('authenticated')
-	}
+    if (!isExistUser) {
+      console.log("new user");
+      console.log(loginRes.userData);
+      const { displayName, uid, email } = loginRes.userData;
+      const createdAt = new Date().getTime();
+      const newUser = generateUserObject(
+        uid,
+        email!,
+        displayName || email!,
+        createdAt
+      );
+      await postUserDocument(newUser);
+    } else {
+      console.log("old user");
+    }
 
-	async function handleSignOut() {
-		await signOut(auth)
-		console.log('log out')
-	}
+    setIsLogin("authenticated");
+  }
 
-	return (
-		<button
-			className={cn(
-				'flex flex-col items-center justify-center',
-				className,
-				!icon && isLogin === 'authenticated' && 'text-rose-500',
-			)}
-			onClick={isLogin === 'authenticated' ? handleSignOut : handleSignIn}
-			aria-label="login, logout"
-		>
-			{isLogin === 'authenticated' ? 'logout' : 'login'}
-		</button>
-	)
+  async function handleToAccount() {
+    router.push("/account");
+  }
+
+  return (
+    <button
+      className={cn(
+        "flex flex-col items-center justify-center",
+        className,
+        !icon && isLogin === "authenticated" && "text-rose-500"
+      )}
+      onClick={isLogin === "authenticated" ? handleToAccount : handleSignIn}
+      aria-label="login, logout"
+    >
+      {isLogin === "authenticated" ? "account" : "login"}
+    </button>
+  );
 }
 
-export default LoginButton
+export default LoginButton;
 
 function generateUserObject(
-	uid: string,
-	email: string,
-	displayName: string,
-	createdAt: number,
+  uid: string,
+  email: string,
+  displayName: string,
+  createdAt: number
 ) {
-	return { uid, email, displayName, createdAt, job: 'user' }
+  return { uid, email, displayName, createdAt, job: "user" };
 }
