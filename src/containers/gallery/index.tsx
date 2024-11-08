@@ -38,6 +38,8 @@ function filterByTag(docList: GalleryItemDoc[], tag: string) {
 const masonryColumnGap = 5;
 
 function columnCount() {
+  if (typeof window === "undefined") return;
+
   if (window.innerWidth > 1360) {
     return 8;
   } else if (window.innerWidth > 735) {
@@ -52,7 +54,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
   const { images, gif, combine } = galleryDocs;
 
   //render state
-  const [masonryColumn, setMasonryColumn] = useState(columnCount);
+  const [masonryColumn, setMasonryColumn] = useState(0);
   const [renderImageList, setRenderImageList] = useState(combine);
   const [uniqueTags, setUniqueTags] = useState(() => filterUniqueTags(combine));
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -124,10 +126,10 @@ export default function GalleryContainer(props: GalleryContainerProps) {
   useEffect(() => {
     const handleMasonryColumn = () => {
       const newColumnCount = columnCount();
-      console.log(newColumnCount);
+      if (newColumnCount === undefined) return;
       setMasonryColumn(newColumnCount);
     };
-
+    handleMasonryColumn();
     const ResizeDebounced = new DebounceEvent("resize", handleMasonryColumn);
     return () => {
       ResizeDebounced.removeEventListeners();
@@ -194,24 +196,26 @@ export default function GalleryContainer(props: GalleryContainerProps) {
         </div>
       </div>
       <div className="bg-[#fafafc] border flex-1 pc:min-h-full max-h-full overflow-y-auto p-[5px]">
-        <MasonryGrid
-          column={masonryColumn}
-          gap={5}
-          defaultDirection={"end"}
-          align={"justify"}
-          useResizeObserver={true}
-          observeChildren={true}
-        >
-          {renderImageList.map((i) => (
-            <GalleryItem
-              style={masonryItemStyle}
-              className={cn("rounded-md mo:max-w-[33%]")}
-              //   imageClassName="max-w-[183px] mo:max-w-full"
-              key={i.id}
-              doc={i}
-            />
-          ))}
-        </MasonryGrid>
+        {masonryColumn !== 0 && (
+          <MasonryGrid
+            column={masonryColumn}
+            gap={5}
+            defaultDirection={"end"}
+            align={"justify"}
+            useResizeObserver={true}
+            observeChildren={true}
+          >
+            {renderImageList.map((i) => (
+              <GalleryItem
+                style={masonryItemStyle}
+                className={cn("rounded-md mo:max-w-[33%]")}
+                //   imageClassName="max-w-[183px] mo:max-w-full"
+                key={i.id}
+                doc={i}
+              />
+            ))}
+          </MasonryGrid>
+        )}
       </div>
     </div>
   );
