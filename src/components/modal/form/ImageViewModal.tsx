@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ModalTemplate from "../ModalTemplate";
 import { GalleryItemDoc, UserDoc } from "@/types";
 import Image from "next/image";
 import { cn } from "@/utils";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { getUserDocument } from "@/services/firebase";
+import { deleteGalleryItem, getUserDocument } from "@/services/firebase";
 import { useUserDoc } from "@/store/auth";
 import { IconKebabMenu } from "@/components/svg";
+import useModal from "../useModal";
+import { revalidateApi } from "@/services/_server";
 
 interface ImageViewModalProps {
   imageDoc: GalleryItemDoc;
@@ -18,8 +20,29 @@ export default function ImageViewModal(props: ImageViewModalProps) {
   const { imageDoc } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [uploaderDoc, setUploaderDoc] = useState<UserDoc | null>(null);
+  const [isDropdown, setIsDropdown] = useState(false);
+  const { closeAllModal } = useModal();
 
   const userDoc = useUserDoc();
+
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  function handleKebabClick() {
+    setIsDropdown((prev) => !prev);
+  }
+
+  async function handleDeleteClick() {
+    await deleteGalleryItem(imageDoc);
+    forceSubmitRevalidateForm();
+    alert("정상적으로 삭제 되었습니다.");
+    closeAllModal();
+  }
+
+  function forceSubmitRevalidateForm() {
+    if (formRef.current) {
+      formRef.current.requestSubmit();
+    }
+  }
 
   useEffect(() => {
     async function getUser() {
@@ -33,13 +56,33 @@ export default function ImageViewModal(props: ImageViewModalProps) {
   }, []);
   return (
     <ModalTemplate bg={false}>
+      <form
+        className="visually-hidden"
+        ref={formRef}
+        action={revalidateApi}
+      ></form>
       <div className="flex relative">
-        {!isLoading && (
+        {!isLoading && userDoc?.uid === imageDoc.uploaderId && (
           <div className="absolute top-0 w-full z-10 p-md">
             <div className="flex justify-end">
-              <button className="text-white">
-                <IconKebabMenu className="size-[24px] opacity-80" />
-              </button>
+              <div className="relative bg-[#0000003b] size-[30px] flex items-center justify-center rounded-full ">
+                <button className="text-white">
+                  <IconKebabMenu
+                    onClick={handleKebabClick}
+                    className="size-[24px] opacity-80"
+                  />
+                </button>
+                {isDropdown && (
+                  <div className="absolute right-full bg-white">
+                    <button
+                      onClick={handleDeleteClick}
+                      className="button min-w-[100px] p-xxxs bg-white text-red-400 top-0 hover:bg-gray-100"
+                    >
+                      삭제
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}
@@ -56,7 +99,7 @@ export default function ImageViewModal(props: ImageViewModalProps) {
         />
         {/* text panel */}
         {!isLoading && (
-          <div className="absolute w-full h-[100px] bottom-0 bg-black opacity-50 flex flex-col text-white p-md">
+          <div className="absolute w-full h-[80px] bottom-0 bg-black opacity-50 flex flex-col text-white p-md">
             <div className="flex gap-xs">
               {imageDoc.tags.map((tag, idx) => (
                 <span key={`${imageDoc.id}-${idx}`} className="text-xs">

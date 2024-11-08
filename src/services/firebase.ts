@@ -1,10 +1,20 @@
-import { auth, dbService } from "@/lib/firebase/firebase";
+import { auth, dbService, storageService } from "@/lib/firebase/firebase";
 import { GalleryItemDoc, UserDoc } from "@/types";
-import { addDoc, collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { API_BASE_URL, API_TAG } from ".";
 import { User } from "firebase/auth/web-extension";
 import { GoogleAuthProvider } from "firebase/auth";
 import { signInWithPopup } from "firebase/auth";
+import { deleteObject, ref } from "firebase/storage";
 
 export async function uploadImage(document: GalleryItemDoc) {
   const collectionName = document.isGif ? "gifs" : "images";
@@ -94,4 +104,24 @@ export async function getUserDocument(uid: string) {
 export async function postUserDocument(user: UserDoc) {
   const ref = doc(dbService, "user", user.uid);
   const res = await setDoc(ref, user);
+}
+
+export async function deleteGalleryItem(imageDoc: GalleryItemDoc) {
+  let imageRef;
+
+  if (imageDoc.isGif) {
+    imageRef = ref(storageService, `gallery/gif/${imageDoc.storageFileName}`);
+  } else {
+    imageRef = ref(
+      storageService,
+      `gallery/images/${imageDoc.storageFileName}`
+    );
+  }
+
+  const fileDelRes = await deleteObject(imageRef);
+  console.log(fileDelRes);
+  const docDelRes = await deleteDoc(
+    doc(dbService, imageDoc.isGif ? "gif" : "images", imageDoc.id!)
+  );
+  console.log(docDelRes);
 }
