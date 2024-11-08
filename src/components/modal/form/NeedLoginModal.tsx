@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ModalTemplate from "../ModalTemplate";
 import LoginButton from "@/components/auth/LoginButton";
+import { useIsLogin } from "@/store/auth";
+import useModal from "../useModal";
 
 export default function NeedLoginModal() {
+  const isLogin = useIsLogin();
+  const { closeAllModal } = useModal();
+
+  useEffect(() => {
+    if (isLogin === "authenticated") {
+      closeAllModal();
+    }
+  }, [isLogin]);
+
   return (
     <ModalTemplate>
       <div className="min-w-[300px] text-sm mo:min-w-[80vw]">
