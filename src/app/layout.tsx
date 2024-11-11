@@ -54,14 +54,14 @@ export default function RootLayout({
 }>) {
   return (
     <html className="h-full" lang="en">
-      <body className={cn("h-full w-full", `${pretendard.variable}`)}>
+      <body className={cn("", `${pretendard.variable}`)}>
         <h1 className="visually-hidden">hanroro | fanpage</h1>
         <AuthProvider>
           <Header />
-          <main className="h-full bg-black flex flex-col pt-nav">
+          <main className="bg-white min-h-full h-auto flex flex-col pt-nav">
             {children}
-            <Footer />
           </main>
+          <Footer />
           <ModalPortal />
           <ToastPortal />
           {API_BASE_URL?.includes("localhost") && <Toolbar />}
