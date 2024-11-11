@@ -97,7 +97,8 @@ export default function ImageViewModal(props: ImageViewModalProps) {
           alt={"이미지"}
           className={cn(
             "pc:max-h-[80vh] object-cover pc:w-auto mo:max-w-[80vw]",
-            isLoading && "opacity-0"
+            isLoading && "opacity-0",
+            !isLoading && "animate-fadeIn"
           )}
           onLoad={() => setIsLoading(false)}
         />

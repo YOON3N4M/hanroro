@@ -25,7 +25,10 @@ function GalleryItem(props: GalleryItemProps) {
 
   return (
     <div
-      className={cn(className, "cursor-pointer border transition-all bg-black")}
+      className={cn(
+        className,
+        "cursor-pointer border transition-all bg-black animate-fadeIn"
+      )}
       onClick={() => onImageClick(doc)}
       style={style}
       {...attrs}

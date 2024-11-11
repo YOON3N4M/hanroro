@@ -22,7 +22,7 @@ export default ToastPortal;
 function ToastItem({ toast }: { toast: Toast }) {
   const { message } = toast;
   return (
-    <div className="py-sm px-md bg-black text-white text-sm rounded-md transition-all">
+    <div className="py-sm px-md bg-black text-white text-sm rounded-md animate-fadeIn">
       <p>{message}</p>
     </div>
   );
