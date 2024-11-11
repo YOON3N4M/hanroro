@@ -54,8 +54,6 @@ export default function GalleryContainer(props: GalleryContainerProps) {
   const { galleryDocs } = props;
   const { images, gif, combine } = galleryDocs;
 
-  const { addToast } = useToast();
-
   //render state
   const [masonryColumn, setMasonryColumn] = useState(0);
   const [renderImageList, setRenderImageList] = useState(combine);
@@ -80,10 +78,6 @@ export default function GalleryContainer(props: GalleryContainerProps) {
       setSearchKeyword(tag);
       setRenderImageList(filterByTag(combine, tag));
     }
-  }
-
-  function test() {
-    addToast({ message: "dasdasdasda" });
   }
 
   function onClickTypeTag(type: ImageType) {
@@ -153,7 +147,6 @@ export default function GalleryContainer(props: GalleryContainerProps) {
         <div className="flex justify-center">
           <GalleyUploadButton className="text-white rounded-md bg-black py-xs px-sm w-[180px] border" />
         </div>
-        <button onClick={test}>test</button>
         <div className="px-md mt-md text-sm">
           <span className="opacity-60">필터</span>
           <div className="flex gap-sm mt-xxs text-sm">

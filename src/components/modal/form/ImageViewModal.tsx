@@ -11,6 +11,8 @@ import { useUserDoc } from "@/store/auth";
 import { IconKebabMenu } from "@/components/svg";
 import useModal from "../useModal";
 import { revalidateApi } from "@/services/_server";
+import useToast from "@/components/toast/useToast";
+import { TOAST_MESSAGE } from "@/components/toast/message";
 
 interface ImageViewModalProps {
   imageDoc: GalleryItemDoc;
@@ -21,7 +23,9 @@ export default function ImageViewModal(props: ImageViewModalProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [uploaderDoc, setUploaderDoc] = useState<UserDoc | null>(null);
   const [isDropdown, setIsDropdown] = useState(false);
+
   const { closeAllModal } = useModal();
+  const { addToast } = useToast();
 
   const userDoc = useUserDoc();
 
@@ -34,7 +38,7 @@ export default function ImageViewModal(props: ImageViewModalProps) {
   async function handleDeleteClick() {
     await deleteGalleryItem(imageDoc);
     forceSubmitRevalidateForm();
-    alert("정상적으로 삭제 되었습니다.");
+    addToast({ message: TOAST_MESSAGE.deleteSucess });
     closeAllModal();
   }
 

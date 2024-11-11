@@ -10,6 +10,7 @@ import useModal from "../useModal";
 import { revalidateApi } from "@/services/_server";
 import { useUser } from "@/store/auth";
 import useToast from "@/components/toast/useToast";
+import { TOAST_MESSAGE } from "@/components/toast/message";
 
 export default function UploadModal() {
   const { handleChangeAttachment, tempAttachment, generateURL, isGifType } =
@@ -90,7 +91,7 @@ export default function UploadModal() {
     forceSubmitRevalidateForm();
 
     setIsLoading(false);
-    addToast({ message: "업로드가 정상적으로 완료되었습니다." });
+    addToast({ message: TOAST_MESSAGE.uploadSucess });
     closeAllModal();
   }
 
