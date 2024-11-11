@@ -10,6 +10,7 @@ import { cn } from "@/utils";
 import { API_BASE_URL } from "@/services";
 import AuthProvider from "@/components/auth/AuthProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import ToastPortal from "@/components/toast/ToastPortal";
 
 const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS as string;
 const GOOGLE_SEARCH_VERIFICATION = process.env
@@ -62,6 +63,7 @@ export default function RootLayout({
             <Footer />
           </main>
           <ModalPortal />
+          <ToastPortal />
           {API_BASE_URL?.includes("localhost") && <Toolbar />}
         </AuthProvider>
       </body>
