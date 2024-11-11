@@ -6,7 +6,7 @@ function ModalPortal() {
   const modalElements = useModalElements();
 
   return (
-    <div>
+    <div id="modal-portal">
       {modalElements.map((element, idx) => (
         <div key={idx}>{element}</div>
       ))}
