@@ -1,6 +1,8 @@
 "use client";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { TOAST_MESSAGE } from "@/components/toast/message";
+import useToast from "@/components/toast/useToast";
 import { auth, dbService } from "@/lib/firebase/firebase";
 import { useAuthActions, useIsLogin, useUser, useUserDoc } from "@/store/auth";
 import { signOut } from "firebase/auth";
@@ -14,6 +16,7 @@ function AccountContainer(props: AccountContainerProps) {
   const {} = props;
 
   const { setUserDoc } = useAuthActions();
+  const { addToast } = useToast();
 
   const user = useUserDoc();
   const isLogin = useIsLogin();
@@ -46,6 +49,7 @@ function AccountContainer(props: AccountContainerProps) {
 
     setUserDoc({ ...user, displayName: nickname });
     handleEditClick();
+    addToast({ message: TOAST_MESSAGE.profileChangeSuccess });
   }
 
   if (isLogin === "unauthenticated") {
@@ -58,7 +62,7 @@ function AccountContainer(props: AccountContainerProps) {
     setNickname(user.displayName!);
   }, [user]);
   return (
-    <div className="h-full pt-md bg-white">
+    <div className="h-full pt-md bg-white min-h-fu">
       {isLogin === "initial" && <LoadingSpinner />}
       {user && (
         <>

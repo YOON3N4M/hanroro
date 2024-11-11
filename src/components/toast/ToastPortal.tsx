@@ -8,7 +8,7 @@ function ToastPortal() {
 
   return (
     <div id="toast-portal">
-      <div className="absolute bottom-[2%] left-[3%] flex flex-col gap-sm">
+      <div className="fixed bottom-[2%] left-[3%] flex flex-col gap-sm">
         {toastList.map((toast, idx) => (
           <ToastItem key={`${idx}-${toast.message}`} toast={toast} />
         ))}
