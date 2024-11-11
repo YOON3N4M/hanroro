@@ -9,11 +9,13 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import useModal from "../useModal";
 import { revalidateApi } from "@/services/_server";
 import { useUser } from "@/store/auth";
+import useToast from "@/components/toast/useToast";
 
 export default function UploadModal() {
   const { handleChangeAttachment, tempAttachment, generateURL, isGifType } =
     useAttachment();
   const { closeAllModal } = useModal();
+  const { addToast } = useToast();
 
   const user = useUser();
 
@@ -88,6 +90,7 @@ export default function UploadModal() {
     forceSubmitRevalidateForm();
 
     setIsLoading(false);
+    addToast({ message: "업로드가 정상적으로 완료되었습니다." });
     closeAllModal();
   }
 

@@ -21,5 +21,14 @@ export default function useToast() {
 
     setToastList([...toastList, newToast]);
   }
+
+  useEffect(() => {
+    if (toastList.length === 0) return;
+
+    setTimeout(() => {
+      setToastList(toastList.slice(1));
+    }, 3000);
+  }, [toastList]);
+
   return { addToast };
 }
