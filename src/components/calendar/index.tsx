@@ -2,7 +2,7 @@
 
 import { format, startOfMonth } from "date-fns";
 import useCalendar from "./useCalendar";
-import { IconRightLeft, IconRightRight } from "../svg";
+import { IconCalendar, IconRightLeft, IconRightRight, IconTimer } from "../svg";
 import { cn } from "@/utils";
 import { Schedule, SCHEDULE_LIST, ScheduleType } from "@/data/schedule";
 import useModal from "../modal/useModal";
@@ -78,25 +78,36 @@ export default function Calendar() {
           ))}
         </div>
         <span className="mt-xl text-sm opacity-80">리스트</span>
-        <div className="bg-white border rounded-md flex flex-col mt-xs gap-sm p-md flex-1">
+        <div className="bg-white border rounded-md flex flex-col mt-xs flex-1">
           {scheduleList.map((item) => (
             <div
               key={`${item.type}-list-${item.title}`}
               className={cn(
-                "px-xs py-xxxs flex-col flex border-l-8",
-                scheduleTypeColorStyles[item.type].border,
+                "min-h-[70px] border-b hover:bg-gray-50",
                 !filter.find((filterItem) => filterItem.type === item.type) &&
                   "hidden"
               )}
             >
-              {/* <span className="text-sm">{item.title}</span> */}
-              <span className="text-sm">abc</span>
-              <div className="flex gap-xxxs">
-                {item.date.map((item, idx) => (
-                  <span key={idx} className="text-xs opacity-60">
-                    {idx !== 0 && ","} {item}
+              <div
+                className={cn(
+                  "px-xs py-xs flex-col flex border-l-8 gap-xs size-full animate-fadeIn ",
+                  scheduleTypeColorStyles[item.type].border
+                )}
+              >
+                <span className="text-sm">{item.title}</span>
+                <div>
+                  <div className="flex gap-xxs text-xs opacity-60">
+                    <IconCalendar className="opacity-60" />
+                    {item.date.map((item, idx) => (
+                      <span key={idx} className="">
+                        {idx !== 0 && ","} {item}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="text-xs opacity-60 flex items-center gap-xxs">
+                    <IconTimer className="opacity-60" /> {item.duration}
                   </span>
-                ))}
+                </div>
               </div>
             </div>
           ))}
@@ -224,10 +235,10 @@ function ScheduleItem({
       onClick={onClickSchedule}
       key={schedule.title}
       className={cn(
-        "w-[80%] min-h-[5px] rounded-md",
+        "w-[80%] min-h-[5px] rounded-md animate-fadeIn",
         scheduleTypeColorStyles[schedule.type].default,
         scheduleTypeColorStyles[schedule.type].hover,
-        !filter.find((item) => item.type === schedule.type) && "opacity-0"
+        !filter.find((item) => item.type === schedule.type) && "hidden"
       )}
       aria-label="view schedule"
     ></button>
