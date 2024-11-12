@@ -1,28 +1,30 @@
 import { usePrevNextButtons } from "@/components/carousel/usePrevNextButton";
 import { IconRightLeft, IconRightRight } from "@/components/svg";
 import { SCHEDULE_LIST, Schedule } from "@/data/schedule";
+import { cn } from "@/utils";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
-
+import { ReactNode, useEffect } from "react";
+import ClassNames from "embla-carousel-class-names";
 interface BannerCarouselProps {}
 
 function BannerCarousel(props: BannerCarouselProps) {
   const {} = props;
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "center",
-    loop: true,
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "center",
+      loop: true,
+    },
+    [ClassNames({ snapped: "opacity-100" })]
+  );
   const { onNextButtonClick, onPrevButtonClick } = usePrevNextButtons(emblaApi);
 
-  function isHide(idx) {
-    if (!emblaApi) return;
-  }
-
   return (
-    <div className="size-full relative">
+    <div
+      className={cn("size-full relative animate-fadeIn", !emblaApi && "hidden")}
+    >
       {/* arrow */}
       <button
         onClick={onPrevButtonClick}
@@ -45,13 +47,14 @@ function BannerCarousel(props: BannerCarouselProps) {
             linkText="갤러리로 이동하기"
             desc="짤들을 업로드하고 공유해보세요."
           >
-            <div className="relative size-full">
+            <div className="relative size-full ">
               <div className="absolute left-[7%] overflow-hidden bottom-[5%] w-[250px] h-[350px] rounded-[32px] shadow-md z-[1]">
                 <Image
                   className="size-full object-cover brightness-0"
                   width={1000}
                   height={1000}
                   src="/images/content/hanroro.webp"
+                  alt="한로로"
                 />
               </div>
               <div className="absolute overflow-hidden left-[25%] top-[5%] w-[250px] h-[350px] rounded-[32px] shadow-md z-[2]">
@@ -60,6 +63,7 @@ function BannerCarousel(props: BannerCarouselProps) {
                   width={1000}
                   height={1000}
                   src="/images/content/roro-ping.webp"
+                  alt="한로로"
                 />
               </div>
               <div className="absolute overflow-hidden right-[25%] bottom-[10%] w-[250px] h-[350px] rounded-[32px] shadow-md z-[3]">
@@ -68,6 +72,7 @@ function BannerCarousel(props: BannerCarouselProps) {
                   width={1000}
                   height={1000}
                   src="/images/content/hyundai-card-dive-1.webp"
+                  alt="한로로"
                 />
               </div>
               <div className="absolute overflow-hidden right-[7%] top-[10%] w-[250px] h-[350px] rounded-[32px] shadow-md z-[4]">
@@ -76,6 +81,7 @@ function BannerCarousel(props: BannerCarouselProps) {
                   width={1000}
                   height={1000}
                   src="/images/content/sungshin-1.webp"
+                  alt="한로로"
                 />
               </div>
             </div>
@@ -100,16 +106,20 @@ function BannerCarousel(props: BannerCarouselProps) {
 export default BannerCarousel;
 
 interface SlideProps {
-  children?: ReactNode;
   linkHref: string;
   linkText: string;
   desc: string;
+  children?: ReactNode;
 }
 
 function Slide(props: SlideProps) {
   const { children, linkHref, linkText, desc } = props;
   return (
-    <div className="basis-[60%] flex flex-col relative flex-shrink-0 ml-sm flex-grow-0 h-full border shadow-md">
+    <div
+      className={cn(
+        "basis-[60%] flex flex-col relative flex-shrink-0 ml-sm flex-grow-0 h-full border shadow-md opacity-20 transition-opacity duration-1000"
+      )}
+    >
       {/* button section */}
       <div className="absolute bottom-[5%] z-20 p-[56px] flex gap-sm items-center">
         <Link
