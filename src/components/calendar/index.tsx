@@ -77,7 +77,12 @@ export default function Calendar() {
             </button>
           ))}
         </div>
-        <span className="mt-xl text-sm opacity-80">리스트</span>
+        <div className="flex items-center mt-xl text-sm ">
+          <span className="opacity-80">일정</span>
+          {/* <button className="ml-auto opacity-80 hover:opacity-100">
+            지난 일정 숨기기
+          </button> */}
+        </div>
         <div className="bg-white border rounded-md flex flex-col mt-xs flex-1">
           {scheduleList.map((item) => (
             <div
