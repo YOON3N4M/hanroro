@@ -7,6 +7,7 @@ const NAVIGATION_ITEM = [
   { name: "profile", href: "/profile" },
   // { name: "album", href: "/album" },
   { name: "gallery", href: "/gallery" },
+  { name: "calendar", href: "/calendar" },
 ];
 
 function Header(props: HeaderProps) {
