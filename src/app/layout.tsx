@@ -17,8 +17,8 @@ const GOOGLE_SEARCH_VERIFICATION = process.env
   .GOOGLE_SEARCH_VERIFICATION as string;
 
 export const metadata: Metadata = {
-  title: "hanroro | fanpage",
-  description: "한로로 팬페이지",
+  title: "hanroro | fansite",
+  description: "한로로 팬사이트",
   icons: {
     icon: "/favicon.png",
   },
@@ -55,7 +55,7 @@ export default function RootLayout({
   return (
     <html className="h-full" lang="en">
       <body className={cn("", `${pretendard.variable}`)}>
-        <h1 className="visually-hidden">hanroro | fanpage</h1>
+        <h1 className="visually-hidden">hanroro | fansite</h1>
         <AuthProvider>
           <Header />
           <main className="bg-white min-h-full h-full flex flex-col pt-nav">
