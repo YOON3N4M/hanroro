@@ -19,14 +19,17 @@ const TYPE_FILTER: Filter[] = [
   { type: "concert", kor: "공연" },
   { type: "event", kor: "이벤트" },
   { type: "anniversary", kor: "기념일" },
-  //   { type: "release", kor: "발매" },
+  { type: "release", kor: "발매" },
   //   { type: "etc", kor: "기타" },
 ];
 
 export default function Calendar() {
-  const { currentDate, daysOfMonth, nextMonth, prevMonth } = useCalendar();
+  const { currentDate, daysOfMonth, nextMonth, prevMonth, today } =
+    useCalendar();
   const [scheduleList, setSchduleList] = useState(SCHEDULE_LIST);
   const [filter, setFilter] = useState<Filter[]>(TYPE_FILTER);
+
+  const { openSingleModal } = useModal();
 
   function onFilterClick(obj: Filter) {
     if (filter.find((item) => item.type === obj.type)) {
@@ -35,7 +38,9 @@ export default function Calendar() {
       setFilter((prev) => [...prev, obj]);
     }
   }
-
+  function onClickSchedule(schedule: Schedule) {
+    openSingleModal(<ScheduleViewModal schedule={schedule} />);
+  }
   return (
     <>
       {/* left */}
@@ -82,15 +87,17 @@ export default function Calendar() {
             지난 일정 숨기기
           </button> */}
         </div>
-        <div className="bg-white border rounded-md flex flex-col mt-xs pc:min-h-[300px]">
-          {scheduleList.map((item) => (
+        <div className="bg-white border rounded-md flex flex-col mt-xs pc:min-h-[300px] pc:max-h-[300px] overflow-y-auto">
+          {scheduleList.map((item, idx) => (
             <div
               key={`${item.type}-list-${item.title}`}
               className={cn(
-                "min-h-[70px] border-b hover:bg-gray-50",
+                "hover:bg-gray-50 cursor-pointer",
                 !filter.find((filterItem) => filterItem.type === item.type) &&
-                  "hidden"
+                  "hidden",
+                idx !== scheduleList.length - 1 && "border-b"
               )}
+              onClick={() => onClickSchedule(item)}
             >
               <div
                 className={cn(
@@ -99,7 +106,7 @@ export default function Calendar() {
                 )}
               >
                 <span className="text-sm">{item.title}</span>
-                <div>
+                <div className="mt-sm">
                   <div className="flex gap-xxs text-xs opacity-60">
                     <IconCalendar className="opacity-60" />
                     {item.date.map((item, idx) => (
@@ -169,9 +176,9 @@ export const scheduleTypeColorStyles: {
     border: "border-red-300",
   },
   release: {
-    default: "bg-blue-300",
-    hover: "bg-blue-400",
-    border: "border-blue-300",
+    default: "bg-orange-300",
+    hover: "bg-orange-400",
+    border: "border-orange-300",
   },
   etc: {
     default: "bg-blue-300",
@@ -188,17 +195,29 @@ interface DayGridProps {
 }
 
 function DayGrid(props: DayGridProps) {
+  const { today } = useCalendar();
+  const formmatedToday = format(today, "yyyy-MM-dd");
   const { scheduleList, currentDate, day, filter } = props;
   const formattedDay = format(day, "yyyy-MM-dd");
   const isSunday = format(day, "iii") === "Sun";
   const isDayOfCurrentDate = format(day, "LLL") === format(currentDate, "LLL");
+  const isToday = formmatedToday === formattedDay;
 
   const scheduleListOfDay = scheduleList.filter((schedule) =>
     schedule.date.includes(formattedDay)
   );
 
   return (
-    <div className={cn("border-b", !isSunday && "border-r")}>
+    <div
+      className={cn(
+        "border-b relative",
+        !isSunday && "border-r",
+        isToday && "bg-gray-50"
+      )}
+    >
+      {isToday && (
+        <span className="absolute center opacity-50 font-bold">오늘</span>
+      )}
       <div className="flex justify-center">
         <span
           className={cn(

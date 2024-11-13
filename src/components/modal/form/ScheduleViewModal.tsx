@@ -88,5 +88,8 @@ function handleLinkText(link: string) {
   if (link.includes("instagram")) {
     return "instagram";
   }
+  if (link.includes("youtube") || link.includes("youtu.be")) {
+    return "youtube";
+  }
   return link;
 }

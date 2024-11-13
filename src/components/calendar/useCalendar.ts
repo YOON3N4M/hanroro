@@ -17,10 +17,15 @@ export default function useCalendar() {
   const startOfCurrentMonth = startOfMonth(currentDate);
   const endOfCurrentMonth = endOfMonth(currentDate);
   // 첫째날의 첫째주, 마지막 날의 마지막 주
-  const startOfFirstWeek = startOfWeek(startOfCurrentMonth, { weekStartsOn: 1 });
+  const startOfFirstWeek = startOfWeek(startOfCurrentMonth, {
+    weekStartsOn: 1,
+  });
   const endOfLastWeek = endOfWeek(endOfCurrentMonth, { weekStartsOn: 1 });
   // 지난 달을 포함해 달력에 보여지는 날짜들
-  const daysOfMonth = eachDayOfInterval({ start: startOfFirstWeek, end: endOfLastWeek });
+  const daysOfMonth = eachDayOfInterval({
+    start: startOfFirstWeek,
+    end: endOfLastWeek,
+  });
 
   function nextMonth() {
     setCurrentDate((prev) => addMonths(prev, 1));
@@ -30,5 +35,5 @@ export default function useCalendar() {
     setCurrentDate((prev) => subMonths(prev, 1));
   }
 
-  return { daysOfMonth, currentDate, nextMonth, prevMonth };
+  return { daysOfMonth, currentDate, nextMonth, prevMonth, today };
 }
