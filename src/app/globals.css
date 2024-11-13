@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  --screen-height-without-nav: calc(100dvh - 45px);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -58,6 +59,9 @@ main {
 @layer utilities {
   body {
     @apply font-pretendard;
+  }
+  .h-screen-nav {
+    height: var(--screen-height-without-nav);
   }
   .active-slide {
     @apply !opacity-100;

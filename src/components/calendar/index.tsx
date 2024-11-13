@@ -87,7 +87,7 @@ export default function Calendar() {
             지난 일정 숨기기
           </button> */}
         </div>
-        <div className="bg-white border rounded-md flex flex-col mt-xs pc:min-h-[300px] pc:max-h-[300px] overflow-y-auto">
+        <div className="bg-white border rounded-md flex flex-col mt-xs pc:min-h-[300px] pc:max-h-[300px] tab:min-h-[150px] tab:max-h-[150px] overflow-y-auto">
           {scheduleList.map((item, idx) => (
             <div
               key={`${item.type}-list-${item.title}`}
