@@ -17,7 +17,7 @@ function BannerCarousel(props: BannerCarouselProps) {
       align: "center",
       loop: true,
     },
-    [ClassNames({ snapped: "opacity-100" })]
+    [ClassNames({ snapped: "active-slide" })]
   );
   const { onNextButtonClick, onPrevButtonClick } = usePrevNextButtons(emblaApi);
 

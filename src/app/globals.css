@@ -59,6 +59,9 @@ main {
   body {
     @apply font-pretendard;
   }
+  .active-slide {
+    @apply !opacity-100;
+  }
   .text-balance {
     text-wrap: balance;
   }
