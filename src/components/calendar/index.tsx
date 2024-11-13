@@ -39,7 +39,7 @@ export default function Calendar() {
   return (
     <>
       {/* left */}
-      <div className="basis-[20%] flex flex-col pc:min-h-[500px] min-w-[300px] p-md max-w-[375px] border py-md bg-[#fafafc] mo:w-full mo:max-w-full">
+      <div className="basis-[20%] flex flex-col pc:min-h-[500px] h-min min-w-[300px] p-md max-w-[375px] border py-md bg-[#fafafc] tab:w-full tab:max-w-full">
         <div className="flex justify-center items-center gap-sm">
           <button onClick={prevMonth} aria-label="calendar prev month">
             <IconRightLeft />
@@ -55,12 +55,12 @@ export default function Calendar() {
           </button>
         </div>
         {/* filter */}
-        <div className="bg-white border rounded-md mt-xl flex flex-col p-md">
+        <div className="bg-white border rounded-md mt-xl flex flex-col p-sm">
           {TYPE_FILTER.map((obj) => (
             <button
               key={`${obj.type}-filter`}
               className={cn(
-                "w-full flex items-center gap-sm hover:bg-gray-50 py-xs px-sm rounded-md"
+                "w-full flex items-center gap-sm hover:bg-gray-50 py-xxs px-sm rounded-md"
               )}
               onClick={() => onFilterClick(obj)}
             >
@@ -82,7 +82,7 @@ export default function Calendar() {
             지난 일정 숨기기
           </button> */}
         </div>
-        <div className="bg-white border rounded-md flex flex-col mt-xs flex-1">
+        <div className="bg-white border rounded-md flex flex-col mt-xs pc:min-h-[300px]">
           {scheduleList.map((item) => (
             <div
               key={`${item.type}-list-${item.title}`}
@@ -209,7 +209,7 @@ function DayGrid(props: DayGridProps) {
           {format(day, "dd")}
         </span>
       </div>
-      <div className="flex flex-col items-center justify-center mt-xxxs mo:min-h-[50px]">
+      <div className="flex flex-col items-center justify-start mt-xxxs tab:min-h-[80px] pt-xxs">
         {scheduleListOfDay.map((schedule) => (
           <ScheduleItem
             key={schedule.title}
