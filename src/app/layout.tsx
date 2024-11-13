@@ -58,9 +58,7 @@ export default function RootLayout({
         <h1 className="visually-hidden">hanroro | fansite</h1>
         <AuthProvider>
           <Header />
-          <main className="bg-white min-h-full h-full flex flex-col pt-nav">
-            {children}
-          </main>
+          <main className="bg-white min-h-full pt-nav">{children}</main>
           <Footer />
           <ModalPortal />
           <ToastPortal />
