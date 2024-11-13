@@ -8,6 +8,15 @@ import Link from "next/link";
 import { ReactNode, useEffect } from "react";
 import ClassNames from "embla-carousel-class-names";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import {
+  home,
+  howToGoOn,
+  mayfly,
+  mirror,
+  systemError,
+  takeOff,
+  theCompass,
+} from "../../../../public/images/album";
 interface BannerCarouselProps {}
 
 function BannerCarousel(props: BannerCarouselProps) {
@@ -48,6 +57,49 @@ function BannerCarousel(props: BannerCarouselProps) {
           {/* containe */}
           <div className="h-full flex min-w-full">
             {/* slide */}
+            <Slide
+              linkHref="/profile"
+              linkText="알아보기"
+              desc="앨범활동, 미디어 출연 정보를 확인해보세요."
+            >
+              <div className="absolute center size-[300px]">
+                <Image
+                  src={systemError.src}
+                  width={systemError.width}
+                  height={systemError.height}
+                  className="size-[300px] brightness-50 absolute z-[10] translate-x-[-150px] translate-y-[75px]"
+                  alt="먹이사슬"
+                />
+                <Image
+                  src={home.src}
+                  width={home.width}
+                  height={home.height}
+                  className="size-[300px] brightness-50 absolute z-[13]"
+                  alt="생존법"
+                />
+                <Image
+                  src={howToGoOn.src}
+                  width={howToGoOn.width}
+                  height={howToGoOn.height}
+                  className="size-[300px] brightness-50 absolute z-[12] translate-x-[150px] translate-y-[-75px]"
+                  alt="집"
+                />
+              </div>
+            </Slide>
+            <Slide
+              linkHref="/schdule"
+              linkText="일정 확인하기"
+              desc="공연과 행사, 신규발매, 이벤트 등 모든 일정들을 확인해보세요."
+            >
+              <Image
+                src={"/images/content/hyundai-card-dive-2.webp"}
+                width={3000}
+                height={3000}
+                alt="현대카드 다이브"
+                className="object-cover brightness-50 posi size-full object-left-top"
+              />
+            </Slide>
+
             <Slide
               linkHref="/gallery"
               linkText="갤러리로 이동하기"
@@ -92,16 +144,6 @@ function BannerCarousel(props: BannerCarouselProps) {
                 </div>
               </div>
             </Slide>
-            <Slide
-              linkHref="/schdule"
-              linkText="일정 확인하기"
-              desc="공연과 행사, 신규발매, 이벤트 등 모든 일정들을 확인해보세요."
-            ></Slide>
-            <Slide
-              linkHref="/profile"
-              linkText="알아보기"
-              desc="앨범활동, 미디어 출연 정보를 확인해보세요."
-            ></Slide>
           </div>
         </div>
       </div>
@@ -124,18 +166,18 @@ function Slide(props: SlideProps) {
   return (
     <div
       className={cn(
-        "basis-[60%] flex flex-col relative flex-shrink-0 ml-sm flex-grow-0 h-full border shadow-md opacity-20 transition-opacity duration-1000"
+        "basis-[60%] flex bg-black flex-col relative flex-shrink-0 ml-sm flex-grow-0 h-full shadow-md opacity-20 transition-opacity duration-1000"
       )}
     >
       {/* button section */}
       <div className="absolute bottom-[5%] z-20 p-[56px] flex gap-sm items-center">
         <Link
-          className="py-sm px-md bg-black text-white rounded-[980px]"
+          className="py-sm px-md text-black bg-white rounded-[980px]"
           href={linkHref}
         >
           {linkText}
         </Link>
-        <p>{desc}</p>
+        <p className="text-white">{desc}</p>
       </div>
       {/* content section */}
       <div className="absolute size-full z-10 overflow-hidden">{children}</div>
