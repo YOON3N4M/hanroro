@@ -1,11 +1,111 @@
+"use client";
+
 import { IconInstagram, IconYoutube } from "@/components/svg";
 import NewTabAnchor from "@/components/ui/NewTabAnchor";
+import gsap from "gsap";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { cn } from "@/utils";
+import ScrollToPlugin from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+const tabList = [
+  { kr: "프로필", eng: "profile" },
+  { kr: "앨범", eng: "album" },
+  { kr: "영상", eng: "media" },
+];
+
+function slideTab(
+  timeline: gsap.core.Timeline,
+  target: string,
+  direction: 1 | -1
+) {
+  return timeline.to(target, {
+    y: direction > 0 ? "100%" : "-100%",
+    opacity: 0.5,
+  });
+}
 
 export default function ProfileContainer() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [tl, setTl] = useState<gsap.core.Timeline>();
+
+  function onTabClick(idx: number) {
+    if (!tl) return;
+    tl.progress(0.25 * idx);
+    setActiveIndex(idx);
+  }
+
+  useEffect(() => {
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#scroll-section",
+        start: "top top",
+        end: "+=5000",
+        scrub: 1,
+        pin: true,
+      },
+    });
+    setTl(timeline);
+    slideTab(timeline, "#test", -1);
+    slideTab(timeline, "#test2", -1);
+    slideTab(timeline, "#test3", -1);
+    slideTab(timeline, "#test4", -1);
+    // timeline.to("#test", { y: "-100%", opacity: 0.5 }).call(() => {
+    //   setActiveIndex(1);
+    // });
+  }, []);
   return (
-    <section className="mt-md w-full">
+    <div
+      id="scroll-section"
+      className="w-ful relative h-screen bg-black text-white overflow-hidden translate-y-[-50px]"
+    >
+      <div className="absolute y-center text-white z-50 left-[30px] flex flex-col">
+        {tabList.map((tab, idx) => (
+          <button
+            onClick={() => onTabClick(idx)}
+            className={cn("text-left", idx === activeIndex ? "" : "opacity-55")}
+            key={tab.eng}
+          >
+            {tab.kr}
+          </button>
+        ))}
+      </div>
+      <div
+        id="test"
+        className="absolute top-0 left-0 size-full bg-black border z-[30]"
+      >
+        <div className="relative size-full">
+          <span className="absolute center text-[50px]">1</span>
+        </div>
+      </div>
+      <div
+        id="test2"
+        className="absolute top-0 left-0 size-full bg-black border z-[29] "
+      >
+        <div className="relative size-full">
+          <span className="absolute center text-[50px]">2</span>
+        </div>
+      </div>
+      <div
+        id="test3"
+        className="absolute top-0 left-0 size-full bg-black border z-[28]"
+      >
+        <div className="relative size-full">
+          <span className="absolute center text-[50px]">3</span>
+        </div>
+      </div>
+      <div
+        id="test4"
+        className="absolute top-0 left-0 size-full bg-black border z-[27]"
+      >
+        <div className="relative size-full">
+          <span className="absolute center text-[50px]">4</span>
+        </div>
+      </div>
       {/* <div className="relative w-full">
         <div className="w-full">
           <Image
@@ -67,6 +167,6 @@ export default function ProfileContainer() {
         </div>
       </div> */}
       {/* <div className="h-[100vh]"></div> */}
-    </section>
+    </div>
   );
 }
