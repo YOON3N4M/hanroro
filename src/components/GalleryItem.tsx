@@ -27,7 +27,7 @@ function GalleryItem(props: GalleryItemProps) {
     <div
       className={cn(
         className,
-        "cursor-pointer border transition-all bg-black animate-fadeIn"
+        "cursor-pointer border transition-all animate-fadeIn"
       )}
       onClick={() => onImageClick(doc)}
       style={style}
@@ -37,7 +37,7 @@ function GalleryItem(props: GalleryItemProps) {
         width={1000}
         height={1000}
         src={doc.url}
-        className={cn("object-cover opacity-0", imageClassName)}
+        className={cn("object-cover", imageClassName)}
         alt={doc.tags[0] || "한로로 짤"}
       />
     </div>

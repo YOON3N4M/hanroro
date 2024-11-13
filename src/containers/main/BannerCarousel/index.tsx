@@ -59,8 +59,8 @@ function BannerCarousel(props: BannerCarouselProps) {
             {/* slide */}
             <Slide
               linkHref="/profile"
-              linkText="알아보기"
-              desc="앨범활동, 미디어 출연 정보를 확인해보세요."
+              linkText="프로필로 이동"
+              desc="프로필, 앨범활동, 미디어 출연 정보"
             >
               <div className="absolute center size-[300px]">
                 <Image
@@ -87,62 +87,33 @@ function BannerCarousel(props: BannerCarouselProps) {
               </div>
             </Slide>
             <Slide
-              linkHref="/schdule"
-              linkText="일정 확인하기"
-              desc="공연과 행사, 신규발매, 이벤트 등 모든 일정들을 확인해보세요."
+              linkHref="/gallery"
+              linkText="갤러리로 이동"
+              desc="짤들을 업로드하고 공유"
             >
-              <Image
-                src={"/images/content/hyundai-card-dive-2.webp"}
-                width={3000}
-                height={3000}
-                alt="현대카드 다이브"
-                className="object-cover brightness-50 posi size-full object-left-top"
-              />
+              <div className="relative size-full ">
+                <Image
+                  src={"/images/content/gallery-capture.png"}
+                  width={3000}
+                  height={3000}
+                  alt="갤러리"
+                  className="object-cover brightness-50 size-full opacity-80"
+                />
+              </div>
             </Slide>
 
             <Slide
-              linkHref="/gallery"
-              linkText="갤러리로 이동하기"
-              desc="짤들을 업로드하고 공유해보세요."
+              linkHref="/calendar"
+              linkText="일정으로 이동"
+              desc="공연과 행사, 앨범발매, 이벤트 등 모든 일정들"
             >
-              <div className="relative size-full ">
-                <div className="absolute left-[7%] overflow-hidden bottom-[5%] w-[250px] h-[350px] rounded-[32px] shadow-md z-[1]">
-                  <Image
-                    className="size-full object-cover brightness-0"
-                    width={1000}
-                    height={1000}
-                    src="/images/content/hanroro.webp"
-                    alt="한로로"
-                  />
-                </div>
-                <div className="absolute overflow-hidden left-[25%] top-[5%] w-[250px] h-[350px] rounded-[32px] shadow-md z-[2]">
-                  <Image
-                    className="size-full object-cover brightness-0"
-                    width={1000}
-                    height={1000}
-                    src="/images/content/roro-ping.webp"
-                    alt="한로로"
-                  />
-                </div>
-                <div className="absolute overflow-hidden right-[25%] bottom-[10%] w-[250px] h-[350px] rounded-[32px] shadow-md z-[3]">
-                  <Image
-                    className="size-full object-cover brightness-0"
-                    width={1000}
-                    height={1000}
-                    src="/images/content/hyundai-card-dive-1.webp"
-                    alt="한로로"
-                  />
-                </div>
-                <div className="absolute overflow-hidden right-[7%] top-[10%] w-[250px] h-[350px] rounded-[32px] shadow-md z-[4]">
-                  <Image
-                    className="size-full object-cover brightness-0"
-                    width={1000}
-                    height={1000}
-                    src="/images/content/sungshin-1.webp"
-                    alt="한로로"
-                  />
-                </div>
-              </div>
+              <Image
+                src={"/images/content/IMG_3469.JPG"}
+                width={3000}
+                height={3000}
+                alt="현대카드 다이브"
+                className="object-cover brightness-50 size-full object-[0%_23%]"
+              />
             </Slide>
           </div>
         </div>
