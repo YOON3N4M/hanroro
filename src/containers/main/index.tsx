@@ -16,10 +16,10 @@ function MainContainer(props: MainContainerProps) {
 
   return (
     <div className="bg-white flex flex-col gap-sm">
-      <ContentSection className="">
+      <ContentSection className="mt-sm">
         <BannerCarousel />
       </ContentSection>
-      <ContentSection className="flex gap-sm text-white">
+      <ContentSection className="flex gap-sm text-white mo:flex-col">
         <div className="flex-1">
           <ContentModule
             staticImage={theCompass}

@@ -43,13 +43,13 @@ function BannerCarousel(props: BannerCarouselProps) {
         {/* arrow */}
         <button
           onClick={onPrevButtonClick}
-          className="absolute y-center left-[10%] z-[30] bg-default-gray-bg p-xs rounded-full"
+          className="absolute y-center left-[10%] mo:left-[2%] mo:opacity-60 z-[30] bg-default-gray-bg p-xs rounded-full"
         >
           <IconRightLeft />
         </button>
         <button
           onClick={onNextButtonClick}
-          className="absolute y-center right-[10%] z-[30] bg-default-gray-bg p-xs rounded-full"
+          className="absolute y-center right-[10%] mo:right-[2%] mo:opacity-60 z-[30] bg-default-gray-bg p-xs rounded-full"
         >
           <IconRightRight />
         </button>
@@ -137,18 +137,18 @@ function Slide(props: SlideProps) {
   return (
     <div
       className={cn(
-        "basis-[60%] flex bg-black flex-col relative flex-shrink-0 ml-sm flex-grow-0 h-full shadow-md opacity-20 transition-opacity duration-1000"
+        "basis-[60%] mo:basis-[80%] flex bg-black flex-col relative flex-shrink-0 ml-sm flex-grow-0 h-full shadow-md opacity-20 transition-opacity duration-1000"
       )}
     >
       {/* button section */}
-      <div className="absolute bottom-[5%] z-20 p-[56px] flex gap-sm items-center">
+      <div className="absolute bottom-[5%] z-20 w-full p-[56px] flex gap-sm items-center mo:flex-col-reverse mo:p-lg">
         <Link
-          className="py-sm px-md text-black bg-white rounded-[980px]"
+          className="py-sm px-md text-black text-nowrap bg-white rounded-[980px] text-sm mo:py-xs mo:px-sm"
           href={linkHref}
         >
           {linkText}
         </Link>
-        <p className="text-white">{desc}</p>
+        <p className="text-white text-sm mo:text-center">{desc}</p>
       </div>
       {/* content section */}
       <div className="absolute size-full z-10 overflow-hidden">{children}</div>
