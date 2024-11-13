@@ -40,7 +40,6 @@ export default function Calendar() {
     <>
       {/* left */}
       <div className="basis-[20%] flex flex-col pc:min-h-[500px] min-w-[300px] p-md max-w-[375px] border py-md bg-[#fafafc] mo:w-full mo:max-w-full">
-        {/* calendar */}
         <div className="flex justify-center items-center gap-sm">
           <button onClick={prevMonth} aria-label="calendar prev month">
             <IconRightLeft />
@@ -119,7 +118,7 @@ export default function Calendar() {
         </div>
       </div>
       {/* right - calendar */}
-      <div className="bg-white border flex-1 h-full pc:min-h-full max-h-full p-[5px]">
+      <div className="bg-white border flex-1 mo:h-screen p-[5px]">
         <div className="text-xs size-full flex flex-col ">
           {/* MTWTFSS */}
           <div className="grid grid-cols-7 mt-xs">
@@ -210,7 +209,7 @@ function DayGrid(props: DayGridProps) {
           {format(day, "dd")}
         </span>
       </div>
-      <div className="flex flex-col items-center justify-center mt-xxxs">
+      <div className="flex flex-col items-center justify-center mt-xxxs mo:min-h-[50px]">
         {scheduleListOfDay.map((schedule) => (
           <ScheduleItem
             key={schedule.title}

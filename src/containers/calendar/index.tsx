@@ -8,7 +8,7 @@ function CalendarContainer(props: CalendarContainerProps) {
   const {} = props;
 
   return (
-    <div className="pt-md flex text-black bg-white gap-md h-screen px-md mo:flex-col">
+    <div className="pt-md flex text-black bg-white gap-md pc:min-h-screen px-md mo:flex-col">
       <Calendar />
     </div>
   );
