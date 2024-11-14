@@ -15,7 +15,6 @@
     "embla-carousel-class-names": "^8.3.1",
     "embla-carousel-react": "^8.3.1",
     "firebase": "^11.0.1",
-    "gsap": "^3.12.5",
     "next": "14.2.5",
     "next-cache-toolbar": "^0.2.1",
     "react": "^18",
