@@ -30,11 +30,7 @@ function ProfileSection(props: ProfileSectionProps) {
     }
   }, [isInView]);
   return (
-    <div
-      id={tab.eng}
-      ref={ref}
-      className="bg-blue-300 h-screen-nav border relative"
-    >
+    <div id={tab.eng} ref={ref} className="h-screen-nav relative bg-black">
       <span className="center absolute">{index}</span>
     </div>
   );

@@ -22,7 +22,7 @@ export default function ProfileContainer() {
   const [indexProgress, setIndexProgress] = useState<any>();
 
   function onClickNav(idx: number) {
-    setActiveIndex(idx);
+    // setActiveIndex(idx);
     const target = tabList[idx].eng;
     scrollMove(target);
   }
@@ -37,7 +37,10 @@ export default function ProfileContainer() {
         {tabList.map((tab, idx) => (
           <button
             key={`${tab.eng}-nav`}
-            className="text-start"
+            className={cn(
+              "text-start text-white text-sm transition-all opacity-40",
+              idx === activeIndex && "!opacity-100 !text-base"
+            )}
             onClick={() => onClickNav(idx)}
           >
             {tab.kor}
@@ -45,7 +48,7 @@ export default function ProfileContainer() {
         ))}
       </div>
       {/* viewer */}
-      <div className="h-screen fixed bg-black z-[25] opacity-40 w-full">
+      <div className="h-screen fixed bg-black z-[25] w-full">
         <div className="size-full relative">
           <div className="absolute center text-white">
             컨텐츠 패널{activeIndex}
@@ -62,6 +65,7 @@ export default function ProfileContainer() {
             indexSetter={setActiveIndex}
           />
         ))}
+        <div className="h-screen-nav border relative bg-black"></div>
         {/* <div className="h-screen-nav w-full"></div> */}
       </div>
     </div>
