@@ -1,8 +1,6 @@
-import { cn } from "@/utils";
-import { useScroll, motion, useSpring, useInView } from "motion/react";
+import { useInView, useScroll } from "motion/react";
 import { useEffect, useRef } from "react";
 import { Tab } from "..";
-import { MotionValue } from "motion";
 
 interface ProfileSectionProps {
   index: number;

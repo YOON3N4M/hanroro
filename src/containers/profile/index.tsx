@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion } from "motion/react";
-import ProfileSection from "./ProfileSection";
 import { cn, scrollMove } from "@/utils";
-import { MotionValue } from "motion";
+import { useEffect, useState } from "react";
+import ProfileSection from "./ProfileSection";
+import AlbumPanel from "./Panel/AlbumPanel";
 
 export interface Tab {
   kor: string;
@@ -33,7 +32,7 @@ export default function ProfileContainer() {
   return (
     <div className="relative h-[400vh] flex flex-col overflow-visible">
       {/* nav */}
-      <div className="fixed y-center left-[30px] z-[30] flex flex-col">
+      <div className="fixed top-[30%] left-[30px] mo:left-[15px] z-[30] flex flex-col animate-fadeIn">
         {tabList.map((tab, idx) => (
           <button
             key={`${tab.eng}-nav`}
@@ -47,13 +46,9 @@ export default function ProfileContainer() {
           </button>
         ))}
       </div>
-      {/* viewer */}
-      <div className="h-screen fixed bg-black z-[25] w-full">
-        <div className="size-full relative">
-          <div className="absolute center text-white">
-            컨텐츠 패널{activeIndex}
-          </div>
-        </div>
+      {/* panel */}
+      <div className="h-screen-nav fixed bg-black z-[25] w-full animate-fadeIn">
+        <AlbumPanel activePanelIndex={activeIndex} panelIndex={1} />
       </div>
       {/* spacer (scroll-trigger) */}
       <div className="absolute top-0 left-0 w-full h-min">

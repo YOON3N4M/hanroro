@@ -52,7 +52,7 @@ export const ALBUM_LIST: Album[] = [
     trackList: [{ title: "자처", duration: "04:32", youtubeUrl: "" }],
   },
   {
-    type: "EP1",
+    type: "EP",
     title: "이상비행",
     releaseDate: "2023/08/31",
     cover: takeOff,
@@ -83,10 +83,16 @@ export const ALBUM_LIST: Album[] = [
     title: "생존법",
     releaseDate: "2023/05/16",
     cover: howToGoOn,
-    trackList: [{ title: "생존법", duration: "03:27", youtubeUrl: "" }],
+    trackList: [
+      {
+        title: "생존법",
+        duration: "03:27",
+        youtubeUrl: "https://youtu.be/puw1hdSnSX0?si=-UDmcwoFQkravEaq",
+      },
+    ],
   },
   {
-    type: "EP2",
+    type: "EP",
     title: "집",
     releaseDate: "2024/05/28",
     cover: home,

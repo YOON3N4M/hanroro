@@ -51,3 +51,18 @@ export const scrollMove = (id: string) => {
 
   window.scrollTo({ top: tagetAbsoluteY - navHeight, behavior: "smooth" });
 };
+
+/**
+ * URL이 아래와 같은 형태여야만 가능
+ *
+ * https://youtu.be/puw1hdSnSX0?si=-UDmcwoFQkravEaq
+ */
+export function getYoutubeIdFromUrl(url: string) {
+  const match = url.match(/youtu\.be\/([^?]+)/);
+
+  if (match) {
+    return match[1];
+  } else {
+    null;
+  }
+}
