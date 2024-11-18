@@ -22,6 +22,7 @@ export interface Album {
   cover: StaticImageData;
   releaseDate: string;
   trackList: Track[];
+  desc?: string;
 }
 
 export interface Track {
@@ -29,6 +30,7 @@ export interface Track {
   duration: string;
   youtubeUrl: string;
   isTitle?: boolean;
+  desc?: string;
   //작곡가
 }
 

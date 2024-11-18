@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from "react";
 import YouTube from "react-youtube";
 import { PanelProps, PanelTemplate, usePanel } from ".";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import useEmblaCarousel from "embla-carousel-react";
+import ClassNames from "embla-carousel-class-names";
 
 interface AlbumPanelProps extends PanelProps {}
 
@@ -35,11 +37,10 @@ const albumInfoVariant = {
 const infoItemVariant = {
   hidden: {
     opacity: 0,
-    x: -20,
   },
   visible: {
     opacity: 1,
-    x: 0,
+    transition: { staggerChildren: 0.3, delayChildren: 0.5 },
   },
 };
 // const containerVariants = {
@@ -77,42 +78,47 @@ function AlbumPanel(props: AlbumPanelProps) {
   const { activePanelIndex, panelIndex } = props;
   const { isPanelActive } = usePanel(activePanelIndex, panelIndex);
 
+  const [isIntroEnd, setIsIntroEnd] = useState(false);
   const [activeAlbumIndex, setActiveAlbumIndex] = useState<number | null>(null);
-
-  const albumContainerRef = useRef<HTMLDivElement>(null);
+  const [isCarouselMode, setIsCarouselMode] = useState(false);
 
   const isAlbumSelected = activeAlbumIndex !== null;
   const selectedAlbum = isAlbumSelected && ALBUM_LIST[activeAlbumIndex];
-  console.log(selectedAlbum);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      active: false,
+      align: "start",
+      axis: "y",
+      dragFree: true,
+    },
+    [ClassNames({ snapped: "active-slide" })]
+  );
 
   function onClickAlbum(idx: number) {
+    if (!isIntroEnd) return;
+
     if (activeAlbumIndex === idx) {
       setActiveAlbumIndex(null);
+      setIsCarouselMode(false);
       return;
     }
-    scrollToAlbum(ALBUM_LIST[idx].title, !isAlbumSelected);
+    setIsCarouselMode(true);
+    setTimeout(() => {
+      if (emblaApi) {
+        emblaApi.scrollTo(idx);
+      }
+    }, 500);
+    // scrollToAlbum(ALBUM_LIST[idx].title, !isAlbumSelected);
     setActiveAlbumIndex(idx);
-  }
-
-  function scrollToAlbum(id: string, delay: boolean) {
-    if (!albumContainerRef.current) return;
-    const el = albumContainerRef.current;
-    const target = el.querySelector(`#${id}`);
-    if (!target) return;
-
-    if (delay) {
-      setTimeout(() => {
-        target.scrollIntoView({ behavior: "smooth" });
-      }, 800);
-    } else {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
   }
 
   useEffect(() => {
     if (!isPanelActive) {
       setActiveAlbumIndex(null);
+      setIsCarouselMode(false);
     }
+    console.log(isPanelActive);
   }, [isPanelActive]);
 
   return (
@@ -127,7 +133,7 @@ function AlbumPanel(props: AlbumPanelProps) {
         {selectedAlbum && (
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 1, transition: { duration: 1 } }}
             exit={{ opacity: 0 }}
             className={cn(
               "size-full absolute -z-10- bg-gradient-to-l via-transparent to-transparent",
@@ -139,48 +145,73 @@ function AlbumPanel(props: AlbumPanelProps) {
       </AnimatePresence>
       <h3 className="visually-hidden">앨범</h3>
       <div className={cn("size-full relative")}>
-        <div className="w-[80vw] tab:w-screen h-full absolute center flex gap-md">
+        <div className="w-[80vw] tab:w-screen h-full absolute center flex gap-[10%]">
           {/* album grid */}
-          <div
-            ref={albumContainerRef}
-            className={cn(
-              "relative  overflow-x-visible",
-              isAlbumSelected
-                ? "flex flex-col w-[300px] pc:!h-full  gap-sm tab:flex-row tab:h-[300px] tab:overflow-x-auto tab:w-full"
-                : "grid grid-cols-5 tab:grid-cols-3 h-screen-nav"
-            )}
-          >
-            {ALBUM_LIST.map((album, idx) => (
-              <motion.div
-                id={album.title}
-                layout
-                custom={idx}
-                key={album.title}
-                variants={albumCoverVariant}
-                initial="exit"
-                animate={isPanelActive ? "visible" : "hidden"}
-                className={cn(
-                  "relative",
-                  // "aspect-square",
-                  // activeAlbumIndex !== null && "absolute top-[20%]",
-                  idx == activeAlbumIndex && "z-[10]"
-                )}
-              >
-                <div className="absolute center ml-[100px] size-[80%] rounded-full bg-white"></div>
-                <button className="size-full" onClick={() => onClickAlbum(idx)}>
-                  <Image
-                    src={album.cover.src}
-                    height={1000}
-                    width={1000}
-                    alt={album.title}
-                    className={cn(
-                      "object-cover brightness-50 transition-all hover:brightness-100",
-                      activeAlbumIndex === idx && "!brightness-100"
-                    )}
-                  />
-                </button>
-              </motion.div>
-            ))}
+          <div className="relative" ref={emblaRef}>
+            <div
+              className={cn(
+                "relative",
+                isCarouselMode
+                  ? "flex flex-col w-[300px] pc:!h-full  gap-sm tab:flex-row tab:h-[300px] tab:overflow-x-auto tab:w-full"
+                  : "grid grid-cols-5 tab:grid-cols-3 h-screen-nav"
+              )}
+            >
+              {ALBUM_LIST.map((album, idx) => (
+                <motion.div
+                  id={album.title}
+                  layout
+                  custom={idx}
+                  key={album.title}
+                  variants={albumCoverVariant}
+                  initial="hidden"
+                  animate={isPanelActive ? "visible" : "hidden"}
+                  className={cn(
+                    "relative",
+                    "aspect-square",
+                    // activeAlbumIndex !== null && "absolute top-[20%]",
+                    idx == activeAlbumIndex && "z-[10]"
+                  )}
+                  onAnimationComplete={
+                    idx === ALBUM_LIST.length - 1
+                      ? () => {
+                          setIsIntroEnd(true);
+                          if (emblaApi) {
+                            emblaApi.reInit({ active: true });
+                          }
+                        }
+                      : undefined
+                  }
+                >
+                  {/* cd shape */}
+                  <motion.div
+                    className="absolute y-center size-[80%]"
+                    initial={{ marginLeft: 0, opacity: 0 }}
+                    animate={
+                      idx === activeAlbumIndex
+                        ? { marginLeft: "60%", opacity: 1 }
+                        : { marginLeft: 0, opacity: 1 }
+                    }
+                  >
+                    <div className="cd"></div>
+                  </motion.div>
+                  <button
+                    className="size-full"
+                    onClick={() => onClickAlbum(idx)}
+                  >
+                    <Image
+                      src={album.cover.src}
+                      height={1000}
+                      width={1000}
+                      alt={album.title}
+                      className={cn(
+                        "object-cover brightness-50 transition-all hover:brightness-100",
+                        activeAlbumIndex === idx && "!brightness-100"
+                      )}
+                    />
+                  </button>
+                </motion.div>
+              ))}
+            </div>
           </div>
           {/* album info */}
           {selectedAlbum && <AlbumInfo album={selectedAlbum} />}
@@ -243,12 +274,13 @@ function albumTypeStr(str: string) {
 }
 
 function AlbumInfo({ album }: { album: Album }) {
-  const { title } = album;
+  const { title, type, releaseDate, trackList, desc } = album;
 
   const [isLoad, setIsLoad] = useState(false);
 
+  const titleTrack = album.trackList.find((item) => item.isTitle);
   const titileYoutubeId =
-    album.trackList[0] && getYoutubeIdFromUrl(album.trackList[0].youtubeUrl);
+    titleTrack && getYoutubeIdFromUrl(titleTrack.youtubeUrl);
 
   function onYoutbeLoad() {
     setIsLoad(true);
@@ -258,52 +290,61 @@ function AlbumInfo({ album }: { album: Album }) {
     <motion.div
       // key를 부여해서 앨범이 변경될때 마다 모션이 새로고침 될 수 있도록
       key={title}
-      className="flex-1 text-white p-md flex flex-col items-center"
+      className="flex-1 text-white p-md flex flex-col"
       variants={albumInfoVariant}
       initial="hidden"
       animate={isLoad ? "visible" : "hidden"}
       exit="hidden"
     >
-      <motion.div variants={infoItemVariant}>
+      {/* title type date */}
+      <motion.div
+        variants={infoItemVariant}
+        className="flex items-center gap-xs"
+      >
+        <motion.h3
+          variants={infoItemVariant}
+          className="text-[50px] font-extralight"
+        >
+          {title}
+        </motion.h3>
+        <motion.span variants={infoItemVariant}>
+          {albumTypeStr(type)}
+        </motion.span>
+        <motion.span variants={infoItemVariant}>
+          {releaseDate.slice(0, 4)}
+        </motion.span>
+      </motion.div>
+      {/* desc */}
+      <motion.div className="mt-md" variants={infoItemVariant}>
+        <motion.p className="font-light max-w-[50%]" variants={infoItemVariant}>
+          {desc}
+        </motion.p>
+      </motion.div>
+      {/* youtube */}
+      <motion.div className="mt-md" variants={infoItemVariant}>
         <YouTube
           videoId={titileYoutubeId}
           className="mt-sm"
           onReady={onYoutbeLoad}
         />
       </motion.div>
-      <motion.div variants={infoItemVariant}>2</motion.div>
-      <motion.div variants={infoItemVariant}>3</motion.div>
+
+      {/* track list */}
+      <motion.div className="mt-md" variants={infoItemVariant}>
+        {trackList.map((track, idx) => (
+          <motion.div
+            key={`tracklist-${track.title}`}
+            variants={infoItemVariant}
+          >
+            <span>{idx + 1}. </span>
+            <span>{track.title}</span>
+            {track.isTitle && (
+              <span className="ml-xs text-xs opacity-80">타이틀</span>
+            )}
+          </motion.div>
+        ))}
+      </motion.div>
+      {/* <motion.div variants={infoItemVariant}>3</motion.div> */}
     </motion.div>
   );
 }
-
-// function TrackItem({ track, idx }: { track: Track; idx: number }) {
-//   const { title, duration } = track;
-
-//   const [isHover, setIsHover] = useState(false);
-
-//   function onHover() {
-//     setIsHover((prev) => !prev);
-//   }
-
-//   return (
-//     <motion.div
-//       onMouseEnter={onHover}
-//       onMouseLeave={onHover}
-//       variants={itemVariants}
-//       className="flex gap-sm py-xxs px-xs items-center text-sm border-b"
-//     >
-//       <span>{idx + 1}</span>
-//       <h3 className="text-">{title}</h3>
-//       <div className="ml-auto flex items-center">
-//         {!isHover ? (
-//           <span className="ml-auto">{duration}</span>
-//         ) : (
-//           <NewTabAnchor href="">
-//             <IconYoutube />
-//           </NewTabAnchor>
-//         )}
-//       </div>
-//     </motion.div>
-//   );
-// }
