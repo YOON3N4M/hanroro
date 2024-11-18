@@ -9,6 +9,7 @@ function ProfilePanel(props: ProfilePanelProps) {
 
   return (
     <PanelTemplate isPanelActive={isPanelActive}>
+      <h3 className="visually-hidden">프로필</h3>
       <div className={cn("size-full relative")}>
         <div className="w-[80vw] border tab:w-screen h-full absolute center flex gap-md">
           ProfilePanel

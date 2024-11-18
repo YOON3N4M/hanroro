@@ -32,6 +32,7 @@ export default function ProfileContainer() {
   }, [indexProgress]);
   return (
     <div className="relative h-[400vh] flex flex-col overflow-visible">
+      <h2 className="visually-hidden">프로필</h2>
       {/* nav */}
       <div className="fixed top-[30%] left-[30px] mo:left-[15px] z-[30] flex flex-col animate-fadeIn">
         {tabList.map((tab, idx) => (

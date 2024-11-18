@@ -23,6 +23,7 @@ function Header(props: HeaderProps) {
               <Link href={"/"}>HANRORO</Link>
             </div>
             <nav className="flex gap-lg">
+              <h2 className="visually-hidden">네비게이션</h2>
               {NAVIGATION_ITEM.map((item) => (
                 <div key={item.name}>
                   <Link href={item.href}>{item.name}</Link>
