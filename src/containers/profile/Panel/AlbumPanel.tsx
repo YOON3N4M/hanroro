@@ -7,11 +7,11 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import YouTube from "react-youtube";
-import { PanelProps } from "./type";
+import { PanelProps, PanelTemplate, usePanel } from ".";
 
 interface AlbumPanelProps extends PanelProps {}
 
-const variants = {
+const albumCoverVariant = {
   enter: (custom: number) => ({
     opacity: 1,
     transition: { delay: custom * 0.15 },
@@ -40,11 +40,12 @@ const itemVariants = {
 
 function AlbumPanel(props: AlbumPanelProps) {
   const { activePanelIndex, panelIndex } = props;
+  const { isPanelActive } = usePanel(activePanelIndex, panelIndex);
+
   const [activeAlbumIndex, setActiveAlbumIndex] = useState<number | null>(null);
 
   const albumContainerRef = useRef<HTMLDivElement>(null);
 
-  const isViewActive = activePanelIndex === panelIndex;
   const isAlbumSelected = activeAlbumIndex !== null;
   const selectedAlbum = isAlbumSelected && ALBUM_LIST[activeAlbumIndex];
   const titileYoutubeId =
@@ -77,95 +78,97 @@ function AlbumPanel(props: AlbumPanelProps) {
   }
 
   return (
-    <div className="size-full relative">
-      {/* album grid */}
-      <div className="w-[80vw] tab:w-screen h-full absolute center flex gap-md">
-        <div
-          ref={albumContainerRef}
-          className={cn(
-            "relative  overflow-x-visible",
-            isAlbumSelected
-              ? "flex flex-col w-[300px] pc:!h-full pc:overflow-y-auto gap-sm tab:flex-row tab:h-[300px] tab:overflow-x-auto tab:w-full"
-              : "grid grid-cols-5 tab:grid-cols-3 h-screen-nav"
-          )}
-        >
-          {ALBUM_LIST.map((album, idx) => (
-            <motion.div
-              id={album.title}
-              layout
-              custom={idx}
-              key={album.title}
-              variants={variants}
-              initial="exit"
-              animate={isViewActive ? "enter" : "exit"}
-              className={cn(
-                // "aspect-square",
-                // activeAlbumIndex !== null && "absolute top-[20%]",
-                idx == activeAlbumIndex && "z-[10]"
-              )}
-            >
-              <button className="size-full" onClick={() => onClickAlbum(idx)}>
-                <Image
-                  src={album.cover.src}
-                  height={1000}
-                  width={1000}
-                  alt={album.title}
-                  className={cn(
-                    "object-cover brightness-50 transition-all hover:brightness-100",
-                    activeAlbumIndex === idx && "!brightness-100"
-                  )}
-                />
-              </button>
-            </motion.div>
-          ))}
-        </div>
-        <div className="flex-1 text-white p-md">
-          <div className="w-min min-w-[50%]">
-            {selectedAlbum && (
-              <>
-                <motion.div
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                  className="flex flex-col"
-                >
-                  <motion.h2 className="text-lg" variants={itemVariants}>
-                    {selectedAlbum.title}
-                  </motion.h2>
-                  <motion.span
-                    className="text-sm opacity-80"
-                    variants={itemVariants}
-                  >
-                    {albumTypeStr(selectedAlbum.type)}
-                  </motion.span>
-                  {/* title youtube */}
-                  <motion.div className="mt-md" variants={itemVariants}>
-                    <h2>타이틀</h2>
-                    {titileYoutubeId && (
-                      <YouTube videoId={titileYoutubeId} className="mt-sm" />
-                    )}
-                  </motion.div>
-                  <div className="mt-md">
-                    <motion.h3 className="text-sm" variants={itemVariants}>
-                      트랙 리스트
-                    </motion.h3>
-                    <div className="mt-sm gap-xs">
-                      {selectedAlbum.trackList.map((track, idx) => (
-                        <TrackItem
-                          key={`${selectedAlbum.title}-${track.title}`}
-                          track={track}
-                          idx={idx}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </>
+    <PanelTemplate isPanelActive={isPanelActive}>
+      <div className={cn("size-full relative")}>
+        <div className="w-[80vw] tab:w-screen h-full absolute center flex gap-md">
+          {/* album grid */}
+          <div
+            ref={albumContainerRef}
+            className={cn(
+              "relative  overflow-x-visible",
+              isAlbumSelected
+                ? "flex flex-col w-[300px] pc:!h-full pc:overflow-y-auto gap-sm tab:flex-row tab:h-[300px] tab:overflow-x-auto tab:w-full"
+                : "grid grid-cols-5 tab:grid-cols-3 h-screen-nav"
             )}
+          >
+            {ALBUM_LIST.map((album, idx) => (
+              <motion.div
+                id={album.title}
+                layout
+                custom={idx}
+                key={album.title}
+                variants={albumCoverVariant}
+                initial="exit"
+                animate={isPanelActive ? "enter" : "exit"}
+                className={cn(
+                  // "aspect-square",
+                  // activeAlbumIndex !== null && "absolute top-[20%]",
+                  idx == activeAlbumIndex && "z-[10]"
+                )}
+              >
+                <button className="size-full" onClick={() => onClickAlbum(idx)}>
+                  <Image
+                    src={album.cover.src}
+                    height={1000}
+                    width={1000}
+                    alt={album.title}
+                    className={cn(
+                      "object-cover brightness-50 transition-all hover:brightness-100",
+                      activeAlbumIndex === idx && "!brightness-100"
+                    )}
+                  />
+                </button>
+              </motion.div>
+            ))}
+          </div>
+          <div className="flex-1 text-white p-md">
+            <div className="w-min min-w-[50%]">
+              {selectedAlbum && (
+                <>
+                  <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="flex flex-col"
+                  >
+                    <motion.h2 className="text-lg" variants={itemVariants}>
+                      {selectedAlbum.title}
+                    </motion.h2>
+                    <motion.span
+                      className="text-sm opacity-80"
+                      variants={itemVariants}
+                    >
+                      {albumTypeStr(selectedAlbum.type)}
+                    </motion.span>
+                    {/* title youtube */}
+                    <motion.div className="mt-md" variants={itemVariants}>
+                      <h2>타이틀</h2>
+                      {titileYoutubeId && (
+                        <YouTube videoId={titileYoutubeId} className="mt-sm" />
+                      )}
+                    </motion.div>
+                    <div className="mt-md">
+                      <motion.h3 className="text-sm" variants={itemVariants}>
+                        트랙 리스트
+                      </motion.h3>
+                      <div className="mt-sm gap-xs">
+                        {selectedAlbum.trackList.map((track, idx) => (
+                          <TrackItem
+                            key={`${selectedAlbum.title}-${track.title}`}
+                            track={track}
+                            idx={idx}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </PanelTemplate>
   );
 }
 

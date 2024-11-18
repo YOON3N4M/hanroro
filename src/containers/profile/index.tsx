@@ -4,6 +4,7 @@ import { cn, scrollMove } from "@/utils";
 import { useEffect, useState } from "react";
 import ProfileSection from "./ProfileSection";
 import AlbumPanel from "./Panel/AlbumPanel";
+import ProfilePanel from "./Panel/ProfilePanel";
 
 export interface Tab {
   kor: string;
@@ -48,7 +49,10 @@ export default function ProfileContainer() {
       </div>
       {/* panel */}
       <div className="h-screen-nav fixed bg-black z-[25] w-full animate-fadeIn">
-        <AlbumPanel activePanelIndex={activeIndex} panelIndex={1} />
+        <div className="size-full relative">
+          <ProfilePanel activePanelIndex={activeIndex} panelIndex={0} />
+          <AlbumPanel activePanelIndex={activeIndex} panelIndex={1} />
+        </div>
       </div>
       {/* spacer (scroll-trigger) */}
       <div className="absolute top-0 left-0 w-full h-min">
