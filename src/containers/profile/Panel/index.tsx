@@ -1,12 +1,13 @@
+import { cn } from "@/utils";
 import { motion } from "motion/react";
-import { Attributes, ReactNode } from "react";
+import { Attributes, HTMLAttributes, ReactNode } from "react";
 
 export interface PanelProps {
   activePanelIndex: number;
   panelIndex: number;
 }
 
-export interface PanelTemplateProps {
+export interface PanelTemplateProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   isPanelActive: boolean;
 }
@@ -19,6 +20,7 @@ export const panelVariants = {
   visible: {
     opacity: 1,
     display: "block",
+    transition: { staggerChildren: 0.3 },
   },
 };
 
@@ -29,11 +31,11 @@ export function usePanel(activePanelIndex: number, panelIndex: number) {
 }
 
 export function PanelTemplate(props: PanelTemplateProps) {
-  const { isPanelActive, children } = props;
+  const { isPanelActive, children, className } = props;
 
   return (
     <motion.div
-      className="absolute size-full"
+      className={cn("absolute size-full", className)}
       variants={panelVariants}
       initial="hidden"
       animate={isPanelActive ? "visible" : "hidden"}
