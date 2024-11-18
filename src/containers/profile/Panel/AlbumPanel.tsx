@@ -189,7 +189,7 @@ function AlbumPanel(props: AlbumPanelProps) {
                     animate={
                       idx === activeAlbumIndex
                         ? { marginLeft: "60%", opacity: 1 }
-                        : { marginLeft: 0, opacity: 1 }
+                        : { marginLeft: 0, opacity: 0 }
                     }
                   >
                     <div className="cd"></div>
