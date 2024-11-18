@@ -4,10 +4,16 @@ interface LoadingSpinnerProps {
   className?: string;
   container?: boolean;
   absolute?: boolean;
+  white?: boolean;
 }
 
 export default function LoadingSpinner(props: LoadingSpinnerProps) {
-  const { container = false, className, absolute = false } = props;
+  const {
+    container = false,
+    className,
+    absolute = false,
+    white = false,
+  } = props;
 
   const renderSpinner = () => (
     <div
@@ -18,7 +24,10 @@ export default function LoadingSpinner(props: LoadingSpinnerProps) {
       )}
     >
       <div
-        className="shadow-lg inline-block h-8 w-8 animate-spin rounded-full border-2 border-solid border-black border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+        className={cn(
+          "shadow-lg inline-block h-8 w-8 animate-spin rounded-full border-2 border-solid border-black border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]",
+          white && "border-white"
+        )}
         role="status"
       >
         <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">

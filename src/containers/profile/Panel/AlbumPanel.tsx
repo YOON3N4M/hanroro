@@ -30,7 +30,7 @@ const albumInfoVariant = {
   },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.3, delayChildren: 0.5 },
+    transition: { staggerChildren: 0.3, delayChildren: 0 },
   },
 };
 
@@ -43,22 +43,6 @@ const infoItemVariant = {
     transition: { staggerChildren: 0.3, delayChildren: 0.5 },
   },
 };
-// const containerVariants = {
-//   hidden: { opacity: 0 },
-//   visible: {
-//     opacity: 1,
-//     transition: { staggerChildren: 0.3 }, // 각 자식 요소가 0.3초 간격으로 등장
-//   },
-// };
-
-// const itemVariants = {
-//   hidden: { opacity: 0, y: 20 }, // 처음에는 위에서 살짝 떨어져 있다가
-//   visible: {
-//     opacity: 1,
-//     y: 0,
-//     transition: { type: "spring", stiffness: 50 }, // 자연스러운 스프링 애니메이션
-//   },
-// };
 
 const gradientBgStyles: { [key in any]: string } = {
   letMeLoveMyYouth: "from-[#ffffff60]",
@@ -109,7 +93,7 @@ function AlbumPanel(props: AlbumPanelProps) {
         emblaApi.scrollTo(idx);
       }
     }, 500);
-    // scrollToAlbum(ALBUM_LIST[idx].title, !isAlbumSelected);
+
     setActiveAlbumIndex(idx);
   }
 
@@ -286,65 +270,77 @@ function AlbumInfo({ album }: { album: Album }) {
     setIsLoad(true);
   }
 
-  return (
-    <motion.div
-      // key를 부여해서 앨범이 변경될때 마다 모션이 새로고침 될 수 있도록
-      key={title}
-      className="flex-1 text-white p-md flex flex-col"
-      variants={albumInfoVariant}
-      initial="hidden"
-      animate={isLoad ? "visible" : "hidden"}
-      exit="hidden"
-    >
-      {/* title type date */}
-      <motion.div
-        variants={infoItemVariant}
-        className="flex items-center gap-xs"
-      >
-        <motion.h3
-          variants={infoItemVariant}
-          className="text-[50px] font-extralight"
-        >
-          {title}
-        </motion.h3>
-        <motion.span variants={infoItemVariant}>
-          {albumTypeStr(type)}
-        </motion.span>
-        <motion.span variants={infoItemVariant}>
-          {releaseDate.slice(0, 4)}
-        </motion.span>
-      </motion.div>
-      {/* desc */}
-      <motion.div className="mt-md" variants={infoItemVariant}>
-        <motion.p className="font-light max-w-[50%]" variants={infoItemVariant}>
-          {desc}
-        </motion.p>
-      </motion.div>
-      {/* youtube */}
-      <motion.div className="mt-md" variants={infoItemVariant}>
-        <YouTube
-          videoId={titileYoutubeId}
-          className="mt-sm"
-          onReady={onYoutbeLoad}
-        />
-      </motion.div>
+  useEffect(() => {
+    setIsLoad(false);
+  }, [album]);
 
-      {/* track list */}
-      <motion.div className="mt-md" variants={infoItemVariant}>
-        {trackList.map((track, idx) => (
-          <motion.div
-            key={`tracklist-${track.title}`}
+  return (
+    <div className="flex-1 text-white p-md flex flex-col relative">
+      {!isLoad && (
+        <LoadingSpinner absolute white className="pointer-events-none z-50" />
+      )}
+      <motion.div
+        // key를 부여해서 앨범이 변경될때 마다 모션이 새로고침 될 수 있도록
+        key={title}
+        // className="flex-1 text-white p-md flex flex-col"
+        variants={albumInfoVariant}
+        initial="hidden"
+        animate={isLoad ? "visible" : "hidden"}
+        exit="hidden"
+      >
+        {/* title type date */}
+        <motion.div
+          variants={infoItemVariant}
+          className="flex items-center gap-xs"
+        >
+          <motion.h3
+            variants={infoItemVariant}
+            className="text-[50px] font-extralight"
+          >
+            {title}
+          </motion.h3>
+          <motion.span variants={infoItemVariant}>
+            {albumTypeStr(type)}
+          </motion.span>
+          <motion.span variants={infoItemVariant}>
+            {releaseDate.slice(0, 4)}
+          </motion.span>
+        </motion.div>
+        {/* desc */}
+        <motion.div className="mt-md" variants={infoItemVariant}>
+          <motion.p
+            className="font-light max-w-[50%]"
             variants={infoItemVariant}
           >
-            <span>{idx + 1}. </span>
-            <span>{track.title}</span>
-            {track.isTitle && (
-              <span className="ml-xs text-xs opacity-80">타이틀</span>
-            )}
-          </motion.div>
-        ))}
+            {desc}
+          </motion.p>
+        </motion.div>
+        {/* youtube */}
+        <motion.div className="mt-md" variants={infoItemVariant}>
+          <YouTube
+            videoId={titileYoutubeId}
+            className="mt-sm"
+            onReady={onYoutbeLoad}
+          />
+        </motion.div>
+
+        {/* track list */}
+        <motion.div className="mt-md" variants={infoItemVariant}>
+          {trackList.map((track, idx) => (
+            <motion.div
+              key={`tracklist-${track.title}`}
+              variants={infoItemVariant}
+            >
+              <span>{idx + 1}. </span>
+              <span>{track.title}</span>
+              {track.isTitle && (
+                <span className="ml-xs text-xs opacity-80">타이틀</span>
+              )}
+            </motion.div>
+          ))}
+        </motion.div>
+        {/* <motion.div variants={infoItemVariant}>3</motion.div> */}
       </motion.div>
-      {/* <motion.div variants={infoItemVariant}>3</motion.div> */}
-    </motion.div>
+    </div>
   );
 }
