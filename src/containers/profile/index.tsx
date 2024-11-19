@@ -5,10 +5,15 @@ import { useEffect, useState } from "react";
 import ProfileSection from "./ProfileSection";
 import AlbumPanel from "./Panel/AlbumPanel";
 import ProfilePanel from "./Panel/ProfilePanel";
+import { SearchParams } from "@/types";
 
 export interface Tab {
   kor: string;
   eng: string;
+}
+
+interface ProfileContainerProps {
+  searchParams?: SearchParams;
 }
 
 const tabList: Tab[] = [
@@ -17,7 +22,9 @@ const tabList: Tab[] = [
   // { kor: "영상", eng: "media" },
 ];
 
-export default function ProfileContainer() {
+export default function ProfileContainer(props: ProfileContainerProps) {
+  const { searchParams } = props;
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [indexProgress, setIndexProgress] = useState<any>();
 
@@ -30,6 +37,7 @@ export default function ProfileContainer() {
   useEffect(() => {
     console.log(indexProgress);
   }, [indexProgress]);
+
   return (
     <div className="relative h-[400vh] flex flex-col overflow-visible">
       <h2 className="visually-hidden">프로필</h2>
@@ -52,7 +60,11 @@ export default function ProfileContainer() {
       <div className="h-screen-nav fixed bg-black z-[25] w-full animate-fadeIn">
         <div className="size-full relative">
           {/* <ProfilePanel activePanelIndex={activeIndex} panelIndex={0} /> */}
-          <AlbumPanel activePanelIndex={activeIndex} panelIndex={0} />
+          <AlbumPanel
+            activePanelIndex={activeIndex}
+            panelIndex={0}
+            searchParams={searchParams}
+          />
         </div>
       </div>
       {/* spacer (scroll-trigger) */}

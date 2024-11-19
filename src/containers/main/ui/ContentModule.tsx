@@ -1,18 +1,27 @@
 import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import { cn } from "@/utils";
 import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 import React, { ReactNode } from "react";
 
 interface ContentModuleProps {
   children?: ReactNode;
   href?: string;
+  linkHref?: string;
   staticImage: StaticImageData;
   alt: string;
   imageHover?: boolean;
 }
 
 export default function ContentModule(props: ContentModuleProps) {
-  const { children, href, staticImage, imageHover = true, alt } = props;
+  const {
+    children,
+    href,
+    staticImage,
+    imageHover = true,
+    alt,
+    linkHref,
+  } = props;
 
   return (
     <div className="size-full relative group text-white overflow-hidden">
@@ -24,6 +33,11 @@ export default function ContentModule(props: ContentModuleProps) {
         >
           &nbsp;
         </NewTabAnchor>
+      )}
+      {linkHref && (
+        <Link href={linkHref} className="size-full z-[3] absolute top-0 left-0">
+          &nbsp;
+        </Link>
       )}
 
       {/* text wrapper */}

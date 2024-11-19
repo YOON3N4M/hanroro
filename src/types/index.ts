@@ -1,5 +1,7 @@
 import { StaticImageData } from "next/image";
 
+export type SearchParams = Record<string, string>;
+
 export interface GalleryDocsObj {
   gif: GalleryItemDoc[];
   images: GalleryItemDoc[];

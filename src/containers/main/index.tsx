@@ -23,7 +23,7 @@ function MainContainer(props: MainContainerProps) {
         <div className="flex-1">
           <ContentModule
             staticImage={theCompass}
-            href="https://hatchingroom.com/index.html"
+            linkHref="/profile?album=나침반"
             alt="hanroro single compass cover image"
           >
             <div className="mt-auto pb-[60px] flex flex-col items-center font-[100]">

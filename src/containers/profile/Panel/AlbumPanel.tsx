@@ -1,7 +1,7 @@
 import { IconYoutube } from "@/components/svg";
 import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import { ALBUM_LIST } from "@/data/album";
-import { Album, Track } from "@/types";
+import { Album, SearchParams, Track } from "@/types";
 import { cn, getYoutubeIdFromUrl } from "@/utils";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
@@ -13,7 +13,9 @@ import useEmblaCarousel from "embla-carousel-react";
 import ClassNames from "embla-carousel-class-names";
 import useDeviceDetect from "@/hooks/useDeviceDetect";
 
-interface AlbumPanelProps extends PanelProps {}
+interface AlbumPanelProps extends PanelProps {
+  searchParams?: SearchParams;
+}
 
 const albumCoverVariant = {
   visible: (custom: number) => ({
@@ -60,7 +62,7 @@ const gradientBgStyles: { [key in any]: string } = {
 };
 
 function AlbumPanel(props: AlbumPanelProps) {
-  const { activePanelIndex, panelIndex } = props;
+  const { activePanelIndex, panelIndex, searchParams } = props;
   const { isPanelActive } = usePanel(activePanelIndex, panelIndex);
   const { isPc, isTab, isMobile } = useDeviceDetect();
 
@@ -75,8 +77,11 @@ function AlbumPanel(props: AlbumPanelProps) {
     {
       active: false,
       align: "start",
-      axis: isPc ? "y" : "x",
       dragFree: true,
+      breakpoints: {
+        "(min-width: 1200px)": { axis: "y" },
+        "(max-width: 1199px)": { axis: "x" },
+      },
     },
     [ClassNames({ snapped: "active-slide" })]
   );
@@ -106,15 +111,18 @@ function AlbumPanel(props: AlbumPanelProps) {
     }
   }, [isPanelActive]);
 
-  // 캐러셀 초기화
   useEffect(() => {
-    if (!emblaApi) return;
+    if (!isIntroEnd) return;
+    if (!searchParams) return;
 
-    const axis = isPc ? "y" : "x";
-    console.log("axis", axis);
-    emblaApi.reInit({ axis });
-    console.log("isPc=", isPc, "isTab=", isTab, "isMobile=", isMobile);
-  }, [isPc, isTab, isMobile]);
+    if (searchParams.album) {
+      const targetAlbum = ALBUM_LIST.findIndex(
+        (album) => album.title === searchParams.album
+      );
+
+      onClickAlbum(targetAlbum);
+    }
+  }, [isIntroEnd]);
 
   return (
     <PanelTemplate
