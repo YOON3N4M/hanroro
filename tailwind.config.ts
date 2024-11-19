@@ -14,8 +14,8 @@ const config: Config = {
       },
       screens: {
         mo: { max: "734px" },
-        tab: { max: "1200px" },
-        pc: "1201px",
+        tab: { max: "1199px" },
+        pc: "1200px",
       },
       fontFamily: {
         pretendard: ["var(--font-pretendard)"],

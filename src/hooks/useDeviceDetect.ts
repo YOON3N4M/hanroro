@@ -4,16 +4,20 @@ import { useEffect, useState } from "react";
 export interface DeviceDetect {
   [key: string]: boolean | undefined;
   isPc: boolean | undefined;
+  isTab: boolean | undefined;
   isMobile: boolean | undefined;
 }
 
 interface UseDeviceDetect extends DeviceDetect {}
 
-const desktop = 735;
+const mo = 734;
+const tab = 1199;
+const pc = 1200;
 
 function useDeviceDetect(): UseDeviceDetect {
   const [deviceDetect, setDeviceDetect] = useState<DeviceDetect>({
     isPc: undefined,
+    isTab: undefined,
     isMobile: undefined,
   });
 
@@ -23,8 +27,9 @@ function useDeviceDetect(): UseDeviceDetect {
 
       setDeviceDetect((prev) => {
         const newState: DeviceDetect = {
-          isPc: width >= desktop,
-          isMobile: width < desktop,
+          isPc: width >= pc,
+          isTab: width > 734 && width < pc,
+          isMobile: width <= mo,
         };
         const isDeviceChanged = Object.keys(prev).find(
           (key) => prev[key] !== newState[key]

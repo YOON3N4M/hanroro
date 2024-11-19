@@ -11,6 +11,7 @@ import { PanelProps, PanelTemplate, usePanel } from ".";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import useEmblaCarousel from "embla-carousel-react";
 import ClassNames from "embla-carousel-class-names";
+import useDeviceDetect from "@/hooks/useDeviceDetect";
 
 interface AlbumPanelProps extends PanelProps {}
 
@@ -61,6 +62,7 @@ const gradientBgStyles: { [key in any]: string } = {
 function AlbumPanel(props: AlbumPanelProps) {
   const { activePanelIndex, panelIndex } = props;
   const { isPanelActive } = usePanel(activePanelIndex, panelIndex);
+  const { isPc, isTab, isMobile } = useDeviceDetect();
 
   const [isIntroEnd, setIsIntroEnd] = useState(false);
   const [activeAlbumIndex, setActiveAlbumIndex] = useState<number | null>(null);
@@ -73,8 +75,8 @@ function AlbumPanel(props: AlbumPanelProps) {
     {
       active: false,
       align: "start",
-      axis: "y",
-      dragFree: true,
+      axis: isPc ? "y" : "x",
+      // dragFree: true,
     },
     [ClassNames({ snapped: "active-slide" })]
   );
@@ -102,8 +104,17 @@ function AlbumPanel(props: AlbumPanelProps) {
       setActiveAlbumIndex(null);
       setIsCarouselMode(false);
     }
-    console.log(isPanelActive);
   }, [isPanelActive]);
+
+  // 캐러셀 초기화
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const axis = isPc ? "y" : "x";
+    console.log("axis", axis);
+    emblaApi.reInit({ axis });
+    console.log("isPc=", isPc, "isTab=", isTab, "isMobile=", isMobile);
+  }, [isPc, isTab, isMobile]);
 
   return (
     <PanelTemplate
@@ -128,16 +139,28 @@ function AlbumPanel(props: AlbumPanelProps) {
         )}
       </AnimatePresence>
       <h3 className="visually-hidden">앨범</h3>
-      <div className={cn("size-full relative")}>
-        <div className="w-[80vw] tab:w-screen h-full absolute center flex gap-[10%]">
+      <div className={cn("size-full relative tab:inner")}>
+        <div
+          className={cn(
+            "w-[80vw] tab:w-full h-full absolute tab:relative center flex pc:gap-[10%] tab:flex-col",
+            !isCarouselMode && "tab:justify-center",
+            isCarouselMode && "tab:w-screen"
+          )}
+        >
           {/* album grid */}
-          <div className="relative" ref={emblaRef}>
+          <div
+            className={cn(
+              "flex items-center",
+              isCarouselMode && "overflow-hidden tab:w-screen"
+            )}
+            ref={emblaRef}
+          >
             <div
               className={cn(
                 "relative",
                 isCarouselMode
-                  ? "flex flex-col w-[300px] pc:!h-full  gap-sm tab:flex-row tab:h-[300px] tab:overflow-x-auto tab:w-full"
-                  : "grid grid-cols-5 tab:grid-cols-3 h-screen-nav"
+                  ? "flex pc:flex-col pc:w-[300px] pc:!h-full gap-sm tab:h-[150px] tab:flex-row"
+                  : "grid grid-cols-5 tab:grid-cols-4 mo:!grid-cols-3 h-min "
               )}
             >
               {ALBUM_LIST.map((album, idx) => (
@@ -153,7 +176,8 @@ function AlbumPanel(props: AlbumPanelProps) {
                     "relative",
                     "aspect-square",
                     // activeAlbumIndex !== null && "absolute top-[20%]",
-                    idx == activeAlbumIndex && "z-[10]"
+                    idx == activeAlbumIndex && "z-[10]",
+                    isCarouselMode && "tab:size-[150px]"
                   )}
                   onAnimationComplete={
                     idx === ALBUM_LIST.length - 1
@@ -168,7 +192,7 @@ function AlbumPanel(props: AlbumPanelProps) {
                 >
                   {/* cd shape */}
                   <motion.div
-                    className="absolute y-center size-[80%]"
+                    className="absolute y-center size-[80%] tab:hidden"
                     initial={{ marginLeft: 0, opacity: 0 }}
                     animate={
                       idx === activeAlbumIndex
@@ -261,10 +285,12 @@ function AlbumInfo({ album }: { album: Album }) {
   const { title, type, releaseDate, trackList, desc } = album;
 
   const [isLoad, setIsLoad] = useState(false);
-
+  const { isPc } = useDeviceDetect();
   const titleTrack = album.trackList.find((item) => item.isTitle);
   const titileYoutubeId =
     titleTrack && getYoutubeIdFromUrl(titleTrack.youtubeUrl);
+
+  const opts = !isPc ? { width: "100%" } : { width: 640, height: 360 };
 
   function onYoutbeLoad() {
     setIsLoad(true);
@@ -275,7 +301,7 @@ function AlbumInfo({ album }: { album: Album }) {
   }, [album]);
 
   return (
-    <div className="flex-1 text-white p-md flex flex-col relative">
+    <div className="flex-1 text-white p-md !pb-[100px] flex flex-col relative overflow-y-auto">
       {!isLoad && (
         <LoadingSpinner absolute white className="pointer-events-none z-50" />
       )}
@@ -295,21 +321,21 @@ function AlbumInfo({ album }: { album: Album }) {
         >
           <motion.h3
             variants={infoItemVariant}
-            className="text-[50px] font-extralight"
+            className="text-[50px] tab:text-[30px] font-extralight"
           >
             {title}
           </motion.h3>
-          <motion.span variants={infoItemVariant}>
+          <motion.span className="tab:text-sm" variants={infoItemVariant}>
             {albumTypeStr(type)}
           </motion.span>
-          <motion.span variants={infoItemVariant}>
+          <motion.span className="tab:text-sm" variants={infoItemVariant}>
             {releaseDate.slice(0, 4)}
           </motion.span>
         </motion.div>
         {/* desc */}
         <motion.div className="mt-md" variants={infoItemVariant}>
           <motion.p
-            className="font-light max-w-[50%]"
+            className="font-light max-w-[640px] tab:max-w-[90%] tab:text-sm"
             variants={infoItemVariant}
           >
             {desc}
@@ -320,6 +346,7 @@ function AlbumInfo({ album }: { album: Album }) {
           <YouTube
             videoId={titileYoutubeId}
             className="mt-sm"
+            opts={opts}
             onReady={onYoutbeLoad}
           />
         </motion.div>
