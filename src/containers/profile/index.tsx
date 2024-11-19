@@ -12,8 +12,8 @@ export interface Tab {
 }
 
 const tabList: Tab[] = [
-  { kor: "프로필", eng: "profile" },
   { kor: "앨범", eng: "album" },
+  // { kor: "프로필", eng: "profile" },
   { kor: "영상", eng: "media" },
 ];
 
@@ -51,8 +51,8 @@ export default function ProfileContainer() {
       {/* panel */}
       <div className="h-screen-nav fixed bg-black z-[25] w-full animate-fadeIn">
         <div className="size-full relative">
-          <ProfilePanel activePanelIndex={activeIndex} panelIndex={0} />
-          <AlbumPanel activePanelIndex={activeIndex} panelIndex={1} />
+          {/* <ProfilePanel activePanelIndex={activeIndex} panelIndex={0} /> */}
+          <AlbumPanel activePanelIndex={activeIndex} panelIndex={0} />
         </div>
       </div>
       {/* spacer (scroll-trigger) */}

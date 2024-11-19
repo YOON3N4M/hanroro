@@ -76,7 +76,7 @@ function AlbumPanel(props: AlbumPanelProps) {
       active: false,
       align: "start",
       axis: isPc ? "y" : "x",
-      // dragFree: true,
+      dragFree: true,
     },
     [ClassNames({ snapped: "active-slide" })]
   );
@@ -150,8 +150,8 @@ function AlbumPanel(props: AlbumPanelProps) {
           {/* album grid */}
           <div
             className={cn(
-              "flex items-center",
-              isCarouselMode && "overflow-hidden tab:w-screen"
+              "pc:flex items-center relative",
+              isCarouselMode && " tab:w-screen"
             )}
             ref={emblaRef}
           >
@@ -159,7 +159,7 @@ function AlbumPanel(props: AlbumPanelProps) {
               className={cn(
                 "relative",
                 isCarouselMode
-                  ? "flex pc:flex-col pc:w-[300px] pc:!h-full gap-sm tab:h-[150px] tab:flex-row"
+                  ? "flex pc:flex-col pc:w-[300px] pc:!h-full gap-sm tab:h-[150px] tab:flex-row w-full"
                   : "grid grid-cols-5 tab:grid-cols-4 mo:!grid-cols-3 h-min "
               )}
             >
@@ -173,7 +173,7 @@ function AlbumPanel(props: AlbumPanelProps) {
                   initial="hidden"
                   animate={isPanelActive ? "visible" : "hidden"}
                   className={cn(
-                    "relative",
+                    "relative tab:shrink-0",
                     "aspect-square",
                     // activeAlbumIndex !== null && "absolute top-[20%]",
                     idx == activeAlbumIndex && "z-[10]",
