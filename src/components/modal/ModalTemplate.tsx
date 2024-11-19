@@ -14,7 +14,7 @@ function ModalTemplate(props: ModalTemplateProps) {
   const { removeModalElement } = useModal();
 
   return (
-    <div className="absolute left-0 top-0 z-[500] h-[100dvh] w-[100vw]">
+    <div className="fixed left-0 top-0 z-[500] h-[100dvh] w-[100vw]">
       <div className="relative z-[600] flex size-full">
         <div className="absolute z-[700] center">
           <div
