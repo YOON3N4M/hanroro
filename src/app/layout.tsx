@@ -18,7 +18,8 @@ const GOOGLE_SEARCH_VERIFICATION = process.env
 
 export const metadata: Metadata = {
   title: "hanroro | fansite",
-  description: "한로로 팬사이트",
+  description:
+    "가수 한로로 님의 팬사이트 입니다. 앨범, 공연/행사 일정 등을 확인하고 사진을 공유 할 수 있습니다.",
   icons: {
     icon: "/favicon.png",
   },
