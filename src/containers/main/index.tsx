@@ -16,7 +16,7 @@ function MainContainer(props: MainContainerProps) {
 
   return (
     <div className="bg-white flex flex-col gap-sm">
-      <ContentSection className="mt-sm">
+      <ContentSection className="mt-sm tab:min-h-[350px] tab:h-[350px]">
         <BannerCarousel />
       </ContentSection>
       <ContentSection className="flex gap-sm text-white mo:flex-col">
