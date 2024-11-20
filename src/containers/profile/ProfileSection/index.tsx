@@ -33,7 +33,7 @@ function ProfileSection(props: ProfileSectionProps) {
       ref={ref}
       className="h-screen-nav relative bg-default-black-bg"
     >
-      <span className="center absolute">{index}</span>
+      {/* <span className="center absolute">{index}</span> */}
     </div>
   );
 }
