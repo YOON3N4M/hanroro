@@ -12,7 +12,7 @@ export default function ToastPortal() {
 
   return (
     <div id="toast-portal">
-      <div className="fixed bottom-[2%] left-[3%] flex flex-col gap-sm">
+      <div className="fixed bottom-[2%] left-[3%] flex flex-col gap-sm z-[400]">
         {toastList.map((toast, idx) => (
           <ToastItem key={`${toast.id}-toast`} toast={toast} />
         ))}
