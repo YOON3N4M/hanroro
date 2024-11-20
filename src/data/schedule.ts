@@ -4,6 +4,7 @@ import {
   birthdayCafe2,
   birthdayCafe3,
   wonderLivet,
+  thirdSolo,
 } from "../../public/images/schdule";
 import { theCompass } from "../../public/images/album";
 
@@ -60,5 +61,23 @@ export const SCHEDULE_LIST: Schedule[] = [
     date: ["2024-12-07"],
     duration: "-",
     location: "-",
+  },
+  {
+    type: "event",
+    title: "3차 단독 콘서트 '발아' 티켓팅 오픈",
+    date: ["2024-11-28"],
+    duration: "18:00",
+    location: "-",
+    images: [thirdSolo],
+    link: "https://www.instagram.com/p/DCYnEtkS4Vj/?utm_source=ig_web_copy_link",
+  },
+  {
+    type: "concert",
+    title: "3차 단독 콘서트 '발아'",
+    date: ["2025-01-11", "2025-01-12"],
+    duration: "-",
+    location: "YES24 LIVE HALL",
+    images: [thirdSolo],
+    link: "https://www.instagram.com/p/DCYnEtkS4Vj/?utm_source=ig_web_copy_link",
   },
 ];

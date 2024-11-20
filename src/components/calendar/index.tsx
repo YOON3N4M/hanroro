@@ -1,55 +1,39 @@
 "use client";
 
-import { format, startOfMonth } from "date-fns";
-import useCalendar from "./useCalendar";
-import { IconCalendar, IconRightLeft, IconRightRight, IconTimer } from "../svg";
+import { Schedule, ScheduleType } from "@/data/schedule";
 import { cn } from "@/utils";
-import { Schedule, SCHEDULE_LIST, ScheduleType } from "@/data/schedule";
-import useModal from "../modal/useModal";
+import { EachDayOfIntervalResult, format } from "date-fns";
 import ScheduleViewModal from "../modal/form/ScheduleViewModal";
-import { useState } from "react";
+import useModal from "../modal/useModal";
+import useCalendar from "./useCalendar";
+import { Filter, scheduleTypeColorStyles } from "@/containers/calendar";
 
-interface Filter {
-  type: ScheduleType;
-  kor: string;
+interface CalendarProps {
+  today: Date;
+  currentDate: Date;
+  daysOfMonth: EachDayOfIntervalResult<
+    {
+      start: Date;
+      end: Date;
+    },
+    undefined
+  >;
+  scheduleList: Schedule[];
+  filter: Filter[];
 }
 
 const weeks = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-const TYPE_FILTER: Filter[] = [
-  { type: "concert", kor: "공연" },
-  { type: "event", kor: "이벤트" },
-  { type: "anniversary", kor: "기념일" },
-  { type: "release", kor: "발매" },
-  //   { type: "etc", kor: "기타" },
-];
 
-export default function Calendar() {
-  const { currentDate, daysOfMonth, nextMonth, prevMonth, today } =
-    useCalendar();
-  const [scheduleList, setSchduleList] = useState(SCHEDULE_LIST);
-  const [filter, setFilter] = useState<Filter[]>(TYPE_FILTER);
+export default function Calendar(props: CalendarProps) {
+  const { today, currentDate, daysOfMonth, scheduleList, filter } = props;
 
-  const { openSingleModal } = useModal();
-
-  function onFilterClick(obj: Filter) {
-    if (filter.find((item) => item.type === obj.type)) {
-      setFilter((prev) => prev.filter((item) => item.type !== obj.type));
-    } else {
-      setFilter((prev) => [...prev, obj]);
-    }
-  }
-  function onClickSchedule(schedule: Schedule) {
-    openSingleModal(<ScheduleViewModal schedule={schedule} />);
-  }
   return (
     <>
-      {/* left */}
-
-      {/* right - calendar */}
-      <div className="bg-default-black-bg border flex-1 mo:h-screen p-[5px]">
+      {/*  calendar */}
+      <div className="bg-default-black-bg h-full mo:h-screen p-[5px]">
         <div className="text-xs size-full flex flex-col ">
           {/* MTWTFSS */}
-          <div className="grid grid-cols-7 mt-xs">
+          <div className="grid grid-cols-7 mt-xs border-y py-xs">
             {weeks.map((week, idx) => (
               <div key={week} className="flex justify-center">
                 <span
@@ -78,36 +62,6 @@ export default function Calendar() {
   );
 }
 
-export const scheduleTypeColorStyles: {
-  [key in ScheduleType]: { default: string; hover: string; border: string };
-} = {
-  concert: {
-    default: "bg-blue-300",
-    hover: "hover:bg-blue-400",
-    border: "border-blue-300",
-  },
-  event: {
-    default: "bg-yellow-200",
-    hover: "hover:bg-yellow-400",
-    border: "border-yellow-200",
-  },
-  anniversary: {
-    default: "bg-red-300",
-    hover: "hover:bg-red-400",
-    border: "border-red-300",
-  },
-  release: {
-    default: "bg-orange-300",
-    hover: "bg-orange-400",
-    border: "border-orange-300",
-  },
-  etc: {
-    default: "bg-blue-300",
-    hover: "bg-blue-400",
-    border: "border-blue-300",
-  },
-};
-
 interface DayGridProps {
   scheduleList: Schedule[];
   currentDate: Date;
@@ -133,7 +87,7 @@ function DayGrid(props: DayGridProps) {
       className={cn(
         "border-b relative",
         !isSunday && "border-r",
-        isToday && "bg-gray-50"
+        isToday && "bg-default-gray-bg"
       )}
     >
       {isToday && (

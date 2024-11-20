@@ -71,6 +71,9 @@ main {
   .h-screen-nav {
     height: var(--screen-height-without-nav);
   }
+  .min-h-screen-nav {
+    min-height: var(--screen-height-without-nav);
+  }
   .active-slide {
     @apply !opacity-100;
   }

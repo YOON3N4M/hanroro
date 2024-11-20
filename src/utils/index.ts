@@ -1,3 +1,5 @@
+import { ScheduleType } from "@/data/schedule";
+
 export const cn = (...classNames: (string | false | undefined)[]) => {
   const styledClassNames = [...classNames]
     .map((className) => className && className.split(" "))
@@ -64,5 +66,38 @@ export function getYoutubeIdFromUrl(url: string) {
     return match[1];
   } else {
     null;
+  }
+}
+
+/**
+ * 날짜 비교를 위해 문자열 날짜를 숫자 날짜 형식으로 변환해주는 함수
+ *
+ * ex) 2024-11-20, 2024-11-21에 적용하면
+ *
+ * => 20241120, 20241121 과 같이 변환되어 이전/이후/당일을 비교할 수 있게 됨.
+ */
+export function getNumberDate(dateStr: string) {
+  const result = parseInt(dateStr.replace(/-/g, ""), 10);
+
+  return result;
+}
+
+/**
+ * 스케줄 타입의 영문명을 국문명으로 변경
+ */
+export function translateScheduleType(str: ScheduleType) {
+  switch (str) {
+    case "anniversary":
+      return "기념일";
+    case "concert":
+      return "공연";
+    case "event":
+      return "티켓팅/이벤트";
+    case "release":
+      return "발매";
+    case "etc":
+      return "기타";
+    default:
+      return str;
   }
 }

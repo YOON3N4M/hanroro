@@ -1,8 +1,8 @@
 import React from "react";
 import ModalTemplate from "../ModalTemplate";
 import { Schedule } from "@/data/schedule";
-import { cn } from "@/utils";
-import { scheduleTypeColorStyles } from "@/components/calendar";
+import { cn, translateScheduleType } from "@/utils";
+
 import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import Image from "next/image";
 import {
@@ -11,6 +11,7 @@ import {
   IconLocation,
   IconTimer,
 } from "@/components/svg";
+import { scheduleTypeColorStyles } from "@/containers/calendar";
 
 interface ScheduleViewModalProps {
   schedule: Schedule;
@@ -24,13 +25,9 @@ export default function ScheduleViewModal(props: ScheduleViewModalProps) {
     <ModalTemplate>
       <div className="min-w-[500px] mo:min-w-[80vw] mo:max-w-[80vw]  ">
         <div className="flex items-center text-sm gap-xxs">
-          <span
-            className={cn(
-              "size-[5px] rounded-full",
-              scheduleTypeColorStyles[type].default
-            )}
-          ></span>
-          <span>{type}</span>
+          <span className={cn(scheduleTypeColorStyles[type].text)}>
+            {translateScheduleType(type)}
+          </span>
         </div>
         <div>
           <h2>{title}</h2>
