@@ -28,7 +28,11 @@ function ProfileSection(props: ProfileSectionProps) {
     }
   }, [isInView]);
   return (
-    <div id={tab.eng} ref={ref} className="h-screen-nav relative bg-black">
+    <div
+      id={tab.eng}
+      ref={ref}
+      className="h-screen-nav relative bg-default-black-bg"
+    >
       <span className="center absolute">{index}</span>
     </div>
   );

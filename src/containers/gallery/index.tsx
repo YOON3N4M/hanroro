@@ -141,18 +141,18 @@ export default function GalleryContainer(props: GalleryContainerProps) {
     console.log(masonryColumn);
   }, [masonryColumn]);
   return (
-    <div className="pt-md flex text-black bg-white gap-md h-full px-md mo:flex-col">
+    <div className="pt-md flex text-black gap-md h-screen-nav px-md mo:flex-col">
       {/* filter section */}
-      <div className="basis-[20%] pc:min-h-[500px] min-w-[300px] max-w-[375px] border py-md bg-[#fafafc] mo:w-full mo:max-w-full">
+      <div className="basis-[20%] min-w-[300px] max-w-[375px] border py-md mo:w-full mo:max-w-full h-min">
         <div className="flex justify-center">
-          <GalleyUploadButton className="text-white rounded-md bg-black py-xs px-sm w-[180px] border" />
+          <GalleyUploadButton className="text-white rounded-md bg-default-gray-bg py-xs px-sm w-[180px] border" />
         </div>
         <div className="px-md mt-md text-sm">
           <span className="opacity-60">필터</span>
           <div className="flex gap-sm mt-xxs text-sm">
             <button
               className={cn(
-                "text-white rounded-md bg-black px-sm flex items-center gap-xxs"
+                "text-white rounded-md bg-default-gray-bg px-sm flex items-center gap-xxs"
               )}
               onClick={() => onClickTypeTag("image")}
               aria-label="filter image"
@@ -160,7 +160,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
               사진 {typeFilter === "image" && <IconRemove />}
             </button>
             <button
-              className="text-white rounded-md bg-black px-sm flex items-center gap-xxs"
+              className="text-white rounded-md bg-default-gray-bg px-sm flex items-center gap-xxs"
               onClick={() => onClickTypeTag("gif")}
               aria-label="filter gif"
             >
@@ -175,8 +175,8 @@ export default function GalleryContainer(props: GalleryContainerProps) {
               <button
                 key={`tag-${item}`}
                 className={cn(
-                  "rounded-md text-black bg-gray-200 px-xs",
-                  item === searchKeyword && "bg-gray-300"
+                  "rounded-md  text-[#e4e4e7] border px-xs",
+                  item === searchKeyword && "bg-default-gray-bg"
                 )}
                 onClick={() => onClickTag(item)}
                 aria-label={`filter ${item}`}
@@ -196,7 +196,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
           </div>
         </div>
       </div>
-      <div className="bg-[#fafafc] border flex-1 pc:min-h-full max-h-full overflow-y-auto p-[5px]">
+      <div className="border flex-1 pc:min-h-full h-full overflow-y-auto p-[5px]">
         {masonryColumn !== 0 && (
           <MasonryGrid
             column={masonryColumn}

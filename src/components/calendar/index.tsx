@@ -44,88 +44,9 @@ export default function Calendar() {
   return (
     <>
       {/* left */}
-      <div className="basis-[20%] flex flex-col pc:min-h-[500px] h-min min-w-[300px] p-md max-w-[375px] border py-md bg-[#fafafc] tab:w-full tab:max-w-full">
-        <div className="flex justify-center items-center gap-sm">
-          <button onClick={prevMonth} aria-label="calendar prev month">
-            <IconRightLeft />
-          </button>
-          <div className="flex justify-center flex-col items-center">
-            <span className="text-xs"> {format(currentDate, "yyyy")}</span>
-            <span className="text-xl font-bold">
-              {format(currentDate, "MM")}
-            </span>
-          </div>
-          <button onClick={nextMonth} aria-label="calendar next month">
-            <IconRightRight />
-          </button>
-        </div>
-        {/* filter */}
-        <div className="bg-white border rounded-md mt-xl flex flex-col p-sm">
-          {TYPE_FILTER.map((obj) => (
-            <button
-              key={`${obj.type}-filter`}
-              className={cn(
-                "w-full flex items-center gap-sm hover:bg-gray-50 py-xxs px-sm rounded-md"
-              )}
-              onClick={() => onFilterClick(obj)}
-            >
-              <span
-                className={cn(
-                  "aspect-[1/1] w-[15px] border-2",
-                  scheduleTypeColorStyles[obj.type].border,
-                  filter.find((item) => item.type === obj.type) &&
-                    scheduleTypeColorStyles[obj.type].default
-                )}
-              ></span>
-              <span>{obj.kor}</span>
-            </button>
-          ))}
-        </div>
-        <div className="flex items-center mt-xl text-sm ">
-          <span className="opacity-80">일정</span>
-          {/* <button className="ml-auto opacity-80 hover:opacity-100">
-            지난 일정 숨기기
-          </button> */}
-        </div>
-        <div className="bg-white border rounded-md flex flex-col mt-xs pc:min-h-[300px] pc:max-h-[300px] tab:min-h-[150px] tab:max-h-[150px] overflow-y-auto">
-          {scheduleList.map((item, idx) => (
-            <div
-              key={`${item.type}-list-${item.title}`}
-              className={cn(
-                "hover:bg-gray-50 cursor-pointer",
-                !filter.find((filterItem) => filterItem.type === item.type) &&
-                  "hidden",
-                idx !== scheduleList.length - 1 && "border-b"
-              )}
-              onClick={() => onClickSchedule(item)}
-            >
-              <div
-                className={cn(
-                  "px-xs py-xs flex-col flex border-l-8 gap-xs size-full animate-fadeIn ",
-                  scheduleTypeColorStyles[item.type].border
-                )}
-              >
-                <span className="text-sm">{item.title}</span>
-                <div className="mt-sm">
-                  <div className="flex gap-xxs text-xs opacity-60">
-                    <IconCalendar className="opacity-60" />
-                    {item.date.map((item, idx) => (
-                      <span key={idx} className="">
-                        {idx !== 0 && ","} {item}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="text-xs opacity-60 flex items-center gap-xxs">
-                    <IconTimer className="opacity-60" /> {item.duration}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+
       {/* right - calendar */}
-      <div className="bg-white border flex-1 mo:h-screen p-[5px]">
+      <div className="bg-default-black-bg border flex-1 mo:h-screen p-[5px]">
         <div className="text-xs size-full flex flex-col ">
           {/* MTWTFSS */}
           <div className="grid grid-cols-7 mt-xs">

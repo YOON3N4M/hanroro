@@ -20,7 +20,7 @@ function ModalTemplate(props: ModalTemplateProps) {
           <div
             className={cn(
               "p-md max-w-[100vw] max-h-[90dvh] overflow-y-auto overflow-x-visible",
-              bg && "rounded-[4px] bg-white"
+              bg && "rounded-[4px] bg-default-black-bg border"
             )}
           >
             {children}
@@ -78,7 +78,7 @@ function ModalBackGround({
   return (
     <div
       onClick={handleModalClose}
-      className="absolute left-0 top-0 size-full bg-black opacity-50"
+      className="absolute left-0 top-0 size-full bg-default-black-bg opacity-50"
     />
   );
 }

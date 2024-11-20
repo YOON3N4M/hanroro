@@ -137,7 +137,7 @@ function Slide(props: SlideProps) {
   return (
     <div
       className={cn(
-        "basis-[60%] mo:basis-[80%] flex bg-black flex-col relative flex-shrink-0 ml-sm flex-grow-0 h-full shadow-md opacity-60 transition-opacity duration-1000"
+        "basis-[60%] mo:basis-[80%] border flex bg-default-black-bg flex-col relative flex-shrink-0 ml-sm flex-grow-0 h-full shadow-md opacity-60 transition-opacity duration-1000"
       )}
     >
       {/* button section */}

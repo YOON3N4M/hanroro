@@ -57,7 +57,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
         ))}
       </div>
       {/* panel */}
-      <div className="h-screen-nav fixed bg-black z-[25] w-full animate-fadeIn">
+      <div className="h-screen-nav fixed bg-default-black-bg z-[25] w-full animate-fadeIn">
         <div className="size-full relative">
           {/* <ProfilePanel activePanelIndex={activeIndex} panelIndex={0} /> */}
           <AlbumPanel
@@ -77,7 +77,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
             indexSetter={setActiveIndex}
           />
         ))}
-        <div className="h-screen-nav border relative bg-black"></div>
+        <div className="h-screen-nav border relative bg-default-black-bg"></div>
         {/* <div className="h-screen-nav w-full"></div> */}
       </div>
     </div>

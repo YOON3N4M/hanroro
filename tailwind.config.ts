@@ -41,7 +41,9 @@ const config: Config = {
         "authentic-light": "rgb(201, 222, 220)",
         "authentic-brown": "rgb(145, 126, 106)",
         //after-rework
-        "default-gray-bg": "#fafafc",
+        white: "#FAFAFA",
+        "default-gray-bg": "#1e1e1e",
+        "default-black-bg": "#09090B",
       },
       keyframes: {
         fadeLeft: {

@@ -38,7 +38,7 @@ function AttachmentInput(props: AttachmentInputProps) {
           htmlFor="file-input"
           className={cn(
             className,
-            "flex bg-black text-white w-[180px] px-xl py-xs cursor-pointer text-sm items-center justify-center rounded-md bg-base-200",
+            "flex bg-default-gray-bg border text-white w-[180px] px-xl py-xs cursor-pointer text-sm items-center justify-center rounded-md bg-base-200",
             absolute && "absolute opacity-0 center hover:opacity-80"
           )}
         >

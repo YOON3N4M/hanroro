@@ -55,11 +55,11 @@ export default function RootLayout({
 }>) {
   return (
     <html className="h-full" lang="en">
-      <body className={cn("", `${pretendard.variable}`)}>
+      <body className={cn("bg-default-black-bg", `${pretendard.variable}`)}>
         <h1 className="visually-hidden">hanroro | fansite</h1>
         <AuthProvider>
           <Header />
-          <main className="bg-white min-h-full pt-nav">{children}</main>
+          <main className="min-h-full pt-nav">{children}</main>
           <Footer />
           <ModalPortal />
           <ToastPortal />

@@ -131,7 +131,7 @@ export default function UploadModal() {
 
         <form ref={formRef} action={revalidateApi}></form>
         {tempAttachment && (
-          <div className="flex flex-col mt-md bg-default-gray-bg">
+          <div className="flex flex-col mt-md bg-default-gray-bg p-sm">
             {/* <label className="">제목</label>
 						<input
 							className="border mt-xs"
@@ -149,7 +149,7 @@ export default function UploadModal() {
                 단어 입력후 엔터를 입력하면 태그가 만들어집니다.
               </p>
               <input
-                className="border mt-xs"
+                className="border mt-xs text-default-black-bg"
                 onChange={onTagChange}
                 value={tag}
                 onKeyDown={handleSpaceBar}

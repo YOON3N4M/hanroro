@@ -15,12 +15,12 @@ function MainContainer(props: MainContainerProps) {
   const { galleryDocs } = props;
 
   return (
-    <div className="bg-white flex flex-col gap-sm">
+    <div className="flex flex-col gap-sm">
       <ContentSection className="mt-sm tab:min-h-[350px] tab:h-[350px]">
         <BannerCarousel />
       </ContentSection>
       <ContentSection className="flex gap-sm text-white mo:flex-col">
-        <div className="flex-1">
+        <div className="flex-1 border">
           <ContentModule
             staticImage={theCompass}
             linkHref="/profile?album=나침반"
@@ -33,7 +33,7 @@ function MainContainer(props: MainContainerProps) {
             </div>
           </ContentModule>
         </div>
-        <div className="flex-1 bg-white relative group">
+        <div className="flex-1 relative group border">
           <ContentModule
             staticImage={hatchingRoomCollaboration}
             href="https://hatchingroom.com/index.html"

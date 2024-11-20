@@ -62,7 +62,7 @@ function AccountContainer(props: AccountContainerProps) {
     setNickname(user.displayName!);
   }, [user]);
   return (
-    <div className="h-full pt-md bg-white min-h-fu">
+    <div className="h-full pt-md min-h-fu">
       {isLogin === "initial" && <LoadingSpinner />}
       {user && (
         <>

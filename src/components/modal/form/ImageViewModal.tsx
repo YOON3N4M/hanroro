@@ -104,7 +104,7 @@ export default function ImageViewModal(props: ImageViewModalProps) {
         />
         {/* text panel */}
         {!isLoading && (
-          <div className="absolute w-full h-[80px] bottom-0 bg-black opacity-50 flex flex-col text-white p-md">
+          <div className="absolute w-full h-[80px] bottom-0 bg-default-black-bg opacity-50 flex flex-col text-white p-md">
             <div className="flex gap-xs">
               {imageDoc.tags.map((tag, idx) => (
                 <span key={`${imageDoc.id}-${idx}`} className="text-xs">

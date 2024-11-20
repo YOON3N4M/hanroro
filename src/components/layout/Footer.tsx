@@ -7,8 +7,8 @@ function Footer(props: FooterProps) {
   const {} = props;
 
   return (
-    <div className="pt-sm text-center text-xs bg-white text-white">
-      <div className="py-lg bg-black">
+    <div className="pt-sm text-center text-xs text-white">
+      <div className="py-lg bg-default-black-bg">
         <div>
           <span className="mx-auto">hanroro fansite</span>
         </div>

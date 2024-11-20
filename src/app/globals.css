@@ -56,6 +56,14 @@ main {
   overflow-y: auto;
 }
 
+@layer base {
+  *,
+  ::before,
+  ::after {
+    @apply border-[#27272a] text-[#FAFAFA];
+  }
+}
+
 @layer utilities {
   body {
     @apply font-pretendard;
@@ -97,10 +105,10 @@ main {
 
 @layer components {
   .button {
-    @apply text-white rounded-md bg-black py-xs px-sm border;
+    @apply text-white rounded-md bg-default-black-bg py-xs px-sm border;
   }
   .tag {
-    @apply rounded-md text-black bg-gray-200 px-xs;
+    @apply rounded-md text-white border bg-default-gray-bg px-xs;
   }
 }
 
