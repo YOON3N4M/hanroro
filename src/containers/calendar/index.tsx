@@ -130,7 +130,7 @@ function CalendarContainer(props: CalendarContainerProps) {
         <span className=""> {format(currentDate, "yyyy")}</span>
         <span className="">{format(currentDate, "MM")}</span>
       </div>
-      <div className="h-[500px]">
+      <div className="min-h-[500px] pc:h-[500px] tab:h-[800px]">
         <Calendar
           today={today}
           currentDate={currentDate}

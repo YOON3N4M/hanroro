@@ -141,7 +141,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
     console.log(masonryColumn);
   }, [masonryColumn]);
   return (
-    <div className="pt-md flex text-black gap-md h-screen-nav px-md mo:flex-col">
+    <div className="pt-md flex text-black gap-md min-h-screen-nav px-md mo:flex-col">
       {/* filter section */}
       <div className="basis-[20%] min-w-[300px] max-w-[375px] border py-md mo:w-full mo:max-w-full h-min">
         <div className="flex justify-center">
@@ -170,7 +170,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
         </div>
         <div className="px-md mt-md text-sm">
           <span className="opacity-60">태그</span>
-          <div className="flex gap-sm mt-xxs flex-wrap text-sm mo:max-h-[130px] mo:overflow-y-auto">
+          <div className="flex gap-sm mt-xxs flex-wrap text-sm mo:max-h-[80px] mo:overflow-y-auto">
             {uniqueTags.map((item, idx) => (
               <button
                 key={`tag-${item}`}
@@ -196,7 +196,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
           </div>
         </div>
       </div>
-      <div className="border flex-1 pc:min-h-full h-full overflow-y-auto p-[5px]">
+      <div className="border flex-1 pc:min-h-full pc:h-full tab:h-[1000px] overflow-y-auto p-[5px]">
         {masonryColumn !== 0 && (
           <MasonryGrid
             column={masonryColumn}
