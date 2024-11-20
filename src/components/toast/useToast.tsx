@@ -15,6 +15,7 @@ export default function useToast() {
   function addToast(toast: Toast) {
     const newToast: Toast = {
       ...toast,
+      id: new Date().getTime(),
       status: toast.status || "success",
       position: toast.position || "bottom-left",
     };
@@ -22,13 +23,10 @@ export default function useToast() {
     setToastList([...toastList, newToast]);
   }
 
-  useEffect(() => {
-    if (toastList.length === 0) return;
+  function removeToast(id: number) {
+    const filtered = toastList.filter((item) => item.id !== id);
+    setToastList(filtered);
+  }
 
-    setTimeout(() => {
-      setToastList(toastList.slice(1));
-    }, 3000);
-  }, [toastList]);
-
-  return { addToast };
+  return { addToast, removeToast };
 }

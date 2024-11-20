@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 export interface Toast {
+  id?: number;
   message: string;
   status?: "success" | "warn" | "error";
   position?: "bottom-left";

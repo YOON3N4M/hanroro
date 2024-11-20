@@ -1,29 +1,43 @@
 "use client";
 
+import { useEffect } from "react";
+import { IconXSign } from "../svg";
 import { Toast, useToastList } from "./store";
 import useToast from "./useToast";
 
-function ToastPortal() {
+const TOAST_DURATION = 5000;
+
+export default function ToastPortal() {
   const toastList = useToastList();
 
   return (
     <div id="toast-portal">
       <div className="fixed bottom-[2%] left-[3%] flex flex-col gap-sm">
         {toastList.map((toast, idx) => (
-          <ToastItem key={`${idx}-${toast.message}`} toast={toast} />
+          <ToastItem key={`${toast.id}-toast`} toast={toast} />
         ))}
       </div>
     </div>
   );
 }
 
-export default ToastPortal;
-
 function ToastItem({ toast }: { toast: Toast }) {
-  const { message } = toast;
+  const { message, id } = toast;
+
+  const { removeToast } = useToast();
+
+  useEffect(() => {
+    setTimeout(() => {
+      removeToast(id!);
+    }, TOAST_DURATION);
+  }, []);
+
   return (
-    <div className="py-sm px-md bg-default-black-bg text-white text-sm rounded-md animate-fadeIn">
+    <div className="py-sm px-md bg-default-black-bg text-white text-sm rounded-md animate-fadeIn border flex gap-sm items-center">
       <p>{message}</p>
+      <button onClick={() => removeToast(id!)}>
+        <IconXSign />
+      </button>
     </div>
   );
 }
