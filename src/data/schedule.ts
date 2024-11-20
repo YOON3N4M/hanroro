@@ -56,13 +56,6 @@ export const SCHEDULE_LIST: Schedule[] = [
     images: [birthdayCafe1, birthdayCafe2, birthdayCafe3],
   },
   {
-    type: "anniversary",
-    title: "한로로 데뷔 D+1000",
-    date: ["2024-12-07"],
-    duration: "-",
-    location: "-",
-  },
-  {
     type: "event",
     title: "3차 단독 콘서트 '발아' 티켓팅 오픈",
     date: ["2024-11-28"],
@@ -70,6 +63,13 @@ export const SCHEDULE_LIST: Schedule[] = [
     location: "-",
     images: [thirdSolo],
     link: "https://www.instagram.com/p/DCYnEtkS4Vj/?utm_source=ig_web_copy_link",
+  },
+  {
+    type: "anniversary",
+    title: "한로로 데뷔 D+1000",
+    date: ["2024-12-07"],
+    duration: "-",
+    location: "-",
   },
   {
     type: "concert",
