@@ -95,14 +95,29 @@ function CalendarContainer(props: CalendarContainerProps) {
       <div className="mt-sm">
         <SoonScheduleCarousel soonScheduleList={soonScheduleList} />
       </div>
+
+      {/* calendar */}
+      <div className="mt-md text-sm flex gap-xs">
+        <span className=""> {format(currentDate, "yyyy")}</span>
+        <span className="">{format(currentDate, "MM")}</span>
+        <div className="ml-auto flex gap-sm">
+          <button onClick={prevMonth} aria-label="calendar prev month">
+            <IconRightLeft />
+          </button>
+          <button onClick={nextMonth} aria-label="calendar next month">
+            <IconRightRight />
+          </button>
+        </div>
+      </div>
       {/* controller */}
-      <div className="mt-sm flex justify-between">
+      <div className="mt-sm flex">
         <div className="flex gap-md">
+          <span className="opacity-70">필터</span>
           {TYPE_FILTER.map((type) => (
             <button
               onClick={() => onFilterClick(type)}
               key={type.type}
-              className="flex items-center gap-xxs"
+              className="flex items-center gap-xxs tab:text-xs"
             >
               <span
                 className={cn(
@@ -116,19 +131,6 @@ function CalendarContainer(props: CalendarContainerProps) {
             </button>
           ))}
         </div>
-        <div className="flex gap-sm">
-          <button onClick={prevMonth} aria-label="calendar prev month">
-            <IconRightLeft />
-          </button>
-          <button onClick={nextMonth} aria-label="calendar next month">
-            <IconRightRight />
-          </button>
-        </div>
-      </div>
-      {/* calendar */}
-      <div className="mt-sm text-sm flex gap-xs">
-        <span className=""> {format(currentDate, "yyyy")}</span>
-        <span className="">{format(currentDate, "MM")}</span>
       </div>
       <div className="min-h-[500px] pc:h-[500px] tab:h-[800px]">
         <Calendar
@@ -220,6 +222,15 @@ function SoonScheduleCarousel({
                 </p>
               </Slide>
             ))}
+          {soonScheduleList.length === 3 && (
+            <Slide
+              key={3}
+              idx={3 + 1}
+              className="relative basis-[30%] flex flex-col p-sm tab:basis-[50%] shrink-0 bg-[#111111] border min-h-[150px] rounded-md ml-sm"
+            >
+              <p className="opacity-70 absolute center">마지막 일정 입니다.</p>
+            </Slide>
+          )}
         </BasicCarousel>
       </div>
     </div>
