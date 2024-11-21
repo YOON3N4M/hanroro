@@ -1,18 +1,19 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import ModalTemplate from "../ModalTemplate";
-import { GalleryItemDoc, UserDoc } from "@/types";
-import Image from "next/image";
-import { cn } from "@/utils";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { deleteGalleryItem, getUserDocument } from "@/services/firebase";
-import { useUserDoc } from "@/store/auth";
 import { IconKebabMenu } from "@/components/svg";
-import useModal from "../useModal";
-import { revalidateApi } from "@/services/_server";
-import useToast from "@/components/toast/useToast";
 import { TOAST_MESSAGE } from "@/components/toast/message";
+import useToast from "@/components/toast/useToast";
+import { API_TAG, getUserDisplayName } from "@/services";
+import { revalidateApi } from "@/services/_server";
+import { deleteGalleryItem } from "@/services/firebase";
+import { useUserDoc } from "@/store/auth";
+import { GalleryItemDoc } from "@/types";
+import { cn } from "@/utils";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import ModalTemplate from "../ModalTemplate";
+import useModal from "../useModal";
 
 interface ImageViewModalProps {
   imageDoc: GalleryItemDoc;
@@ -21,7 +22,9 @@ interface ImageViewModalProps {
 export default function ImageViewModal(props: ImageViewModalProps) {
   const { imageDoc } = props;
   const [isLoading, setIsLoading] = useState(true);
-  const [uploaderDoc, setUploaderDoc] = useState<UserDoc | null>(null);
+  const [uploaderDisplayName, setUploaderDisplayName] = useState<string | null>(
+    null
+  );
   const [isDropdown, setIsDropdown] = useState(false);
 
   const { closeAllModal } = useModal();
@@ -49,21 +52,22 @@ export default function ImageViewModal(props: ImageViewModalProps) {
   }
 
   useEffect(() => {
-    async function getUser() {
-      const userDoc = (await getUserDocument(
-        imageDoc.uploaderId
-      )) as UserDoc | null;
-      if (!userDoc) return;
-      setUploaderDoc(userDoc);
+    async function getUploaderDisplayName() {
+      const res = await getUserDisplayName(imageDoc.uploaderId);
+      if (!res) return;
+      const resJson = await res?.json();
+      const name = resJson.data;
+      setUploaderDisplayName(name);
     }
-    getUser();
+
+    getUploaderDisplayName();
   }, []);
   return (
     <ModalTemplate bg={false}>
       <form
         className="visually-hidden"
         ref={formRef}
-        action={revalidateApi}
+        action={() => revalidateApi(API_TAG.gallery)}
       ></form>
       <div className="flex relative">
         {!isLoading && userDoc?.uid === imageDoc.uploaderId && (
@@ -113,7 +117,9 @@ export default function ImageViewModal(props: ImageViewModalProps) {
               ))}
             </div>
             <div className="mt-auto flex justify-end text-xs">
-              {uploaderDoc && <span>업로드 : {uploaderDoc.displayName}</span>}
+              {uploaderDisplayName && (
+                <span>업로드 : {uploaderDisplayName}</span>
+              )}
             </div>
           </div>
         )}
