@@ -67,7 +67,7 @@ function BannerCarousel(props: BannerCarouselProps) {
                   src={systemError.src}
                   width={systemError.width}
                   height={systemError.height}
-                  className="size-[300px] brightness-50 absolute z-[10] translate-x-[-150px] translate-y-[75px]"
+                  className="size-[300px] brightness-50 absolute z-[10] translate-x-[-150px] translate-y-[75px] mo:hidden"
                   alt="먹이사슬"
                 />
                 <Image
@@ -81,7 +81,7 @@ function BannerCarousel(props: BannerCarouselProps) {
                   src={howToGoOn.src}
                   width={howToGoOn.width}
                   height={howToGoOn.height}
-                  className="size-[300px] brightness-50 absolute z-[12] translate-x-[150px] translate-y-[-75px]"
+                  className="size-[300px] brightness-50 absolute z-[12] translate-x-[150px] translate-y-[-75px] mo:hidden"
                   alt="집"
                 />
               </div>
