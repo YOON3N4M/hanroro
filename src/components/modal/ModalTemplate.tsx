@@ -2,6 +2,7 @@ import { ReactNode, useEffect } from "react";
 import useModal from "./useModal";
 import { useIsModalOn } from "./store";
 import { cn } from "@/utils";
+import { IconXSign } from "../svg";
 
 interface ModalTemplateProps {
   children?: ReactNode;
@@ -19,10 +20,18 @@ function ModalTemplate(props: ModalTemplateProps) {
         <div className="absolute z-[700] center">
           <div
             className={cn(
-              "p-md max-w-[100vw] max-h-[90dvh] overflow-y-auto overflow-x-visible",
+              "p-md max-w-[100vw] max-h-[90dvh] relative overflow-y-auto overflow-x-visible",
               bg && "rounded-[4px] bg-default-black-bg border"
             )}
           >
+            {bg && (
+              <button
+                onClick={removeModalElement}
+                className="absolute right-[10px] top-[10px] text-2xl"
+              >
+                <IconXSign />
+              </button>
+            )}
             {children}
           </div>
         </div>
