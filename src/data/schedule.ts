@@ -96,13 +96,6 @@ export const SCHEDULE_LIST: Schedule[] = [
     link: "https://www.instagram.com/p/DCn2Gh5ySnV/?utm_source=ig_web_copy_link",
   },
   {
-    type: "anniversary",
-    title: "한로로 데뷔 D+1000",
-    date: ["2024-12-07"],
-    duration: "-",
-    location: "-",
-  },
-  {
     type: "event",
     title: "3차 단독 콘서트 '발아' 티켓팅 오픈",
     date: ["2024-11-28"],
