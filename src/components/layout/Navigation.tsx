@@ -12,8 +12,8 @@ interface NavigationProps {}
 const NAVIGATION_ITEM = [
   { name: "프로필", href: "/profile" },
   // { name: "album", href: "/album" },
-  { name: "갤러리", href: "/gallery" },
   { name: "일정", href: "/calendar" },
+  { name: "갤러리", href: "/gallery" },
 ];
 
 function Navigation(props: NavigationProps) {
