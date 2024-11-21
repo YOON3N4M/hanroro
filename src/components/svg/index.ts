@@ -15,3 +15,4 @@ export { BsThreeDotsVertical as IconKebabMenu } from "react-icons/bs";
 
 export { CiEdit as iconEdit } from "react-icons/ci";
 export { IoCloseOutline as IconXSign } from "react-icons/io5";
+export { TbMenu as IconMenu } from "react-icons/tb";

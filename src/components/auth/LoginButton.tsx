@@ -73,7 +73,7 @@ function LoginButton(props: LoginButtonProps) {
       onClick={isLogin === "authenticated" ? handleToAccount : handleSignIn}
       aria-label="login, logout"
     >
-      {isLogin === "authenticated" ? "account" : "login"}
+      {isLogin === "authenticated" ? "내 계정" : "로그인"}
     </button>
   );
 }

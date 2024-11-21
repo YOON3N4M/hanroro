@@ -1,14 +1,8 @@
 import Link from "next/link";
 import LoginButton from "../auth/LoginButton";
+import Navigation from "./Navigation";
 
 interface HeaderProps {}
-
-const NAVIGATION_ITEM = [
-  { name: "profile", href: "/profile" },
-  // { name: "album", href: "/album" },
-  { name: "gallery", href: "/gallery" },
-  { name: "calendar", href: "/calendar" },
-];
 
 function Header(props: HeaderProps) {
   const {} = props;
@@ -22,17 +16,7 @@ function Header(props: HeaderProps) {
             <div className="">
               <Link href={"/"}>HANRORO</Link>
             </div>
-            <nav className="flex gap-lg">
-              <h2 className="visually-hidden">네비게이션</h2>
-              {NAVIGATION_ITEM.map((item) => (
-                <div key={item.name}>
-                  <Link href={item.href}>{item.name}</Link>
-                </div>
-              ))}
-            </nav>
-            <div className="ml-auto">
-              <LoginButton />
-            </div>
+            <Navigation />
           </div>
         </div>
       </header>
