@@ -60,7 +60,7 @@ function BannerCarousel(props: BannerCarouselProps) {
             <Slide
               linkHref="/profile"
               linkText="프로필로 이동"
-              desc="프로필, 앨범활동, 미디어 출연 정보"
+              desc="프로필, 앨범 활동"
             >
               <div className="absolute center size-[300px]">
                 <Image
