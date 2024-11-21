@@ -11,6 +11,7 @@ import { revalidateApi } from "@/services/_server";
 import { useUser } from "@/store/auth";
 import useToast from "@/components/toast/useToast";
 import { TOAST_MESSAGE } from "@/components/toast/message";
+import { API_TAG } from "@/services";
 
 export default function UploadModal() {
   const { handleChangeAttachment, tempAttachment, generateURL, isGifType } =
@@ -129,7 +130,10 @@ export default function UploadModal() {
           </div>
         )}
 
-        <form ref={formRef} action={revalidateApi}></form>
+        <form
+          ref={formRef}
+          action={() => revalidateApi(API_TAG.gallery)}
+        ></form>
         {tempAttachment && (
           <div className="flex flex-col mt-md bg-default-gray-bg p-sm">
             {/* <label className="">제목</label>

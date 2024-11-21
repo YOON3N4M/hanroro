@@ -1,8 +1,20 @@
-'use server'
+"use server";
 
-import { revalidateTag } from 'next/cache'
-import { API_TAG } from '..'
+import { revalidateTag } from "next/cache";
+import { API_BASE_URL, API_TAG } from "..";
 
-export async function revalidateApi() {
-	revalidateTag(API_TAG.gallery)
+export async function revalidateApi(tag: string) {
+  revalidateTag(tag);
+}
+
+export async function getGallery() {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/gallery/`, {
+      cache: "force-cache",
+      next: { tags: [API_TAG.gallery] },
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
 }

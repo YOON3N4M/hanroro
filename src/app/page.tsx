@@ -1,5 +1,6 @@
 import MainContainer from "@/containers/main";
-import { getGallery } from "@/services/firebase";
+import { getGallery } from "@/services/_server";
+
 import { GalleryDocsObj } from "@/types";
 import { sortByNumber } from "@/utils";
 import { Metadata } from "next";
