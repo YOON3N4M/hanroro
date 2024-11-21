@@ -5,6 +5,7 @@ import { TOAST_MESSAGE } from "@/components/toast/message";
 import useToast from "@/components/toast/useToast";
 import { auth, dbService } from "@/lib/firebase/firebase";
 import { useAuthActions, useIsLogin, useUser, useUserDoc } from "@/store/auth";
+import { cn } from "@/utils";
 import { signOut } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
@@ -70,14 +71,17 @@ function AccountContainer(props: AccountContainerProps) {
             <div className="bg-default-gray-bg border min-h-[300px] flex flex-col p-md text-sm">
               <label className="opacity-80">이메일</label>
               <input
-                className="max-w-[200px] border rounded-md p-xxs mt-xxxs"
+                className="max-w-[200px] border rounded-md p-xxs mt-xxxs text-white"
                 value={user.email!}
                 disabled
               />
               <label className="opacity-80 mt-sm">닉네임</label>
               <div className="flex mt-xxxs gap-xxs">
                 <input
-                  className="max-w-[200px] border rounded-md p-xxs "
+                  className={cn(
+                    "max-w-[200px] border rounded-md p-xxs",
+                    isEdit && "text-black"
+                  )}
                   value={nickname}
                   disabled={!isEdit}
                   required
