@@ -19,7 +19,7 @@ function MainContainer(props: MainContainerProps) {
       <ContentSection className="mt-sm tab:min-h-[350px] tab:h-[350px]">
         <BannerCarousel />
       </ContentSection>
-      <ContentSection className="flex gap-sm text-white mo:flex-col">
+      <ContentSection className="flex gap-sm text-white mo:flex-col pc:px-md">
         <div className="flex-1 border">
           <ContentModule
             staticImage={theCompass}
@@ -33,6 +33,7 @@ function MainContainer(props: MainContainerProps) {
             </div>
           </ContentModule>
         </div>
+
         <div className="flex-1 relative group border">
           <ContentModule
             staticImage={hatchingRoomCollaboration}

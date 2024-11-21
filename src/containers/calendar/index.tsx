@@ -222,7 +222,7 @@ function SoonScheduleCarousel({
                 </p>
               </Slide>
             ))}
-          {soonScheduleList.length === 3 && (
+          {soonScheduleList.length >= 3 && (
             <Slide
               key={3}
               idx={3 + 1}
