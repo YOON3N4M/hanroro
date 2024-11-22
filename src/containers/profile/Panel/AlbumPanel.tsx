@@ -172,7 +172,7 @@ function AlbumPanel(props: AlbumPanelProps) {
               )}
             >
               {ALBUM_LIST.map((album, idx) => (
-                <motion.div
+                <motion.button
                   id={album.title}
                   layout
                   custom={idx}
@@ -180,8 +180,9 @@ function AlbumPanel(props: AlbumPanelProps) {
                   variants={albumCoverVariant}
                   initial="hidden"
                   animate={isPanelActive ? "visible" : "hidden"}
+                  onClick={() => onClickAlbum(idx)}
                   className={cn(
-                    "relative tab:shrink-0",
+                    "relative tab:shrink-0 h-min",
                     "aspect-square",
                     // activeAlbumIndex !== null && "absolute top-[20%]",
                     idx == activeAlbumIndex && "z-[10]",
@@ -210,22 +211,18 @@ function AlbumPanel(props: AlbumPanelProps) {
                   >
                     <div className="cd"></div>
                   </motion.div>
-                  <button
-                    className="size-full"
-                    onClick={() => onClickAlbum(idx)}
-                  >
-                    <Image
-                      src={album.cover.src}
-                      height={1000}
-                      width={1000}
-                      alt={album.title}
-                      className={cn(
-                        "object-cover brightness-50 transition-all hover:brightness-100",
-                        activeAlbumIndex === idx && "!brightness-100"
-                      )}
-                    />
-                  </button>
-                </motion.div>
+
+                  <Image
+                    src={album.cover.src}
+                    height={1000}
+                    width={1000}
+                    alt={album.title}
+                    className={cn(
+                      "object-cover brightness-50 transition-all hover:brightness-100",
+                      activeAlbumIndex === idx && "!brightness-100"
+                    )}
+                  />
+                </motion.button>
               ))}
             </div>
           </div>
