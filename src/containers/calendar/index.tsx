@@ -92,7 +92,7 @@ function CalendarContainer(props: CalendarContainerProps) {
       <h2 className="visually-hidden">일정</h2>
       {/* carousel */}
 
-      <div className="mt-sm">
+      <div>
         <SoonScheduleCarousel soonScheduleList={soonScheduleList} />
       </div>
 
