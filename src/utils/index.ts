@@ -101,3 +101,25 @@ export function translateScheduleType(str: ScheduleType) {
       return str;
   }
 }
+
+/**
+ * 입력된 문자열 날짜 형태가 YYYY-MM-DD 형식인지 확인
+ */
+export function validationDateFormat(str: string) {
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+  // 형식이 맞는지 확인
+  if (!dateRegex.test(str)) {
+    return false;
+  }
+
+  // 실제 유효한 날짜인지 확인
+  const date = new Date(str);
+  const [year, month, day] = str.split("-").map(Number);
+
+  return (
+    date.getFullYear() === year &&
+    date.getMonth() + 1 === month &&
+    date.getDate() === day
+  );
+}

@@ -4,10 +4,12 @@ import Calendar from "@/components/calendar";
 import useCalendar from "@/components/calendar/useCalendar";
 import { BasicCarousel } from "@/components/carousel";
 import { usePrevNextButtons } from "@/components/carousel/usePrevNextButton";
+import ScheduleUploadModal from "@/components/modal/form/ScheduleUploadModal";
 import ScheduleViewModal from "@/components/modal/form/ScheduleViewModal";
 import useModal from "@/components/modal/useModal";
 import { IconRightLeft, IconRightRight } from "@/components/svg";
 import { SCHEDULE_LIST, Schedule, ScheduleType } from "@/data/schedule";
+import { useUserDoc } from "@/store/auth";
 import { cn, getNumberDate, translateScheduleType } from "@/utils";
 import { format } from "date-fns";
 import useEmblaCarousel from "embla-carousel-react";
@@ -69,6 +71,9 @@ export const scheduleTypeColorStyles: {
 function CalendarContainer(props: CalendarContainerProps) {
   const {} = props;
 
+  const userDoc = useUserDoc();
+  const { openSingleModal } = useModal();
+
   const { currentDate, daysOfMonth, nextMonth, prevMonth, today } =
     useCalendar();
   const [scheduleList, setSchduleList] = useState(SCHEDULE_LIST);
@@ -87,11 +92,24 @@ function CalendarContainer(props: CalendarContainerProps) {
     }
   }
 
+  function onAddScheduleClick() {
+    openSingleModal(<ScheduleUploadModal />);
+  }
+
   return (
     <div className="pt-md text-sm bg-default-black-bg inner pc:min-h-screen-nav">
       <h2 className="visually-hidden">일정</h2>
+      {userDoc && userDoc.job === "admin" && (
+        <div className="flex mb-md">
+          <button
+            onClick={onAddScheduleClick}
+            className="ml-auto border py-xxs px-xs rounded-md text-xs"
+          >
+            일정 추가
+          </button>
+        </div>
+      )}
       {/* carousel */}
-
       <div>
         <SoonScheduleCarousel soonScheduleList={soonScheduleList} />
       </div>

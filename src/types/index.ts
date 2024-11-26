@@ -17,6 +17,28 @@ export interface GalleryItemDoc {
   uploadAt: number;
 }
 
+export type ScheduleType =
+  | "concert"
+  | "anniversary"
+  | "release"
+  | "event"
+  | "etc";
+
+export interface ScheduleDoc {
+  type: ScheduleType;
+  title: string;
+  //date - yyyy-MM-dd
+  startDate: string;
+  endDate?: string;
+  startTime: string;
+  endTime?: string;
+  location?: string;
+  desc?: string;
+  link?: string;
+  images?: string;
+  createAt: number;
+}
+
 export interface Album {
   type: string;
   title: string;

@@ -113,6 +113,9 @@ main {
   .tag {
     @apply rounded-md text-white border bg-default-gray-bg px-xs;
   }
+  .input {
+    @apply bg-[#111111] bg-none rounded-md border outline-none;
+  }
 }
 
 .cd {
