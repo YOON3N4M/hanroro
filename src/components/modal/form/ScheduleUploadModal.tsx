@@ -12,6 +12,7 @@ import ModalTemplate from "../ModalTemplate";
 import { TYPE_FILTER } from "@/containers/calendar";
 import useModal from "../useModal";
 import useToast from "@/components/toast/useToast";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 interface ScheduleUploadModalProps {}
 
@@ -31,6 +32,7 @@ function ScheduleUploadModal(props: ScheduleUploadModalProps) {
   const { addToast } = useToast();
 
   const [errorMsg, setErrorMsg] = useState<string | undefined>();
+  const [isUploadLoading, setIsUploadLoading] = useState(false);
 
   async function forceSubmitRevalidateForm() {
     if (formRef.current) {
@@ -62,11 +64,13 @@ function ScheduleUploadModal(props: ScheduleUploadModalProps) {
     }
 
     if (endDate) {
-      getNumberDate(startDate) > getNumberDate(endDate) &&
+      if (getNumberDate(startDate) > getNumberDate(endDate)) {
         setErrorMsg(MESSAGE.fastEndDate);
-
-      return;
+        return;
+      }
     }
+
+    setIsUploadLoading(true);
 
     let url = null;
 
@@ -84,6 +88,7 @@ function ScheduleUploadModal(props: ScheduleUploadModalProps) {
 
     await uploadSchedule(newData);
     await forceSubmitRevalidateForm();
+    setIsUploadLoading(false);
     addToast({ message: "일정이 정상적으로 등록 되었습니다." });
     closeAllModal();
   }
@@ -157,6 +162,11 @@ function ScheduleUploadModal(props: ScheduleUploadModalProps) {
           ref={formRef}
           action={() => revalidateApi(API_TAG.schedule)}
         ></form>
+        {isUploadLoading && (
+          <div className="absolute center">
+            <LoadingSpinner white />
+          </div>
+        )}
       </div>
     </ModalTemplate>
   );
