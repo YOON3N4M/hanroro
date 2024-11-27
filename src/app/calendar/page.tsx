@@ -18,15 +18,22 @@ interface CalendarPageProps {}
 
 async function CalendarPage(props: CalendarPageProps) {
   const res = await getSchedule();
-  // const data = res
-  //   ? ((await res?.json()).data as ScheduleResult)
-  //   : ({ data: [] } as ScheduleResult);
-  // //startDate를 기준으로 정렬
-  // const sorted = [...data.data].sort(
-  //   (a, b) => getNumberDate(a.startDate) - getNumberDate(b.startDate)
-  // );
+  let scheduleList: ScheduleDoc[] = [];
 
-  return <CalendarContainer scheduleList={[]} />;
+  if (res) {
+    if (res.ok) {
+      const data = res
+        ? ((await res?.json()).data as ScheduleResult)
+        : ({ data: [] } as ScheduleResult);
+      // startDate를 기준으로 정렬
+      const sorted = [...data.data].sort(
+        (a, b) => getNumberDate(a.startDate) - getNumberDate(b.startDate)
+      );
+      scheduleList = sorted;
+    }
+  }
+
+  return <CalendarContainer scheduleList={scheduleList} />;
 }
 
 export default CalendarPage;
