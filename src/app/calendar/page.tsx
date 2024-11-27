@@ -17,16 +17,16 @@ export interface ScheduleResult {
 interface CalendarPageProps {}
 
 async function CalendarPage(props: CalendarPageProps) {
-  // const res = await getSchedule();
-  // const data = res
-  //   ? ((await res?.json()).data as ScheduleResult)
-  //   : ({ data: [] } as ScheduleResult);
-  // //startDate를 기준으로 정렬
-  // const sorted = [...data.data].sort(
-  //   (a, b) => getNumberDate(a.startDate) - getNumberDate(b.startDate)
-  // );
+  const res = await getSchedule();
+  const data = res
+    ? ((await res?.json()).data as ScheduleResult)
+    : ({ data: [] } as ScheduleResult);
+  //startDate를 기준으로 정렬
+  const sorted = [...data.data].sort(
+    (a, b) => getNumberDate(a.startDate) - getNumberDate(b.startDate)
+  );
 
-  return <CalendarContainer scheduleList={[]} />;
+  return <CalendarContainer scheduleList={sorted} />;
 }
 
 export default CalendarPage;
