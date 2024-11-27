@@ -35,7 +35,7 @@ export interface ScheduleDoc {
   location?: string;
   desc?: string;
   link?: string;
-  images?: string;
+  images?: string | null;
   createAt: number;
 }
 

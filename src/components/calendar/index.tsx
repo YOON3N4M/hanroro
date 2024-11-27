@@ -1,12 +1,12 @@
 "use client";
 
-import { Schedule, ScheduleType } from "@/data/schedule";
+import { Filter, scheduleTypeColorStyles } from "@/containers/calendar";
+import { ScheduleDoc } from "@/types";
 import { cn } from "@/utils";
 import { EachDayOfIntervalResult, format } from "date-fns";
 import ScheduleViewModal from "../modal/form/ScheduleViewModal";
 import useModal from "../modal/useModal";
 import useCalendar from "./useCalendar";
-import { Filter, scheduleTypeColorStyles } from "@/containers/calendar";
 
 interface CalendarProps {
   today: Date;
@@ -18,7 +18,7 @@ interface CalendarProps {
     },
     undefined
   >;
-  scheduleList: Schedule[];
+  scheduleList: ScheduleDoc[];
   filter: Filter[];
 }
 
@@ -63,7 +63,7 @@ export default function Calendar(props: CalendarProps) {
 }
 
 interface DayGridProps {
-  scheduleList: Schedule[];
+  scheduleList: ScheduleDoc[];
   currentDate: Date;
   day: Date;
   filter: Filter[];
@@ -78,8 +78,8 @@ function DayGrid(props: DayGridProps) {
   const isDayOfCurrentDate = format(day, "LLL") === format(currentDate, "LLL");
   const isToday = formmatedToday === formattedDay;
 
-  const scheduleListOfDay = scheduleList.filter((schedule) =>
-    schedule.date.includes(formattedDay)
+  const scheduleListOfDay = scheduleList.filter(
+    (schedule) => schedule.startDate === formattedDay
   );
 
   return (
@@ -103,7 +103,7 @@ function DayGrid(props: DayGridProps) {
           {format(day, "dd")}
         </span>
       </div>
-      <div className="flex flex-col items-center justify-start mt-xxxs tab:min-h-[80px] pt-xxs">
+      <div className="flex flex-col gap-xxs items-center justify-start mt-xxxs tab:min-h-[80px] pt-xxs">
         {scheduleListOfDay.map((schedule) => (
           <ScheduleItem
             key={schedule.title}
@@ -120,7 +120,7 @@ function ScheduleItem({
   schedule,
   filter,
 }: {
-  schedule: Schedule;
+  schedule: ScheduleDoc;
   filter: Filter[];
 }) {
   const { openSingleModal } = useModal();

@@ -1,29 +1,42 @@
-import React from "react";
-import ModalTemplate from "../ModalTemplate";
-import { Schedule } from "@/data/schedule";
 import { cn, translateScheduleType } from "@/utils";
+import ModalTemplate from "../ModalTemplate";
 
-import NewTabAnchor from "@/components/ui/NewTabAnchor";
-import Image from "next/image";
 import {
   IconCalendar,
   IconLink,
   IconLocation,
   IconTimer,
 } from "@/components/svg";
+import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import { scheduleTypeColorStyles } from "@/containers/calendar";
+import { ScheduleDoc } from "@/types";
+import { useState } from "react";
+import SkeletonImage from "@/components/ui/SkeletonImage";
+import Image from "next/image";
 
 interface ScheduleViewModalProps {
-  schedule: Schedule;
+  schedule: ScheduleDoc;
 }
 
 export default function ScheduleViewModal(props: ScheduleViewModalProps) {
   const { schedule } = props;
-  const { type, title, date, duration, location, desc, link, images } =
-    schedule;
+  const {
+    type,
+    title,
+    location,
+    desc,
+    link,
+    images,
+    startDate,
+    endDate,
+    startTime,
+    endTime,
+  } = schedule;
+
+  const [isImgLoad, setIsImageLoad] = useState(false);
   return (
     <ModalTemplate>
-      <div className="min-w-[500px] mo:min-w-[80vw] mo:max-w-[80vw]  ">
+      <div className="min-w-[500px] mo:min-w-[80vw] mo:max-w-[80vw] min-h-[30vh] flex flex-col">
         <div className="flex items-center text-sm gap-xxs">
           <span className={cn(scheduleTypeColorStyles[type].text)}>
             {translateScheduleType(type)}
@@ -34,39 +47,59 @@ export default function ScheduleViewModal(props: ScheduleViewModalProps) {
         </div>
         <div className="flex justify-center mt-sm">
           {images && (
-            <Image
-              src={images[0].src}
-              width={images[0].width}
-              height={images[0].height}
-              className="max-h-[500px] w-auto"
-              alt={title}
-              placeholder="blur"
-              blurDataURL={images[0].blurDataURL}
-            />
+            <>
+              {!isImgLoad && (
+                <SkeletonImage className="w-full h-[150px] bg-default-gray-bg" />
+              )}
+              <Image
+                width={3000}
+                height={3000}
+                src={images}
+                alt={"이미지"}
+                className={cn(
+                  "pc:max-h-[70vh] object-cover pc:w-auto mo:max-w-[80vw]",
+                  !isImgLoad && "opacity-0"
+                )}
+                onLoad={() => setIsImageLoad(true)}
+              />
+            </>
           )}
         </div>
-        <div className="mt-sm flex flex-col gap-xxs">
+        <div
+          className={cn("flex flex-col gap-xxs", images ? "mt-sm" : "mt-auto")}
+        >
           <div className="flex pc:gap-sm mo:gap-xxs text-sm mo:flex-col">
             <div className="flex gap-xxs items-center">
               <IconCalendar />
               <div className="flex gap-xxxs">
-                {date.map((d, idx) => (
-                  <span key={`${title}-${d}=${idx}`}>
-                    {idx !== 0 ? "- " : ""}
-                    {d}
-                  </span>
-                ))}
+                <span>{startDate}</span>
+                {endDate && (
+                  <>
+                    <span>~</span>
+                    <span>{endDate}</span>
+                  </>
+                )}
               </div>
             </div>
-            <span className="flex gap-xxs items-center">
-              <IconTimer />
-              {duration}
-            </span>
+            {startTime && (
+              <span className="flex gap-xxs items-center">
+                <IconTimer />
+                {startTime}
+                {endTime && (
+                  <>
+                    <span>~</span>
+                    <span>{endTime}</span>
+                  </>
+                )}
+              </span>
+            )}
           </div>
-          <div className="text-sm flex gap-xxs items-center">
-            <IconLocation />
-            {location}
-          </div>
+          {location && (
+            <div className="text-sm flex gap-xxs items-center">
+              <IconLocation />
+              {location}
+            </div>
+          )}
           {link && (
             <div className="flex gap-xxs items-center">
               <IconLink />

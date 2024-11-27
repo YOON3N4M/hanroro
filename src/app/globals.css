@@ -116,6 +116,9 @@ main {
   .input {
     @apply bg-[#111111] bg-none rounded-md border outline-none;
   }
+  .select {
+    @apply border py-xxxs rounded-md bg-[#111111];
+  }
 }
 
 .cd {
