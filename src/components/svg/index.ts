@@ -1,7 +1,9 @@
 export { CiImageOn as IconImage } from "react-icons/ci";
-export { CiInstagram as IconInstagram } from "react-icons/ci";
-export { CiYoutube as IconYoutube } from "react-icons/ci";
-export { AiOutlineSpotify as IconSpotify } from "react-icons/ai";
+export { SiInstagram as IconInstagram } from "react-icons/si";
+export { SiYoutube as IconYoutube } from "react-icons/si";
+
+export { SiNaver as IconNaver } from "react-icons/si";
+export { SiSpotify as IconSpotify } from "react-icons/si";
 
 export { BiSolidLeftArrow as IconRightLeft } from "react-icons/bi";
 export { BiSolidRightArrow as IconRightRight } from "react-icons/bi";

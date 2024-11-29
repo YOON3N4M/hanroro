@@ -71,6 +71,9 @@ main {
   .h-screen-nav {
     height: var(--screen-height-without-nav);
   }
+  .h-screen-nav-double {
+    height: calc(var(--screen-height-without-nav) * 2);
+  }
   .min-h-screen-nav {
     min-height: var(--screen-height-without-nav);
   }
@@ -118,6 +121,13 @@ main {
   }
   .select {
     @apply border py-xxxs rounded-md bg-[#111111];
+  }
+  .mask {
+    mask-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
+    mask-size: 0px 100%;
+    mask-repeat: no-repeat;
+    mask-position: left center;
+    object-fit: cover;
   }
 }
 
