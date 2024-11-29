@@ -35,7 +35,10 @@ export default function ProfileContainer(props: ProfileContainerProps) {
   }
 
   useEffect(() => {
-    console.log(indexProgress);
+    if (!searchParams) return;
+    if (searchParams.album) {
+      scrollMove("album");
+    }
   }, [indexProgress]);
 
   return (

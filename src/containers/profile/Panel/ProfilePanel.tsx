@@ -154,7 +154,7 @@ function ProfilePanel(props: ProfilePanelProps) {
               시작됩니다. 누구보다 자신의 두려움이 크지만, 못지않은 용기로
               한로로는 분연히 시대의 아픔을 관통하고 우리와 유대합니다.
             </motion.p>
-            <div className="mt-auto flex gap-lg items-center text-[32px] mo:text-base">
+            <div className="mt-auto flex gap-lg items-center text-[32px] mo:text-base mo:mt-xxl">
               {LINK.map((link, idx) => (
                 <motion.div
                   variants={iconVariant}
@@ -171,7 +171,7 @@ function ProfilePanel(props: ProfilePanelProps) {
           <motion.img
             src="/images/profile/profile.jpg"
             alt="한로로 프로필 이미지"
-            className="size-[500px] max-w-[500px] mo:max-w-full mo:h-auto object-cover mask z-10 ml-auto"
+            className="size-[500px] tab:size-[450px] max-w-[500px] mo:max-w-full mo:h-auto object-cover mask z-10 pc:ml-auto"
             variants={afterLogoVariant}
             animate={isLogoHide === "end" ? "visible" : "hidden"}
           />
