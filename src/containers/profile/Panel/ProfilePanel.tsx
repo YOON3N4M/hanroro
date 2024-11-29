@@ -136,14 +136,14 @@ function ProfilePanel(props: ProfilePanelProps) {
                   setTimeout(() => setIsLogoHide("end"), 100)
                 }
               />
-              <motion.span
+              <motion.p
                 variants={afterLogoVariant}
                 initial="hidden"
                 animate={isLogoHide === "end" ? "visible" : "hidden"}
-                className="text-[50px] mask mo:text-[32px] "
+                className="text-[50px] mask mo:text-[32px]"
               >
                 한로로
-              </motion.span>
+              </motion.p>
             </div>
             <motion.p
               className="w-[80%] mo:w-full mt-md mask mo:text-xs mo:mt-sm"
