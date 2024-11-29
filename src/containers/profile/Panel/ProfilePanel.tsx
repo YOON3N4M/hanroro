@@ -84,8 +84,9 @@ const iconVariant = {
     opacity: 1,
     y: 0,
     transition: {
+      delay: LOGO_DURATION + 0.1 * custom,
       duration: LOGO_DURATION,
-      delay: 0.2 * custom,
+
       type: "spring",
       stiffness: 50,
     },
