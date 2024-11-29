@@ -1,4 +1,5 @@
 import { ScheduleType } from "@/data/schedule";
+import { parse } from "date-fns";
 
 export const cn = (...classNames: (string | false | undefined)[]) => {
   const styledClassNames = [...classNames]
@@ -123,3 +124,10 @@ export function validationDateFormat(str: string) {
     date.getDate() === day
   );
 }
+// 문자열로 포맷팅된 날짜 데이터를 다시 Date 객체로 변환
+export const parseFormattedDate = (
+  dateString: string,
+  formatString: string
+): Date => {
+  return parse(dateString, formatString, new Date());
+};

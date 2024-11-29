@@ -2,8 +2,8 @@
 
 import { Filter, scheduleTypeColorStyles } from "@/containers/calendar";
 import { ScheduleDoc } from "@/types";
-import { cn } from "@/utils";
-import { EachDayOfIntervalResult, format } from "date-fns";
+import { cn, parseFormattedDate } from "@/utils";
+import { EachDayOfIntervalResult, eachDayOfInterval, format } from "date-fns";
 import ScheduleViewModal from "../modal/form/ScheduleViewModal";
 import useModal from "../modal/useModal";
 import useCalendar from "./useCalendar";
@@ -78,9 +78,18 @@ function DayGrid(props: DayGridProps) {
   const isDayOfCurrentDate = format(day, "LLL") === format(currentDate, "LLL");
   const isToday = formmatedToday === formattedDay;
 
-  const scheduleListOfDay = scheduleList.filter(
-    (schedule) => schedule.startDate === formattedDay
-  );
+  const scheduleListOfDay = scheduleList.filter((schedule) => {
+    if (!schedule.endDate) {
+      return schedule.startDate === formattedDay;
+    } else {
+      const dateList = eachDayOfInterval({
+        start: parseFormattedDate(schedule.startDate, "yyyy-MM-dddd"),
+        end: parseFormattedDate(schedule.endDate, "yyyy-MM-dddd"),
+      });
+
+      return dateList.find((d) => format(d, "yyyy-MM-dd") === formattedDay);
+    }
+  });
 
   return (
     <div
