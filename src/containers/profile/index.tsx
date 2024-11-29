@@ -26,7 +26,6 @@ export default function ProfileContainer(props: ProfileContainerProps) {
   const { searchParams } = props;
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [indexProgress, setIndexProgress] = useState<any>();
 
   function onClickNav(idx: number) {
     // setActiveIndex(idx);
@@ -39,7 +38,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
     if (searchParams.album) {
       scrollMove("album");
     }
-  }, [indexProgress]);
+  }, []);
 
   return (
     <div className="relative h-[400vh] flex flex-col overflow-visible">
