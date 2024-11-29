@@ -1,4 +1,4 @@
-import { ScheduleType } from "@/data/schedule";
+import { ScheduleType } from "@/types";
 import { parse } from "date-fns";
 
 export const cn = (...classNames: (string | false | undefined)[]) => {

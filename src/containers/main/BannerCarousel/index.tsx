@@ -1,22 +1,13 @@
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { usePrevNextButtons } from "@/components/carousel/usePrevNextButton";
 import { IconRightLeft, IconRightRight } from "@/components/svg";
-import { SCHEDULE_LIST, Schedule } from "@/data/schedule";
 import { cn } from "@/utils";
+import ClassNames from "embla-carousel-class-names";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode, useEffect } from "react";
-import ClassNames from "embla-carousel-class-names";
-import LoadingSpinner from "@/components/LoadingSpinner";
-import {
-  home,
-  howToGoOn,
-  mayfly,
-  mirror,
-  systemError,
-  takeOff,
-  theCompass,
-} from "../../../../public/images/album";
+import { ReactNode } from "react";
+import { home, howToGoOn, systemError } from "../../../../public/images/album";
 interface BannerCarouselProps {}
 
 function BannerCarousel(props: BannerCarouselProps) {

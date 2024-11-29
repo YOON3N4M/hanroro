@@ -9,13 +9,13 @@ import ScheduleUploadModal from "@/components/modal/form/ScheduleUploadModal";
 import ScheduleViewModal from "@/components/modal/form/ScheduleViewModal";
 import useModal from "@/components/modal/useModal";
 import { IconRightLeft, IconRightRight } from "@/components/svg";
-import { SCHEDULE_LIST, Schedule, ScheduleType } from "@/data/schedule";
+
 import { useUserDoc } from "@/store/auth";
 import { cn, getNumberDate, translateScheduleType } from "@/utils";
 import { format } from "date-fns";
 import useEmblaCarousel from "embla-carousel-react";
 import { HTMLAttributes, ReactNode, useState } from "react";
-import { ScheduleDoc } from "@/types";
+import { ScheduleDoc, ScheduleType } from "@/types";
 export interface Filter {
   type: ScheduleType;
   kor: string;
