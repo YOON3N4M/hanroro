@@ -219,6 +219,12 @@ function SoonScheduleCarousel({
               <h4 className="mt-sm">{schedule.title}</h4>
               <div className="flex gap-xxxs opacity-70 text-xs">
                 <span>{schedule.startDate}</span>
+                {schedule.endDate && (
+                  <>
+                    <span>~</span>
+                    <span>{schedule.endDate}</span>
+                  </>
+                )}
               </div>
               <div className="mt-auto flex">
                 <button
