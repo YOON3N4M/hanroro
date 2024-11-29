@@ -97,15 +97,12 @@ function ProfilePanel(props: ProfilePanelProps) {
   const { isPanelActive } = usePanel(activePanelIndex, panelIndex);
 
   const [isLogoHide, setIsLogoHide] = useState<"initial" | "end">("initial");
+  const [innerHeight, setInnerHeight] = useState(0);
 
   const { scrollY } = useScroll();
   const [isPin, setIsPin] = useState(true);
 
-  const boxY = useTransform(
-    scrollY,
-    [0, window.innerHeight],
-    [0, window.innerHeight]
-  );
+  const boxY = useTransform(scrollY, [0, innerHeight], [0, innerHeight]);
 
   const scrollYSpring = useSpring(scrollY, {
     stiffness: 300,
@@ -116,8 +113,10 @@ function ProfilePanel(props: ProfilePanelProps) {
   const opacity = useTransform(scrollYSpring, [0, 100], [0.1, 1]);
 
   useEffect(() => {
-    console.log(isLogoHide);
-  }, [isLogoHide]);
+    if (!window) return;
+
+    setInnerHeight(window.innerHeight);
+  }, []);
   return (
     <PanelTemplate isPanelActive={isPanelActive}>
       <h3 className="visually-hidden">프로필</h3>
