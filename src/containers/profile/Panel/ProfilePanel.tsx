@@ -102,7 +102,7 @@ function ProfilePanel(props: ProfilePanelProps) {
   const { scrollY } = useScroll();
   const [isPin, setIsPin] = useState(true);
 
-  const boxY = useTransform(scrollY, [0, innerHeight], [0, innerHeight]);
+  const boxY = useTransform(scrollY, [0, innerHeight * 2], [0, innerHeight]);
 
   const scrollYSpring = useSpring(scrollY, {
     stiffness: 300,
@@ -115,7 +115,7 @@ function ProfilePanel(props: ProfilePanelProps) {
   useEffect(() => {
     if (!window) return;
 
-    setInnerHeight(window.innerHeight);
+    setInnerHeight(window.innerHeight - 40);
   }, []);
   return (
     <PanelTemplate isPanelActive={isPanelActive}>
