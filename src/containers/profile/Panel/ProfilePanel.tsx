@@ -112,10 +112,8 @@ function ProfilePanel(props: ProfilePanelProps) {
     damping: 40,
   });
 
-  const scale = useTransform(scrollYSpring, [0, 100], [12, 1]);
+  const rotate = useTransform(scrollYSpring, [0, 1080], [0, 1080]);
   const opacity = useTransform(scrollYSpring, [0, 100], [0.1, 1]);
-  const rotate = useTransform(scrollYSpring, [0, 100], [30, 0]);
-  const maskSize = useTransform(scrollY, [0, 100], [0, 100]);
 
   useEffect(() => {
     console.log(isLogoHide);
@@ -124,12 +122,12 @@ function ProfilePanel(props: ProfilePanelProps) {
     <PanelTemplate isPanelActive={isPanelActive}>
       <h3 className="visually-hidden">프로필</h3>
       <div className={cn("size-full relative ")}>
-        <div className="w-[80vw] tab:w-screen h-full absolute center tab:inner flex justify-center items-center z-10">
+        <div className="w-[80vw] tab:w-screen h-full absolute center mo:py-md tab:inner flex justify-center items-center z-10 mo:flex-col-reverse mo:justify-end">
           <motion.div
             variants={leftFadeInVariant}
-            className="flex flex-col h-[500px]"
+            className="flex flex-col h-[500px] mo:h-full"
           >
-            <div className="relative h-min">
+            <div className="relative h-min mo:mt-md">
               <motion.img
                 src="/images/profile/logo.svg"
                 className="h-full w-auto absolute top-0 mask"
@@ -143,13 +141,13 @@ function ProfilePanel(props: ProfilePanelProps) {
                 variants={afterLogoVariant}
                 initial="hidden"
                 animate={isLogoHide === "end" ? "visible" : "hidden"}
-                className="text-[50px] mask"
+                className="text-[50px] mask mo:text-[32px] "
               >
                 한로로
               </motion.span>
             </div>
             <motion.p
-              className="w-[80%] mt-md mask"
+              className="w-[80%] mo:w-full mt-md mask mo:text-xs mo:mt-sm"
               variants={afterLogoVariant}
               animate={isLogoHide === "end" ? "visible" : "hidden"}
             >
@@ -157,7 +155,7 @@ function ProfilePanel(props: ProfilePanelProps) {
               시작됩니다. 누구보다 자신의 두려움이 크지만, 못지않은 용기로
               한로로는 분연히 시대의 아픔을 관통하고 우리와 유대합니다.
             </motion.p>
-            <div className="mt-auto flex gap-lg items-center text-[32px]">
+            <div className="mt-auto flex gap-lg items-center text-[32px] mo:text-base">
               {LINK.map((link, idx) => (
                 <motion.div
                   variants={iconVariant}
@@ -174,22 +172,22 @@ function ProfilePanel(props: ProfilePanelProps) {
           <motion.img
             src="/images/profile/profile.jpg"
             alt="한로로 프로필 이미지"
-            className="size-[500px] max-w-[500px] object-cover mask z-10 ml-auto"
+            className="size-[500px] max-w-[500px] mo:max-w-full mo:h-auto object-cover mask z-10 ml-auto"
             variants={afterLogoVariant}
             animate={isLogoHide === "end" ? "visible" : "hidden"}
           />
           <motion.div
             layout
-            className="cd"
+            className="cd pc:!size-[120px] tab:!size-[80px] left-0 mo:left-1/2"
             style={{
               position: "absolute",
               top: isPin ? boxY : "auto",
               bottom: isPin ? "auto" : 0,
-              left: "50%",
-              width: "100px",
-              height: "100px",
               x: "-50%",
               opacity: isLogoHide === "initial" ? 0 : opacity,
+              rotateY: rotate,
+              perspective: "1000px",
+              transformStyle: "preserve-3d",
             }}
           />
         </div>
