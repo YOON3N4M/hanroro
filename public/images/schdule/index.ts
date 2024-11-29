@@ -5,3 +5,4 @@ export { default as birthdayCafe3 } from "./birthday/3.jpg";
 export { default as gmf2024 } from "./gmf/gmf-2024.png";
 export { default as busan2024 } from "./busan/busan.png";
 export { default as thirdSolo } from "./third/third.jpg";
+export { default as chunberia } from "./chunberia.jpg";
