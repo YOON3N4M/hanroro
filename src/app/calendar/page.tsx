@@ -1,5 +1,5 @@
 import CalendarContainer from "@/containers/calendar";
-import { getSchedule } from "@/services/_server";
+import { fetchSchedule } from "@/services/_server";
 import { ScheduleDoc } from "@/types";
 import { getNumberDate } from "@/utils";
 import { Metadata } from "next";
@@ -17,7 +17,7 @@ export interface ScheduleResult {
 interface CalendarPageProps {}
 
 async function CalendarPage(props: CalendarPageProps) {
-  const res = await getSchedule();
+  const res = await fetchSchedule();
   let scheduleList: ScheduleDoc[] = [];
 
   if (res) {

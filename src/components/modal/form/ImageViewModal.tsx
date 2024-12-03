@@ -4,8 +4,8 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import { IconKebabMenu } from "@/components/svg";
 import { TOAST_MESSAGE } from "@/components/toast/message";
 import useToast from "@/components/toast/useToast";
-import { API_TAG, getUserDisplayName } from "@/services";
-import { revalidateApi } from "@/services/_server";
+import { API_TAG } from "@/services";
+import { fetchUserDisplayName, revalidateApi } from "@/services/_server";
 import { deleteGalleryItem } from "@/services/firebase";
 import { useUserDoc } from "@/store/auth";
 import { GalleryItemDoc } from "@/types";
@@ -53,7 +53,7 @@ export default function ImageViewModal(props: ImageViewModalProps) {
 
   useEffect(() => {
     async function getUploaderDisplayName() {
-      const res = await getUserDisplayName(imageDoc.uploaderId);
+      const res = await fetchUserDisplayName(imageDoc.uploaderId);
       if (!res) return;
       const resJson = await res?.json();
       const name = resJson.data;

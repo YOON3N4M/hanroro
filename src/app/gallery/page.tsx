@@ -1,5 +1,5 @@
 import GalleryContainer from "@/containers/gallery";
-import { getGallery } from "@/services/_server";
+import { fetchGallery } from "@/services/_server";
 import { GalleryDocsObj } from "@/types";
 import { sortByNumber } from "@/utils";
 import { Metadata } from "next";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function GalleryPage() {
-  const res = await getGallery();
+  const res = await fetchGallery();
   const data = res ? ((await res?.json()).data as GalleryDocsObj) : defaultData;
   const sorted = {
     images: sortByNumber(data.images, "uploadAt", true),
