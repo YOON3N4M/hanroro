@@ -44,7 +44,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
     <div className="relative h-[400vh] flex flex-col overflow-visible">
       <h2 className="visually-hidden">프로필</h2>
       {/* nav */}
-      <div className="fixed top-[30%] tab:top-[200px] pc:left-[30px] tab:right-[15px] z-[30] flex flex-col animate-fadeIn">
+      <div className="fixed top-[30%] tab:top-[40%] left-[30px] z-[30] flex flex-col animate-fadeIn">
         {tabList.map((tab, idx) => (
           <button
             key={`${tab.eng}-nav`}

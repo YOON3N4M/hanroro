@@ -1,7 +1,14 @@
 import { cn } from "@/utils";
 import { PanelProps, PanelTemplate, usePanel } from ".";
 import Image from "next/image";
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
 import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import {
   IconInstagram,
@@ -11,6 +18,11 @@ import {
 } from "@/components/svg";
 import { useEffect, useState } from "react";
 import { delay } from "motion";
+import TextupMotion, {
+  customEase,
+  textupVariant,
+} from "@/components/motion/TextupMotion";
+import useDeviceDetect from "@/hooks/useDeviceDetect";
 
 interface ProfilePanelProps extends PanelProps {}
 
@@ -93,103 +105,229 @@ const iconVariant = {
   }),
 };
 
+//2.0
+const profileImageVariant = {
+  hidden: {
+    height: 0,
+    width: 0,
+    marginRight: 0,
+    marginLeft: 0,
+  },
+  visible: (isPc: boolean) => ({
+    height: isPc ? 500 : 350,
+    width: isPc ? 300 : 150,
+    marginRight: 10,
+    marginLeft: 10,
+    transition: {
+      height: { duration: 0 },
+      width: { duration: 1.5, ease: customEase },
+      padding: { duration: 1.5, ease: customEase },
+    },
+  }),
+};
+
+const textSectionVariant = {
+  hidden: {
+    display: "none",
+  },
+  visible: {
+    display: "flex",
+  },
+};
+
 function ProfilePanel(props: ProfilePanelProps) {
   const { activePanelIndex, panelIndex } = props;
   const { isPanelActive } = usePanel(activePanelIndex, panelIndex);
+  const { isPc } = useDeviceDetect();
 
-  const [isLogoHide, setIsLogoHide] = useState<"initial" | "end">("initial");
   const [innerHeight, setInnerHeight] = useState(0);
 
-  const { scrollY } = useScroll();
+  const { scrollY, scrollYProgress } = useScroll();
+
   const [isPin, setIsPin] = useState(true);
 
   const boxY = useTransform(scrollY, [0, innerHeight * 2], [0, innerHeight]);
-
   const scrollYSpring = useSpring(scrollY, {
     stiffness: 300,
     damping: 40,
   });
-
   const rotate = useTransform(scrollYSpring, [0, 1080], [0, 1080]);
   const opacity = useTransform(scrollYSpring, [0, 100], [0.1, 1]);
+  // 이름 등
+
+  //2.0
+  const [isTextUpEnd, setIsTextUpEnd] = useState(false);
+  const [isimageEnd, setIsImageEnd] = useState(false);
+  const [isTextSectionEnd, setIsTextSectionEnd] = useState(false);
 
   useEffect(() => {
     if (!window) return;
 
     setInnerHeight(window.innerHeight - 40);
   }, []);
+
+  // useEffect(() => {
+  //   if (!activePanelIndex) {
+  //     setIsTextUpEnd(false);
+  //     setIsImageEnd(false);
+  //     setIsTextSectionEnd(false);
+  //   }
+  // }, [activePanelIndex]);
   return (
     <PanelTemplate isPanelActive={isPanelActive}>
       <h3 className="visually-hidden">프로필</h3>
-      <div className={cn("size-full relative ")}>
-        <div className="w-[80vw] tab:w-screen h-full absolute center mo:py-md tab:inner flex justify-center items-center z-10 mo:flex-col-reverse mo:justify-end">
-          <motion.div
-            variants={leftFadeInVariant}
-            className="flex flex-col h-[500px] mo:h-full"
-          >
-            <div className="relative h-min mo:mt-md">
-              <motion.img
-                src="/images/profile/logo.svg"
-                className="h-full w-auto absolute top-0 mask"
-                variants={logoVariant}
-                animate={isLogoHide === "end" ? "hidden" : "visible"}
-                onAnimationComplete={() =>
-                  setTimeout(() => setIsLogoHide("end"), 100)
-                }
-              />
-              <motion.p
-                variants={afterLogoVariant}
-                initial="hidden"
-                animate={isLogoHide === "end" ? "visible" : "hidden"}
-                className="text-[50px] mask mo:text-[32px]"
-              >
-                한로로
-              </motion.p>
-            </div>
-            <motion.p
-              className="w-[80%] mo:w-full mt-md mask mo:text-xs mo:mt-sm"
-              variants={afterLogoVariant}
-              animate={isLogoHide === "end" ? "visible" : "hidden"}
+      <div className={cn("size-full relative pt-md tab:inner")}>
+        {/* <motion.div
+          layout
+          className="cd pc:!size-[120px] tab:!size-[80px] left-[10%] mo:left-1/2"
+          style={{
+            position: "absolute",
+            top: isPin ? boxY : "auto",
+            bottom: isPin ? "auto" : 0,
+            x: "-50%",
+            opacity: !isTextSectionEnd ? 0 : opacity,
+            rotateY: rotate,
+            perspective: "1000px",
+            transformStyle: "preserve-3d",
+          }}
+        /> */}
+        <div
+          className={cn(
+            "w-[80vw] tab:w-full h-full absolute tab:relative center flex pc:gap-[10%] tab:flex-col"
+          )}
+        >
+          <div className="size-full pt-md relative flex flex-col">
+            {/* 인트로 박스 */}
+            <motion.div
+              className={cn(
+                "flex h-min overflow-hidden ",
+                isimageEnd ? "items-start" : "items-center mx-auto my-auto"
+              )}
             >
-              다가올 미래를 두려워하는 청춘에게 손을 건네는 것으로 그의 작품은
-              시작됩니다. 누구보다 자신의 두려움이 크지만, 못지않은 용기로
-              한로로는 분연히 시대의 아픔을 관통하고 우리와 유대합니다.
-            </motion.p>
-            <div className="mt-auto flex gap-lg items-center text-[32px] mo:text-base mo:mt-xxl">
-              {LINK.map((link, idx) => (
-                <motion.div
-                  variants={iconVariant}
-                  initial="hidden"
-                  animate={isLogoHide === "end" ? "visible" : "hidden"}
-                  key={link.link}
-                  custom={idx}
-                >
-                  <NewTabAnchor href={link.link}>{link.icon}</NewTabAnchor>
+              <MotionText
+                text="H"
+                idx={0}
+                onAnimationComplete={setIsTextUpEnd}
+              />
+              <MotionText
+                text="A"
+                idx={1}
+                onAnimationComplete={setIsTextUpEnd}
+              />
+              <MotionText
+                text="N"
+                idx={2}
+                onAnimationComplete={setIsTextUpEnd}
+              />
+              <motion.div
+                //className="h-[500px]"
+                custom={isPc}
+                layout
+                transition={{
+                  duration: isimageEnd ? 2 : 0.3,
+                  ease: customEase,
+                }}
+                variants={profileImageVariant}
+                initial={"hidden"}
+                animate={isTextUpEnd ? "visible" : "hidden"}
+                onAnimationComplete={() => setIsImageEnd(true)}
+                className={cn(isimageEnd && "absolute left-0 top-1/2")}
+              >
+                <Image
+                  src="/images/profile/profile.jpg"
+                  alt="한로로 프로필 이미지"
+                  width={1000}
+                  height={1000}
+                  className="size-full object-cover"
+                />
+              </motion.div>
+              <MotionText
+                text="R"
+                idx={3}
+                onAnimationComplete={setIsTextUpEnd}
+              />
+              <MotionText
+                text="O"
+                idx={4}
+                onAnimationComplete={setIsTextUpEnd}
+              />
+              <MotionText
+                text="R"
+                idx={5}
+                onAnimationComplete={setIsTextUpEnd}
+              />
+              <MotionText
+                text="O"
+                idx={6}
+                onAnimationComplete={setIsTextUpEnd}
+              />
+            </motion.div>
+            {/* 텍스트 섹션 */}
+            <motion.div
+              variants={textSectionVariant}
+              initial="hidden"
+              animate={isimageEnd ? "visible" : "hidden"}
+              className="flex flex-1 flex-col items-end"
+              onAnimationComplete={() => setIsTextSectionEnd(true)}
+            >
+              {" "}
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={
+                  isTextSectionEnd && {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 1.2, ease: customEase },
+                  }
+                }
+                className="text-right mo:text-sm mo:mt-md"
+              >
+                다가올 미래를 두려워하는 청춘에게 손을 건네는 것으로 <br /> 그의
+                작품은 시작됩니다. 누구보다 자신의 두려움이 크지만, <br />
+                못지않은 용기로 한로로는 분연히 시대의 아픔을 관통하고 우리와
+                유대합니다.
+              </motion.p>
+              <motion.div className="flex text-[30px] mo:text-[15px] mt-lg gap-sm">
+                {LINK.map((link, idx) => (
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={
+                      isTextSectionEnd && {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          duration: 1.2,
+                          ease: customEase,
+                          delay: idx * 0.2,
+                        },
+                      }
+                    }
+                    key={link.link}
+                    custom={idx}
+                  >
+                    <NewTabAnchor href={link.link}>{link.icon}</NewTabAnchor>
+                  </motion.div>
+                ))}
+              </motion.div>
+              <div className="mt-auto">
+                <motion.div className="relative h-[50px] mo:h-[30px] font-thin text-[70px] mo:text-[30px] italic">
+                  <TextupMotion isAnimate={isTextSectionEnd} text="20001111" />
                 </motion.div>
-              ))}
-            </div>
-          </motion.div>
-          <motion.img
-            src="/images/profile/profile.jpg"
-            alt="한로로 프로필 이미지"
-            className="size-[500px] tab:size-[450px] max-w-[500px] mo:max-w-full mo:h-auto object-cover mask z-10 pc:ml-auto"
-            variants={afterLogoVariant}
-            animate={isLogoHide === "end" ? "visible" : "hidden"}
-          />
-          <motion.div
-            layout
-            className="cd pc:!size-[120px] tab:!size-[80px] left-0 mo:left-1/2"
-            style={{
-              position: "absolute",
-              top: isPin ? boxY : "auto",
-              bottom: isPin ? "auto" : 0,
-              x: "-50%",
-              opacity: isLogoHide === "initial" ? 0 : opacity,
-              rotateY: rotate,
-              perspective: "1000px",
-              transformStyle: "preserve-3d",
-            }}
-          />
+                <motion.div className="h-[70px] font-thin text-[50px] mo:text-[20px] italic translate-x-[-10%]">
+                  <TextupMotion isAnimate={isTextSectionEnd} text="AUTHENTIC" />
+                  {/* <NewTabAnchor href="http://label-authentic.com/">
+                  <Image
+                    src="/images/profile/authentic.png"
+                    width={1000}
+                    height={1000}
+                    alt="레이블 어센틱 로고"
+                    className="w-[150px]"
+                  />
+                </NewTabAnchor> */}
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </PanelTemplate>
@@ -197,3 +335,28 @@ function ProfilePanel(props: ProfilePanelProps) {
 }
 
 export default ProfilePanel;
+
+interface MotionTextProps {
+  text: string;
+  idx: number;
+  onAnimationComplete: (bool: boolean) => void;
+}
+
+function MotionText(props: MotionTextProps) {
+  const { text, onAnimationComplete, idx } = props;
+  return (
+    <motion.div
+      layout
+      transition={{ duration: 1.5, ease: customEase }}
+      className="shadow-sm z-30 text-[120px] mo:text-[60px]"
+      variants={textupVariant}
+      custom={idx}
+      // style={{ display: isimageEnd ? "none" : "inline-block" }}
+      onAnimationComplete={
+        idx === 6 ? () => onAnimationComplete(true) : () => {}
+      }
+    >
+      {text}
+    </motion.div>
+  );
+}
