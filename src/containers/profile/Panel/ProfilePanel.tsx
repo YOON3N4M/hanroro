@@ -2,6 +2,7 @@ import { cn } from "@/utils";
 import { PanelProps, PanelTemplate, usePanel } from ".";
 import Image from "next/image";
 import {
+  MotionValue,
   motion,
   useMotionTemplate,
   useMotionValueEvent,
@@ -140,13 +141,22 @@ function ProfilePanel(props: ProfilePanelProps) {
   const { isPanelActive } = usePanel(activePanelIndex, panelIndex);
   const { isPc } = useDeviceDetect();
 
-  const [innerHeight, setInnerHeight] = useState(0);
+  const [innerHeight, setInnerHeight] = useState(2000);
 
   const { scrollY, scrollYProgress } = useScroll();
 
   const [isPin, setIsPin] = useState(true);
 
-  const boxY = useTransform(scrollY, [0, innerHeight * 2], [0, innerHeight]);
+  const boxY = useTransform(
+    scrollY,
+    [0, isPc ? innerHeight - 100 : innerHeight],
+    [-innerHeight, 0]
+  );
+
+  const springY = useSpring(boxY, {
+    stiffness: 300,
+    damping: 40,
+  });
   const scrollYSpring = useSpring(scrollY, {
     stiffness: 300,
     damping: 40,
@@ -197,6 +207,8 @@ function ProfilePanel(props: ProfilePanelProps) {
           )}
         >
           <div className="size-full pt-md relative flex flex-col">
+            <div className="absolute"></div>
+            <Curtain isPin={isPin} y={springY} />
             {/* 인트로 박스 */}
             <motion.div
               className={cn(
@@ -310,10 +322,10 @@ function ProfilePanel(props: ProfilePanelProps) {
                 ))}
               </motion.div>
               <div className="mt-auto">
-                <motion.div className="relative h-[50px] mo:h-[30px] font-thin text-[70px] mo:text-[30px] italic">
+                <motion.div className="relative h-[50px] mo:h-[30px] font-thin text-[70px] mo:text-[30px]  italic">
                   <TextupMotion isAnimate={isTextSectionEnd} text="20001111" />
                 </motion.div>
-                <motion.div className="h-[70px] font-thin text-[50px] mo:text-[20px] italic translate-x-[-10%]">
+                <motion.div className="h-[70px] font-thin text-[50px] mo:text-[20px] italic  translate-x-[-10%]">
                   <TextupMotion isAnimate={isTextSectionEnd} text="AUTHENTIC" />
                   {/* <NewTabAnchor href="http://label-authentic.com/">
                   <Image
@@ -356,7 +368,35 @@ function MotionText(props: MotionTextProps) {
         idx === 6 ? () => onAnimationComplete(true) : () => {}
       }
     >
-      {text}
+      <span className="z-[100]">{text}</span>
+    </motion.div>
+  );
+}
+
+interface CurtainProps {
+  isPin: boolean;
+  y: MotionValue<number>;
+}
+
+function Curtain(props: CurtainProps) {
+  const { isPin, y } = props;
+  console.log(y);
+  return (
+    <motion.div
+      className="left-0 w-full h-screen-nav bg-default-black-bg z-20 flex"
+      style={{
+        position: "absolute",
+        top: isPin ? y : "auto",
+        bottom: isPin ? "auto" : 0,
+      }}
+    >
+      {/* <motion.img
+        src="/images/profile/logo.svg"
+        className="w-3/4 my-auto mx-auto brightness-50"
+      /> */}
+      <span className="text-[120px] mo:text-[60px] text-[#F50925] mt-auto ml-auto mb-md italic font-caslon">
+        /ALBUM
+      </span>
     </motion.div>
   );
 }
