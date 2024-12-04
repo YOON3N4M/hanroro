@@ -48,6 +48,13 @@ const pretendard = localFont({
   variable: "--font-pretendard",
 });
 
+const caslon = localFont({
+  src: "../../public/fonts/LibreCaslonDisplay-Regular.ttf",
+  display: "swap",
+  weight: "45 920",
+  variable: "--font-caslon",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -55,7 +62,13 @@ export default function RootLayout({
 }>) {
   return (
     <html className="h-full" lang="en">
-      <body className={cn("bg-default-black-bg", `${pretendard.variable}`)}>
+      <body
+        className={cn(
+          "bg-default-black-bg",
+          `${pretendard.variable}`,
+          caslon.variable
+        )}
+      >
         <h1 className="visually-hidden">hanroro | fansite</h1>
         <AuthProvider>
           <Header />

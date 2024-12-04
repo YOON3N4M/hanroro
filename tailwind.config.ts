@@ -19,6 +19,7 @@ const config: Config = {
       },
       fontFamily: {
         pretendard: ["var(--font-pretendard)"],
+        caslon: ["var(--font-caslon)"],
       },
       height: {
         nav: "45px",
