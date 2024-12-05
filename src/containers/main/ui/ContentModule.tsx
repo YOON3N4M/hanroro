@@ -53,7 +53,7 @@ export default function ContentModule(props: ContentModuleProps) {
           className={cn(
             "size-full object-cover transition-all animate-fadeIn",
             imageHover
-              ? "group-hover:brightness-100 brightness-50 group-hover:scale-105"
+              ? "group-hover:brightness-100 brightness-50"
               : "brightness-[0.25]"
           )}
           alt={alt}
