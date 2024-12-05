@@ -1,29 +1,26 @@
-import { cn } from "@/utils";
-import { PanelProps, PanelTemplate, usePanel } from ".";
-import Image from "next/image";
-import {
-  MotionValue,
-  motion,
-  useMotionTemplate,
-  useMotionValueEvent,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "motion/react";
-import NewTabAnchor from "@/components/ui/NewTabAnchor";
+import TextupMotion, {
+  customEase,
+  textupVariant,
+} from "@/components/motion/TextupMotion";
 import {
   IconInstagram,
   IconNaver,
   IconSpotify,
   IconYoutube,
 } from "@/components/svg";
-import { useEffect, useState } from "react";
-import { delay } from "motion";
-import TextupMotion, {
-  customEase,
-  textupVariant,
-} from "@/components/motion/TextupMotion";
+import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import useDeviceDetect from "@/hooks/useDeviceDetect";
+import { cn } from "@/utils";
+import {
+  MotionValue,
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { PanelProps, PanelTemplate, usePanel } from ".";
 
 interface ProfilePanelProps extends PanelProps {}
 
@@ -39,72 +36,6 @@ const LINK = [
     icon: <IconSpotify />,
   },
 ];
-
-const leftFadeInVariant = {
-  hidden: {
-    opacity: 1,
-  },
-  visible: {
-    opacity: 1,
-  },
-};
-/////////
-const LOGO_DELAY = 1;
-const LOGO_DURATION = 0.5;
-
-const logoVariant = {
-  hidden: {
-    maskSize: "0%",
-    maskPosition: "right center",
-    transition: {
-      duration: LOGO_DURATION,
-    },
-  },
-  visible: {
-    maskSize: "100%",
-    maskPosition: "left center",
-    transition: {
-      duration: LOGO_DURATION,
-      delay: LOGO_DELAY,
-      type: "spring",
-      stiffness: 50,
-    },
-  },
-};
-
-const afterLogoVariant = {
-  hidden: {
-    maskSize: "0%",
-  },
-  visible: {
-    maskSize: "100%",
-    maskPosition: "left center",
-    transition: {
-      duration: LOGO_DURATION,
-      delay: 0.1,
-      type: "spring",
-      stiffness: 50,
-    },
-  },
-};
-
-const iconVariant = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-  },
-  visible: (custom: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: LOGO_DURATION + 0.1 * custom,
-      duration: LOGO_DURATION,
-
-      type: "spring",
-      stiffness: 50,
-    },
-  }),
-};
 
 //2.0
 const profileImageVariant = {
@@ -143,7 +74,7 @@ function ProfilePanel(props: ProfilePanelProps) {
 
   const [innerHeight, setInnerHeight] = useState(2000);
 
-  const { scrollY, scrollYProgress } = useScroll();
+  const { scrollY } = useScroll();
 
   const [isPin, setIsPin] = useState(true);
 
@@ -161,8 +92,6 @@ function ProfilePanel(props: ProfilePanelProps) {
     stiffness: 300,
     damping: 40,
   });
-  const rotate = useTransform(scrollYSpring, [0, 1080], [0, 1080]);
-  const opacity = useTransform(scrollYSpring, [0, 100], [0.1, 1]);
   // 이름 등
 
   //2.0
@@ -327,15 +256,6 @@ function ProfilePanel(props: ProfilePanelProps) {
                 </motion.div>
                 <motion.div className="h-[70px] font-thin text-[50px] mo:text-[20px] italic  translate-x-[-10%]">
                   <TextupMotion isAnimate={isTextSectionEnd} text="AUTHENTIC" />
-                  {/* <NewTabAnchor href="http://label-authentic.com/">
-                  <Image
-                    src="/images/profile/authentic.png"
-                    width={1000}
-                    height={1000}
-                    alt="레이블 어센틱 로고"
-                    className="w-[150px]"
-                  />
-                </NewTabAnchor> */}
                 </motion.div>
               </div>
             </motion.div>
@@ -390,10 +310,6 @@ function Curtain(props: CurtainProps) {
         bottom: isPin ? "auto" : 0,
       }}
     >
-      {/* <motion.img
-        src="/images/profile/logo.svg"
-        className="w-3/4 my-auto mx-auto brightness-50"
-      /> */}
       <span className="text-[120px] mo:text-[60px] text-[#F50925] mt-auto ml-auto mb-md italic font-caslon">
         /ALBUM
       </span>

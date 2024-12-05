@@ -1,17 +1,15 @@
-import { IconYoutube } from "@/components/svg";
-import NewTabAnchor from "@/components/ui/NewTabAnchor";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { ALBUM_LIST } from "@/data/album";
-import { Album, SearchParams, Track } from "@/types";
+import useDeviceDetect from "@/hooks/useDeviceDetect";
+import { Album, SearchParams } from "@/types";
 import { cn, getYoutubeIdFromUrl } from "@/utils";
+import ClassNames from "embla-carousel-class-names";
+import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import YouTube from "react-youtube";
 import { PanelProps, PanelTemplate, usePanel } from ".";
-import LoadingSpinner from "@/components/LoadingSpinner";
-import useEmblaCarousel from "embla-carousel-react";
-import ClassNames from "embla-carousel-class-names";
-import useDeviceDetect from "@/hooks/useDeviceDetect";
 
 interface AlbumPanelProps extends PanelProps {
   searchParams?: SearchParams;
@@ -228,51 +226,6 @@ function AlbumPanel(props: AlbumPanelProps) {
           </div>
           {/* album info */}
           {selectedAlbum && <AlbumInfo album={selectedAlbum} />}
-          {/* <div className="flex-1 text-white p-md">
-            <div className="w-min min-w-[50%]">
-              {selectedAlbum && (
-                <>
-                  <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="flex flex-col"
-                  >
-                    <motion.h2 className="text-lg" variants={itemVariants}>
-                      {selectedAlbum.title}
-                    </motion.h2>
-                    <motion.span
-                      className="text-sm opacity-80"
-                      variants={itemVariants}
-                    >
-                      {albumTypeStr(selectedAlbum.type)}
-                    </motion.span>
-                   
-                    <motion.div className="mt-md" variants={itemVariants}>
-                      <h2>타이틀</h2>
-                      {titileYoutubeId && (
-                        <YouTube videoId={titileYoutubeId} className="mt-sm" />
-                      )}
-                    </motion.div>
-                    <div className="mt-md">
-                      <motion.h3 className="text-sm" variants={itemVariants}>
-                        트랙 리스트
-                      </motion.h3>
-                      <div className="mt-sm gap-xs">
-                        {selectedAlbum.trackList.map((track, idx) => (
-                          <TrackItem
-                            key={`${selectedAlbum.title}-${track.title}`}
-                            track={track}
-                            idx={idx}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                </>
-              )}
-            </div>
-          </div> */}
         </div>
       </div>
     </PanelTemplate>
@@ -371,7 +324,6 @@ function AlbumInfo({ album }: { album: Album }) {
             </motion.div>
           ))}
         </motion.div>
-        {/* <motion.div variants={infoItemVariant}>3</motion.div> */}
       </motion.div>
     </div>
   );
