@@ -1,3 +1,4 @@
+import { ALBUM_LIST } from "@/data/album";
 import { ScheduleType } from "@/types";
 import { parse } from "date-fns";
 
@@ -131,3 +132,13 @@ export const parseFormattedDate = (
 ): Date => {
   return parse(dateString, formatString, new Date());
 };
+
+export function generateAlbumData(title: string) {
+  const album = ALBUM_LIST.find((albumItem) => albumItem.engTitle === title);
+  const albumIndex = ALBUM_LIST.findIndex(
+    (albumItem) => albumItem.engTitle === title
+  );
+  const nextAlbum = ALBUM_LIST[albumIndex + 1] || ALBUM_LIST[0];
+
+  return { album, nextAlbum };
+}

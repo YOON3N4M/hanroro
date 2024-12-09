@@ -1,4 +1,4 @@
-export { default as takeOff } from "./take-off.webp";
+export { default as takeOff } from "./take-off.jpg";
 export { default as howToGoOn } from "./how-to-go-on.webp";
 export { default as dontBeAfraidToFall } from "./dont-be-afraid-to-fall.webp";
 export { default as evenIfYouLeave } from "./even-if-you-leave.webp";

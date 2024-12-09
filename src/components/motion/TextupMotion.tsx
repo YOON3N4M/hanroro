@@ -1,6 +1,8 @@
+import { cn } from "@/utils";
 import { motion } from "motion/react";
+import { HTMLAttributes } from "react";
 
-interface TextupMotionProps {
+interface TextupMotionProps extends HTMLAttributes<HTMLDivElement> {
   isAnimate?: boolean;
   text: string;
 }
@@ -41,7 +43,7 @@ export const textupVariant = {
 };
 
 function TextupMotion(props: TextupMotionProps) {
-  const { isAnimate, text } = props;
+  const { isAnimate = true, text, className } = props;
 
   const splitText = text.split("");
 
@@ -52,7 +54,7 @@ function TextupMotion(props: TextupMotionProps) {
       variants={containerVariant}
       initial="hidden"
       animate={isAnimate ? "visible" : "hidden"}
-      className="flex h-min overflow-hidden italic px-md"
+      className={cn("flex h-min overflow-hidden px-md")}
     >
       {splitText.map((t, idx) => (
         <motion.div
