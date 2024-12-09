@@ -11,6 +11,7 @@ import { API_BASE_URL } from "@/services";
 import AuthProvider from "@/components/auth/AuthProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import ToastPortal from "@/components/toast/ToastPortal";
+import SmoothScrolling from "@/components/layout/SmoothScrolling";
 
 const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS as string;
 const GOOGLE_SEARCH_VERIFICATION = process.env
@@ -72,7 +73,9 @@ export default function RootLayout({
         <h1 className="visually-hidden">hanroro | fansite</h1>
         <AuthProvider>
           <Header />
-          <main className="min-h-full pt-nav">{children}</main>
+          <SmoothScrolling>
+            <main className="min-h-full">{children}</main>
+          </SmoothScrolling>
           <Footer />
           <ModalPortal />
           <ToastPortal />
