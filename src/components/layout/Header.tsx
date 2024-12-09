@@ -9,8 +9,7 @@ function Header(props: HeaderProps) {
 
   return (
     <>
-      <div className="h-nav bg-default-black-bg absolute z-[99] w-full"></div>
-      <header className="bg-default-black-bg text-white text-xs h-nav w-full fixed z-[100]">
+      <header className="text-white text-xs h-nav w-full fixed z-[100] mix-blend-difference">
         <div className="inner h-full">
           <div className="flex gap-[10%] h-full items-center">
             <div className="">
