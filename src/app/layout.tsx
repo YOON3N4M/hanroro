@@ -73,9 +73,9 @@ export default function RootLayout({
         <h1 className="visually-hidden">hanroro | fansite</h1>
         <AuthProvider>
           <Header />
-          <SmoothScrolling>
-            <main className="min-h-full">{children}</main>
-          </SmoothScrolling>
+
+          <main className="min-h-full">{children}</main>
+
           <Footer />
           <ModalPortal />
           <ToastPortal />
