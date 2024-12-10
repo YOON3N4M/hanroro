@@ -41,8 +41,7 @@ function HomeContainer(props: HomeContainerProps) {
         src={["/images/album/home/5.webp", "/images/album/home/4.webp"]}
       /> */}
 
-      <ImageSection src={"/images/album/home/8.webp"} />
-      <ImageSection src={"/images/album/home/9.webp"} />
+      {/* <ImageSection src={"/images/album/home/8.webp"} /> */}
 
       <NextAlbumSection album={nextAlbum} />
     </div>

@@ -21,6 +21,7 @@ function ImageSection(props: ImageSectionProps) {
             src={src}
             className={cn("object-cover size-full", imageClassName)}
             alt=""
+            priority={false}
           />
         </div>
       </Container>
@@ -34,6 +35,7 @@ function ImageSection(props: ImageSectionProps) {
             width={3000}
             height={3000}
             src={s}
+            priority={false}
             className={cn("object-cover size-full", imageClassName)}
             alt=""
           />
