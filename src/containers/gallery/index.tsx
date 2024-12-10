@@ -141,7 +141,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
     console.log(masonryColumn);
   }, [masonryColumn]);
   return (
-    <div className="pt-md flex text-black gap-md min-h-screen-nav px-md mo:flex-col">
+    <div className="pt-md mt-[2rem] flex text-black gap-md min-h-screen-nav px-md mo:flex-col">
       {/* filter section */}
       <div className="basis-[20%] min-w-[300px] max-w-[375px] border py-md mo:w-full mo:max-w-full h-min">
         <div className="flex justify-center">
