@@ -72,11 +72,9 @@ export default function RootLayout({
       >
         <h1 className="visually-hidden">hanroro | fansite</h1>
         <AuthProvider>
-          <SmoothScrolling>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </SmoothScrolling>
+          <Header />
+          <main>{children}</main>
+          <Footer />
           <ModalPortal />
           <ToastPortal />
           {API_BASE_URL?.includes("localhost") && <Toolbar />}
