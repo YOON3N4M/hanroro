@@ -16,10 +16,11 @@ interface NextAlbumSectionProps {
   album: Album;
 }
 
-const defaultSize = 50;
+const defaultSize = 80;
 
 function NextAlbumSection(props: NextAlbumSectionProps) {
   const { album } = props;
+  const { title, releaseDate, engTitle, cover } = album;
 
   const { scrollYProgress } = useScroll();
   const [imageHeight, setImageHeight] = useState(defaultSize);
@@ -53,17 +54,15 @@ function NextAlbumSection(props: NextAlbumSectionProps) {
       onWheel={onWheel}
       className="mx-[5rem] flex flex-col items-center h-screen overflow-hidden"
     >
-      <h3>[NEXT PROJECT]</h3>
-      <h2 className="mt-[10rem] text-[7rem] font-medium">
-        {work.title.toUpperCase()}
-      </h2>
-      <span className="text-[7rem] font-caslon italic mb-[10rem]">
-        ({work.year})
+      <h3>[NEXT ALBUM]</h3>
+      <h2 className="mt-[10rem] text-[3rem] font-medium">{title}</h2>
+      <span className="text-[3rem] font-caslon italic mb-[10rem]">
+        ({releaseDate.slice(0, 4)})
       </span>
       <div className="flex-1 w-full">
         <Link
           className="flex justify-center items-end h-full"
-          href={`/case/${translateWorkTitle(work.title)}`}
+          href={`/album/${engTitle}`}
         >
           <motion.div
             style={{
@@ -73,9 +72,9 @@ function NextAlbumSection(props: NextAlbumSectionProps) {
             className="origin-bottom max-w-[50%]"
           >
             <Image
-              src={work.overlaySrc}
+              src={cover.src}
               className="size-full object-cover"
-              alt={work.title}
+              alt={title}
               width={1000}
               height={1000}
             />

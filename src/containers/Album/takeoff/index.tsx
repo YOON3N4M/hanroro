@@ -1,12 +1,12 @@
 "use client";
 
-import { Album } from "@/types";
+import { generateAlbumData } from "@/utils";
 import CategorySection from "../CategorySection";
 import ImageSection from "../ImageSection";
-import InfromationSection from "../InfromationSection";
+import InformationSection from "../InformationSection";
 import IntroSection from "../IntroSection";
+import NextAlbumSection from "../NextAlbumSection";
 import VideoSection from "../VideoSection";
-import { generateAlbumData } from "@/utils";
 
 interface TakeOffContainerProps {}
 
@@ -24,13 +24,13 @@ function TakeOffContainer(props: TakeOffContainerProps) {
     //   gradientBgStyles["takeOff"]
     // )}
     >
-      <IntroSection workTitle="이상비행" workYear="2022" />
+      <IntroSection title={title} releaseDate={releaseDate} />
       <CategorySection format={type} label="Authentic" release={releaseDate} />
       <VideoSection
         src="/video/takeoff.mp4"
         overlaySrc="/images/album/takeoff/0.jpg"
       />
-      <InfromationSection album={album} />
+      <InformationSection album={album} />
 
       <ImageSection src={"/images/album/takeoff/2.jpg"} />
       {/* <ImageSection
@@ -38,14 +38,15 @@ function TakeOffContainer(props: TakeOffContainerProps) {
         src={["/images/album/take-off.webp", "/images/album/takeoff/1.webp"]}
       /> */}
       <ImageSection
-        imageClassName="h-[720px] tab:h-[400px]"
+        imageClassName=""
         src={["/images/album/takeoff/3.jpg", "/images/album/takeoff/5.jpg"]}
       />
       <ImageSection
         src={"/images/album/takeoff/4.jpg"}
-        imageClassName="w-[80%] h-[720px]"
+        imageClassName="w-[80%] ml-auto"
       />
       <ImageSection src={"/images/album/takeoff/6.jpg"} />
+      <NextAlbumSection album={nextAlbum} />
     </div>
   );
 }

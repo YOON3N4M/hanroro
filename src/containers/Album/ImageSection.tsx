@@ -14,27 +14,30 @@ function ImageSection(props: ImageSectionProps) {
   if (typeof src === "string")
     return (
       <Container className={justfy}>
-        <Image
-          width={3000}
-          height={3000}
-          src={src}
-          className={cn("object-cover", imageClassName || "h-[720px]")}
-          alt=""
-        />
+        <div className="flex-1 flex justify-center">
+          <Image
+            width={3000}
+            height={3000}
+            src={src}
+            className={cn("object-cover size-full", imageClassName)}
+            alt=""
+          />
+        </div>
       </Container>
     );
 
   return (
     <Container className="gap-lg">
       {src.map((s) => (
-        <Image
-          key={s}
-          width={3000}
-          height={3000}
-          src={s}
-          className={cn("object-cover flex-1", imageClassName || "h-auto")}
-          alt=""
-        />
+        <div key={s} className="flex-1 flex justify-center">
+          <Image
+            width={3000}
+            height={3000}
+            src={s}
+            className={cn("object-cover size-full", imageClassName)}
+            alt=""
+          />
+        </div>
       ))}
     </Container>
   );
@@ -49,7 +52,12 @@ interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
 function Container(props: ContainerProps) {
   const { children, className } = props;
   return (
-    <div className={cn("px-[5rem] flex mb-[20rem] w-full", className)}>
+    <div
+      className={cn(
+        "inner justify-center flex mb-[20rem] tab:flex-col",
+        className
+      )}
+    >
       {children}
     </div>
   );
