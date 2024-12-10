@@ -21,22 +21,26 @@ function TheLastStopOfPainContainer(props: TheLastStopOfPainContainerProps) {
     <div>
       <IntroSection title={title} releaseDate={releaseDate} />
       <CategorySection format={type} label="Authentic" release={releaseDate} />
-      <VideoSection src="/video/dontbeafraidtofall.mp4" />
+      <VideoSection src="/video/thelaststopofpain.mp4" />
       <InformationSection album={album} />
 
-      <ImageSection src={"/images/album/dontbeafraidtofall/1.webp"} />
+      <ImageSection src={"/images/album/thelaststopofpain/1.jpg"} />
+
       <ImageSection
         src={[
-          "/images/album/dontbeafraidtofall/2.webp",
-          "/images/album/dontbeafraidtofall/4.webp",
+          "/images/album/thelaststopofpain/2.webp",
+          "/images/album/thelaststopofpain/3.webp",
         ]}
       />
       <ImageSection
-        src={"/images/album/dontbeafraidtofall/3.webp"}
-        imageClassName="w-[80%]"
+        src={[
+          "/images/album/thelaststopofpain/5.webp",
+          "/images/album/thelaststopofpain/6.webp",
+        ]}
       />
 
-      {/* <ImageSection src={"/images/album/dontbeafraidtofall/6.jpg"} /> */}
+      {/* <ImageSection src={"/images/album/thelaststopofpain/6.jpg"} /> */}
+      <ImageSection src={"/images/album/thelaststopofpain/4.webp"} />
       <NextAlbumSection album={nextAlbum} />
     </div>
   );
