@@ -1,4 +1,5 @@
 import { Album } from "@/types";
+import { exceptionHandleAlbumHref } from "@/utils";
 import { motionValue } from "motion";
 import {
   motion,
@@ -62,7 +63,7 @@ function NextAlbumSection(props: NextAlbumSectionProps) {
       <div className="flex-1 w-full">
         <Link
           className="flex justify-center items-end h-full"
-          href={`/album/${engTitle.toLocaleLowerCase()}`}
+          href={exceptionHandleAlbumHref(engTitle)}
         >
           <motion.div
             style={{

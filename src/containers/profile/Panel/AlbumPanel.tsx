@@ -2,7 +2,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import { ALBUM_LIST } from "@/data/album";
 import useDeviceDetect from "@/hooks/useDeviceDetect";
 import { Album, SearchParams } from "@/types";
-import { cn, getYoutubeIdFromUrl } from "@/utils";
+import { cn, exceptionHandleAlbumHref, getYoutubeIdFromUrl } from "@/utils";
 import ClassNames from "embla-carousel-class-names";
 import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -10,6 +10,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import YouTube from "react-youtube";
 import { PanelProps, PanelTemplate, usePanel } from ".";
+import { useRouter } from "next/navigation";
 
 interface AlbumPanelProps extends PanelProps {
   searchParams?: SearchParams;
@@ -62,75 +63,27 @@ const gradientBgStyles: { [key in any]: string } = {
 function AlbumPanel(props: AlbumPanelProps) {
   const { activePanelIndex, panelIndex, searchParams } = props;
   const { isPanelActive } = usePanel(activePanelIndex, panelIndex);
-  const { isPc, isTab, isMobile } = useDeviceDetect();
+
+  const router = useRouter();
 
   const [isIntroEnd, setIsIntroEnd] = useState(false);
-  const [activeAlbumIndex, setActiveAlbumIndex] = useState<number | null>(null);
-  const [isCarouselMode, setIsCarouselMode] = useState(false);
-
-  const isAlbumSelected = activeAlbumIndex !== null;
-  const selectedAlbum = isAlbumSelected && ALBUM_LIST[activeAlbumIndex];
-
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      active: false,
-      align: "start",
-      dragFree: true,
-      breakpoints: {
-        "(min-width: 1200px)": { axis: "y" },
-        "(max-width: 1199px)": { axis: "x" },
-      },
-    },
-    [ClassNames({ snapped: "active-slide" })]
-  );
 
   function onClickAlbum(idx: number) {
-    if (!isIntroEnd) return;
-
-    if (activeAlbumIndex === idx) {
-      setActiveAlbumIndex(null);
-      setIsCarouselMode(false);
-      return;
-    }
-    setIsCarouselMode(true);
-    setTimeout(() => {
-      if (emblaApi) {
-        emblaApi.scrollTo(idx);
-      }
-    }, 500);
-
-    setActiveAlbumIndex(idx);
+    const album = ALBUM_LIST[idx];
+    const handleEarly = ["systemError", "howToGoOn"];
+    const href = exceptionHandleAlbumHref(album.engTitle);
+    router.push(href);
   }
-
-  useEffect(() => {
-    if (!isPanelActive) {
-      setActiveAlbumIndex(null);
-      setIsCarouselMode(false);
-    }
-  }, [isPanelActive]);
-
-  useEffect(() => {
-    if (!isIntroEnd) return;
-    if (!searchParams) return;
-
-    if (searchParams.album) {
-      const targetAlbum = ALBUM_LIST.findIndex(
-        (album) => album.title === searchParams.album
-      );
-
-      onClickAlbum(targetAlbum);
-    }
-  }, [isIntroEnd]);
 
   return (
     <PanelTemplate
       isPanelActive={isPanelActive}
       className={cn(
-        "",
-        selectedAlbum && gradientBgStyles[selectedAlbum.engTitle]
+        ""
+        // selectedAlbum && gradientBgStyles[selectedAlbum.engTitle]
       )}
     >
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {selectedAlbum && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -143,30 +96,22 @@ function AlbumPanel(props: AlbumPanelProps) {
             key={`${selectedAlbum.title}-bg`}
           />
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
       <h3 className="visually-hidden">앨범</h3>
       <div className={cn("size-full relative tab:inner")}>
         <div
           className={cn(
             "w-[80vw] tab:w-full h-full absolute tab:relative center flex pc:gap-[10%] tab:flex-col",
-            !isCarouselMode && "tab:justify-center",
-            isCarouselMode && "tab:w-screen"
+            "tab:justify-center"
           )}
         >
           {/* album grid */}
-          <div
-            className={cn(
-              "pc:flex items-center relative",
-              isCarouselMode && " tab:w-screen"
-            )}
-            ref={emblaRef}
-          >
+          <div className={cn("pc:flex items-center relative")}>
             <div
               className={cn(
                 "relative",
-                isCarouselMode
-                  ? "flex pc:flex-col pc:w-[300px] pc:!h-full gap-sm tab:h-[150px] tab:flex-row w-full"
-                  : "grid grid-cols-5 tab:grid-cols-4 mo:!grid-cols-3 h-min "
+
+                "grid grid-cols-5 tab:grid-cols-4 mo:!grid-cols-3 h-min "
               )}
             >
               {ALBUM_LIST.map((album, idx) => (
@@ -181,51 +126,23 @@ function AlbumPanel(props: AlbumPanelProps) {
                   onClick={() => onClickAlbum(idx)}
                   className={cn(
                     "relative tab:shrink-0 h-min",
-                    "aspect-square",
+                    "aspect-square"
                     // activeAlbumIndex !== null && "absolute top-[20%]",
-                    idx == activeAlbumIndex && "z-[10]",
-                    isCarouselMode && "tab:size-[150px]"
                   )}
-                  onAnimationComplete={
-                    idx === ALBUM_LIST.length - 1
-                      ? () => {
-                          setIsIntroEnd(true);
-                          if (emblaApi) {
-                            emblaApi.reInit({ active: true });
-                          }
-                        }
-                      : undefined
-                  }
                 >
-                  {/* cd shape */}
-                  <motion.div
-                    className="absolute y-center size-[80%] tab:hidden"
-                    initial={{ marginLeft: 0, opacity: 0 }}
-                    animate={
-                      idx === activeAlbumIndex
-                        ? { marginLeft: "60%", opacity: 1 }
-                        : { marginLeft: 0, opacity: 0 }
-                    }
-                  >
-                    <div className="cd"></div>
-                  </motion.div>
-
                   <Image
                     src={album.cover.src}
                     height={1000}
                     width={1000}
                     alt={album.title}
                     className={cn(
-                      "object-cover brightness-50 transition-all hover:brightness-100",
-                      activeAlbumIndex === idx && "!brightness-100"
+                      "object-cover brightness-50 transition-all hover:brightness-100"
                     )}
                   />
                 </motion.button>
               ))}
             </div>
           </div>
-          {/* album info */}
-          {selectedAlbum && <AlbumInfo album={selectedAlbum} />}
         </div>
       </div>
     </PanelTemplate>

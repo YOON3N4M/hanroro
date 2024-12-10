@@ -132,7 +132,9 @@ export const parseFormattedDate = (
 ): Date => {
   return parse(dateString, formatString, new Date());
 };
-
+/**
+ * 앨범 페이지 마크업에 필요한 앨범, 다음 앨범을 반환하는 함수
+ */
 export function generateAlbumData(title: string) {
   const album = ALBUM_LIST.find((albumItem) => albumItem.engTitle === title);
   const albumIndex = ALBUM_LIST.findIndex(
@@ -141,4 +143,17 @@ export function generateAlbumData(title: string) {
   const nextAlbum = ALBUM_LIST[albumIndex + 1] || ALBUM_LIST[0];
 
   return { album, nextAlbum };
+}
+
+/**
+ * 앨범 페이지로 이동하는 기능의 href의 예외처리를 위한 함수
+ */
+export function exceptionHandleAlbumHref(engTitle: string) {
+  const exceptionList = ["systemError", "howToGoOn"];
+
+  if (exceptionList.includes(engTitle)) {
+    return `/album/home`;
+  } else {
+    return `/album/${engTitle.toLowerCase()}`;
+  }
 }
