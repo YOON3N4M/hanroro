@@ -9,7 +9,7 @@ function IntroSection(props: IntroSectionProps) {
   const { title, releaseDate } = props;
 
   return (
-    <div className="py-[5rem] px-[5rem] flex-col flex items-center text-[5rem]  tab:text-[4rem]">
+    <div className="py-[5rem] px-[5rem] flex-col flex items-center text-[5rem] tab:text-[3rem]">
       <div>
         <TextupMotion text={title.toUpperCase()} />
       </div>

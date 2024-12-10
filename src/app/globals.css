@@ -99,7 +99,7 @@ main {
     text-wrap: balance;
   }
   .inner {
-    @apply w-full mx-auto px-[5rem] tab:px-[2rem];
+    @apply w-full max-w-[1600px] mx-auto px-[5rem] tab:px-[2rem];
   }
   .drag-unable {
     -webkit-user-select: none;

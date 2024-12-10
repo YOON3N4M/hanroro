@@ -30,7 +30,7 @@ function VideoSection(props: VideoSectionProps) {
         </motion.div>
       )}
       <div className="w-full">
-        <video className="size-full" autoPlay loop muted>
+        <video className="size-full" autoPlay loop muted playsInline>
           <source src={src} type="video/mp4" />
         </video>
       </div>

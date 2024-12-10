@@ -73,7 +73,7 @@ export default function RootLayout({
         <h1 className="visually-hidden">hanroro | fansite</h1>
         <AuthProvider>
           <Header />
-          <main>{children}</main>
+          <main className="min-h-full">{children}</main>
           <Footer />
           <ModalPortal />
           <ToastPortal />
