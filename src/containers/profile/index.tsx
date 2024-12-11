@@ -2,13 +2,13 @@
 import useEmblaCarousel from "embla-carousel-react";
 import TextupMotion, { customEase } from "@/components/motion/TextupMotion";
 import { SearchParams } from "@/types";
-import { exceptionHandleAlbumHref, scrollMove } from "@/utils";
+import { cn, exceptionHandleAlbumHref, scrollMove } from "@/utils";
 import { useEffect, useState } from "react";
 import { BasicCarousel } from "@/components/carousel";
 import { ALBUM_LIST } from "@/data/album";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   IconInstagram,
   IconNaver,
@@ -66,10 +66,27 @@ const nameVariant = {
   }),
 };
 
+const gradientBgStyles: { [key in any]: string } = {
+  letMeLoveMyYouth: "from-[#ffffff60]",
+  mirror: "from-[#dd000063]",
+  dontBeAfraidToFall: "from-[#e0d10060]",
+  theLastStopOfPain: "from-[#c8e0f16c]",
+  evenIfYouLeave: "from-[#6ea7ca6b]",
+  takeOff: "from-[#0909f289]",
+  mayfly: "from-[#edb16c4f]",
+  systemError: "from-[#bf062557]",
+  howToGoOn: "from-[#bf062573]",
+  home: "from-[#bf06258a]",
+  theCompass: "from-[#092a01]",
+};
+
 export default function ProfileContainer(props: ProfileContainerProps) {
   const { searchParams } = props;
 
   const [isCarouselAnimateEnd, setIsCarouselAnimateEnd] = useState(false);
+  const [hoveredAlbum, setHoveredAlbum] = useState<undefined | string>(
+    undefined
+  );
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
@@ -78,19 +95,34 @@ export default function ProfileContainer(props: ProfileContainerProps) {
   });
 
   return (
-    <div className="inner h-[100dvh] border">
-      <h2 className="visually-hidden">프로필</h2>
-      <div className="size-full flex flex-col relative">
-        {/* name */}
-        <div className="mt-[7rem] tab:mt-[2rem] ">
-          <div className="text-[9rem] tab:text-[4rem] font-medium flex">
-            <TextupMotion text={"HANRORO"} />
+    <div className={cn("relative")}>
+      <AnimatePresence>
+        {hoveredAlbum && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 1 } }}
+            exit={{ opacity: 0 }}
+            className={cn(
+              "size-full absolute -z-10- bg-gradient-to-l via-transparent to-transparent",
+              hoveredAlbum && gradientBgStyles[hoveredAlbum]
+            )}
+            key={`${hoveredAlbum}-bg`}
+          />
+        )}
+      </AnimatePresence>
+      <div className="inner h-[100dvh]">
+        <h2 className="visually-hidden">프로필</h2>
+        <div className="size-full flex flex-col relative">
+          {/* name */}
+          <div className="mt-[7rem] tab:mt-[2rem] ">
+            <div className="text-[9rem] tab:text-[4rem] font-medium flex">
+              <TextupMotion text={"HANRORO"} />
+            </div>
           </div>
-        </div>
-        {/* desc, icons */}
-        <div className="w-full flex pc:my-auto tab:mt-[3rem]">
-          <div className="flex-1">
-            {/* <motion.p
+          {/* desc, icons */}
+          <div className="w-full flex pc:my-auto tab:mt-[3rem]">
+            <div className="flex-1">
+              {/* <motion.p
               className="text-[2rem]"
               initial={{ opacity: 0 }}
               animate={
@@ -106,71 +138,74 @@ export default function ProfileContainer(props: ProfileContainerProps) {
               못지않은 용기로 한로로는 분연히 시대의 아픔을 관통하고{" "}
               <br className="mo:hidden" /> 우리와 유대합니다.
             </motion.p> */}
-          </div>
-          <div className="ml-auto pl-[2rem] flex flex-col text-[1.5rem] gap-sm items-end">
-            {LINK.map((link, idx) => (
-              <motion.div
-                key={link.link}
-                initial={{ opacity: 0 }}
-                animate={
-                  isCarouselAnimateEnd && {
-                    opacity: 1,
-                    transition: { duration: 1 },
+            </div>
+            <div className="ml-auto pl-[2rem] flex flex-col text-[1.5rem] gap-sm items-end">
+              {LINK.map((link, idx) => (
+                <motion.div
+                  key={link.link}
+                  initial={{ opacity: 0 }}
+                  animate={
+                    isCarouselAnimateEnd && {
+                      opacity: 1,
+                      transition: { duration: 1 },
+                    }
                   }
-                }
-                className="brightness-50 hover:brightness-100 transition-all"
-              >
-                <NewTabAnchor href={link.link}>{link.icon}</NewTabAnchor>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-        {/* album carousel */}
-        <div className="mt-auto mb-md tab:mb-sm">
-          <BasicCarousel emblaRef={emblaRef}>
-            {ALBUM_LIST.map((album, idx) => (
-              <div
-                key={album.engTitle}
-                className="basis-[20%] relative tab:basis-[45%] flex shrink-0 ml-md tab:ml-sm"
-              >
-                <Link
-                  href={exceptionHandleAlbumHref(album.engTitle)}
-                  className="size-full"
+                  className="brightness-50 hover:brightness-100 transition-all"
                 >
-                  <motion.span
-                    className="flex flex-col-reverse"
-                    variants={carouselItemVariant}
-                    initial="hidden"
-                    animate={"visible"}
+                  <NewTabAnchor href={link.link}>{link.icon}</NewTabAnchor>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          {/* album carousel */}
+          <div className="mt-auto mb-md tab:mb-sm">
+            <BasicCarousel emblaRef={emblaRef}>
+              {ALBUM_LIST.map((album, idx) => (
+                <div
+                  onMouseEnter={() => setHoveredAlbum(album.engTitle)}
+                  onMouseLeave={() => setHoveredAlbum(undefined)}
+                  key={album.engTitle}
+                  className="basis-[20%] relative tab:basis-[45%] flex shrink-0 ml-md tab:ml-sm"
+                >
+                  <Link
+                    href={exceptionHandleAlbumHref(album.engTitle)}
+                    className="size-full"
                   >
-                    <motion.div
-                      variants={maskVariant}
-                      custom={idx}
-                      className="size-full mask aspect-square mt-sm"
-                      onAnimationComplete={() =>
-                        idx === 1 && setIsCarouselAnimateEnd(true)
-                      }
-                    >
-                      <Image
-                        src={album.cover.src}
-                        width={album.cover.width}
-                        height={album.cover.height}
-                        alt={album.title}
-                        className="size-full brightness-50 hover:brightness-100 transition-all"
-                      />
-                    </motion.div>
                     <motion.span
-                      className="text-sm font-extralight"
-                      variants={nameVariant}
-                      custom={idx}
+                      className="flex flex-col-reverse"
+                      variants={carouselItemVariant}
+                      initial="hidden"
+                      animate={"visible"}
                     >
-                      {album.title}
+                      <motion.div
+                        variants={maskVariant}
+                        custom={idx}
+                        className="size-full mask aspect-square mt-sm"
+                        onAnimationComplete={() =>
+                          idx === 1 && setIsCarouselAnimateEnd(true)
+                        }
+                      >
+                        <Image
+                          src={album.cover.src}
+                          width={album.cover.width}
+                          height={album.cover.height}
+                          alt={album.title}
+                          className="size-full brightness-50 hover:brightness-100 transition-all"
+                        />
+                      </motion.div>
+                      <motion.span
+                        className="text-sm font-extralight"
+                        variants={nameVariant}
+                        custom={idx}
+                      >
+                        {album.title}
+                      </motion.span>
                     </motion.span>
-                  </motion.span>
-                </Link>
-              </div>
-            ))}
-          </BasicCarousel>
+                  </Link>
+                </div>
+              ))}
+            </BasicCarousel>
+          </div>
         </div>
       </div>
     </div>

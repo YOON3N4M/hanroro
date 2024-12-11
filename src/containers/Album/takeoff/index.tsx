@@ -10,12 +10,6 @@ import VideoSection from "../VideoSection";
 
 interface TakeOffContainerProps {}
 
-const gradientBgStyles: { [key in any]: string } = {
-  systemError: "from-[#bf062557]",
-  howToGoOn: "from-[#bf062573]",
-  home: "from-[#bf06258a]",
-};
-
 function TakeOffContainer(props: TakeOffContainerProps) {
   const {} = props;
 
