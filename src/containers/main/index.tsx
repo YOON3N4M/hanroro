@@ -53,7 +53,7 @@ function MainContainer(props: MainContainerProps) {
         <div className="flex-1 border">
           <ContentModule
             staticImage={theCompass}
-            linkHref="/profile?album=나침반"
+            linkHref="/album/thecompass"
             alt="hanroro single compass cover image"
           >
             <div className="mt-auto pb-[60px] flex flex-col items-center font-[100]">
