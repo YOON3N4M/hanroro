@@ -13,8 +13,8 @@ function IntroSection(props: IntroSectionProps) {
       <div>
         <TextupMotion text={title.toUpperCase()} />
       </div>
-      <div className=" font-caslon italic">
-        <TextupMotion text={`(${releaseDate.slice(0, 4)})`} />
+      <div className="font-caslon italic">
+        <TextupMotion className="px-md" text={`(${releaseDate.slice(0, 4)})`} />
       </div>
     </div>
   );

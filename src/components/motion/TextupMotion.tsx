@@ -54,7 +54,7 @@ function TextupMotion(props: TextupMotionProps) {
       variants={containerVariant}
       initial="hidden"
       animate={isAnimate ? "visible" : "hidden"}
-      className={cn("flex h-min overflow-hidden")}
+      className={cn("flex h-min overflow-hidden", className)}
     >
       {splitText.map((t, idx) => (
         <motion.div
