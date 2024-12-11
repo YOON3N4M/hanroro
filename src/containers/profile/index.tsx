@@ -1,86 +1,177 @@
 "use client";
-
-import { cn, scrollMove } from "@/utils";
-import { useEffect, useState } from "react";
-import ProfileSection from "./ProfileSection";
-import AlbumPanel from "./Panel/AlbumPanel";
-import ProfilePanel from "./Panel/ProfilePanel";
+import useEmblaCarousel from "embla-carousel-react";
+import TextupMotion, { customEase } from "@/components/motion/TextupMotion";
 import { SearchParams } from "@/types";
-
-export interface Tab {
-  kor: string;
-  eng: string;
-  vh?: number;
-}
+import { exceptionHandleAlbumHref, scrollMove } from "@/utils";
+import { useEffect, useState } from "react";
+import { BasicCarousel } from "@/components/carousel";
+import { ALBUM_LIST } from "@/data/album";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "motion/react";
+import {
+  IconInstagram,
+  IconNaver,
+  IconSpotify,
+  IconYoutube,
+} from "@/components/svg";
+import NewTabAnchor from "@/components/ui/NewTabAnchor";
 
 interface ProfileContainerProps {
   searchParams?: SearchParams;
 }
 
-const tabList: Tab[] = [
-  { kor: "프로필", eng: "profile", vh: 2 },
-  { kor: "앨범", eng: "album" },
+const LINK = [
+  { link: "https://www.instagram.com/hanr0r0/?hl=ko", icon: <IconInstagram /> },
+  {
+    link: "https://www.youtube.com/channel/UCrDa_5OU-rhvXqWlPx5hgKQ",
+    icon: <IconYoutube />,
+  },
+  { link: "https://blog.naver.com/hanr0r0", icon: <IconNaver /> },
+  {
+    link: "https://open.spotify.com/user/31b5u2b6imqqe6ddalfnqvbpdbbm",
+    icon: <IconSpotify />,
+  },
 ];
+
+const maskVariant = {
+  hidden: {},
+  visible: (custom: number) => ({
+    maskSize: "100% 100%",
+    transition: { duration: 1.5, ease: customEase, delay: custom * 0.075 },
+  }),
+};
+
+const carouselItemVariant = {
+  hidden: {
+    opacity: 1,
+  },
+  visible: {
+    transition: {
+      staggerChildren: 0.7,
+    },
+  },
+};
+
+const nameVariant = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: (custom: number) => ({
+    opacity: 1,
+    transition: {
+      duration: 1,
+      delay: custom * 0.25,
+    },
+  }),
+};
 
 export default function ProfileContainer(props: ProfileContainerProps) {
   const { searchParams } = props;
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [isCarouselAnimateEnd, setIsCarouselAnimateEnd] = useState(false);
 
-  function onClickNav(idx: number) {
-    // setActiveIndex(idx);
-    const target = tabList[idx].eng;
-    scrollMove(target);
-  }
-
-  useEffect(() => {
-    if (!searchParams) return;
-    if (searchParams.album) {
-      scrollMove("album");
-    }
-  }, []);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    loop: true,
+    dragFree: true,
+  });
 
   return (
-    <div className="relative h-[400vh] flex flex-col overflow-visible">
+    <div className="inner h-[100dvh] border">
       <h2 className="visually-hidden">프로필</h2>
-      {/* nav */}
-      <div className="fixed top-[30%] tab:flex-row tab:gap-sm tab:top-[50px] left-[30px] z-[30] flex flex-col animate-fadeIn">
-        {tabList.map((tab, idx) => (
-          <button
-            key={`${tab.eng}-nav`}
-            className={cn(
-              "text-start text-white text-sm transition-opacity opacity-40",
-              idx === activeIndex && "!opacity-100 !text-base"
-            )}
-            onClick={() => onClickNav(idx)}
-          >
-            {tab.kor}
-          </button>
-        ))}
-      </div>
-      {/* panel */}
-      <div className="h-screen-nav fixed bg-default-black-bg z-[25] w-full animate-fadeIn">
-        <div className="size-full relative">
-          <ProfilePanel activePanelIndex={activeIndex} panelIndex={0} />
-          <AlbumPanel
-            activePanelIndex={activeIndex}
-            panelIndex={1}
-            searchParams={searchParams}
-          />
+      <div className="size-full flex flex-col relative">
+        {/* name */}
+        <div className="mt-[7rem] tab:mt-[2rem] ">
+          <div className="text-[9rem] tab:text-[4rem] font-medium flex">
+            <TextupMotion text={"HANRORO"} />
+          </div>
         </div>
-      </div>
-      {/* spacer (scroll-trigger) */}
-      <div className="absolute top-0 left-0 w-full h-min">
-        {tabList.map((tab, idx) => (
-          <ProfileSection
-            tab={tab}
-            index={idx}
-            key={`profile-section-${tab.eng}`}
-            indexSetter={setActiveIndex}
-          />
-        ))}
-        <div className="h-screen-nav border relative bg-default-black-bg"></div>
-        {/* <div className="h-screen-nav w-full"></div> */}
+        {/* desc, icons */}
+        <div className="w-full flex pc:my-auto tab:mt-[3rem]">
+          <div className="flex-1">
+            {/* <motion.p
+              className="text-[2rem]"
+              initial={{ opacity: 0 }}
+              animate={
+                isCarouselAnimateEnd && {
+                  opacity: 1,
+                  transition: { duration: 1 },
+                }
+              }
+            >
+              다가올 미래를 두려워하는 청춘에게 손을 건네는 것으로 그의 작품은
+              시작됩니다.
+              <br className="mo:hidden" /> 누구보다 자신의 두려움이 크지만,{" "}
+              못지않은 용기로 한로로는 분연히 시대의 아픔을 관통하고{" "}
+              <br className="mo:hidden" /> 우리와 유대합니다.
+            </motion.p> */}
+          </div>
+          <div className="ml-auto pl-[2rem] flex flex-col text-[1.5rem] gap-sm items-end">
+            {LINK.map((link, idx) => (
+              <motion.div
+                key={link.link}
+                initial={{ opacity: 0 }}
+                animate={
+                  isCarouselAnimateEnd && {
+                    opacity: 1,
+                    transition: { duration: 1 },
+                  }
+                }
+                className="brightness-50 hover:brightness-100 transition-all"
+              >
+                <NewTabAnchor href={link.link}>{link.icon}</NewTabAnchor>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        {/* album carousel */}
+        <div className="mt-auto mb-md tab:mb-sm">
+          <BasicCarousel emblaRef={emblaRef}>
+            {ALBUM_LIST.map((album, idx) => (
+              <div
+                key={album.engTitle}
+                className="basis-[20%] relative tab:basis-[45%] flex shrink-0 ml-md tab:ml-sm"
+              >
+                <Link
+                  href={exceptionHandleAlbumHref(album.engTitle)}
+                  className="size-full"
+                >
+                  <motion.span
+                    className="flex flex-col-reverse"
+                    variants={carouselItemVariant}
+                    initial="hidden"
+                    animate={"visible"}
+                  >
+                    <motion.div
+                      variants={maskVariant}
+                      custom={idx}
+                      className="size-full mask aspect-square mt-sm"
+                      onAnimationComplete={() =>
+                        idx === 1 && setIsCarouselAnimateEnd(true)
+                      }
+                    >
+                      <Image
+                        src={album.cover.src}
+                        width={album.cover.width}
+                        height={album.cover.height}
+                        alt={album.title}
+                        className="size-full brightness-50 hover:brightness-100 transition-all"
+                      />
+                    </motion.div>
+                    <motion.span
+                      className="text-sm font-extralight"
+                      variants={nameVariant}
+                      custom={idx}
+                    >
+                      {album.title}
+                    </motion.span>
+                  </motion.span>
+                </Link>
+              </div>
+            ))}
+          </BasicCarousel>
+        </div>
       </div>
     </div>
   );

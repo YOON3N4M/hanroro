@@ -1,6 +1,5 @@
 "use client";
 
-import { ScheduleResult } from "@/app/calendar/page";
 import Calendar from "@/components/calendar";
 import useCalendar from "@/components/calendar/useCalendar";
 import { BasicCarousel } from "@/components/carousel";
@@ -11,11 +10,11 @@ import useModal from "@/components/modal/useModal";
 import { IconRightLeft, IconRightRight } from "@/components/svg";
 
 import { useUserDoc } from "@/store/auth";
+import { ScheduleDoc, ScheduleType } from "@/types";
 import { cn, getNumberDate, translateScheduleType } from "@/utils";
 import { format } from "date-fns";
 import useEmblaCarousel from "embla-carousel-react";
 import { HTMLAttributes, ReactNode, useState } from "react";
-import { ScheduleDoc, ScheduleType } from "@/types";
 export interface Filter {
   type: ScheduleType;
   kor: string;

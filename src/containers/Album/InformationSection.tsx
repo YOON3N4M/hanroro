@@ -22,8 +22,8 @@ function InformationSection(props: InformationSectionProps) {
             alt={album.title}
           />
         </div>
-        <div className="flex-1 flex flex-col gap-xl">
-          <div className="flex tab:flex-col tab:gap-md">
+        <div className="flex-1 flex flex-col gap-xl tab:text-sm">
+          <div className="flex tab:flex-col tab:gap-sm">
             <div className="basis-[20%] shrink-0">
               <span>[앨범 소개]</span>
             </div>
@@ -31,7 +31,7 @@ function InformationSection(props: InformationSectionProps) {
               <p className="">{desc}</p>
             </div>
           </div>
-          <div className="flex tab:flex-col tab:gap-md">
+          <div className="flex tab:flex-col tab:gap-sm">
             <div className="basis-[20%]">
               <span>[수록곡]</span>
             </div>

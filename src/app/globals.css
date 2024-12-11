@@ -124,9 +124,9 @@ main {
   }
   .mask {
     mask-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
-    mask-size: 0px 100%;
+    mask-size: 100% 0%;
     mask-repeat: no-repeat;
-    mask-position: left center;
+    mask-position: bottom;
     object-fit: cover;
   }
 }
