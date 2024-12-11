@@ -1,12 +1,12 @@
 "use client";
 import useEmblaCarousel from "embla-carousel-react";
 import TextupMotion, { customEase } from "@/components/motion/TextupMotion";
-import { SearchParams } from "@/types";
+import { Album, SearchParams } from "@/types";
 import { cn, exceptionHandleAlbumHref, scrollMove } from "@/utils";
 import { useEffect, useState } from "react";
 import { BasicCarousel } from "@/components/carousel";
 import { ALBUM_LIST } from "@/data/album";
-import Link from "next/link";
+import { Link, useTransitionRouter } from "next-view-transitions";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import {
@@ -88,11 +88,19 @@ export default function ProfileContainer(props: ProfileContainerProps) {
     undefined
   );
 
+  const router = useTransitionRouter();
+
+  const [selectedAlbum, setSelectedAlbum] = useState<undefined | string>();
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: true,
     dragFree: true,
   });
+
+  function onClickAlbum(album: Album) {
+    setSelectedAlbum(album.engTitle);
+    router.push(exceptionHandleAlbumHref(album.engTitle));
+  }
 
   return (
     <div className={cn("relative")}>
@@ -162,15 +170,16 @@ export default function ProfileContainer(props: ProfileContainerProps) {
             <BasicCarousel emblaRef={emblaRef}>
               {ALBUM_LIST.map((album, idx) => (
                 <div
+                  onClick={() => onClickAlbum(album)}
                   onMouseEnter={() => setHoveredAlbum(album.engTitle)}
                   onMouseLeave={() => setHoveredAlbum(undefined)}
                   key={album.engTitle}
-                  className="basis-[20%] relative tab:basis-[45%] flex shrink-0 ml-md tab:ml-sm"
+                  className={cn(
+                    "basis-[20%] relative cursor-pointer tab:basis-[45%] flex shrink-0 ml-md tab:ml-sm",
+                    selectedAlbum === album.engTitle && "cover-transition"
+                  )}
                 >
-                  <Link
-                    href={exceptionHandleAlbumHref(album.engTitle)}
-                    className="size-full"
-                  >
+                  <div className="size-full">
                     <motion.span
                       className="flex flex-col-reverse"
                       variants={carouselItemVariant}
@@ -201,7 +210,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
                         {album.title}
                       </motion.span>
                     </motion.span>
-                  </Link>
+                  </div>
                 </div>
               ))}
             </BasicCarousel>

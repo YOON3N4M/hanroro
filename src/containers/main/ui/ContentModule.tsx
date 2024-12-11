@@ -1,7 +1,7 @@
 import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import { cn } from "@/utils";
 import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import React, { ReactNode } from "react";
 
 interface ContentModuleProps {

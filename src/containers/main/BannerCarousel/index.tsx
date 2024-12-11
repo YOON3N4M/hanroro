@@ -5,7 +5,7 @@ import { cn } from "@/utils";
 import ClassNames from "embla-carousel-class-names";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { ReactNode } from "react";
 import { home, howToGoOn, systemError } from "../../../../public/images/album";
 interface BannerCarouselProps {}

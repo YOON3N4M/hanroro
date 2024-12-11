@@ -12,6 +12,7 @@ import AuthProvider from "@/components/auth/AuthProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import ToastPortal from "@/components/toast/ToastPortal";
 import SmoothScrolling from "@/components/layout/SmoothScrolling";
+import { ViewTransitions } from "next-view-transitions";
 
 const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS as string;
 const GOOGLE_SEARCH_VERIFICATION = process.env
@@ -62,25 +63,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="h-full" lang="en">
-      <body
-        className={cn(
-          "bg-default-black-bg",
-          `${pretendard.variable}`,
-          caslon.variable
-        )}
-      >
-        <h1 className="visually-hidden">hanroro | fansite</h1>
-        <AuthProvider>
-          <Header />
-          <main className="min-h-full">{children}</main>
-          <Footer />
-          <ModalPortal />
-          <ToastPortal />
-          {API_BASE_URL?.includes("localhost") && <Toolbar />}
-        </AuthProvider>
-      </body>
-      <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
-    </html>
+    <ViewTransitions>
+      <html className="h-full" lang="en">
+        <body
+          className={cn(
+            "bg-default-black-bg",
+            `${pretendard.variable}`,
+            caslon.variable
+          )}
+        >
+          <h1 className="visually-hidden">hanroro | fansite</h1>
+          <AuthProvider>
+            <Header />
+            <main className="min-h-full">{children}</main>
+            <Footer />
+            <ModalPortal />
+            <ToastPortal />
+            {API_BASE_URL?.includes("localhost") && <Toolbar />}
+          </AuthProvider>
+        </body>
+        <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
+      </html>
+    </ViewTransitions>
   );
 }

@@ -11,7 +11,7 @@ import {
   useSpring,
 } from "motion/react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { WheelEvent, useEffect, useState } from "react";
 
 interface NextAlbumSectionProps {
