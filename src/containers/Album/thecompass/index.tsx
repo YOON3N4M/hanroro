@@ -18,7 +18,7 @@ function TheCompassContainer(props: TheCompassContainerProps) {
 
   const { title, releaseDate, type, desc, trackList, cover } = album;
   return (
-    <div>
+    <div className="bg-gradient-to-l via-transparent to-transparent from-[#092a01]">
       <IntroSection title={title} releaseDate={releaseDate} />
       <CategorySection format={type} label="Authentic" release={releaseDate} />
       <VideoSection src="/video/thecompass.mp4" />

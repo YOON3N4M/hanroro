@@ -18,7 +18,7 @@ function EvenIfYouLeaveContainer(props: EvenIfYouLeaveContainerProps) {
 
   const { title, releaseDate, type, desc, trackList, cover } = album;
   return (
-    <div>
+    <div className="bg-gradient-to-l via-transparent to-transparent from-[#6ea7ca6b]">
       <IntroSection title={title} releaseDate={releaseDate} />
       <CategorySection format={type} label="Authentic" release={releaseDate} />
       <VideoSection src="/video/evenifyouleave.mp4" />

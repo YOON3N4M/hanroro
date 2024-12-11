@@ -18,7 +18,7 @@ function TheLastStopOfPainContainer(props: TheLastStopOfPainContainerProps) {
 
   const { title, releaseDate, type, desc, trackList, cover } = album;
   return (
-    <div>
+    <div className="bg-gradient-to-l via-transparent to-transparent from-[#c8e0f16c]">
       <IntroSection title={title} releaseDate={releaseDate} />
       <CategorySection format={type} label="Authentic" release={releaseDate} />
       <VideoSection src="/video/thelaststopofpain.mp4" />

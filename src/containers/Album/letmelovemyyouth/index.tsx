@@ -18,12 +18,7 @@ function LetMeLoveMyYouthContainer(props: LetMeLoveMyYouthContainerProps) {
 
   const { title, releaseDate, type, desc, trackList, cover } = album;
   return (
-    <div
-    // className={cn(
-    //   "bg-gradient-to-l via-transparent to-transparent",
-    //   gradientBgStyles["letmelovemyyouth"]
-    // )}
-    >
+    <div className="bg-gradient-to-l via-transparent to-transparent from-[#ffffff60]">
       <IntroSection title={title} releaseDate={releaseDate} />
       <CategorySection format={type} label="Authentic" release={releaseDate} />
       <VideoSection src="/video/letmelovemyyouth.mp4" />

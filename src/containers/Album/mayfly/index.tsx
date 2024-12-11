@@ -17,7 +17,7 @@ function MayflyContainer(props: MayflyContainerProps) {
 
   const { title, releaseDate, type, desc, trackList, cover } = album;
   return (
-    <div>
+    <div className="bg-gradient-to-l via-transparent to-transparent from-[#edb16c4f]">
       <IntroSection title={title} releaseDate={releaseDate} />
       <CategorySection format={type} label="Authentic" release={releaseDate} />
       <VideoSection src="/video/mayfly.mp4" />

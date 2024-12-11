@@ -1,6 +1,6 @@
 "use client";
 
-import { generateAlbumData } from "@/utils";
+import { cn, generateAlbumData } from "@/utils";
 import CategorySection from "../CategorySection";
 import ImageSection from "../ImageSection";
 import InformationSection from "../InformationSection";
@@ -9,6 +9,12 @@ import NextAlbumSection from "../NextAlbumSection";
 import VideoSection from "../VideoSection";
 
 interface TakeOffContainerProps {}
+
+const gradientBgStyles: { [key in any]: string } = {
+  systemError: "from-[#bf062557]",
+  howToGoOn: "from-[#bf062573]",
+  home: "from-[#bf06258a]",
+};
 
 function TakeOffContainer(props: TakeOffContainerProps) {
   const {} = props;
@@ -19,10 +25,9 @@ function TakeOffContainer(props: TakeOffContainerProps) {
   const { title, releaseDate, type, desc, trackList, cover } = album;
   return (
     <div
-    // className={cn(
-    //   "bg-gradient-to-l via-transparent to-transparent",
-    //   gradientBgStyles["takeOff"]
-    // )}
+      className={cn(
+        "bg-gradient-to-l via-transparent to-transparent from-[#0909f289]"
+      )}
     >
       <IntroSection title={title} releaseDate={releaseDate} />
       <CategorySection format={type} label="Authentic" release={releaseDate} />
