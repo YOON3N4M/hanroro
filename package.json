@@ -15,6 +15,7 @@
     "date-fns": "^4.1.0",
     "embla-carousel-class-names": "^8.3.1",
     "embla-carousel-react": "^8.3.1",
+    "embla-carousel-wheel-gestures": "^8.0.1",
     "firebase": "^11.0.1",
     "install": "^0.13.0",
     "motion": "^11.11.15",

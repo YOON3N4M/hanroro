@@ -16,6 +16,7 @@ import {
   IconYoutube,
 } from "@/components/svg";
 import NewTabAnchor from "@/components/ui/NewTabAnchor";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 interface ProfileContainerProps {
   searchParams?: SearchParams;
@@ -91,11 +92,19 @@ export default function ProfileContainer(props: ProfileContainerProps) {
   const router = useTransitionRouter();
 
   const [selectedAlbum, setSelectedAlbum] = useState<undefined | string>();
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "start",
-    loop: true,
-    dragFree: true,
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "start",
+      loop: true,
+      // dragFree: true,
+      skipSnaps: true,
+    },
+    [
+      WheelGesturesPlugin({
+        forceWheelAxis: "y",
+      }),
+    ]
+  );
 
   function onClickAlbum(album: Album) {
     setSelectedAlbum(album.engTitle);
