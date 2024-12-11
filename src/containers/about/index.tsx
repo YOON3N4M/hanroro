@@ -3,7 +3,7 @@ import React from "react";
 
 export default function AboutContainer() {
   return (
-    <div className="size-full h-screen-nav bg-default-black-bg pt-md">
+    <div className="size-full mt-md  h-screen-nav bg-default-black-bg pt-md">
       <div className="my-auto text-xs inner text-white">
         <p>
           가수 한로로님의 팬 페이지 입니다.
