@@ -92,7 +92,7 @@ function TextupMotion(props: TextupMotionProps) {
         <motion.div
           custom={{ idx, isVisibleEnd }}
           variants={textupVariant}
-          key={idx}
+          key={`${text}-${t}-${idx}`}
           className="inline-block"
           onAnimationComplete={() => {
             if (idx === splitText.length - 1) {
