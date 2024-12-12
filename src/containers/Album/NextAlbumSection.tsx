@@ -27,13 +27,15 @@ function NextAlbumSection(props: NextAlbumSectionProps) {
   return (
     <div className="inner flex flex-col items-center pt-[10rem] h-screen overflow-hidden">
       <h2>[NEXT ALBUM]</h2>
-      <h3 className="mt-[7rem] text-[3rem] font-medium">{title}</h3>
-      <span className="text-[3rem] font-caslon italic mb-[7rem]">
+      <h3 className="mt-[7rem] mo:mt-[2rem] text-[3rem] mo:text-[2rem] font-medium">
+        {title}
+      </h3>
+      <span className="text-[3rem] mo:text-[2rem] font-caslon italic mb-[7rem] mo:mb-0">
         ({releaseDate.slice(0, 4)})
       </span>
       <div className="flex-1 w-full">
         <Link
-          className="flex justify-center items-end h-full"
+          className="flex justify-center items-center h-full"
           href={exceptionHandleAlbumHref(engTitle)}
         >
           <motion.div className="size-[300px]">

@@ -8,7 +8,7 @@ function CategorySection(props: CategorySectionProps) {
   const { format, label, release } = props;
 
   return (
-    <div className="inner !pb-[8.5rem] text-xs flex justify-between animate-fadeIn">
+    <div className="inner !pb-[1rem] text-xs flex justify-between">
       <div className="flex flex-col">
         <span>Format</span>
         <span>[{format.toUpperCase()}]</span>
