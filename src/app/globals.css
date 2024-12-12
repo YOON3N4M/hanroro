@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 :root {
-  --screen-height-without-nav: calc(100dvh - 45px);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,7 +13,6 @@
 body {
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding: 0;
   margin: 0;
 }
@@ -52,8 +50,6 @@ body {
 }
 
 main {
-  flex-grow: 1;
-  overflow-y: auto;
 }
 
 @layer base {
@@ -67,15 +63,6 @@ main {
 @layer utilities {
   body {
     @apply font-pretendard;
-  }
-  .h-screen-nav {
-    height: var(--screen-height-without-nav);
-  }
-  .h-screen-nav-double {
-    height: calc(var(--screen-height-without-nav) * 2);
-  }
-  .min-h-screen-nav {
-    min-height: var(--screen-height-without-nav);
   }
   .active-slide {
     @apply !opacity-100;
@@ -100,6 +87,9 @@ main {
   }
   .inner {
     @apply w-full max-w-[1600px] mx-auto px-[5rem] tab:px-[2rem];
+  }
+  .y-inner {
+    @apply pt-[60px];
   }
   .drag-unable {
     -webkit-user-select: none;

@@ -22,7 +22,7 @@ const config: Config = {
         caslon: ["var(--font-caslon)"],
       },
       height: {
-        nav: "45px",
+        nav: "60px",
       },
       spacing: {
         xxxs: "2px",

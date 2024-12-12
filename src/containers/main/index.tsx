@@ -16,8 +16,8 @@ function MainContainer(props: MainContainerProps) {
   const { galleryDocs } = props;
 
   return (
-    <div className="flex flex-col gap-sm mt-[2rem]">
-      <ContentSection className="mt-sm tab:min-h-[350px] tab:h-[350px]">
+    <div className="flex flex-col gap-sm y-inner">
+      <ContentSection className="tab:min-h-[350px] tab:h-[350px]">
         <BannerCarousel />
       </ContentSection>
       <ContentSection className="flex gap-sm text-white mo:flex-col pc:px-md">

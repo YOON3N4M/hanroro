@@ -103,7 +103,7 @@ function CalendarContainer(props: CalendarContainerProps) {
   console.log(scheduleList);
 
   return (
-    <div className="pt-md mt-[2rem] text-sm bg-default-black-bg inner pc:min-h-screen-nav">
+    <div className="y-inner text-sm bg-default-black-bg inner pc:min-h-screen">
       <h2 className="visually-hidden">일정</h2>
       {userDoc && userDoc.job === "admin" && (
         <div className="flex mb-md">

@@ -127,11 +127,11 @@ export default function ProfileContainer(props: ProfileContainerProps) {
           />
         )}
       </AnimatePresence>
-      <div className="inner h-[100dvh]">
+      <div className="inner h-[100dvh] y-inner">
         <h2 className="visually-hidden">프로필</h2>
         <div className="size-full flex flex-col relative">
           {/* name */}
-          <div className="mt-[7rem] tab:mt-[2rem] ">
+          <div className="">
             <div className="text-[9rem] tab:text-[4rem] font-medium flex">
               <TextupMotion text={"HANRORO"} />
             </div>
