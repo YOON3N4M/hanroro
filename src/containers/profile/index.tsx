@@ -91,7 +91,6 @@ export default function ProfileContainer(props: ProfileContainerProps) {
 
   const router = useTransitionRouter();
 
-  const [selectedAlbum, setSelectedAlbum] = useState<undefined | string>();
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       align: "start",
@@ -107,7 +106,6 @@ export default function ProfileContainer(props: ProfileContainerProps) {
   );
 
   function onClickAlbum(album: Album) {
-    setSelectedAlbum(album.engTitle);
     router.push(exceptionHandleAlbumHref(album.engTitle));
   }
 
@@ -185,8 +183,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
                   onMouseLeave={() => setHoveredAlbum(undefined)}
                   key={album.engTitle}
                   className={cn(
-                    "basis-[20%] relative cursor-pointer tab:basis-[45%] flex shrink-0 ml-md tab:ml-sm",
-                    selectedAlbum === album.engTitle && "cover-transition"
+                    "basis-[20%] relative cursor-pointer tab:basis-[45%] flex shrink-0 ml-md tab:ml-sm"
                   )}
                 >
                   <div className="size-full">

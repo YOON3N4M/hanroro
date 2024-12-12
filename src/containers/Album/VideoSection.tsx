@@ -10,7 +10,7 @@ function VideoSection(props: VideoSectionProps) {
   const { src, overlaySrc } = props;
 
   return (
-    <div className="relative inner mb-[15rem] cover-transition">
+    <div className="relative inner mb-[15rem]">
       {/* overlayImage */}
       {overlaySrc && (
         <motion.div
