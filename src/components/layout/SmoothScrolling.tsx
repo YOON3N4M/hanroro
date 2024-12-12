@@ -6,7 +6,6 @@ import { ReactNode, useEffect } from "react";
 
 function SmoothScrolling({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const lenis = useLenis();
 
@@ -23,7 +22,7 @@ function SmoothScrolling({ children }: { children: ReactNode }) {
     lenis.scrollTo(0, { immediate: true });
     lenis.resize();
     console.log("초기화");
-  }, [pathname, searchParams, lenis]);
+  }, [pathname, lenis]);
 
   useEffect(() => {
     const observer = new ResizeObserver(() => {
