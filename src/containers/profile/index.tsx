@@ -142,7 +142,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
               {/* <RotationTextUpMotion textList={["HANRORO", "한로로"]} /> */}
             </div>
             <div className="text-[7rem] tab:text-[2rem]  font-[100]">
-              <RotationTextUpMotion textList={["BIRTH/20001111", "LABEL/AUTHENTIC"]} />
+              <RotationTextUpMotion textList={["LABEL/AUTHENTIC", "BIRTH/20001111"]} />
             </div>
           </div>
           {/* desc, icons */}
