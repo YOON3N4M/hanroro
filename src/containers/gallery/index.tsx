@@ -62,9 +62,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
   const [typeFilter, setTypeFilter] = useState<null | ImageType>(null);
 
   const masonryItemStyle = {
-    width: `calc((100% - ${
-      (masonryColumn - 1) * masonryColumnGap
-    }px)/${masonryColumn})`,
+    width: `calc((100% - ${(masonryColumn - 1) * masonryColumnGap}px)/${masonryColumn})`,
   };
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
@@ -151,9 +149,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
           <span className="opacity-60">필터</span>
           <div className="flex gap-sm mt-xxs text-sm">
             <button
-              className={cn(
-                "text-white rounded-md bg-default-gray-bg px-sm flex items-center gap-xxs"
-              )}
+              className={cn("text-white rounded-md bg-default-gray-bg px-sm flex items-center gap-xxs")}
               onClick={() => onClickTypeTag("image")}
               aria-label="filter image"
             >

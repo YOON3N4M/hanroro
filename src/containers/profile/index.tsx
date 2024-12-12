@@ -10,12 +10,7 @@ import { ALBUM_LIST } from "@/data/album";
 import { Link, useTransitionRouter } from "next-view-transitions";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import {
-  IconInstagram,
-  IconNaver,
-  IconSpotify,
-  IconYoutube,
-} from "@/components/svg";
+import { IconInstagram, IconNaver, IconSpotify, IconYoutube } from "@/components/svg";
 import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import RotationTextUpMotion from "@/components/motion/RotationTextUpMotion";
@@ -88,9 +83,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
   const { searchParams } = props;
 
   const [isCarouselAnimateEnd, setIsCarouselAnimateEnd] = useState(false);
-  const [hoveredAlbum, setHoveredAlbum] = useState<undefined | string>(
-    undefined
-  );
+  const [hoveredAlbum, setHoveredAlbum] = useState<undefined | string>(undefined);
 
   const router = useTransitionRouter();
   const lenis = useLenis();
@@ -149,9 +142,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
               {/* <RotationTextUpMotion textList={["HANRORO", "한로로"]} /> */}
             </div>
             <div className="text-[7rem] tab:text-[2rem]  font-[100]">
-              <RotationTextUpMotion
-                textList={["20001111", "LABEL/AUTHENTIC"]}
-              />
+              <RotationTextUpMotion textList={["BIRTH/20001111", "LABEL/AUTHENTIC"]} />
             </div>
           </div>
           {/* desc, icons */}
@@ -206,9 +197,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
                   onMouseEnter={() => setHoveredAlbum(album.engTitle)}
                   onMouseLeave={() => setHoveredAlbum(undefined)}
                   key={album.engTitle}
-                  className={cn(
-                    "basis-[20%] relative cursor-pointer tab:basis-[45%] flex shrink-0 ml-md tab:ml-sm"
-                  )}
+                  className={cn("basis-[20%] relative cursor-pointer tab:basis-[45%] flex shrink-0 ml-md tab:ml-sm")}
                 >
                   <div className="size-full">
                     <motion.span
@@ -221,9 +210,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
                         variants={maskVariant}
                         custom={idx}
                         className="size-full mask aspect-square mt-sm"
-                        onAnimationComplete={() =>
-                          idx === 1 && setIsCarouselAnimateEnd(true)
-                        }
+                        onAnimationComplete={() => idx === 1 && setIsCarouselAnimateEnd(true)}
                       >
                         <Image
                           src={album.cover.src}
@@ -233,11 +220,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
                           className="size-full brightness-50 hover:brightness-100 transition-all"
                         />
                       </motion.div>
-                      <motion.span
-                        className="text-sm font-extralight"
-                        variants={nameVariant}
-                        custom={idx}
-                      >
+                      <motion.span className="text-sm font-extralight" variants={nameVariant} custom={idx}>
                         {album.title}
                       </motion.span>
                     </motion.span>
