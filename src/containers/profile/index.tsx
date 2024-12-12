@@ -1,4 +1,5 @@
 "use client";
+
 import useEmblaCarousel from "embla-carousel-react";
 import TextupMotion, { customEase } from "@/components/motion/TextupMotion";
 import { Album, SearchParams } from "@/types";
@@ -18,6 +19,7 @@ import {
 import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import RotationTextUpMotion from "@/components/motion/RotationTextUpMotion";
+import { useLenis } from "@studio-freight/react-lenis";
 
 interface ProfileContainerProps {
   searchParams?: SearchParams;
@@ -91,6 +93,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
   );
 
   const router = useTransitionRouter();
+  const lenis = useLenis();
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -108,6 +111,15 @@ export default function ProfileContainer(props: ProfileContainerProps) {
 
   function onClickAlbum(album: Album) {
     router.push(exceptionHandleAlbumHref(album.engTitle));
+  }
+
+  function onHoverCarousel(isMouseEnter: boolean) {
+    console.log(lenis);
+    if (isMouseEnter) {
+      lenis?.stop();
+    } else {
+      lenis?.start();
+    }
   }
 
   return (
@@ -136,7 +148,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
               {/* <TextupMotion text={"HANRORO"} /> */}
               {/* <RotationTextUpMotion textList={["HANRORO", "한로로"]} /> */}
             </div>
-            <div className="text-[7rem]  font-[100]">
+            <div className="text-[7rem] tab:text-[2rem]  font-[100]">
               <RotationTextUpMotion
                 textList={["20001111", "LABEL/AUTHENTIC"]}
               />
@@ -181,7 +193,11 @@ export default function ProfileContainer(props: ProfileContainerProps) {
             </div>
           </div>
           {/* album carousel */}
-          <div className="mt-auto mb-md tab:mb-sm">
+          <div
+            onMouseEnter={() => onHoverCarousel(true)}
+            onMouseLeave={() => onHoverCarousel(false)}
+            className="mt-auto mb-md tab:mb-sm"
+          >
             <h3 className="visually-hidden">앨범</h3>
             <BasicCarousel emblaRef={emblaRef}>
               {ALBUM_LIST.map((album, idx) => (
@@ -232,6 +248,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
           </div>
         </div>
       </div>
+      {/* <div className="h-screen inner"></div> */}
     </div>
   );
 }
