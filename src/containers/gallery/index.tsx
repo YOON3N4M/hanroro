@@ -6,10 +6,8 @@ import GalleyUploadButton from "./Upload";
 
 import { GalleryDocsObj, GalleryItemDoc } from "@/types";
 import { cn, filterDuple } from "@/utils";
-import { MasonryGrid } from "@egjs/react-grid";
-import { IconRemove } from "@/components/svg";
 import { DebounceEvent } from "@/utils/DebounceEvent";
-import useToast from "@/components/toast/useToast";
+import { MasonryGrid } from "@egjs/react-grid";
 
 interface GalleryDocsObjWithCombine extends GalleryDocsObj {
   combine: GalleryItemDoc[];
@@ -42,11 +40,11 @@ function columnCount() {
   if (typeof window === "undefined") return;
 
   if (window.innerWidth > 1360) {
-    return 8;
-  } else if (window.innerWidth > 735) {
-    return 6;
-  } else {
     return 4;
+  } else if (window.innerWidth > 735) {
+    return 3;
+  } else {
+    return 3;
   }
 }
 
@@ -62,7 +60,9 @@ export default function GalleryContainer(props: GalleryContainerProps) {
   const [typeFilter, setTypeFilter] = useState<null | ImageType>(null);
 
   const masonryItemStyle = {
-    width: `calc((100% - ${(masonryColumn - 1) * masonryColumnGap}px)/${masonryColumn})`,
+    width: `calc((100% - ${
+      (masonryColumn - 1) * masonryColumnGap
+    }px)/${masonryColumn})`,
   };
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
@@ -140,6 +140,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
   }, [masonryColumn]);
   return (
     <div className="y-inner flex text-black gap-md min-h-screen px-md mo:flex-col">
+      <h2 className="visually-hidden">갤러리</h2>
       {/* filter section */}
       <div className="basis-[20%] min-w-[300px] max-w-[375px] border py-md mo:w-full mo:max-w-full h-min">
         <div className="flex justify-center">
@@ -149,18 +150,24 @@ export default function GalleryContainer(props: GalleryContainerProps) {
           <span className="opacity-60">필터</span>
           <div className="flex gap-sm mt-xxs text-sm">
             <button
-              className={cn("text-white rounded-md bg-default-gray-bg px-sm flex items-center gap-xxs")}
+              className={cn(
+                "text-white rounded-md bg-default-gray-bg px-sm flex items-center gap-xxs",
+                typeFilter === "image" && "brightness-50"
+              )}
               onClick={() => onClickTypeTag("image")}
               aria-label="filter image"
             >
-              사진 {typeFilter === "image" && <IconRemove />}
+              사진
             </button>
             <button
-              className="text-white rounded-md bg-default-gray-bg px-sm flex items-center gap-xxs"
+              className={cn(
+                "text-white rounded-md bg-default-gray-bg px-sm flex items-center gap-xxs",
+                typeFilter === "gif" && "brightness-50"
+              )}
               onClick={() => onClickTypeTag("gif")}
               aria-label="filter gif"
             >
-              움짤{typeFilter === "gif" && <IconRemove />}
+              움짤
             </button>
           </div>
         </div>
@@ -172,7 +179,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
                 key={`tag-${item}`}
                 className={cn(
                   "rounded-md  text-[#e4e4e7] border px-xs",
-                  item === searchKeyword && "bg-default-gray-bg"
+                  item === searchKeyword && "brightness-50"
                 )}
                 onClick={() => onClickTag(item)}
                 aria-label={`filter ${item}`}
@@ -192,7 +199,7 @@ export default function GalleryContainer(props: GalleryContainerProps) {
           </div>
         </div>
       </div>
-      <div className="border flex-1 pc:min-h-full pc:h-full tab:h-[1000px] overflow-y-auto p-[5px]">
+      <div className="border flex-1 pc:min-h-screen pc:h-full tab:h-[1000px] overflow-y-auto p-[5px]">
         {masonryColumn !== 0 && (
           <MasonryGrid
             column={masonryColumn}
