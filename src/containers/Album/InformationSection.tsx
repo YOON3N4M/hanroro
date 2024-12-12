@@ -14,15 +14,16 @@ function InformationSection(props: InformationSectionProps) {
   return (
     <div className="mb-[20rem] inner">
       <div className="flex gap-xxl tab:flex-col">
-        <div className="basis-[25%]">
+        <div className="flex justify-center">
           <Image
             width={cover.width}
             height={cover.height}
             src={cover.src}
             alt={album.title}
+            className="pc:size-[300px] tab:w-[80%] tab::h-auto aspect-square"
           />
         </div>
-        <div className="flex-1 flex flex-col gap-xl tab:text-sm">
+        <div className="max-w-[520px] flex flex-col gap-xl tab:text-sm">
           <div className="flex tab:flex-col tab:gap-sm">
             <div className="basis-[20%] shrink-0">
               <h3>[앨범 소개]</h3>
