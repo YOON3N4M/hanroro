@@ -26,8 +26,8 @@ function NextAlbumSection(props: NextAlbumSectionProps) {
 
   return (
     <div className="inner flex flex-col items-center pt-[10rem] h-screen overflow-hidden">
-      <h3>[NEXT ALBUM]</h3>
-      <h2 className="mt-[7rem] text-[3rem] font-medium">{title}</h2>
+      <h2>[NEXT ALBUM]</h2>
+      <h3 className="mt-[7rem] text-[3rem] font-medium">{title}</h3>
       <span className="text-[3rem] font-caslon italic mb-[7rem]">
         ({releaseDate.slice(0, 4)})
       </span>

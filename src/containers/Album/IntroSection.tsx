@@ -11,6 +11,7 @@ function IntroSection(props: IntroSectionProps) {
   return (
     <div className="py-[5rem] px-[5rem] flex-col flex items-center text-[5rem] tab:text-[3rem]">
       <div>
+        <h2 className="visually-hidden">{title}</h2>
         <TextupMotion text={title.toUpperCase()} />
       </div>
       <div className="font-caslon italic">

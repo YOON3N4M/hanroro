@@ -25,7 +25,7 @@ function InformationSection(props: InformationSectionProps) {
         <div className="flex-1 flex flex-col gap-xl tab:text-sm">
           <div className="flex tab:flex-col tab:gap-sm">
             <div className="basis-[20%] shrink-0">
-              <span>[앨범 소개]</span>
+              <h3>[앨범 소개]</h3>
             </div>
             <div className="">
               <p className="">{desc}</p>
@@ -33,7 +33,7 @@ function InformationSection(props: InformationSectionProps) {
           </div>
           <div className="flex tab:flex-col tab:gap-sm">
             <div className="basis-[20%]">
-              <span>[수록곡]</span>
+              <h3>[수록곡]</h3>
             </div>
             <div className="flex flex-col">
               {trackList.map((track, idx) => (

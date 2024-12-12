@@ -176,6 +176,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
           </div>
           {/* album carousel */}
           <div className="mt-auto mb-md tab:mb-sm">
+            <h3 className="visually-hidden">앨범</h3>
             <BasicCarousel emblaRef={emblaRef}>
               {ALBUM_LIST.map((album, idx) => (
                 <div
