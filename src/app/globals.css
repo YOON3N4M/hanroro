@@ -208,3 +208,7 @@ main {
 .cover-transition {
   view-transition-name: cover-transition;
 }
+
+.header-transition {
+  view-transition-name: header-transition;
+}
