@@ -12,13 +12,14 @@ function RotationTextUpMotion(props: RotationTextUpMotionProps) {
 
   useEffect(() => {
     if (!isAnimateComplete) return;
+    setIsAnimateComplete(false);
     setTimeout(() => {
       setTextIndex((prev) => {
         let newIndex = prev + 1;
         if (prev === textList.length - 1) {
           newIndex = 0;
         }
-        setIsAnimateComplete(false);
+
         return newIndex;
       });
     }, 1000);

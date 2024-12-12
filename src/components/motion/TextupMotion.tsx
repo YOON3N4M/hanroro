@@ -77,6 +77,7 @@ function TextupMotion(props: TextupMotionProps) {
   const splitText = text.split("");
 
   useEffect(() => {
+    if (!isVisibleEnd) return;
     setIsVisibleEnd(false);
   }, [text]);
 

@@ -17,6 +17,7 @@ import {
 } from "@/components/svg";
 import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+import RotationTextUpMotion from "@/components/motion/RotationTextUpMotion";
 
 interface ProfileContainerProps {
   searchParams?: SearchParams;
@@ -132,6 +133,13 @@ export default function ProfileContainer(props: ProfileContainerProps) {
           <div className="">
             <div className="text-[9rem] tab:text-[4rem] font-medium flex">
               <TextupMotion text={"HANRORO"} />
+              {/* <TextupMotion text={"HANRORO"} /> */}
+              {/* <RotationTextUpMotion textList={["HANRORO", "한로로"]} /> */}
+            </div>
+            <div className="text-[7rem]  font-[100]">
+              <RotationTextUpMotion
+                textList={["20001111", "LABEL/AUTHENTIC"]}
+              />
             </div>
           </div>
           {/* desc, icons */}
