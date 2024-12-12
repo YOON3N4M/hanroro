@@ -65,23 +65,25 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html className="h-full" lang="en">
-        <body
-          className={cn(
-            "bg-default-black-bg",
-            `${pretendard.variable}`,
-            caslon.variable
-          )}
-        >
-          <h1 className="visually-hidden">hanroro | fansite</h1>
-          <AuthProvider>
-            <Header />
-            <main className="min-h-full">{children}</main>
-            <Footer />
-            <ModalPortal />
-            <ToastPortal />
-            {API_BASE_URL?.includes("localhost") && <Toolbar />}
-          </AuthProvider>
-        </body>
+        <SmoothScrolling>
+          <body
+            className={cn(
+              "bg-default-black-bg",
+              `${pretendard.variable}`,
+              caslon.variable
+            )}
+          >
+            <h1 className="visually-hidden">hanroro | fansite</h1>
+            <AuthProvider>
+              <Header />
+              <main className="min-h-full">{children}</main>
+              <Footer />
+              <ModalPortal />
+              <ToastPortal />
+              {API_BASE_URL?.includes("localhost") && <Toolbar />}
+            </AuthProvider>
+          </body>
+        </SmoothScrolling>
         <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
       </html>
     </ViewTransitions>
