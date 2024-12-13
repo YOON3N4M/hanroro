@@ -100,8 +100,6 @@ function CalendarContainer(props: CalendarContainerProps) {
     openSingleModal(<ScheduleUploadModal />);
   }
 
-  console.log(scheduleList);
-
   return (
     <div className="y-inner text-sm bg-default-black-bg inner pc:min-h-screen">
       <h2 className="visually-hidden">일정</h2>
@@ -157,6 +155,7 @@ function CalendarContainer(props: CalendarContainerProps) {
         </div>
       </div>
       <div className="min-h-[500px] pc:h-[500px] tab:h-[800px]">
+        <h3 className="visually-hidden">캘린더</h3>
         <Calendar
           today={today}
           currentDate={currentDate}
