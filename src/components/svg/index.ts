@@ -18,3 +18,5 @@ export { BsThreeDotsVertical as IconKebabMenu } from "react-icons/bs";
 export { CiEdit as iconEdit } from "react-icons/ci";
 export { IoCloseOutline as IconXSign } from "react-icons/io5";
 export { TbMenu as IconMenu } from "react-icons/tb";
+export { BiCarousel as IconCarousel } from "react-icons/bi";
+export { BiGridAlt as IconGrid } from "react-icons/bi";
