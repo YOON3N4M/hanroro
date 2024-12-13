@@ -99,7 +99,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
     {
       align: "start",
       loop: true,
-      // dragFree: true,
+      dragFree: true,
       skipSnaps: true,
     },
     [
