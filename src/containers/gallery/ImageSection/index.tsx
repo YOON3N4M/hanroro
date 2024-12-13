@@ -126,6 +126,10 @@ function GridView({ imageList }: { imageList: GalleryItemDoc[] }) {
     emblaApi.on("select", onSelect);
   }, [emblaApi, imageList]);
 
+  useEffect(() => {
+    console.log(imageList);
+  }, [imageList]);
+
   return (
     <div className="relative flex-1 flex flex-col items-center mo:!pt-0 justify-center gap-md mo:justify-start w-full overflow-hidden p-xl mo:p-md">
       <div className="flex items-center gap-sm text-sm">
@@ -155,13 +159,25 @@ function GridView({ imageList }: { imageList: GalleryItemDoc[] }) {
           {imageList.map((imageDoc, idx) => (
             <div
               key={imageDoc.id}
-              className="w-[50%] mo:h-min max-h-[800px] mo:w-full shrink-0 flex justify-center items-center ml-md opacity-60 transition-opacity"
+              className={cn(
+                "w-[50%] mo:h-min max-h-[800px] mo:w-full shrink-0 flex justify-center items-center ml-md opacity-60 transition-opacity",
+                imageList.length === 1 && "!mx-auto"
+              )}
             >
               <div className="w-full">
                 <GalleryItem className="!border-none" doc={imageDoc} />
               </div>
             </div>
           ))}
+          {imageList.length < 1 && (
+            <div
+              className={cn(
+                "w-[50%] h-[700px] rounded-md border mo:h-min max-h-[800px] mo:w-full shrink-0 flex justify-center items-center mx-auto opacity-60 transition-opacity"
+              )}
+            >
+              <p>조건에 부합하는 이미지가 없습니다.</p>
+            </div>
+          )}
         </BasicCarousel>
       </div>
     </div>
