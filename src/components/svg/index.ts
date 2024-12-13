@@ -20,3 +20,4 @@ export { IoCloseOutline as IconXSign } from "react-icons/io5";
 export { TbMenu as IconMenu } from "react-icons/tb";
 export { BiCarousel as IconCarousel } from "react-icons/bi";
 export { BiGridAlt as IconGrid } from "react-icons/bi";
+export { SiApplemusic as IconAppleMusic } from "react-icons/si";

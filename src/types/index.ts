@@ -53,6 +53,8 @@ export interface Track {
   title: string;
   duration: string;
   youtubeUrl: string;
+  spotifyUrl?: string;
+  appleMusicUrl?: string;
   isTitle?: boolean;
   desc?: string;
   //작곡가

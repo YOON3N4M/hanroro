@@ -1,8 +1,7 @@
-import { ALBUM_LIST } from "@/data/album";
-import Image, { StaticImageData } from "next/image";
-import { ReactNode } from "react";
-import { takeOff } from "../../../public/images/album";
+import { IconAppleMusic, IconSpotify, IconYoutube } from "@/components/svg";
+import NewTabAnchor from "@/components/ui/NewTabAnchor";
 import { Album } from "@/types";
+import Image from "next/image";
 
 interface InformationSectionProps {
   album: Album;
@@ -11,6 +10,7 @@ interface InformationSectionProps {
 function InformationSection(props: InformationSectionProps) {
   const { album } = props;
   const { desc, cover, trackList } = album;
+  const titleTrack = trackList.find((track) => track.isTitle);
   return (
     <div className="mb-[20rem] inner">
       <div className="flex gap-xxl tab:flex-col">
@@ -45,25 +45,35 @@ function InformationSection(props: InformationSectionProps) {
               ))}
             </div>
           </div>
-          {/* 
-          <div className="flex mt-[5rem]">
-            <div className="basis-[60%] flex flex-col">
-              <div className="flex">
-                <div className="basis-[45%]">
-                  <span>[수록곡]</span>
-                </div>
-                <div className="basis-[55%] flex flex-col">
-                  {ALBUM_LIST[5].trackList.map((track, idx) => (
-                    <div key={track.title} className="flex gap-xxs">
-                      <span>{idx + 1}. </span>
-                      <span>{track.title}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
+        {titleTrack && (
+          <div className="pc:ml-auto flex pc:flex-col text-3xl tab:text-2xl gap-md tab:justify-end">
+            {titleTrack.youtubeUrl && (
+              <NewTabAnchor
+                href={titleTrack.youtubeUrl}
+                className="brightness-50 hover:brightness-100 transition-all"
+              >
+                <IconYoutube />
+              </NewTabAnchor>
+            )}
+            {titleTrack.appleMusicUrl && (
+              <NewTabAnchor
+                href={titleTrack.appleMusicUrl}
+                className="brightness-50 hover:brightness-100 transition-all"
+              >
+                <IconAppleMusic />
+              </NewTabAnchor>
+            )}
+            {titleTrack.spotifyUrl && (
+              <NewTabAnchor
+                href={titleTrack.spotifyUrl}
+                className="brightness-50 hover:brightness-100 transition-all"
+              >
+                <IconSpotify />
+              </NewTabAnchor>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

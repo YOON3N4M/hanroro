@@ -26,6 +26,10 @@ export const ALBUM_LIST: Album[] = [
         title: "입춘",
         duration: "04:08",
         youtubeUrl: "https://youtu.be/kIiW3XRP7bU?si=qB913rxtbJW_qVli",
+        spotifyUrl:
+          "https://open.spotify.com/track/4KA9VMFIKUUMjEcnwiylr1?si=e789faf3a52241ea",
+        appleMusicUrl:
+          "https://music.apple.com/kr/album/%EC%9E%85%EC%B6%98/1613687888?i=1613687889",
         isTitle: true,
       },
     ],
@@ -42,6 +46,10 @@ export const ALBUM_LIST: Album[] = [
         title: "거울",
         duration: "04:42",
         youtubeUrl: "https://youtu.be/OV668xgCau8?si=4HqUq49BD2uK0YJF",
+        spotifyUrl:
+          "https://open.spotify.com/track/3rJlE3EHSZcjOVI5fJZpgR?si=fd1a4a8232b14425",
+        appleMusicUrl:
+          "https://music.apple.com/kr/album/%EA%B1%B0%EC%9A%B8/1629843991?i=1629843992",
         isTitle: true,
       },
     ],
@@ -59,6 +67,10 @@ export const ALBUM_LIST: Album[] = [
         title: "비틀비틀 짝짜꿍",
         duration: "03:31",
         youtubeUrl: "https://youtu.be/XBiMV9kVhwQ?si=hT1K-UMoN6t3XPd7",
+        spotifyUrl:
+          "https://open.spotify.com/track/2Wr6kLaSkUfgffOQ7nuMgr?si=b41e48ec5a3e4564",
+        appleMusicUrl:
+          "https://music.apple.com/kr/album/%EB%B9%84%ED%8B%80%EB%B9%84%ED%8B%80-%EC%A7%9D%EC%A7%9C%EA%BF%8D/1643105740?i=1643105742",
         isTitle: true,
       },
     ],
@@ -75,6 +87,10 @@ export const ALBUM_LIST: Album[] = [
         title: "정류장",
         duration: "04:12",
         youtubeUrl: "https://youtu.be/2EMgY5E5Ook?si=mmorq50oiHR89puv",
+        spotifyUrl:
+          "https://open.spotify.com/track/4kWRjkhMIGMnyWpYc8L7no?si=67c54b359fbb4d6e",
+        appleMusicUrl:
+          "https://music.apple.com/kr/album/%EC%A0%95%EB%A5%98%EC%9E%A5/1662433958?i=1662433959",
         isTitle: true,
       },
     ],
@@ -91,6 +107,10 @@ export const ALBUM_LIST: Album[] = [
         title: "자처",
         duration: "04:32",
         youtubeUrl: "https://youtu.be/JyoltvsJ9Fw?si=1_A_DEpReOYI6aAy",
+        spotifyUrl:
+          "https://open.spotify.com/track/7sxUb59tfiuzagetBF47AN?si=a7f8c0f1a1034779",
+        appleMusicUrl:
+          "https://music.apple.com/kr/album/%EC%9E%90%EC%B2%98/1683092568?i=1683092569",
         isTitle: true,
       },
     ],
@@ -122,6 +142,10 @@ export const ALBUM_LIST: Album[] = [
         title: "금붕어",
         duration: "03:32",
         youtubeUrl: "https://youtu.be/dAgY7zUqd8E?si=0-nCdNT8_njzlJga",
+        appleMusicUrl:
+          "https://music.apple.com/kr/album/%EA%B8%88%EB%B6%95%EC%96%B4/1703196819?i=1703196823",
+        spotifyUrl:
+          "https://open.spotify.com/track/6DmGMahWoNUCqz54k986AP?si=d3a1fdb1000d41ee",
         isTitle: true,
       },
       {
@@ -148,6 +172,10 @@ export const ALBUM_LIST: Album[] = [
         title: "하루살이",
         duration: "04:02",
         youtubeUrl: "https://youtu.be/ss_WdwNGawM?si=Ik3fMa2N_v4nDJUt",
+        spotifyUrl:
+          "https://open.spotify.com/track/1wOpjD9audwpeOYg5JFhAo?si=259a144a1be24da7",
+        appleMusicUrl:
+          "https://music.apple.com/kr/album/%ED%95%98%EB%A3%A8%EC%82%B4%EC%9D%B4/1722024516?i=1722024517",
         isTitle: true,
       },
     ],
@@ -201,6 +229,10 @@ export const ALBUM_LIST: Album[] = [
         title: "ㅈㅣㅂ",
         duration: "01:50",
         youtubeUrl: "https://youtu.be/U4-cz9NHQv4?si=_AB_3yQRLI159ebw",
+        spotifyUrl:
+          "https://open.spotify.com/track/5E7MmixrLwGiOvEkAybNpr?si=17caee3d877a497f",
+        appleMusicUrl:
+          "https://music.apple.com/kr/album/%E3%85%88%E3%85%A3%E3%85%82/1747512690?i=1747512698",
         isTitle: true,
       },
       {
@@ -243,6 +275,10 @@ export const ALBUM_LIST: Album[] = [
         title: "나침반",
         duration: "02:47",
         youtubeUrl: "https://youtu.be/4JwkYsfKRKM?si=ItOFeaGIA6JGbyyX",
+        spotifyUrl:
+          "https://open.spotify.com/track/3GNKwOjDJlqgAA85lgYTCC?si=3099fa0c883d4c40",
+        appleMusicUrl:
+          "https://music.apple.com/kr/album/%EB%82%98%EC%B9%A8%EB%B0%98/1775646561?i=1775646562",
         isTitle: true,
       },
     ],
