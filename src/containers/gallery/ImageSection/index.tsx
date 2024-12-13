@@ -124,7 +124,7 @@ function GridView({ imageList }: { imageList: GalleryItemDoc[] }) {
     if (!emblaApi) return;
     onSelect(emblaApi);
     emblaApi.on("select", onSelect);
-  }, [emblaApi]);
+  }, [emblaApi, imageList]);
 
   return (
     <div className="relative flex-1 flex flex-col items-center mo:!pt-0 justify-center gap-md mo:justify-start w-full overflow-hidden p-xl mo:p-md">

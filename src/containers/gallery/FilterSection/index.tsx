@@ -112,8 +112,8 @@ function TagButton({ tag }: { tag: string }) {
   return (
     <button
       className={cn(
-        "rounded-md text-[#e4e4e7] border px-xs brightness-50",
-        seletedTagList.includes(tag) && "brightness-100"
+        "rounded-md text-[#e4e4e7] border px-xs",
+        seletedTagList.includes(tag) ? "brightness-100" : "brightness-50"
       )}
       onClick={onClick}
       aria-label={`filter ${tag} filter`}
