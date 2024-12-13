@@ -5,8 +5,8 @@ export { SiYoutube as IconYoutube } from "react-icons/si";
 export { SiNaver as IconNaver } from "react-icons/si";
 export { SiSpotify as IconSpotify } from "react-icons/si";
 
-export { BiSolidLeftArrow as IconRightLeft } from "react-icons/bi";
-export { BiSolidRightArrow as IconRightRight } from "react-icons/bi";
+export { BiSolidLeftArrow as IconTriangleLeft } from "react-icons/bi";
+export { BiSolidRightArrow as IconTriangleRight } from "react-icons/bi";
 export { CiCalendar as IconCalendar } from "react-icons/ci";
 export { CiTimer as IconTimer } from "react-icons/ci";
 export { CiLink as IconLink } from "react-icons/ci";
@@ -21,3 +21,6 @@ export { TbMenu as IconMenu } from "react-icons/tb";
 export { BiCarousel as IconCarousel } from "react-icons/bi";
 export { BiGridAlt as IconGrid } from "react-icons/bi";
 export { SiApplemusic as IconAppleMusic } from "react-icons/si";
+
+export { LiaLongArrowAltRightSolid as IconArrowRight } from "react-icons/lia";
+export { LiaLongArrowAltLeftSolid as IconArrowLeft } from "react-icons/lia";

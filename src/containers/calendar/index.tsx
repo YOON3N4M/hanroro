@@ -7,7 +7,7 @@ import { usePrevNextButtons } from "@/components/carousel/usePrevNextButton";
 import ScheduleUploadModal from "@/components/modal/form/ScheduleUploadModal";
 import ScheduleViewModal from "@/components/modal/form/ScheduleViewModal";
 import useModal from "@/components/modal/useModal";
-import { IconRightLeft, IconRightRight } from "@/components/svg";
+import { IconTriangleLeft, IconTriangleRight } from "@/components/svg";
 
 import { useUserDoc } from "@/store/auth";
 import { ScheduleDoc, ScheduleType } from "@/types";
@@ -124,10 +124,10 @@ function CalendarContainer(props: CalendarContainerProps) {
         <span className="">{format(currentDate, "MM")}</span>
         <div className="ml-auto flex gap-sm">
           <button onClick={prevMonth} aria-label="calendar prev month">
-            <IconRightLeft />
+            <IconTriangleLeft />
           </button>
           <button onClick={nextMonth} aria-label="calendar next month">
-            <IconRightRight />
+            <IconTriangleRight />
           </button>
         </div>
       </div>
@@ -191,10 +191,10 @@ function SoonScheduleCarousel({
         <h3 className="">다가오는 일정</h3>
         <div className="flex gap-sm">
           <button onClick={onPrevButtonClick} aria-label="calendar prev month">
-            <IconRightLeft />
+            <IconTriangleLeft />
           </button>
           <button onClick={onNextButtonClick} aria-label="calendar next month">
-            <IconRightRight />
+            <IconTriangleRight />
           </button>
         </div>
       </div>

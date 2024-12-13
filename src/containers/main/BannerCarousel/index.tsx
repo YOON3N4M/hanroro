@@ -1,6 +1,6 @@
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { usePrevNextButtons } from "@/components/carousel/usePrevNextButton";
-import { IconRightLeft, IconRightRight } from "@/components/svg";
+import { IconTriangleLeft, IconTriangleRight } from "@/components/svg";
 import { cn } from "@/utils";
 import ClassNames from "embla-carousel-class-names";
 import useEmblaCarousel from "embla-carousel-react";
@@ -36,13 +36,13 @@ function BannerCarousel(props: BannerCarouselProps) {
           onClick={onPrevButtonClick}
           className="absolute y-center left-[10%] mo:left-[2%] mo:opacity-60 z-[30] bg-default-gray-bg p-xs rounded-full"
         >
-          <IconRightLeft />
+          <IconTriangleLeft />
         </button>
         <button
           onClick={onNextButtonClick}
           className="absolute y-center right-[10%] mo:right-[2%] mo:opacity-60 z-[30] bg-default-gray-bg p-xs rounded-full"
         >
-          <IconRightRight />
+          <IconTriangleRight />
         </button>
         <div ref={emblaRef} className="size-full overflow-hidden relative">
           {/* containe */}

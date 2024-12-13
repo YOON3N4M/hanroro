@@ -4,6 +4,7 @@ import { BasicCarousel } from "@/components/carousel";
 import RotationTextUpMotion from "@/components/motion/RotationTextUpMotion";
 import TextupMotion, { customEase } from "@/components/motion/TextupMotion";
 import {
+  IconArrowRight,
   IconInstagram,
   IconNaver,
   IconSpotify,
@@ -248,7 +249,16 @@ export default function ProfileContainer(props: ProfileContainerProps) {
           </div>
         </div>
       </div>
-      {/* <div className="h-screen inner"></div> */}
+      {/* <div className="h-screen inner">
+        <h3 className="visually-hidden">로노추/로책추</h3>
+        <Recommended />
+      </div> */}
     </div>
   );
 }
+
+// function Recommended() {
+//   return <div className="size-full">
+//     <div></div>
+//   </div>;
+// }

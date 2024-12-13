@@ -1,7 +1,7 @@
 import GalleryItem from "@/components/GalleryItem";
 import { BasicCarousel } from "@/components/carousel";
 import { usePrevNextButtons } from "@/components/carousel/usePrevNextButton";
-import { IconRightLeft, IconRightRight } from "@/components/svg";
+import { IconTriangleLeft, IconTriangleRight } from "@/components/svg";
 import { GalleryItemDoc } from "@/types";
 import { cn } from "@/utils";
 import { DebounceEvent } from "@/utils/DebounceEvent";
@@ -134,7 +134,7 @@ function GridView({ imageList }: { imageList: GalleryItemDoc[] }) {
             onClick={onPrevButtonClick}
             className="flex bg-white p-xs rounded-full text-black brightness-50 hover:brightness-100"
           >
-            <IconRightLeft fill="black" />
+            <IconTriangleLeft fill="black" />
           </button>
         </div>
         <div className="min-w-[70px] flex justify-center">
@@ -146,7 +146,7 @@ function GridView({ imageList }: { imageList: GalleryItemDoc[] }) {
             onClick={onNextButtonClick}
             className="flex bg-white p-xs rounded-full text-black brightness-50 hover:brightness-100"
           >
-            <IconRightRight fill="black" />
+            <IconTriangleRight fill="black" />
           </button>
         </div>
       </div>
