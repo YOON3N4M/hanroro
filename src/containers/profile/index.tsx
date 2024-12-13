@@ -1,20 +1,25 @@
 "use client";
 
-import useEmblaCarousel from "embla-carousel-react";
-import TextupMotion, { customEase } from "@/components/motion/TextupMotion";
-import { Album, SearchParams } from "@/types";
-import { cn, exceptionHandleAlbumHref, scrollMove } from "@/utils";
-import { useEffect, useState } from "react";
 import { BasicCarousel } from "@/components/carousel";
-import { ALBUM_LIST } from "@/data/album";
-import { Link, useTransitionRouter } from "next-view-transitions";
-import Image from "next/image";
-import { AnimatePresence, motion } from "motion/react";
-import { IconInstagram, IconNaver, IconSpotify, IconYoutube } from "@/components/svg";
-import NewTabAnchor from "@/components/ui/NewTabAnchor";
-import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import RotationTextUpMotion from "@/components/motion/RotationTextUpMotion";
+import TextupMotion, { customEase } from "@/components/motion/TextupMotion";
+import {
+  IconInstagram,
+  IconNaver,
+  IconSpotify,
+  IconYoutube,
+} from "@/components/svg";
+import NewTabAnchor from "@/components/ui/NewTabAnchor";
+import { ALBUM_LIST } from "@/data/album";
+import { Album, SearchParams } from "@/types";
+import { cn, exceptionHandleAlbumHref } from "@/utils";
 import { useLenis } from "@studio-freight/react-lenis";
+import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+import { AnimatePresence, motion } from "motion/react";
+import { useTransitionRouter } from "next-view-transitions";
+import Image from "next/image";
+import { useState } from "react";
 
 interface ProfileContainerProps {
   searchParams?: SearchParams;
@@ -83,7 +88,9 @@ export default function ProfileContainer(props: ProfileContainerProps) {
   const { searchParams } = props;
 
   const [isCarouselAnimateEnd, setIsCarouselAnimateEnd] = useState(false);
-  const [hoveredAlbum, setHoveredAlbum] = useState<undefined | string>(undefined);
+  const [hoveredAlbum, setHoveredAlbum] = useState<undefined | string>(
+    undefined
+  );
 
   const router = useTransitionRouter();
   const lenis = useLenis();
@@ -142,7 +149,9 @@ export default function ProfileContainer(props: ProfileContainerProps) {
               {/* <RotationTextUpMotion textList={["HANRORO", "한로로"]} /> */}
             </div>
             <div className="text-[7rem] tab:text-[2rem]  font-[100]">
-              <RotationTextUpMotion textList={["LABEL/AUTHENTIC", "BIRTH/20001111"]} />
+              <RotationTextUpMotion
+                textList={["LABEL/AUTHENTIC", "BIRTH/20001111"]}
+              />
             </div>
           </div>
           {/* desc, icons */}
@@ -197,7 +206,9 @@ export default function ProfileContainer(props: ProfileContainerProps) {
                   onMouseEnter={() => setHoveredAlbum(album.engTitle)}
                   onMouseLeave={() => setHoveredAlbum(undefined)}
                   key={album.engTitle}
-                  className={cn("basis-[20%] relative cursor-pointer tab:basis-[45%] flex shrink-0 ml-md tab:ml-sm")}
+                  className={cn(
+                    "basis-[20%] relative cursor-pointer tab:basis-[45%] flex shrink-0 ml-md tab:ml-sm"
+                  )}
                 >
                   <div className="size-full">
                     <motion.span
@@ -210,7 +221,9 @@ export default function ProfileContainer(props: ProfileContainerProps) {
                         variants={maskVariant}
                         custom={idx}
                         className="size-full mask aspect-square mt-sm"
-                        onAnimationComplete={() => idx === 1 && setIsCarouselAnimateEnd(true)}
+                        onAnimationComplete={() =>
+                          idx === 1 && setIsCarouselAnimateEnd(true)
+                        }
                       >
                         <Image
                           src={album.cover.src}
@@ -220,7 +233,11 @@ export default function ProfileContainer(props: ProfileContainerProps) {
                           className="size-full brightness-50 hover:brightness-100 transition-all"
                         />
                       </motion.div>
-                      <motion.span className="text-sm font-extralight" variants={nameVariant} custom={idx}>
+                      <motion.span
+                        className="text-sm font-extralight"
+                        variants={nameVariant}
+                        custom={idx}
+                      >
                         {album.title}
                       </motion.span>
                     </motion.span>

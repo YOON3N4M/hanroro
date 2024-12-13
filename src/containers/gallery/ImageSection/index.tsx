@@ -1,11 +1,15 @@
-import { MasonryGrid } from "@egjs/react-grid";
-import { useGalleryViewType, useImageType, useSelectedTagList } from "../state";
-import { useEffect, useState } from "react";
 import GalleryItem from "@/components/GalleryItem";
-import { DebounceEvent } from "@/utils/DebounceEvent";
-import { cn } from "@/utils";
+import { BasicCarousel } from "@/components/carousel";
+import { usePrevNextButtons } from "@/components/carousel/usePrevNextButton";
+import { IconRightLeft, IconRightRight } from "@/components/svg";
 import { GalleryItemDoc } from "@/types";
-
+import { cn } from "@/utils";
+import { DebounceEvent } from "@/utils/DebounceEvent";
+import { MasonryGrid } from "@egjs/react-grid";
+import ClassNames from "embla-carousel-class-names";
+import useEmblaCarousel from "embla-carousel-react";
+import { useCallback, useEffect, useState } from "react";
+import { useGalleryViewType, useSelectedTagList } from "../state";
 interface ImageSectionProps {
   imageList: GalleryItemDoc[];
 }
@@ -13,14 +17,24 @@ interface ImageSectionProps {
 function ImageSection(props: ImageSectionProps) {
   const { imageList } = props;
 
+  const seletedTagList = useSelectedTagList();
   const galleryViewType = useGalleryViewType();
+
+  const filteredImageList = imageList.filter((imageDoc) => {
+    if (seletedTagList.length < 1) {
+      return true;
+    } else {
+      return seletedTagList.every((item) => imageDoc.tags.includes(item));
+    }
+  });
 
   return (
     <>
-      {galleryViewType === "gallery" ? (
-        <GalleryView imageList={imageList} />
-      ) : (
-        <></>
+      {galleryViewType === "gallery" && (
+        <GalleryView imageList={filteredImageList} />
+      )}
+      {galleryViewType === "carousel" && (
+        <GridView imageList={filteredImageList} />
       )}
     </>
   );
@@ -31,16 +45,6 @@ export default ImageSection;
 function GalleryView({ imageList }: { imageList: GalleryItemDoc[] }) {
   const [masonryColumn, setMasonryColumn] = useState(0);
   const masonryColumnGap = 5;
-
-  const seletedTagList = useSelectedTagList();
-
-  const filteredImageList = imageList.filter((imageDoc) => {
-    if (seletedTagList.length < 1) {
-      return true;
-    } else {
-      return seletedTagList.every((item) => imageDoc.tags.includes(item));
-    }
-  });
 
   function columnCount() {
     if (typeof window === "undefined") return;
@@ -84,7 +88,7 @@ function GalleryView({ imageList }: { imageList: GalleryItemDoc[] }) {
         observeChildren={true}
       >
         {/* renderImageList */}
-        {filteredImageList.map((i, idx) => (
+        {imageList.map((i, idx) => (
           <GalleryItem
             style={masonryItemStyle}
             className={cn("rounded-md mo:max-w-[33%]")}
@@ -94,6 +98,72 @@ function GalleryView({ imageList }: { imageList: GalleryItemDoc[] }) {
           />
         ))}
       </MasonryGrid>
+    </div>
+  );
+}
+
+function GridView({ imageList }: { imageList: GalleryItemDoc[] }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "center",
+      loop: true,
+      // dragFree: true,
+      skipSnaps: true,
+    },
+    [ClassNames({ snapped: "active-slide" })]
+  );
+  const onSelect = useCallback((emblaApi: any) => {
+    if (!emblaApi) return;
+    setActiveIndex(emblaApi.selectedScrollSnap());
+  }, []);
+  const { onNextButtonClick, onPrevButtonClick } = usePrevNextButtons(emblaApi);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect(emblaApi);
+    emblaApi.on("select", onSelect);
+  }, [emblaApi]);
+
+  return (
+    <div className="relative flex-1 flex flex-col items-center mo:!pt-0 justify-center gap-md mo:justify-start w-full overflow-hidden p-xl mo:p-md">
+      <div className="flex items-center gap-sm text-sm">
+        <div>
+          <button
+            onClick={onPrevButtonClick}
+            className="flex bg-white p-xs rounded-full text-black brightness-50 hover:brightness-100"
+          >
+            <IconRightLeft fill="black" />
+          </button>
+        </div>
+        <div className="min-w-[70px] flex justify-center">
+          <span>{activeIndex + 1}</span>
+          <span>/{imageList.length}</span>
+        </div>
+        <div>
+          <button
+            onClick={onNextButtonClick}
+            className="flex bg-white p-xs rounded-full text-black brightness-50 hover:brightness-100"
+          >
+            <IconRightRight fill="black" />
+          </button>
+        </div>
+      </div>
+      <div className="w-full overflow-hidden ">
+        <BasicCarousel emblaRef={emblaRef}>
+          {imageList.map((imageDoc, idx) => (
+            <div
+              key={imageDoc.id}
+              className="w-[50%] mo:h-min max-h-[800px] mo:w-full shrink-0 flex justify-center items-center ml-md opacity-60 transition-opacity"
+            >
+              <div className="w-full">
+                <GalleryItem className="!border-none" doc={imageDoc} />
+              </div>
+            </div>
+          ))}
+        </BasicCarousel>
+      </div>
     </div>
   );
 }
