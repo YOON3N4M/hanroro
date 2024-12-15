@@ -1,30 +1,36 @@
 "use client";
 
+import useDeviceDetect from "@/hooks/useDeviceDetect";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import { usePathname, useSearchParams } from "next/navigation";
 import { ReactNode, useEffect } from "react";
 
 function SmoothScrolling({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-
   const lenis = useLenis();
 
+  const { isPc } = useDeviceDetect();
+
   useEffect(() => {
+    if (!isPc) return;
     window.addEventListener("resize", () => {
       if (!lenis) return;
-      console.log("resize init");
       lenis.resize();
     });
-  }, []);
+  }, [isPc]);
 
   useEffect(() => {
     if (!lenis) return;
+    if (!isPc) {
+      lenis.destroy();
+      return;
+    }
     lenis.scrollTo(0, { immediate: true });
     lenis.resize();
-    console.log("초기화");
-  }, [pathname, lenis]);
+  }, [pathname, lenis, isPc]);
 
   useEffect(() => {
+    if (!isPc) return;
     const observer = new ResizeObserver(() => {
       window.dispatchEvent(new Event("resize"));
     });
@@ -33,7 +39,7 @@ function SmoothScrolling({ children }: { children: ReactNode }) {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [isPc]);
   // useEffect(() => {
   //   if (!lenis) return;
   //   const resizeObserver = new ResizeObserver(() => {
