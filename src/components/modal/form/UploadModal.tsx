@@ -68,8 +68,8 @@ export default function UploadModal() {
     // }
     if (!user) return;
     if (tags.length === 0) return;
+    if (isLoading) return;
     setIsLoading(true);
-
     const storageFileName = uuidv4();
 
     const attachmentUrl = await generateURL(
