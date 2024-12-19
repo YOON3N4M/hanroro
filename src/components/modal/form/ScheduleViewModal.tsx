@@ -45,11 +45,11 @@ export default function ScheduleViewModal(props: ScheduleViewModalProps) {
         <div>
           <h2>{title}</h2>
         </div>
-        <div className="flex justify-center mt-sm">
+        <div className="flex justify-center mt-sm relative">
           {images && (
             <>
               {!isImgLoad && (
-                <SkeletonImage className="w-full h-[150px] bg-default-gray-bg" />
+                <SkeletonImage className="size-full absolute top-0 left-0 bg-default-gray-bg" />
               )}
               <Image
                 width={3000}
@@ -57,7 +57,7 @@ export default function ScheduleViewModal(props: ScheduleViewModalProps) {
                 src={images}
                 alt={"이미지"}
                 className={cn(
-                  "pc:max-h-[70vh] object-cover pc:w-auto mo:max-w-[80vw]",
+                  "pc:max-h-[70vh] object-cover pc:w-auto mo:size-full",
                   !isImgLoad && "opacity-0"
                 )}
                 onLoad={() => setIsImageLoad(true)}
