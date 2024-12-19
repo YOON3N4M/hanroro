@@ -51,17 +51,17 @@ export default function ImageViewModal(props: ImageViewModalProps) {
     }
   }
 
-  useEffect(() => {
-    async function getUploaderDisplayName() {
-      const res = await fetchUserDisplayName(imageDoc.uploaderId);
-      if (!res) return;
-      const resJson = await res?.json();
-      const name = resJson.data;
-      setUploaderDisplayName(name);
-    }
+  // useEffect(() => {
+  //   async function getUploaderDisplayName() {
+  //     const res = await fetchUserDisplayName(imageDoc.uploaderId);
+  //     if (!res) return;
+  //     const resJson = await res?.json();
+  //     const name = resJson.data;
+  //     setUploaderDisplayName(name);
+  //   }
 
-    getUploaderDisplayName();
-  }, []);
+  //   getUploaderDisplayName();
+  // }, []);
   return (
     <ModalTemplate bg={false}>
       <form
