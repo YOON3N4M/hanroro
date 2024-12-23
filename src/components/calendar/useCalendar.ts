@@ -3,12 +3,11 @@ import {
   eachDayOfInterval,
   endOfMonth,
   endOfWeek,
-  format,
   startOfMonth,
   startOfWeek,
   subMonths,
 } from "date-fns";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function useCalendar() {
   const today = new Date();

@@ -1,153 +1,111 @@
 "use client";
 
-import { Filter, scheduleTypeColorStyles } from "@/containers/calendar";
-import { ScheduleDoc } from "@/types";
+import { ScheduleDoc, ScheduleType } from "@/types";
 import { cn, parseFormattedDate } from "@/utils";
 import { EachDayOfIntervalResult, eachDayOfInterval, format } from "date-fns";
 import ScheduleViewModal from "../modal/form/ScheduleViewModal";
 import useModal from "../modal/useModal";
 import useCalendar from "./useCalendar";
+import { CalendarFilter, Filter, TYPE_FILTER } from "./CalendarFilter";
 
+import CalendarSchedule from "./CalendarSchedule";
+import CalendarCell from "./CalendarCell";
+import { useState } from "react";
+import CalendarController from "./CalendarController";
+
+export const scheduleTypeColorStyles: {
+  [key in ScheduleType]: {
+    default: string;
+    hover: string;
+    border: string;
+    text: string;
+  };
+} = {
+  concert: {
+    default: "bg-blue-300",
+    hover: "hover:bg-blue-400",
+    border: "border-blue-300",
+    text: "text-blue-300",
+  },
+  event: {
+    default: "bg-yellow-200",
+    hover: "hover:bg-yellow-400",
+    border: "border-yellow-200",
+    text: "text-yellow-200",
+  },
+  anniversary: {
+    default: "bg-red-300",
+    hover: "hover:bg-red-400",
+    border: "border-red-300",
+    text: "text-red-300",
+  },
+  release: {
+    default: "bg-orange-300",
+    hover: "bg-orange-400",
+    border: "border-orange-300",
+    text: "text-orange-300",
+  },
+  etc: {
+    default: "bg-blue-300",
+    hover: "bg-blue-400",
+    border: "border-blue-300",
+    text: "text-blue-300",
+  },
+};
 interface CalendarProps {
-  today: Date;
-  currentDate: Date;
-  daysOfMonth: EachDayOfIntervalResult<
-    {
-      start: Date;
-      end: Date;
-    },
-    undefined
-  >;
   scheduleList: ScheduleDoc[];
-  filter: Filter[];
 }
 
-const weeks = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const WEEK_LIST = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-export default function Calendar(props: CalendarProps) {
-  const { today, currentDate, daysOfMonth, scheduleList, filter } = props;
-
+export function Calendar(props: CalendarProps) {
+  const { scheduleList } = props;
+  const [filterList, setFilterList] = useState<Filter[]>(TYPE_FILTER);
+  const { today, currentDate, daysOfMonth, prevMonth, nextMonth } =
+    useCalendar();
   return (
     <>
+      <CalendarController
+        currentDate={currentDate}
+        nextMonth={nextMonth}
+        prevMonth={prevMonth}
+      />
+      <CalendarFilter filterList={filterList} setFilterList={setFilterList} />
       {/*  calendar */}
-      <div className="bg-default-black-bg h-full mo:h-screen p-[5px]">
-        <div className="text-xs size-full flex flex-col ">
-          {/* MTWTFSS */}
-          <div className="grid grid-cols-7 mt-xs border-y py-xs">
-            {weeks.map((week, idx) => (
-              <div key={week} className="flex justify-center">
-                <span
-                  className={cn(idx === weeks.length - 1 && "text-red-300")}
-                >
-                  {week}
-                </span>
-              </div>
-            ))}
-          </div>
-          {/* days */}
-          <div className="grid grid-cols-7 mt-xs flex-1">
-            {daysOfMonth.map((day, idx) => (
-              <DayGrid
-                filter={filter}
-                scheduleList={scheduleList}
-                key={`${format(day, "yyyy-MM-dd")}-${idx}`}
-                day={day}
-                currentDate={currentDate}
-              />
-            ))}
+      <div className="min-h-[500px] pc:h-[500px] tab:h-[800px]">
+        <h3 className="visually-hidden">캘린더</h3>
+        <div className="bg-default-black-bg h-full mo:h-screen p-[5px]">
+          <div className="text-xs size-full flex flex-col ">
+            {/* MTWTFSS */}
+            <div className="grid grid-cols-7 mt-xs border-y py-xs">
+              {WEEK_LIST.map((week, idx) => (
+                <div key={week} className="flex justify-center">
+                  <span
+                    className={cn(
+                      idx === WEEK_LIST.length - 1 && "text-red-300"
+                    )}
+                  >
+                    {week}
+                  </span>
+                </div>
+              ))}
+            </div>
+            {/* days */}
+            <div className="grid grid-cols-7 mt-xs flex-1">
+              {daysOfMonth.map((day, idx) => (
+                <CalendarCell
+                  today={today}
+                  filterList={filterList}
+                  scheduleList={scheduleList}
+                  key={`${format(day, "yyyy-MM-dd")}-${idx}`}
+                  day={day}
+                  currentDate={currentDate}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </>
-  );
-}
-
-interface DayGridProps {
-  scheduleList: ScheduleDoc[];
-  currentDate: Date;
-  day: Date;
-  filter: Filter[];
-}
-
-function DayGrid(props: DayGridProps) {
-  const { today } = useCalendar();
-  const formmatedToday = format(today, "yyyy-MM-dd");
-  const { scheduleList, currentDate, day, filter } = props;
-  const formattedDay = format(day, "yyyy-MM-dd");
-  const isSunday = format(day, "iii") === "Sun";
-  const isDayOfCurrentDate = format(day, "LLL") === format(currentDate, "LLL");
-  const isToday = formmatedToday === formattedDay;
-
-  const scheduleListOfDay = scheduleList.filter((schedule) => {
-    if (!schedule.endDate) {
-      return schedule.startDate === formattedDay;
-    } else {
-      const dateList = eachDayOfInterval({
-        start: parseFormattedDate(schedule.startDate, "yyyy-MM-dddd"),
-        end: parseFormattedDate(schedule.endDate, "yyyy-MM-dddd"),
-      });
-
-      return dateList.find((d) => format(d, "yyyy-MM-dd") === formattedDay);
-    }
-  });
-
-  return (
-    <div
-      className={cn(
-        "border-b relative",
-        !isSunday && "border-r",
-        isToday && "bg-default-gray-bg"
-      )}
-    >
-      {isToday && (
-        <span className="absolute center opacity-50 font-bold">오늘</span>
-      )}
-      <div className="flex justify-center">
-        <span
-          className={cn(
-            isSunday && "text-red-300",
-            !isDayOfCurrentDate && "opacity-40"
-          )}
-        >
-          {format(day, "dd")}
-        </span>
-      </div>
-      <div className="flex flex-col gap-xxs items-center justify-start mt-xxxs tab:min-h-[80px] pt-xxs">
-        {scheduleListOfDay.map((schedule) => (
-          <ScheduleItem
-            key={schedule.title}
-            schedule={schedule}
-            filter={filter}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ScheduleItem({
-  schedule,
-  filter,
-}: {
-  schedule: ScheduleDoc;
-  filter: Filter[];
-}) {
-  const { openSingleModal } = useModal();
-
-  function onClickSchedule() {
-    openSingleModal(<ScheduleViewModal schedule={schedule} />);
-  }
-  return (
-    <button
-      onClick={onClickSchedule}
-      key={schedule.title}
-      className={cn(
-        "w-[80%] min-h-[5px] rounded-md animate-fadeIn",
-        scheduleTypeColorStyles[schedule.type].default,
-        scheduleTypeColorStyles[schedule.type].hover,
-        !filter.find((item) => item.type === schedule.type) && "hidden"
-      )}
-      aria-label="view schedule"
-    ></button>
   );
 }

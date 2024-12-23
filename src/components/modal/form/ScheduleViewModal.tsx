@@ -8,11 +8,12 @@ import {
   IconTimer,
 } from "@/components/svg";
 import NewTabAnchor from "@/components/ui/NewTabAnchor";
-import { scheduleTypeColorStyles } from "@/containers/calendar";
+
 import { ScheduleDoc } from "@/types";
 import { useState } from "react";
 import SkeletonImage from "@/components/ui/SkeletonImage";
 import Image from "next/image";
+import { scheduleTypeColorStyles } from "@/components/Calendar";
 
 interface ScheduleViewModalProps {
   schedule: ScheduleDoc;

@@ -2,17 +2,18 @@ import { useAttachment } from "@/hooks/useAttachment";
 import { API_TAG } from "@/services";
 import { revalidateApi } from "@/services/_server";
 import { uploadSchedule } from "@/services/firebase";
-import { ScheduleDoc, ScheduleType } from "@/types";
+import { ScheduleDoc } from "@/types";
 import { cn, getNumberDate } from "@/utils";
 import { isMatch } from "date-fns";
-import { ChangeEvent, HTMLAttributes, useRef, useState } from "react";
+import { HTMLAttributes, useRef, useState } from "react";
 import { UseFormRegister, useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import ModalTemplate from "../ModalTemplate";
-import { TYPE_FILTER } from "@/containers/calendar";
-import useModal from "../useModal";
-import useToast from "@/components/toast/useToast";
+
+import { TYPE_FILTER } from "@/components/Calendar/CalendarFilter";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import useToast from "@/components/toast/useToast";
+import useModal from "../useModal";
 
 interface ScheduleUploadModalProps {}
 
