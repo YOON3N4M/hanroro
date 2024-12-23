@@ -21,7 +21,7 @@ interface CalendarFilterProps {
   setFilterList: Dispatch<SetStateAction<Filter[]>>;
 }
 
-export function CalendarFilter(props: CalendarFilterProps) {
+export default function CalendarFilter(props: CalendarFilterProps) {
   const { filterList, setFilterList } = props;
 
   function handleFilterClick(filterObj: Filter) {

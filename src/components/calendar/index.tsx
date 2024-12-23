@@ -3,7 +3,7 @@
 import { ScheduleDoc, ScheduleType } from "@/types";
 import { cn } from "@/utils";
 import { format } from "date-fns";
-import { CalendarFilter, Filter, TYPE_FILTER } from "./CalendarFilter";
+import CalendarFilter, { Filter, TYPE_FILTER } from "./CalendarFilter";
 import useCalendar from "./useCalendar";
 
 import { useState } from "react";
