@@ -10,10 +10,10 @@ import { UseFormRegister, useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import ModalTemplate from "../ModalTemplate";
 
-import { TYPE_FILTER } from "@/components/Calendar/CalendarFilter";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import useToast from "@/components/toast/useToast";
 import useModal from "../useModal";
+import { TYPE_FILTER } from "@/components/Calendar/CalendarFilter";
 
 interface ScheduleUploadModalProps {}
 

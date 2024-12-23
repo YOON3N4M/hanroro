@@ -1,16 +1,13 @@
 "use client";
 
 import { ScheduleDoc, ScheduleType } from "@/types";
-import { cn, parseFormattedDate } from "@/utils";
-import { EachDayOfIntervalResult, eachDayOfInterval, format } from "date-fns";
-import ScheduleViewModal from "../modal/form/ScheduleViewModal";
-import useModal from "../modal/useModal";
-import useCalendar from "./useCalendar";
+import { cn } from "@/utils";
+import { format } from "date-fns";
 import { CalendarFilter, Filter, TYPE_FILTER } from "./CalendarFilter";
+import useCalendar from "./useCalendar";
 
-import CalendarSchedule from "./CalendarSchedule";
-import CalendarCell from "./CalendarCell";
 import { useState } from "react";
+import CalendarCell from "./CalendarCell";
 import CalendarController from "./CalendarController";
 
 export const scheduleTypeColorStyles: {
