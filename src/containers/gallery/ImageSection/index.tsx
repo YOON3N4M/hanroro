@@ -1,6 +1,6 @@
 import GalleryItem from "@/components/GalleryItem";
-import { BasicCarousel } from "@/components/carousel";
-import { usePrevNextButtons } from "@/components/carousel/usePrevNextButton";
+import { Carousel } from "@/components/Carousel";
+import { usePrevNextButtons } from "@/components/Carousel/usePrevNextButton";
 import { IconTriangleLeft, IconTriangleRight } from "@/components/svg";
 import { GalleryItemDoc } from "@/types";
 import { cn } from "@/utils";
@@ -155,7 +155,7 @@ function GridView({ imageList }: { imageList: GalleryItemDoc[] }) {
         </div>
       </div>
       <div className="w-full overflow-hidden ">
-        <BasicCarousel emblaRef={emblaRef}>
+        <Carousel emblaRef={emblaRef}>
           {imageList.map((imageDoc, idx) => (
             <div
               key={imageDoc.id}
@@ -178,7 +178,7 @@ function GridView({ imageList }: { imageList: GalleryItemDoc[] }) {
               <p>조건에 부합하는 이미지가 없습니다.</p>
             </div>
           )}
-        </BasicCarousel>
+        </Carousel>
       </div>
     </div>
   );

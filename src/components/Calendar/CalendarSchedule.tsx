@@ -1,6 +1,6 @@
 import { ScheduleDoc } from "@/types";
-import ScheduleViewModal from "../modal/form/ScheduleViewModal";
-import useModal from "../modal/useModal";
+import ScheduleViewModal from "../Modal/form/ScheduleViewModal";
+import useModal from "../Modal/useModal";
 
 import { Filter } from "./CalendarFilter";
 import { cn } from "@/utils";

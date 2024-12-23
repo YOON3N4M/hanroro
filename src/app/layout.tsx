@@ -3,14 +3,14 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import ModalPortal from "@/components/modal/ModalPortal";
+import ModalPortal from "@/components/Modal/ModalPortal";
 import Toolbar from "./Toolbar";
 import localFont from "next/font/local";
 import { cn } from "@/utils";
 import { API_BASE_URL } from "@/services";
 import AuthProvider from "@/components/auth/AuthProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import ToastPortal from "@/components/toast/ToastPortal";
+import ToastPortal from "@/components/Toast/ToastPortal";
 import SmoothScrolling from "@/components/layout/SmoothScrolling";
 import { ViewTransitions } from "next-view-transitions";
 

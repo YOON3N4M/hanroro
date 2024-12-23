@@ -1,9 +1,9 @@
 import { scheduleTypeColorStyles } from "@/components/Calendar";
 import useCalendar from "@/components/Calendar/useCalendar";
-import { BasicCarousel } from "@/components/carousel";
-import { usePrevNextButtons } from "@/components/carousel/usePrevNextButton";
-import ScheduleViewModal from "@/components/modal/form/ScheduleViewModal";
-import useModal from "@/components/modal/useModal";
+import { Carousel } from "@/components/Carousel";
+import { usePrevNextButtons } from "@/components/Carousel/usePrevNextButton";
+import ScheduleViewModal from "@/components/Modal/form/ScheduleViewModal";
+import useModal from "@/components/Modal/useModal";
 import { IconTriangleLeft, IconTriangleRight } from "@/components/svg";
 import { ScheduleDoc } from "@/types";
 import { cn, getNumberDate, translateScheduleType } from "@/utils";
@@ -49,7 +49,7 @@ export default function SoonScheduleCarousel(props: SoonScheduleCarouselProps) {
         </div>
       </div>
       <div className="mt-sm">
-        <BasicCarousel emblaRef={emblaRef}>
+        <Carousel emblaRef={emblaRef}>
           {soonScheduleList.map((schedule, idx) => (
             <Slide
               key={schedule.title}
@@ -105,7 +105,7 @@ export default function SoonScheduleCarousel(props: SoonScheduleCarouselProps) {
               <p className="opacity-70 absolute center">마지막 일정 입니다.</p>
             </Slide>
           )}
-        </BasicCarousel>
+        </Carousel>
       </div>
     </div>
   );

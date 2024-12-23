@@ -1,7 +1,7 @@
 "use client";
 
-import ScheduleUploadModal from "@/components/modal/form/ScheduleUploadModal";
-import useModal from "@/components/modal/useModal";
+import ScheduleUploadModal from "@/components/Modal/form/ScheduleUploadModal";
+import useModal from "@/components/Modal/useModal";
 
 import { Calendar } from "@/components/Calendar";
 import { useUserDoc } from "@/store/auth";

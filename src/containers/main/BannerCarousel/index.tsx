@@ -1,5 +1,5 @@
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { usePrevNextButtons } from "@/components/carousel/usePrevNextButton";
+import { usePrevNextButtons } from "@/components/Carousel/usePrevNextButton";
 import { IconTriangleLeft, IconTriangleRight } from "@/components/svg";
 import { cn } from "@/utils";
 import ClassNames from "embla-carousel-class-names";

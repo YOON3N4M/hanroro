@@ -1,6 +1,6 @@
 "use client";
 
-import { BasicCarousel } from "@/components/carousel";
+import { Carousel } from "@/components/Carousel";
 import RotationTextUpMotion from "@/components/motion/RotationTextUpMotion";
 import TextupMotion, { customEase } from "@/components/motion/TextupMotion";
 import {
@@ -200,7 +200,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
             className="mt-auto mb-md tab:mb-sm"
           >
             <h3 className="visually-hidden">앨범</h3>
-            <BasicCarousel emblaRef={emblaRef}>
+            <Carousel emblaRef={emblaRef}>
               {ALBUM_LIST.map((album, idx) => (
                 <div
                   onClick={() => onClickAlbum(album)}
@@ -245,7 +245,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
                   </div>
                 </div>
               ))}
-            </BasicCarousel>
+            </Carousel>
           </div>
         </div>
       </div>

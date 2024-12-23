@@ -1,8 +1,8 @@
 "use client";
 
-import NeedLoginModal from "@/components/modal/form/NeedLoginModal";
-import UploadModal from "@/components/modal/form/UploadModal";
-import useModal from "@/components/modal/useModal";
+import NeedLoginModal from "@/components/Modal/form/NeedLoginModal";
+import UploadModal from "@/components/Modal/form/UploadModal";
+import useModal from "@/components/Modal/useModal";
 import { useUser } from "@/store/auth";
 import { cn } from "@/utils";
 import React, { ButtonHTMLAttributes } from "react";

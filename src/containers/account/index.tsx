@@ -1,8 +1,8 @@
 "use client";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { TOAST_MESSAGE } from "@/components/toast/message";
-import useToast from "@/components/toast/useToast";
+import { TOAST_MESSAGE } from "@/components/Toast/message";
+import useToast from "@/components/Toast/useToast";
 import { auth, dbService } from "@/lib/firebase/firebase";
 import { useAuthActions, useIsLogin, useUser, useUserDoc } from "@/store/auth";
 import { cn } from "@/utils";
