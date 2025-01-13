@@ -84,7 +84,7 @@ function BannerCarousel(props: BannerCarouselProps) {
             >
               <div className="relative size-full ">
                 <Image
-                  src={"/images/content/gallery-capture.png"}
+                  src={"/images/content/banner-carousel/gallery-capture.png"}
                   width={3000}
                   height={3000}
                   alt="갤러리"
@@ -99,11 +99,13 @@ function BannerCarousel(props: BannerCarouselProps) {
               desc="공연과 행사, 앨범발매, 이벤트 등 모든 일정들"
             >
               <Image
-                src={"/images/content/IMG_3469.JPG"}
+                // src={"/images/content/banner-carousel/IMG_4062.JPG"}
+                src={"/images/content/banner-carousel/IMG_4053.JPG"}
                 width={3000}
                 height={3000}
                 alt="현대카드 다이브"
-                className="object-cover brightness-50 size-full object-[0%_23%]"
+                className="object-cover brightness-50 size-full"
+                // className="object-cover brightness-50 size-full object-[0%_30%]"
               />
             </Slide>
           </div>

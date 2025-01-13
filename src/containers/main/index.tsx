@@ -69,7 +69,7 @@ function MainContainer(props: MainContainerProps) {
         <div className="flex-1 relative group border">
           <ContentModule
             staticImage={hatchingRoomCollaboration}
-            href="https://hatchingroom.com/index.html"
+            href="https://hatchingroom.com/product/list.html?cate_no=268"
             alt="hanroro x hatchingroom keyring"
           >
             <div className="mt-auto pb-[60px] flex flex-col items-center font-[100]">
