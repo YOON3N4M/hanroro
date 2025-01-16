@@ -18,7 +18,7 @@ function Header(props: HeaderProps) {
                 <Image
                   priority
                   className="h-[35px] w-auto hover:brightness-50 transition-all"
-                  src={"images/profile/logo.svg"}
+                  src={"/images/profile/logo.svg"}
                   width={1000}
                   height={1000}
                   alt="한로로 로고"
