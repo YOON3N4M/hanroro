@@ -56,7 +56,7 @@ function PhotobookItem(props: PhotobookItemProps) {
       </div> */}
       <div className="text-sm mt-sm flex">
         {/* <span className="font-bold text-blue-300">공연</span> */}
-        <span className="ml-sm">{title}</span>
+        <span>{title}</span>
       </div>
     </div>
   );

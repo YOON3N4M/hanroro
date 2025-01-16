@@ -1,7 +1,7 @@
 {
   "germination": [
     {
-      "src": "/images/photobook/germination/thumbnail_hanroro-germination-ref-seung__what-23.jpeg",
+      "src": "/images/photobook/germination/thumbnail-hanroro-germination-ref-seung__what-76.jpeg",
       "ref": "seung__what"
     },
     {
@@ -98,6 +98,10 @@
     },
     {
       "src": "/images/photobook/germination/hanroro-germination-ref-seung__what-22.jpeg",
+      "ref": "seung__what"
+    },
+    {
+      "src": "/images/photobook/germination/hanroro-germination-ref-seung__what-23.jpeg",
       "ref": "seung__what"
     },
     {
@@ -329,10 +333,6 @@
       "ref": "seung__what"
     },
     {
-      "src": "/images/photobook/germination/hanroro-germination-ref-seung__what-76.jpeg",
-      "ref": "seung__what"
-    },
-    {
       "src": "/images/photobook/germination/hanroro-germination-ref-seung__what-77.jpeg",
       "ref": "seung__what"
     },
@@ -375,6 +375,16 @@
     {
       "src": "/images/photobook/germination/hanroro-germination-ref-seung__what-9.jpeg",
       "ref": "seung__what"
+    }
+  ],
+  "hyundai-dive": [
+    {
+      "src": "/images/photobook/hyundai-dive/00775D53-3876-48CB-A805-28AD3DB0E634.JPG",
+      "ref": null
+    },
+    {
+      "src": "/images/photobook/hyundai-dive/CCD16928-B6D5-44BC-AE42-739146E76CE1.JPG",
+      "ref": null
     }
   ]
 }

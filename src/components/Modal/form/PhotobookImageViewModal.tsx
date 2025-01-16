@@ -24,9 +24,18 @@ function PhotobookImageViewModal(props: PhotobookImageViewModalProps) {
         quality={100}
         alt={src}
         onLoad={() => setIsLoading(false)}
-        className={cn(isLoading && "opacity-0", !isLoading && "animate-fadeIn")}
+        className={cn(
+          "size-full",
+          isLoading && "opacity-0",
+          !isLoading && "animate-fadeIn"
+        )}
       />
       {isLoading && <LoadingSpinner absolute white />}
+      {!isLoading && ref && (
+        <div className="text-white absolute bottom-0 right-0 z-[100] p-xl animate-fadeIn">
+          <span className="text-xs opacity-70">사진 제공 @{ref}</span>
+        </div>
+      )}
     </ModalTemplate>
   );
 }

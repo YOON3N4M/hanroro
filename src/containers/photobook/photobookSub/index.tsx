@@ -66,15 +66,28 @@ function PhotobookSubContainer(props: PhotobookSubContainerProps) {
             onClick={() => handleImageClick(image)}
             key={image.src}
             style={masonryItemStyle}
-            className="cursor-pointer transition-all"
+            className="cursor-pointer transition-all group"
           >
-            <Image
-              src={image.src}
-              alt={title}
-              width={1000}
-              height={1000}
-              className="size-full object-cover"
-            />
+            <div className="size-full relative">
+              <Image
+                src={image.src}
+                alt={title}
+                width={1000}
+                height={1000}
+                className="size-full object-cover group-hover:brightness-50 transition-all"
+              />
+              <div className="x-center y-center absolute opacity-0 group-hover:opacity-100 transition-opacity">
+                <span>원본 보기</span>
+              </div>
+              {/* 출처자 */}
+              {image.ref && (
+                <div className="absolute p-xs bottom-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-sm opacity-70">
+                    사진 제공 : @{image.ref}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </MasonryGrid>
