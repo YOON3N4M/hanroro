@@ -25,7 +25,7 @@ function PhotobookImageViewModal(props: PhotobookImageViewModalProps) {
         alt={src}
         onLoad={() => setIsLoading(false)}
         className={cn(
-          "size-full",
+          "pc:size-full tab:w-full tab:h-auto",
           isLoading && "opacity-0",
           !isLoading && "animate-fadeIn"
         )}

@@ -69,7 +69,7 @@ export default function ImageViewModal(props: ImageViewModalProps) {
         ref={formRef}
         action={() => revalidateApi(API_TAG.gallery)}
       ></form>
-      <div className="flex relative">
+      <div className="flex relative justify-center">
         {!isLoading && userDoc?.uid === imageDoc.uploaderId && (
           <div className="absolute top-0 w-full z-10 p-md">
             <div className="flex justify-end">
@@ -100,7 +100,7 @@ export default function ImageViewModal(props: ImageViewModalProps) {
           src={imageDoc.url}
           alt={"이미지"}
           className={cn(
-            "pc:max-h-[80vh] object-cover pc:w-auto mo:max-w-[80vw]",
+            "pc:max-h-[80vh] object-cover pc:w-auto tab:w-full",
             isLoading && "opacity-0",
             !isLoading && "animate-fadeIn"
           )}

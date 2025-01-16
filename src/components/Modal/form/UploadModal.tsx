@@ -98,7 +98,7 @@ export default function UploadModal() {
 
   return (
     <ModalTemplate>
-      <div className="relative pc:min-w-[500px] mo:min-w-[80vw] min-h-[30vh] max-w-[500px] mo:max-w-[300px] text-sm flex flex-col justify-center">
+      <div className="relative pc:min-w-[500px] mo:min-w-[80vw] min-h-[30vh] max-w-[500px] tab:w-full text-sm flex flex-col justify-center">
         <div className="flex justify-center">
           <div className="flex w-full cursor-pointer items-center justify-center rounded-md bg-base-300">
             <AttachmentInput

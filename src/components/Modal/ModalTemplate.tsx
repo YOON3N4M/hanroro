@@ -17,10 +17,10 @@ function ModalTemplate(props: ModalTemplateProps) {
   return (
     <div className="fixed left-0 top-0 z-[500] h-[100dvh] w-[100vw]">
       <div className="relative z-[600] flex size-full">
-        <div className="absolute z-[700] center">
+        <div className="absolute z-[700] center tab:w-full">
           <div
             className={cn(
-              "p-md max-w-[100vw] max-h-[90dvh] relative overflow-y-auto overflow-x-visible",
+              "p-md max-w-[100vw] max-h-[90dvh] relative overflow-y-auto overflow-x-visible tab:w-full",
               bg && "rounded-[4px] bg-default-black-bg border"
             )}
           >

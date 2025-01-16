@@ -5,18 +5,19 @@ import { PhotobookImageData, Photobook, srcGenerate } from "../_local";
 import Image from "next/image";
 import useModal from "@/components/Modal/useModal";
 import PhotobookImageViewModal from "@/components/Modal/form/PhotobookImageViewModal";
+import useDeviceDetect from "@/hooks/useDeviceDetect";
 
 interface PhotobookSubContainerProps {
   photobook?: Photobook;
 }
 
-const row = 4;
 const gap = 5;
 
 function PhotobookSubContainer(props: PhotobookSubContainerProps) {
   const { photobook } = props;
 
   const { openSingleModal } = useModal();
+  const { isPc } = useDeviceDetect();
 
   if (!photobook) {
     return (
@@ -28,8 +29,10 @@ function PhotobookSubContainer(props: PhotobookSubContainerProps) {
 
   const { title, titleEng, imageList } = photobook;
 
+  const columnCount = isPc ? 4 : 2;
+
   const masonryItemStyle = {
-    width: `calc((100% - ${(row - 1) * gap}px)/${row})`,
+    width: `calc((100% - ${(columnCount - 1) * gap}px)/${columnCount})`,
   };
 
   function handleImageClick(imageData: PhotobookImageData) {
@@ -54,7 +57,7 @@ function PhotobookSubContainer(props: PhotobookSubContainerProps) {
       </div> */}
       {/* Masonry */}
       <MasonryGrid
-        column={row}
+        column={columnCount}
         gap={gap}
         useResizeObserver={true}
         observeChildren={true}
@@ -66,7 +69,7 @@ function PhotobookSubContainer(props: PhotobookSubContainerProps) {
             onClick={() => handleImageClick(image)}
             key={image.src}
             style={masonryItemStyle}
-            className="cursor-pointer transition-all group"
+            className="cursor-pointer group"
           >
             <div className="size-full relative">
               <Image
@@ -76,13 +79,13 @@ function PhotobookSubContainer(props: PhotobookSubContainerProps) {
                 height={1000}
                 className="size-full object-cover group-hover:brightness-50 transition-all"
               />
-              <div className="x-center y-center absolute opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="x-center tab:hidden y-center absolute opacity-0 group-hover:opacity-100 transition-opacity">
                 <span>원본 보기</span>
               </div>
               {/* 출처자 */}
               {image.ref && (
-                <div className="absolute p-xs bottom-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-sm opacity-70">
+                <div className="absolute p-xs bottom-0 right-0 tab:p-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-sm opacity-70 tab:text-xs">
                     사진 제공 : @{image.ref}
                   </span>
                 </div>

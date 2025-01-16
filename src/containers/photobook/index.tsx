@@ -9,7 +9,7 @@ function PhotobookContainer(props: PhotobookContainerProps) {
 
   return (
     <div className="y-inner min-h-screen inner">
-      <div className="grid grid-cols-4 gap-md">
+      <div className="grid grid-cols-4 tab:grid-cols-1 gap-md">
         {PHOTOBOOK_LIST.map((item) => (
           <PhotobookItem key={item.titleEng} photobook={item} />
         ))}
