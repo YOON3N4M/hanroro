@@ -9,11 +9,12 @@ import { usePathname } from "next/navigation";
 
 interface NavigationProps {}
 
-const NAVIGATION_ITEM = [
+const NAVIGATION_ITEM: { name: string; href: string }[] = [
   { name: "프로필", href: "/profile" },
   // { name: "album", href: "/album" },
   { name: "일정", href: "/calendar" },
   { name: "갤러리", href: "/gallery" },
+  { name: "포토북", href: "/photobook" },
 ];
 
 function Navigation(props: NavigationProps) {
