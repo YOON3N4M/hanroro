@@ -25,7 +25,7 @@ const generateImageMap = () => {
       .filter((item) => !item.includes(".DS_Store"))
       .map((file) => {
         return {
-          src: `/images/${photobookPath}/${file}`,
+          src: `/images/photobook/${photobookPath}/${file}`,
           ref: getReference(file),
         };
       });
