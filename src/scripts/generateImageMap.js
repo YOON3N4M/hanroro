@@ -30,7 +30,12 @@ const generateImageMap = () => {
         };
       });
 
-    result[photobookPath] = data;
+    const thumbnailSort = [
+      ...data.filter((item) => item.src.includes("thumbnail")),
+      ...data.filter((item) => !item.src.includes("thumbnail")),
+    ];
+
+    result[photobookPath] = thumbnailSort;
   });
 
   // json ㅅ앵성
