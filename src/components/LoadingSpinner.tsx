@@ -18,6 +18,7 @@ export default function LoadingSpinner(props: LoadingSpinnerProps) {
   const renderSpinner = () => (
     <div
       className={cn(
+        "pointer-events-none",
         className,
         absolute && "absolute !mt-0 center",
         "flex size-full items-center justify-center"

@@ -30,7 +30,7 @@ function PhotobookImageViewModal(props: PhotobookImageViewModalProps) {
           !isLoading && "animate-fadeIn"
         )}
       />
-      {isLoading && <LoadingSpinner absolute white />}
+      {isLoading && <LoadingSpinner container absolute white />}
       {!isLoading && ref && (
         <div className="text-white absolute bottom-0 right-0 z-[100] p-xl animate-fadeIn">
           <span className="text-xs opacity-70">사진 제공 @{ref}</span>
