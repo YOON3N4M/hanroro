@@ -16,6 +16,7 @@ function Header(props: HeaderProps) {
             <div className="">
               <Link href={"/"}>
                 <Image
+                  priority
                   className="h-[35px] w-auto hover:brightness-50 transition-all"
                   src={"images/profile/logo.svg"}
                   width={1000}
