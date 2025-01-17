@@ -19,7 +19,7 @@ export default function AboutContainer() {
           <br />
         </p>
         <div className="flex flex-col mt-md">
-          <span>yoon3namm@gmail.com</span>
+          <span>hanrorocket@gmail.com</span>
           <NewTabAnchor
             className="underline"
             href="https://open.kakao.com/o/s6CV3FWg"
