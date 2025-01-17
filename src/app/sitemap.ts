@@ -26,7 +26,7 @@ function generateAlbumSiteMap() {
 
 function generatePhotobookSiteMap() {
   const photobookSiteMap = PHOTOBOOK_LIST.map((photobook) => ({
-    url: `${baseUrl}/album/${photobook.titleEng.toLowerCase()}`,
+    url: `${baseUrl}/photobook/${photobook.titleEng.toLowerCase()}`,
     lastModified: new Date(),
   }));
 
