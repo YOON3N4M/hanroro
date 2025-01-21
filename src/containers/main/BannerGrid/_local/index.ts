@@ -23,6 +23,7 @@ const GERMINATION: BannerGridContent = {
   title: "HANRORO 3rd CONCERT ‘발아(發芽)’",
   subTitle: "포토북",
   src: "hanroro-germination-ref-seung__what-83.jpeg",
+  linkHref: "/photobook/germination",
 };
 
 export const BANNER_GIRD_CONTENT_LIST: BannerGridContent[][] = [
