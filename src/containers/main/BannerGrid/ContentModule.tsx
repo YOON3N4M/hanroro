@@ -3,26 +3,17 @@ import { cn } from "@/utils";
 import Image, { StaticImageData } from "next/image";
 import { Link } from "next-view-transitions";
 import React, { ReactNode } from "react";
+import { BannerGridContent } from "./_local";
 
 interface ContentModuleProps {
-  children?: ReactNode;
-  href?: string;
-  linkHref?: string;
-  staticImage: StaticImageData;
-  alt: string;
-  imageHover?: boolean;
+  content: BannerGridContent;
 }
 
 export default function ContentModule(props: ContentModuleProps) {
-  const {
-    children,
-    href,
-    staticImage,
-    imageHover = true,
-    alt,
-    linkHref,
-  } = props;
+  const { content } = props;
 
+  const { href, linkHref, title, subTitle, date, src } = content;
+  const localSrc = require(`./_local/asset/${src}`).default;
   return (
     <div className="size-full relative group text-white overflow-hidden">
       {/* full size link wrapper */}
@@ -42,21 +33,26 @@ export default function ContentModule(props: ContentModuleProps) {
 
       {/* text wrapper */}
       <div className="size-full flex flex-col absolute top-0 left-0 z-[2] p-md">
-        {children}
+        <div className="mt-auto pb-[60px] flex flex-col items-center font-[100]">
+          <h3 className="text-3xl">{title}</h3>
+          {subTitle && <p>{subTitle}</p>}
+
+          {date && <p>{date}</p>}
+        </div>
       </div>
       {/* image wrapper */}
       <div className="size-full absolute top-0 left-0 z-[1]">
         <Image
-          src={staticImage.src}
-          width={staticImage.width}
-          height={staticImage.height}
+          src={localSrc}
+          width={9999}
+          height={9999}
           className={cn(
             "size-full object-cover transition-all animate-fadeIn",
-            imageHover
+            true
               ? "group-hover:brightness-100 brightness-50"
               : "brightness-[0.25]"
           )}
-          alt={alt}
+          alt={title}
         />
       </div>
     </div>

@@ -2,11 +2,12 @@
 
 import { GalleryDocsObj } from "@/types";
 import { theCompass } from "../../../public/images/album";
-import { hatchingRoomCollaboration } from "./images";
-import ContentModule from "./ui/ContentModule";
-import ContentSection from "./ui/ContentSection";
+
+import ContentModule from "./BannerGrid/ContentModule";
+import ContentSection from "./BannerGrid/ContentSection";
 import BannerCarousel from "./BannerCarousel";
 import { chunberia, thirdSolo } from "../../../public/images/schdule";
+import { BANNER_GIRD_CONTENT_LIST } from "./BannerGrid/_local";
 
 interface MainContainerProps {
   galleryDocs: GalleryDocsObj;
@@ -21,37 +22,18 @@ function MainContainer(props: MainContainerProps) {
         <h2 className="visually-hidden">배너 캐러셀</h2>
         <BannerCarousel />
       </ContentSection>
-      <ContentSection className="flex gap-sm text-white mo:flex-col pc:px-md">
-        <h2 className="visually-hidden">메인 배너</h2>
-        <div className="flex-1 border">
-          <ContentModule
-            staticImage={thirdSolo}
-            href="https://www.instagram.com/p/DCYnEtkS4Vj/?utm_source=ig_web_copy_link"
-            alt="한로로 3번째 단독 콘서트 '발아' 포스터"
-          >
-            <div className="mt-auto pb-[60px] flex flex-col items-center font-[100]">
-              <h3 className="text-3xl">단독 콘서트 &#39;발아&#39;</h3>
+      {BANNER_GIRD_CONTENT_LIST.map((colList, idx) => (
+        <ContentSection
+          key={`col-${idx}`}
+          className="flex gap-sm text-white mo:flex-col pc:px-md"
+        >
+          {colList.map((content) => (
+            <ContentModule content={content} key={content.title} />
+          ))}
+        </ContentSection>
+      ))}
 
-              <p>2025.01.11 ~ 2025.01.12</p>
-            </div>
-          </ContentModule>
-        </div>
-
-        <div className="flex-1 relative group border">
-          <ContentModule
-            staticImage={chunberia}
-            href="https://www.instagram.com/p/DCqbmqlyLiq/"
-            alt="춘베리아 특급열차 포스터"
-          >
-            <div className="mt-auto pb-[60px] flex flex-col items-center font-[100]">
-              <h3 className="text-3xl">춘베리아 특급 열차</h3>
-
-              <p>2024.12.21 13:00</p>
-            </div>
-          </ContentModule>
-        </div>
-      </ContentSection>
-      <ContentSection className="flex gap-sm text-white mo:flex-col pc:px-md">
+      {/* <ContentSection className="flex gap-sm text-white mo:flex-col pc:px-md">
         <div className="flex-1 border">
           <ContentModule
             staticImage={theCompass}
@@ -74,11 +56,11 @@ function MainContainer(props: MainContainerProps) {
           >
             <div className="mt-auto pb-[60px] flex flex-col items-center font-[100]">
               <h3 className="text-3xl">HANRORO X HATCHINGROOM</h3>
-              {/* <p>click to hatchingroom</p> */}
+              
             </div>
           </ContentModule>
         </div>
-      </ContentSection>
+      </ContentSection> */}
     </div>
   );
 }
