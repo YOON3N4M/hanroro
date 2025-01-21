@@ -25,14 +25,14 @@ const generateImageMap = () => {
       .filter((item) => !item.includes(".DS_Store"))
       .map((file) => {
         return {
-          src: `/images/photobook/${photobookPath}/${file}`,
+          imageFileName: `${file}`,
           ref: getReference(file),
         };
       });
 
     const thumbnailSort = [
-      ...data.filter((item) => item.src.includes("thumbnail")),
-      ...data.filter((item) => !item.src.includes("thumbnail")),
+      ...data.filter((item) => item.imageFileName.includes("thumbnail")),
+      ...data.filter((item) => !item.imageFileName.includes("thumbnail")),
     ];
 
     result[photobookPath] = thumbnailSort;

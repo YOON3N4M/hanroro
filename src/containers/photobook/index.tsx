@@ -28,7 +28,7 @@ function PhotobookItem(props: PhotobookItemProps) {
   const { photobook } = props;
   const { title, titleEng, imageList } = photobook;
 
-  const thumbnailSrc = imageList[0].src;
+  const thumbnailSrc = srcGenerate(titleEng, imageList[0].imageFileName);
 
   return (
     <div className="group flex flex-col relative">

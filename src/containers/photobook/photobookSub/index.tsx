@@ -41,21 +41,6 @@ function PhotobookSubContainer(props: PhotobookSubContainerProps) {
 
   return (
     <div className="y-inner min-h-screen inner">
-      {/* 일반 그리드 */}
-      {/* <div className="grid grid-cols-4 gap-[5px]">
-        {imageList.map((image) => (
-          <div key={image}>
-            <Image
-              src={srcGenerate(titleEng, image)}
-              alt={title}
-              width={1000}
-              height={1000}
-              className="size-full object-cover"
-            />
-          </div>
-        ))}
-      </div> */}
-      {/* Masonry */}
       <MasonryGrid
         column={columnCount}
         gap={gap}
@@ -67,13 +52,13 @@ function PhotobookSubContainer(props: PhotobookSubContainerProps) {
         {imageList.map((image) => (
           <div
             onClick={() => handleImageClick(image)}
-            key={image.src}
+            key={image.imageFileName}
             style={masonryItemStyle}
             className="cursor-pointer group"
           >
             <div className="size-full relative">
               <Image
-                src={image.src}
+                src={srcGenerate(titleEng, image.imageFileName)}
                 alt={title}
                 width={1000}
                 height={1000}
