@@ -2,8 +2,8 @@ import photobookJson from "@/data/photobookData.json";
 
 // type PhotobookType = "album" | "concert" | "shoot";
 
-export const srcGenerate = (titleEng: string, filename: string) =>
-  `/images/photobook/${titleEng}/hanroro-${titleEng}-${filename}`;
+export const srcGenerate = (titleEng: string, imageFileName: string) =>
+  `/images/photobook/${titleEng}/${imageFileName}`;
 
 export interface Photobook {
   title: string;
@@ -13,7 +13,7 @@ export interface Photobook {
 }
 
 export interface PhotobookImageData {
-  src: string;
+  imageFileName: string;
   ref: string | null;
 }
 
@@ -24,12 +24,12 @@ const GERMINATION: Photobook = {
   imageList: photobookJson.germination,
 };
 
-// const HYUNDAI_DIVE: Photobook = {
-//   title: "공연 '현대카드 다이브'",
-//   // type: "concert",
-//   titleEng: "hyundai-dive",
-//   imageList: photobookJson["hyundai-dive"],
-//   // thumbnail: "2.JPG",
-// };
+const HYUNDAI_DIVE: Photobook = {
+  title: "공연 '현대카드 다이브'",
+  // type: "concert",
+  titleEng: "hyundai-card-dive",
+  imageList: photobookJson["hyundai-card-dive"],
+  // thumbnail: "2.JPG",
+};
 
-export const PHOTOBOOK_LIST: Photobook[] = [GERMINATION];
+export const PHOTOBOOK_LIST: Photobook[] = [GERMINATION, HYUNDAI_DIVE];
