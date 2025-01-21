@@ -18,14 +18,14 @@ export interface PhotobookImageData {
 }
 
 const GERMINATION: Photobook = {
-  title: `단독 콘서트 '발아'`,
+  title: "HANRORO 3rd CONCERT ‘발아(發芽)’",
   // type: "concert",
   titleEng: "germination",
   imageList: photobookJson.germination,
 };
 
 const HYUNDAI_DIVE: Photobook = {
-  title: "공연 '현대카드 다이브'",
+  title: "현대카드 Curated 95",
   // type: "concert",
   titleEng: "hyundai-card-dive",
   imageList: photobookJson["hyundai-card-dive"],
