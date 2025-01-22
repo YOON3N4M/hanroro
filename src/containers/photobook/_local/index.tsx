@@ -32,4 +32,16 @@ const HYUNDAI_DIVE: Photobook = {
   // thumbnail: "2.JPG",
 };
 
-export const PHOTOBOOK_LIST: Photobook[] = [GERMINATION, HYUNDAI_DIVE];
+const HYPEBEAST: Photobook = {
+  title: "Hypebeast 인터뷰",
+  // type: "concert",
+  titleEng: "hypebeast",
+  imageList: photobookJson["hypebeast"],
+  // thumbnail: "2.JPG",
+};
+
+export const PHOTOBOOK_LIST: Photobook[] = [
+  GERMINATION,
+  HYUNDAI_DIVE,
+  HYPEBEAST,
+];
