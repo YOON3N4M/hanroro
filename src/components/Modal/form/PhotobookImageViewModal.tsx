@@ -1,4 +1,4 @@
-import { PhotobookImageData } from "@/containers/photobook/_local";
+import { PhotobookImageData, srcGenerate } from "@/containers/photobook/_local";
 import ModalTemplate from "../ModalTemplate";
 import { useState } from "react";
 import Image from "next/image";
@@ -7,22 +7,23 @@ import { cn } from "@/utils";
 
 interface PhotobookImageViewModalProps {
   imageData: PhotobookImageData;
+  titleEng: string;
 }
 
 function PhotobookImageViewModal(props: PhotobookImageViewModalProps) {
-  const { imageData } = props;
-  const { src, ref } = imageData;
+  const { imageData, titleEng } = props;
+  const { imageFileName, ref } = imageData;
 
   const [isLoading, setIsLoading] = useState(true);
 
   return (
     <ModalTemplate bg={false}>
       <Image
-        src={src}
+        src={srcGenerate(titleEng, imageFileName)}
         width={9999}
         height={9999}
         quality={100}
-        alt={src}
+        alt={imageFileName}
         onLoad={() => setIsLoading(false)}
         className={cn(
           "pc:size-full tab:w-full tab:h-auto",

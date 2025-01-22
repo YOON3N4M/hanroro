@@ -36,7 +36,9 @@ function PhotobookSubContainer(props: PhotobookSubContainerProps) {
   };
 
   function handleImageClick(imageData: PhotobookImageData) {
-    openSingleModal(<PhotobookImageViewModal imageData={imageData} />);
+    openSingleModal(
+      <PhotobookImageViewModal titleEng={titleEng} imageData={imageData} />
+    );
   }
 
   return (
