@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { PHOTOBOOK_LIST, Photobook, srcGenerate } from "./_local";
 import Image from "next/image";
 
