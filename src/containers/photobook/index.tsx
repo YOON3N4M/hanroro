@@ -46,7 +46,7 @@ function PhotobookItem(props: PhotobookItemProps) {
             src={thumbnailSrc}
             className="object-cover brightness-100 group-hover:brightness-50 transition-all"
             fill
-            alt={`한로로 ${title} 포토북`}
+            alt={`한로로 ${title} 포토앨범`}
           />
         </div>
       </div>

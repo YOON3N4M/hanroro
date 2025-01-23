@@ -14,7 +14,7 @@ const NAVIGATION_ITEM: { name: string; href: string }[] = [
   // { name: "album", href: "/album" },
   { name: "일정", href: "/calendar" },
   { name: "갤러리", href: "/gallery" },
-  { name: "포토북", href: "/photobook" },
+  { name: "포토앨범", href: "/photobook" },
 ];
 
 function Navigation(props: NavigationProps) {

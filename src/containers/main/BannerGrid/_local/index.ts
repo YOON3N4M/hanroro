@@ -21,7 +21,7 @@ const HATCHING_ROOM: BannerGridContent = {
 
 const GERMINATION: BannerGridContent = {
   title: "HANRORO 3rd CONCERT ‘발아(發芽)’",
-  subTitle: "포토북",
+  subTitle: "포토앨범",
   src: "hanroro-germination-ref-seung__what-83.jpeg",
   linkHref: "/photobook/germination",
 };
