@@ -23,14 +23,19 @@ function PhotobookContainer(props: PhotobookContainerProps) {
 
   return (
     <div className="y-inner min-h-screen inner">
-      <div className="flex justify-end">
+      <div className="flex justify-between mt-[20px] tab:flex-col">
         <input
-          className="input !bg-[#282828] px-xs text-sm"
-          placeholder="키워드 입력"
+          className="input !bg-[#282828] px-xxs text-sm"
+          placeholder="키워드 검색"
           onChange={handleOnChange}
         />
+        <div className="text-xs opacity-70 text-right tab:mt-lg">
+          <p>아래의 이메일로 사진을 제보해주시면 등록 됩니다.</p>
+          <span>hanrorocket@gmail.com</span>
+        </div>
       </div>
-      <div className="grid grid-cols-4 tab:grid-cols-1 gap-md mt-xl">
+
+      <div className="grid grid-cols-4 tab:grid-cols-2 gap-md mt-xl">
         {filteredPhotobookList.map((item) => (
           <PhotobookItem key={item.titleEng} photobook={item} />
         ))}
@@ -75,7 +80,7 @@ function PhotobookItem(props: PhotobookItemProps) {
       {/* <div className="absolute bottom-xl x-center">
         <span>{title}</span>
       </div> */}
-      <div className="text-sm mt-sm flex">
+      <div className="text-sm mt-sm flex tab:min-h-[40px] line-clamp-2">
         {/* <span className="font-bold text-blue-300">공연</span> */}
         <span>{title}</span>
       </div>
