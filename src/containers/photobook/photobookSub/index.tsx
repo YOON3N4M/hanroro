@@ -46,13 +46,7 @@ function PhotobookSubContainer(props: PhotobookSubContainerProps) {
     <div className="y-inner min-h-screen inner">
       <div className="pt-xl">
         <div className="relative min-h-[50px]">
-          <Link
-            className="absolute left-0 h-min top-0 button transition-opacity opacity-70 text-sm bg-default-gray-bg"
-            href={"/photobook"}
-          >
-            목록으로
-          </Link>
-          <h2 className="text-center text-lg">{title}</h2>
+          <h2 className="text-center">{title}</h2>
         </div>
       </div>
       <div className="mt-xl">

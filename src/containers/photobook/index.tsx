@@ -1,16 +1,37 @@
+"use client";
+
 import { Link } from "next-view-transitions";
-import { PHOTOBOOK_LIST, Photobook, srcGenerate } from "./_local";
 import Image from "next/image";
+import { ChangeEvent, useState } from "react";
+import { PHOTOBOOK_LIST, Photobook, srcGenerate } from "./_local";
 
 interface PhotobookContainerProps {}
 
 function PhotobookContainer(props: PhotobookContainerProps) {
   const {} = props;
 
+  const [keyword, setKeyword] = useState("");
+
+  function handleOnChange(event: ChangeEvent<HTMLInputElement>) {
+    setKeyword(event.target.value);
+  }
+
+  const filteredPhotobookList =
+    keyword === ""
+      ? PHOTOBOOK_LIST
+      : PHOTOBOOK_LIST.filter((photobook) => photobook.title.includes(keyword));
+
   return (
     <div className="y-inner min-h-screen inner">
-      <div className="grid grid-cols-4 tab:grid-cols-1 gap-md">
-        {PHOTOBOOK_LIST.map((item) => (
+      <div className="flex justify-end">
+        <input
+          className="input !bg-[#282828] px-xs text-sm"
+          placeholder="키워드 입력"
+          onChange={handleOnChange}
+        />
+      </div>
+      <div className="grid grid-cols-4 tab:grid-cols-1 gap-md mt-xl">
+        {filteredPhotobookList.map((item) => (
           <PhotobookItem key={item.titleEng} photobook={item} />
         ))}
       </div>
