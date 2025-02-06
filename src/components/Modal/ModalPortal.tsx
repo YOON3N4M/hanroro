@@ -1,9 +1,20 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { useModalElements } from "./store";
+import useModal from "./useModal";
 
 function ModalPortal() {
   const modalElements = useModalElements();
+
+  const pathname = usePathname();
+
+  const { closeAllModal } = useModal();
+
+  useEffect(() => {
+    closeAllModal();
+  }, [pathname]);
 
   return (
     <div id="modal-portal">
