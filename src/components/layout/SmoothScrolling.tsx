@@ -4,12 +4,15 @@ import useDeviceDetect from "@/hooks/useDeviceDetect";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import { usePathname, useSearchParams } from "next/navigation";
 import { ReactNode, useEffect } from "react";
+import { useModalElements } from "../Modal/store";
 
 function SmoothScrolling({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const lenis = useLenis();
 
   const { isPc } = useDeviceDetect();
+
+  const modalElement = useModalElements();
 
   useEffect(() => {
     if (!isPc) return;
@@ -40,6 +43,16 @@ function SmoothScrolling({ children }: { children: ReactNode }) {
       observer.disconnect();
     };
   }, [isPc]);
+
+  useEffect(() => {
+    if (!lenis) return;
+
+    if (modalElement.length > 0) {
+      lenis?.stop();
+    } else {
+      lenis?.start();
+    }
+  }, [modalElement]);
   // useEffect(() => {
   //   if (!lenis) return;
   //   const resizeObserver = new ResizeObserver(() => {

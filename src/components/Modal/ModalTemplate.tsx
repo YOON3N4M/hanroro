@@ -3,6 +3,7 @@ import useModal from "./useModal";
 import { useIsModalOn } from "./store";
 import { cn } from "@/utils";
 import { IconXSign } from "../svg";
+import { useLenis } from "@studio-freight/react-lenis/types";
 
 interface ModalTemplateProps {
   children?: ReactNode;
