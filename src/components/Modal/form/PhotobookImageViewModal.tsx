@@ -26,7 +26,7 @@ function PhotobookImageViewModal(props: PhotobookImageViewModalProps) {
         alt={imageFileName}
         onLoad={() => setIsLoading(false)}
         className={cn(
-          "size-auto max-h-[80vh] brightness-50 object-cover mx-auto",
+          "size-auto max-h-[80vh] object-cover mx-auto",
           isLoading && "opacity-0",
           !isLoading && "animate-fadeIn"
         )}
