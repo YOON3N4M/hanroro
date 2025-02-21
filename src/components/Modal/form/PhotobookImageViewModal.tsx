@@ -18,25 +18,27 @@ function PhotobookImageViewModal(props: PhotobookImageViewModalProps) {
 
   return (
     <ModalTemplate bg={false}>
-      <Image
-        src={srcGenerate(titleEng, imageFileName)}
-        width={9999}
-        height={9999}
-        quality={100}
-        alt={imageFileName}
-        onLoad={() => setIsLoading(false)}
-        className={cn(
-          "size-auto max-h-[80vh] object-cover mx-auto",
-          isLoading && "opacity-0",
-          !isLoading && "animate-fadeIn"
+      <div className="mo:w-[80vw]">
+        <Image
+          src={srcGenerate(titleEng, imageFileName)}
+          width={9999}
+          height={9999}
+          quality={100}
+          alt={imageFileName}
+          onLoad={() => setIsLoading(false)}
+          className={cn(
+            "size-auto  max-h-[80vh] object-cover mx-auto",
+            isLoading && "opacity-0",
+            !isLoading && "animate-fadeIn"
+          )}
+        />
+        {isLoading && <LoadingSpinner container absolute white />}
+        {!isLoading && ref && (
+          <div className="text-white absolute bottom-0 x-center z-[100] animate-fadeIn">
+            <span className="text-xs opacity-70">사진 제공 @{ref}</span>
+          </div>
         )}
-      />
-      {isLoading && <LoadingSpinner container absolute white />}
-      {!isLoading && ref && (
-        <div className="text-white absolute bottom-0 x-center z-[100] animate-fadeIn">
-          <span className="text-xs opacity-70">사진 제공 @{ref}</span>
-        </div>
-      )}
+      </div>
     </ModalTemplate>
   );
 }

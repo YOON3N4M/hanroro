@@ -18,17 +18,17 @@ function ModalTemplate(props: ModalTemplateProps) {
   return (
     <div className="fixed left-0 top-0 z-[500] h-[100dvh] w-[100vw]">
       <div className="relative z-[600] flex size-full">
-        <div className="absolute z-[700] center tab:w-full">
+        <div className="absolute z-[700] center">
           <div
             className={cn(
-              "p-md max-w-[100vw] max-h-[90dvh] relative overflow-y-auto overflow-x-visible tab:w-full",
+              "p-md relative overflow-y-auto overflow-x-visible",
               bg && "rounded-[4px] bg-default-black-bg border"
             )}
           >
             {bg && (
               <button
                 onClick={removeModalElement}
-                className="absolute right-[10px] top-[10px] text-2xl"
+                className="absolute right-[10px] top-[10px] text-2xl z-[700]"
               >
                 <IconXSign />
               </button>

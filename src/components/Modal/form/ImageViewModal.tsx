@@ -69,7 +69,7 @@ export default function ImageViewModal(props: ImageViewModalProps) {
         ref={formRef}
         action={() => revalidateApi(API_TAG.gallery)}
       ></form>
-      <div className="flex relative justify-center">
+      <div className="flex relative justify-center mo:w-[80vw]">
         {!isLoading && userDoc?.uid === imageDoc.uploaderId && (
           <div className="absolute top-0 w-full z-10 p-md">
             <div className="flex justify-end">
@@ -100,14 +100,14 @@ export default function ImageViewModal(props: ImageViewModalProps) {
           src={imageDoc.url}
           alt={"이미지"}
           className={cn(
-            "pc:max-h-[80vh] object-cover pc:w-auto tab:w-full",
+            "pc:max-h-[80vh] object-cover pc:w-auto",
             isLoading && "opacity-0",
             !isLoading && "animate-fadeIn"
           )}
           onLoad={() => setIsLoading(false)}
         />
         {/* text panel */}
-        {!isLoading && (
+        {/* {!isLoading && (
           <div className="absolute w-full h-[80px] bottom-0 bg-default-black-bg opacity-50 flex flex-col text-white p-md">
             <div className="flex gap-xs">
               {imageDoc.tags.map((tag, idx) => (
@@ -122,7 +122,7 @@ export default function ImageViewModal(props: ImageViewModalProps) {
               )}
             </div>
           </div>
-        )}
+        )} */}
       </div>
       {isLoading && <LoadingSpinner />}
     </ModalTemplate>
