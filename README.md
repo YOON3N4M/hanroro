@@ -3,7 +3,7 @@
 
 가수 한로로님의 팬사이트 입니다.<br/>
 
-![image](https://github.com/user-attachments/assets/d84d2557-86d3-44ef-89dc-211d9237f3f0)
+![image](https://github.com/user-attachments/assets/97c99243-e66a-4a59-8552-ee48a50d8070)
 
 
 
@@ -28,6 +28,9 @@
 
 * 일정 페이지
 > 앨범발매/콘서트/페스티벌 일정과 한로로 님과 관련된 이벤트 등의 일정을 제공합니다. (과거의 일정도 확인 할 수 있습니다.)
+
+* 포토앨범 페이지
+> 각 활동별(의류 콜라보, 공연, 촬영 등) 사진을 한번에 확인 할 수 있습니다.
 
 <br/>
 
