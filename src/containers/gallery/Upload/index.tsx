@@ -1,12 +1,11 @@
 "use client";
 
-import MessageModal from "@/components/Modal/form/MessageModal";
 import NeedLoginModal from "@/components/Modal/form/NeedLoginModal";
 import UploadModal from "@/components/Modal/form/UploadModal";
 import useModal from "@/components/Modal/useModal";
 import { useUser } from "@/store/auth";
 import { cn } from "@/utils";
-import React, { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from "react";
 
 interface GalleyUploadButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {}
@@ -17,21 +16,11 @@ export default function GalleyUploadButton(props: GalleyUploadButtonProps) {
 
   const user = useUser();
   function onClickUpload() {
-    openSingleModal(
-      <MessageModal
-        messageList={[
-          "현재 db 사용량 초과 문제로",
-          "이미지 업로드가 일시중단 되었습니다.",
-        ]}
-        textAlign="center"
-      />
-    );
-    // 업로드 일시 비활성화
-    // if (user) {
-    //   openSingleModal(<UploadModal />);
-    // } else {
-    //   openSingleModal(<NeedLoginModal />);
-    // }
+    if (user) {
+      openSingleModal(<UploadModal />);
+    } else {
+      openSingleModal(<NeedLoginModal />);
+    }
   }
 
   return (
