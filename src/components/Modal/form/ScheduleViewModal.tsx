@@ -1,4 +1,4 @@
-import { cn, translateScheduleType } from "@/utils";
+import { cn, isIncludes, translateScheduleType } from "@/utils";
 
 import {
   IconCalendar,
@@ -104,7 +104,10 @@ export default function ScheduleViewModal(props: ScheduleViewModalProps) {
           {link && (
             <div className="flex gap-xxs items-center">
               <IconLink />
-              <NewTabAnchor className="text-sm underline" href={link}>
+              <NewTabAnchor
+                className="text-sm underline line-clamp-1"
+                href={link}
+              >
                 {handleLinkText(link)}
               </NewTabAnchor>
             </div>
@@ -116,11 +119,15 @@ export default function ScheduleViewModal(props: ScheduleViewModalProps) {
 }
 
 function handleLinkText(link: string) {
-  if (link.includes("instagram")) {
+  if (isIncludes(link, ["instagram"])) {
     return "instagram";
   }
-  if (link.includes("youtube") || link.includes("youtu.be")) {
+
+  if (isIncludes(link, ["youtu.be", "youtube"])) {
     return "youtube";
+  }
+  if (isIncludes(link, ["interpark", "booking"])) {
+    return "예매하기";
   }
   return link;
 }

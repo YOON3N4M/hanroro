@@ -157,3 +157,12 @@ export function exceptionHandleAlbumHref(engTitle: string) {
     return `/album/${engTitle.toLowerCase()}`;
   }
 }
+
+/**
+ * 특정 문자열(들)을 하나라도 포함하고 있는지 boolean을 반환해주는 함수
+ */
+export function isIncludes(targetStr: string, strList: string[]) {
+  const booleanList = strList.map((str) => targetStr.includes(str));
+
+  return booleanList.some((bool) => bool);
+}
