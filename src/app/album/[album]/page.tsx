@@ -1,13 +1,15 @@
 import AlbumContainer from "@/containers/Album";
 import React from "react";
 
+type AlbumPageParams = Promise<{ album: string }>;
+
 interface AlbumPageProps {
-  params: { album: string };
+  params: AlbumPageParams;
 }
 
-export default function AlbumPage(props: AlbumPageProps) {
+export default async function AlbumPage(props: AlbumPageProps) {
   const { params } = props;
-  const { album: albumTitle } = params;
+  const { album: albumTitle } = await params;
 
   return <AlbumContainer albumTitle={albumTitle} />;
 }
