@@ -2,13 +2,13 @@
 
 import React from "react";
 import { LOCAL_ALBUM_PAGE_DATA } from "./_local";
-import IntroSection from "./IntroSection";
-import CategorySection from "./CategorySection";
-import VideoSection from "./VideoSection";
-import InformationSection from "./InformationSection";
-import ImageSection from "./ImageSection";
+import IntroSection from "./section/IntroSection";
+import CategorySection from "./section/CategorySection";
+import VideoSection from "./section/VideoSection";
+import InformationSection from "./section/InformationSection";
+import ImageSection from "./section/ImageSection";
 import { generateAlbumData } from "@/utils";
-import NextAlbumSection from "./NextAlbumSection";
+import NextAlbumSection from "./section/NextAlbumSection";
 
 interface AlbumContainerProps {
   albumTitle: string;
