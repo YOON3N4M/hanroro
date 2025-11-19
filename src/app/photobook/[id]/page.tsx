@@ -1,13 +1,15 @@
 import { PHOTOBOOK_LIST } from "@/containers/photobook/_local";
 import PhotobookSubContainer from "@/containers/photobook/photobookSub";
 
+type PhotobookParams = Promise<{ id: string }>;
+
 interface PhotobookSubPageProps {
-  params: { id: string };
+  params: PhotobookParams;
 }
 
-function PhotobookSubPage(props: PhotobookSubPageProps) {
+async function PhotobookSubPage(props: PhotobookSubPageProps) {
   const { params } = props;
-  const { id } = params;
+  const { id } = await params;
 
   const photobook = PHOTOBOOK_LIST.find((item) => item.titleEng === id);
 

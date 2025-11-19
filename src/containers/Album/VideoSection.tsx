@@ -19,25 +19,12 @@ function VideoSection(props: VideoSectionProps) {
           className="absolute top-0 left-0 size-full px-[5rem]"
         >
           <div className="size-full">
-            <Image
-              src={overlaySrc}
-              width={2000}
-              height={2000}
-              alt="overlay"
-              className="size-full object-cover"
-            />
+            <Image src={overlaySrc} width={2000} height={2000} alt="overlay" className="size-full object-cover" />
           </div>
         </motion.div>
       )}
       <div className="w-full">
-        <video
-          className="size-full"
-          height={820}
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
+        <video className="size-full" height={820} autoPlay loop muted playsInline>
           <source src={src} type="video/mp4" />
         </video>
       </div>
