@@ -1,4 +1,4 @@
-import AlbumContainer from "@/containers/Album";
+import AlbumContainer from "@/containers/Albums";
 import React from "react";
 
 type AlbumPageParams = Promise<{ album: string }>;
