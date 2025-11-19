@@ -17,12 +17,7 @@ export interface GalleryItemDoc {
   uploadAt: number;
 }
 
-export type ScheduleType =
-  | "concert"
-  | "anniversary"
-  | "release"
-  | "event"
-  | "etc";
+export type ScheduleType = "concert" | "anniversary" | "release" | "event" | "etc";
 
 export interface ScheduleDoc {
   type: ScheduleType;
@@ -40,7 +35,7 @@ export interface ScheduleDoc {
 }
 
 export interface Album {
-  type: string;
+  type: "single" | "EP";
   title: string;
   engTitle: string;
   cover: StaticImageData;

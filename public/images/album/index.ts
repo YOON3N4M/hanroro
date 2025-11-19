@@ -9,3 +9,4 @@ export { default as mirror } from "./mirror.jpg";
 export { default as systemError } from "./system-error.webp";
 export { default as theLastStopOfPain } from "./the_last_stop_of_our_pain.webp";
 export { default as theCompass } from "./theCompass.webp";
+export { default as jamongSalguClub } from "./jamong-salgu-club.webp";
