@@ -14,7 +14,7 @@ import {
   jamongSalguClub,
 } from "../../public/images/album";
 
-const LET_ME_LOVE_MY_YOUTH: Album = {
+export const ALBUM_LET_ME_LOVE_MY_YOUTH: Album = {
   type: "single",
   title: "입춘",
   engTitle: "letMeLoveMyYouth",
@@ -32,7 +32,7 @@ const LET_ME_LOVE_MY_YOUTH: Album = {
     },
   ],
 };
-const MIRROR: Album = {
+export const ALBUM_MIRROR: Album = {
   type: "single",
   title: "거울",
   engTitle: "mirror",
@@ -50,7 +50,7 @@ const MIRROR: Album = {
     },
   ],
 };
-const DONT_BE_AFRAID_TO_FALL: Album = {
+export const ALBUM_DONT_BE_AFRAID_TO_FALL: Album = {
   type: "single",
   title: "비틀비틀 짝짜꿍",
   engTitle: "dontBeAfraidToFall",
@@ -70,7 +70,7 @@ const DONT_BE_AFRAID_TO_FALL: Album = {
     },
   ],
 };
-const THE_LAST_STOP_OF_PAIN: Album = {
+export const ALBUM_THE_LAST_STOP_OF_PAIN: Album = {
   type: "single",
   title: "정류장",
   engTitle: "theLastStopOfPain",
@@ -88,7 +88,7 @@ const THE_LAST_STOP_OF_PAIN: Album = {
     },
   ],
 };
-const EVEN_IF_YOU_LEAVE: Album = {
+export const ALBUM_EVEN_IF_YOU_LEAVE: Album = {
   type: "single",
   title: "자처",
   engTitle: "evenIfYouLeave",
@@ -106,7 +106,7 @@ const EVEN_IF_YOU_LEAVE: Album = {
     },
   ],
 };
-const TAKE_OFF: Album = {
+export const ALBUM_TAKE_OFF: Album = {
   type: "EP",
   title: "이상비행",
   engTitle: "takeOff",
@@ -149,7 +149,7 @@ const TAKE_OFF: Album = {
     },
   ],
 };
-const MAYFLY: Album = {
+export const ALBUM_MAYFLY: Album = {
   type: "single",
   title: "하루살이",
   engTitle: "mayfly",
@@ -167,7 +167,7 @@ const MAYFLY: Album = {
     },
   ],
 };
-const SYSTEM_ERROR: Album = {
+export const ALBUM_SYSTEM_ERROR: Album = {
   type: "single",
   title: "먹이사슬",
   engTitle: "systemError",
@@ -183,7 +183,7 @@ const SYSTEM_ERROR: Album = {
     },
   ],
 };
-const HOW_TO_GO_ON: Album = {
+export const ALBUM_HOW_TO_GO_ON: Album = {
   type: "single",
   title: "생존법",
   engTitle: "howToGoOn",
@@ -199,7 +199,7 @@ const HOW_TO_GO_ON: Album = {
     },
   ],
 };
-const HOME: Album = {
+export const ALBUM_HOME: Album = {
   type: "EP",
   title: "집",
   engTitle: "home",
@@ -248,7 +248,7 @@ const HOME: Album = {
     },
   ],
 };
-const THE_COMPASS: Album = {
+export const ALBUM_THE_COMPASS: Album = {
   type: "single",
   title: "나침반",
   engTitle: "theCompass",
@@ -266,7 +266,7 @@ const THE_COMPASS: Album = {
     },
   ],
 };
-const JAMONG_SALGU_CLUB: Album = {
+export const ALBUM_JAMONG_SALGU_CLUB: Album = {
   type: "EP",
   title: "자몽살구클럽",
   engTitle: "jamongSalguClub",
@@ -277,16 +277,16 @@ const JAMONG_SALGU_CLUB: Album = {
 };
 
 export const ALBUM_LIST: Album[] = [
-  LET_ME_LOVE_MY_YOUTH,
-  MIRROR,
-  DONT_BE_AFRAID_TO_FALL,
-  THE_LAST_STOP_OF_PAIN,
-  EVEN_IF_YOU_LEAVE,
-  TAKE_OFF,
-  MAYFLY,
-  SYSTEM_ERROR,
-  HOW_TO_GO_ON,
-  HOME,
-  THE_COMPASS,
-  JAMONG_SALGU_CLUB,
+  ALBUM_LET_ME_LOVE_MY_YOUTH,
+  ALBUM_MIRROR,
+  ALBUM_DONT_BE_AFRAID_TO_FALL,
+  ALBUM_THE_LAST_STOP_OF_PAIN,
+  ALBUM_EVEN_IF_YOU_LEAVE,
+  ALBUM_TAKE_OFF,
+  ALBUM_MAYFLY,
+  ALBUM_SYSTEM_ERROR,
+  ALBUM_HOW_TO_GO_ON,
+  ALBUM_HOME,
+  ALBUM_THE_COMPASS,
+  ALBUM_JAMONG_SALGU_CLUB,
 ];
