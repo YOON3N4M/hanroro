@@ -31,8 +31,8 @@ function GalleryItem(props: GalleryItemProps) {
       {...attrs}
     >
       <Image
-        width={1000}
-        height={1000}
+        width={500}
+        height={500}
         src={doc.url}
         className={cn("object-cover", imageClassName)}
         alt={doc.tags[0] || "한로로 짤"}

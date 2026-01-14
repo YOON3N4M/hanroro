@@ -94,9 +94,7 @@ export default function ImageViewModal(props: ImageViewModalProps) {
             </div>
           </div>
         )}
-        <Image
-          width={3000}
-          height={3000}
+        <img
           src={imageDoc.url}
           alt={"이미지"}
           className={cn(
