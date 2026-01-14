@@ -16,7 +16,11 @@ export default async function sitemap() {
 }
 
 function generateAlbumSiteMap() {
-  const albumSiteMap = ALBUM_LIST.map((album) => ({
+  const exceptionList = ["systemError", "howToGoOn"];
+
+  const albumSiteMap = ALBUM_LIST.filter(
+    (album) => !exceptionList.includes(album.engTitle)
+  ).map((album) => ({
     url: `${baseUrl}/album/${album.engTitle.toLowerCase()}`,
     lastModified: new Date(),
   }));
@@ -26,7 +30,7 @@ function generateAlbumSiteMap() {
 
 function generatePhotobookSiteMap() {
   const photobookSiteMap = PHOTOBOOK_LIST.map((photobook) => ({
-    url: `${baseUrl}/photobook/${photobook.titleEng.toLowerCase()}`,
+    url: `${baseUrl}/photobook/${photobook.titleEng}`,
     lastModified: new Date(),
   }));
 

@@ -10,6 +10,10 @@ const defaultData: GalleryDocsObj = {
 
 export const metadata: Metadata = {
   title: "한로로 팬사이트 | 메인",
+  openGraph: {
+    title: "한로로 팬사이트 | 메인",
+    type: "website",
+  },
 };
 
 export default async function Home() {

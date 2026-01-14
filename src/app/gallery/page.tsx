@@ -14,6 +14,11 @@ const defaultData = {
 export const metadata: Metadata = {
   title: "한로로 팬사이트 | 갤러리",
   description: "한로로 님의 짤을 공유할 수 있습니다.",
+  openGraph: {
+    title: "한로로 팬사이트 | 갤러리",
+    description: "한로로 님의 짤을 공유할 수 있습니다.",
+    type: "website",
+  },
 };
 
 export default async function GalleryPage() {
