@@ -11,10 +11,10 @@ const THECOLDESTMOMENT: BannerGridContent = {
 const JAMONG_SALGU_CLUB_CONCERT: BannerGridContent = {
   title: "HANRORO 4rd CONCERT ‘자몽살구클럽’",
   src: "hanroro-jamong-salgu-concert1.webp",
-  href: "https://www.instagram.com/thecoldestmoment/",
+  linkHref: "/photobook/jamong-salgu-club-concert",
   objectFit: "contain",
-  date: "Available on 2026.01.26",
-  subTitle: "Collaboration",
+  // date: "2025.11.22~2025.11.23",
+  subTitle: "포토앨범",
 };
 
 const JAMONG_SALGU_CLUB: BannerGridContent = {
@@ -31,6 +31,7 @@ const GERMINATION: BannerGridContent = {
   subTitle: "포토앨범",
   src: "thumbnail-hanroro-germination-ref-seung__what-27.jpeg",
   linkHref: "/photobook/germination",
+  // date: "2025.01.11~2025.01.12",
 };
 
 const HATCHING_ROOM: BannerGridContent = {
