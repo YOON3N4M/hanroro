@@ -12,8 +12,16 @@ interface ContentModuleProps {
 export default function ContentModule(props: ContentModuleProps) {
   const { content } = props;
 
-  const { href, linkHref, title, subTitle, date, src } = content;
-  const localSrc = require(`./_local/asset/${src}`).default;
+  const {
+    href,
+    linkHref,
+    title,
+    subTitle,
+    date,
+    src,
+    objectFit = "cover",
+  } = content;
+  const localSrc = require(`./_local/asset/${src}`).default as StaticImageData;
   return (
     <div className="size-full relative group text-white overflow-hidden">
       {/* full size link wrapper */}
@@ -41,16 +49,17 @@ export default function ContentModule(props: ContentModuleProps) {
         </div>
       </div>
       {/* image wrapper */}
-      <div className="size-full absolute top-0 left-0 z-[1]">
+      <div className="size-full absolute top-0 left-0 z-[1] border">
         <Image
           src={localSrc}
-          width={9999}
-          height={9999}
+          fill
+          sizes="(max-width: 734px) 100vw, 50vw"
           className={cn(
-            "size-full object-cover transition-all animate-fadeIn",
+            "size-full transition-all animate-fadeIn",
             true
               ? "group-hover:brightness-100 brightness-50"
-              : "brightness-[0.25]"
+              : "brightness-[0.25]",
+            objectFit === "cover" ? "object-cover" : "object-contain"
           )}
           alt={title}
         />
