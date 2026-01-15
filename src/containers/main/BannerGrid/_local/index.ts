@@ -22,7 +22,8 @@ const JAMONG_SALGU_CLUB: BannerGridContent = {
   src: "jamong-salgu-club.webp",
   linkHref: "/album/jamongsalguclub",
   objectFit: "contain",
-  subTitle: "포토앨범",
+  subTitle: "New Release",
+  date: "2025.08.04",
 };
 
 //
