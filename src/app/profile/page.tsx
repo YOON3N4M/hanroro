@@ -5,6 +5,11 @@ import React from "react";
 export const metadata: Metadata = {
   title: "한로로 팬사이트 | 프로필",
   description: "한로로 님의 프로필, 앨범 활동 등을 확인 할 수 있습니다.",
+  openGraph: {
+    title: "한로로 팬사이트 | 프로필",
+    description: "한로로 님의 프로필, 앨범 활동 등을 확인 할 수 있습니다.",
+    type: "website",
+  },
 };
 
 export default function ProfilePage(props: any) {

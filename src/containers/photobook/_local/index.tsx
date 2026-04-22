@@ -17,6 +17,12 @@ export interface PhotobookImageData {
   ref: string | null;
 }
 
+const JAMONG_SALGU_CLUB_CONCERT: Photobook = {
+  title: "HANRORO 4rd CONCERT ‘자몽살구클럽’",
+  titleEng: "jamong-salgu-club-concert",
+  imageList: photobookJson["jamong-salgu-club-concert"],
+};
+
 const GERMINATION: Photobook = {
   title: "HANRORO 3rd CONCERT ‘발아(發芽)’",
   titleEng: "germination",
@@ -72,6 +78,7 @@ const THANKSGIVING: Photobook = {
 // };
 
 export const PHOTOBOOK_LIST: Photobook[] = [
+  JAMONG_SALGU_CLUB_CONCERT,
   GERMINATION,
   CHUNBEIRA,
   HYUNDAI_DIVE,
