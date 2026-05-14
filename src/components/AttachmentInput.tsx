@@ -27,6 +27,7 @@ function AttachmentInput(props: AttachmentInputProps) {
           width={1000}
           height={1000}
           src={attachmentSrc}
+          sizes="(max-width: 734px) 100vw, 50vw"
           alt="그룹 커버 이미지"
           className={cn(
             "size-full rounded-md object-cover mo:max-w-[100vw] max-h-[50vh]",

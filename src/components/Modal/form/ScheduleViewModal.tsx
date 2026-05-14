@@ -56,6 +56,7 @@ export default function ScheduleViewModal(props: ScheduleViewModalProps) {
                 width={3000}
                 height={3000}
                 src={images}
+                sizes="(max-width: 734px) 100vw, 70vw"
                 alt={"이미지"}
                 className={cn(
                   "pc:max-h-[70vh] object-cover pc:w-auto mo:size-full",

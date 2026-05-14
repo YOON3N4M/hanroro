@@ -19,7 +19,14 @@ function VideoSection(props: VideoSectionProps) {
           className="absolute top-0 left-0 size-full px-[5rem]"
         >
           <div className="size-full">
-            <Image src={overlaySrc} width={2000} height={2000} alt="overlay" className="size-full object-cover" />
+            <Image
+              src={overlaySrc}
+              width={2000}
+              height={2000}
+              sizes="100vw"
+              alt="overlay"
+              className="size-full object-cover"
+            />
           </div>
         </motion.div>
       )}

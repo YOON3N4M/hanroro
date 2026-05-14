@@ -10,10 +10,12 @@ import ImageViewModal from "./Modal/form/ImageViewModal";
 interface GalleryItemProps extends HTMLAttributes<HTMLDivElement> {
   doc: GalleryItemDoc;
   imageClassName?: string;
+  /** 기본: 메이슨리 4·3열 그리드 기준 */
+  sizes?: string;
 }
 
 function GalleryItem(props: GalleryItemProps) {
-  const { doc, className, imageClassName, style, ...attrs } = props;
+  const { doc, className, imageClassName, sizes, style, ...attrs } = props;
 
   const { openSingleModal } = useModal();
 
@@ -34,6 +36,9 @@ function GalleryItem(props: GalleryItemProps) {
         width={500}
         height={500}
         src={doc.url}
+        sizes={
+          sizes ?? "(max-width: 1360px) 34vw, 26vw"
+        }
         className={cn("object-cover", imageClassName)}
         alt={doc.tags[0] || "한로로 짤"}
       />

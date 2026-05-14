@@ -21,9 +21,10 @@ function PhotobookImageViewModal(props: PhotobookImageViewModalProps) {
       <div className="mo:w-[80vw]">
         <Image
           src={srcGenerate(titleEng, imageFileName)}
-          width={9999}
-          height={9999}
-          quality={100}
+          width={1920}
+          height={1920}
+          sizes="(max-width: 734px) 90vw, 85vw"
+          quality={85}
           alt={imageFileName}
           onLoad={() => setIsLoading(false)}
           className={cn(

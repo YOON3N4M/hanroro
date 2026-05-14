@@ -45,6 +45,7 @@ function NextAlbumSection(props: NextAlbumSectionProps) {
               alt={title}
               width={1000}
               height={1000}
+              sizes="300px"
             />
           </motion.div>
         </Link>

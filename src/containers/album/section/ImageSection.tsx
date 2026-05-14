@@ -19,6 +19,7 @@ function ImageSection(props: ImageSectionProps) {
             width={3000}
             height={3000}
             src={src}
+            sizes="100vw"
             className={cn("object-cover size-full", imageClassName)}
             alt=""
             priority={false}
@@ -35,6 +36,7 @@ function ImageSection(props: ImageSectionProps) {
             width={3000}
             height={3000}
             src={s}
+            sizes="100vw"
             priority={false}
             className={cn("object-cover size-full", imageClassName)}
             alt=""

@@ -72,6 +72,7 @@ function PhotobookItem(props: PhotobookItemProps) {
             src={thumbnailSrc}
             className="object-cover brightness-100 group-hover:brightness-50 transition-all"
             fill
+            sizes="(max-width: 1199px) 50vw, 25vw"
             alt={`한로로 ${title} 포토앨범`}
           />
         </div>

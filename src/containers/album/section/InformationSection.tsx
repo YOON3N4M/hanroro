@@ -19,6 +19,7 @@ function InformationSection(props: InformationSectionProps) {
             width={cover.width}
             height={cover.height}
             src={cover.src}
+            sizes="(max-width: 1199px) 80vw, 300px"
             alt={album.title}
             className="pc:size-[300px] tab:w-[80%] tab::h-auto aspect-square"
           />

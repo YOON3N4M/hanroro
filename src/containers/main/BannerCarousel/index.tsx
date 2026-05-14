@@ -58,6 +58,8 @@ function BannerCarousel(props: BannerCarouselProps) {
                   src={systemError.src}
                   width={systemError.width}
                   height={systemError.height}
+                  sizes="300px"
+                  loading="lazy"
                   className="size-[300px] brightness-50 absolute z-[10] translate-x-[-150px] translate-y-[75px] mo:hidden"
                   alt="먹이사슬"
                 />
@@ -65,6 +67,8 @@ function BannerCarousel(props: BannerCarouselProps) {
                   src={home.src}
                   width={home.width}
                   height={home.height}
+                  sizes="300px"
+                  priority
                   className="size-[300px] brightness-50 absolute z-[13]"
                   alt="생존법"
                 />
@@ -72,6 +76,8 @@ function BannerCarousel(props: BannerCarouselProps) {
                   src={howToGoOn.src}
                   width={howToGoOn.width}
                   height={howToGoOn.height}
+                  sizes="300px"
+                  loading="lazy"
                   className="size-[300px] brightness-50 absolute z-[12] translate-x-[150px] translate-y-[-75px] mo:hidden"
                   alt="집"
                 />
@@ -87,6 +93,8 @@ function BannerCarousel(props: BannerCarouselProps) {
                   src={"/images/content/banner-carousel/gallery-capture.png"}
                   width={3000}
                   height={3000}
+                  sizes="(max-width: 734px) 80vw, 60vw"
+                  loading="lazy"
                   alt="갤러리"
                   className="object-cover brightness-50 size-full opacity-80"
                 />
@@ -103,6 +111,8 @@ function BannerCarousel(props: BannerCarouselProps) {
                 src={"/images/content/banner-carousel/IMG_4053.JPG"}
                 width={3000}
                 height={3000}
+                sizes="(max-width: 734px) 80vw, 60vw"
+                loading="lazy"
                 alt="현대카드 다이브"
                 className="object-cover brightness-50 size-full"
                 // className="object-cover brightness-50 size-full object-[0%_30%]"

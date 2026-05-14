@@ -165,7 +165,11 @@ function GridView({ imageList }: { imageList: GalleryItemDoc[] }) {
               )}
             >
               <div className="w-full">
-                <GalleryItem className="!border-none" doc={imageDoc} />
+                <GalleryItem
+                  className="!border-none"
+                  doc={imageDoc}
+                  sizes="(max-width: 734px) 100vw, 50vw"
+                />
               </div>
             </div>
           ))}

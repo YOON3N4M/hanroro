@@ -230,6 +230,7 @@ export default function ProfileContainer(props: ProfileContainerProps) {
                           src={album.cover.src}
                           width={album.cover.width}
                           height={album.cover.height}
+                          sizes="(max-width: 734px) 45vw, 22vw"
                           alt={album.title}
                           className="size-full brightness-50 hover:brightness-100 transition-all"
                         />

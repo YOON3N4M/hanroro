@@ -21,6 +21,7 @@ function Header(props: HeaderProps) {
                   src={"/images/profile/logo.svg"}
                   width={1000}
                   height={1000}
+                  sizes="120px"
                   alt="한로로 로고"
                 />
               </Link>

@@ -71,6 +71,7 @@ function PhotobookSubContainer(props: PhotobookSubContainerProps) {
                   alt={title}
                   width={1000}
                   height={1000}
+                  sizes="(max-width: 1199px) 50vw, 25vw"
                   className="size-full object-cover group-hover:brightness-50 transition-all"
                 />
                 <div className="x-center tab:hidden y-center absolute opacity-0 group-hover:opacity-100 transition-opacity">
